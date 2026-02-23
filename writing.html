@@ -4,26 +4,26 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Rinkesh</title>
+    <title>Rinkesh — Writing</title>
     <!-- SEO -->
-    <meta name="description" content="Rinkesh Gorasia. Building things, figuring things out." />
+    <meta name="description"
+        content="Rinkesh Gorasia's Operating Manual. Mental models and frameworks for shipping product." />
     <meta name="author" content="Rinkesh Gorasia" />
-    <link rel="canonical" href="https://rinkesh.com/" />
+    <link rel="canonical" href="https://rinkesh.com/writing" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://rinkesh.com/" />
-    <meta property="og:title" content="Rinkesh Gorasia" />
-    <meta property="og:description" content="Building things. Figuring things out." />
-    <!-- NOTE: Replace this image URL with an actual 1200x630 sharing image -->
-    <meta property="og:image" content="https://rinkesh.com/images/og-image.jpg" />
+    <meta property="og:url" content="https://rinkesh.com/writing" />
+    <meta property="og:title" content="Rinkesh Gorasia — Writing" />
+    <meta property="og:description" content="Mental models and frameworks for shipping product." />
+    <meta property="og:image" content="https://rinkesh.com/images/og-writing.jpg" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="https://rinkesh.com/" />
-    <meta name="twitter:title" content="Rinkesh Gorasia" />
-    <meta name="twitter:description" content="Building things. Figuring things out." />
-    <meta name="twitter:image" content="https://rinkesh.com/images/og-image.jpg" />
+    <meta name="twitter:url" content="https://rinkesh.com/writing" />
+    <meta name="twitter:title" content="Rinkesh Gorasia — Writing" />
+    <meta name="twitter:description" content="Mental models and frameworks for shipping product." />
+    <meta name="twitter:image" content="https://rinkesh.com/images/og-writing.jpg" />
     <meta name="twitter:creator" content="@rinks__g" />
 
     <link rel="icon" type="image/svg+xml"
@@ -419,6 +419,50 @@
         .nav a.active {
             color: var(--ink);
         }
+
+        /* ---- Operating Manual ---- */
+        .manual-item {
+            display: block;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(16, 16, 16, .08);
+            padding: 24px 0;
+            transition: transform 0.2s ease, padding-left 0.2s ease;
+        }
+
+        .manual-item:first-of-type {
+            border-top: 1px solid rgba(16, 16, 16, .08);
+            margin-top: 24px;
+        }
+
+        .manual-item:hover {
+            border-bottom-color: rgba(16, 16, 16, .08);
+            transform: translateX(4px);
+        }
+
+        .m-tag {
+            font-family: Sora, Inter, system-ui, sans-serif;
+            font-size: 11px;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: rgba(16, 16, 16, .4);
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .m-title {
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--ink);
+            margin: 0 0 6px;
+            line-height: 1.3;
+        }
+
+        .m-teaser {
+            font-size: 15px;
+            color: var(--muted);
+            margin: 0;
+            line-height: 1.5;
+        }
     </style>
 </head>
 
@@ -430,160 +474,41 @@
 
         <!-- Nav -->
         <nav class="nav" aria-label="Main Navigation">
-            <a href="preview.html" class="active">Home</a>
+            <a href="preview.html">Home</a>
             <a href="work.html">Work</a>
-            <a href="writing.html">Writing</a>
+            <a href="writing.html" class="active">Writing</a>
         </nav>
 
-        <!-- Intro -->
-        <section aria-label="Intro" id="top">
-            <h1>Hi, I'm Rinkesh.</h1>
+        <!-- Writing -->
+        <section class="section" aria-label="Writing" id="writing">
+            <div class="kicker">Operating Manual</div>
 
-            <p class="lede">I build things. Usually products, sometimes communities, occasionally experiments I'm too
-                excited about to leave alone.</p>
-
-            <p class="p">
-                I've spent the last several years building software products from scratch, starting with real problems,
-                working with real users, and figuring things out as I go.
+            <p class="p" style="margin-bottom: 32px;">
+                A collection of frameworks and mental models that I actually use when building products.
+                Written down mostly so I don't forget them.
             </p>
 
-            <p class="p">
-                Most of my work has been early-stage: when the brief is vague, the team is small, and the only way
-                forward is to get your hands dirty. That's the part I like most.
-            </p>
+            <a href="#" class="manual-item">
+                <span class="m-tag">Product · Feb 2026</span>
+                <h2 class="m-title">Why I never write 10-page specs</h2>
+                <p class="m-teaser">If you need 10 pages to explain what you're building, you don't actually know what
+                    you're building yet. How to align a team with wireframes and a 1-pager.</p>
+            </a>
 
-            <p class="p">
-                I tend to prefer doing over planning. Not always the wisest approach, but it keeps things honest.
-            </p>
-        </section>
+            <a href="#" class="manual-item">
+                <span class="m-tag">Startups · Jan 2026</span>
+                <h2 class="m-title">How I decide when to kill a project</h2>
+                <p class="m-teaser">Unit economics don't care about your ego. The exact mathematical threshold I use to
+                    decide whether to pivot, push through, or shut it down.</p>
+            </a>
 
-        <!-- Visual break -->
-        <div class="hero" aria-label="Visual break">
-            <!-- NOTE TO RINKESH: This GIF is generic. Replace with a real photo
-           of you, your space, or your work. Even a plain image is better.
-           If you don't have one yet, you can remove this .hero div entirely. -->
-            <img src="images/hero.gif" alt="A moment of focused work" />
-        </div>
+            <a href="#" class="manual-item">
+                <span class="m-tag">Engineering · Nov 2025</span>
+                <h2 class="m-title">The only 2 metrics that matter in the first 30 days</h2>
+                <p class="m-teaser">Stop looking at vanity user signups. Why I only track activation velocity and day-7
+                    retention when launching V1.</p>
+            </a>
 
-        <!-- Now -->
-        <section class="section" aria-label="Now" id="now">
-            <div class="kicker">
-                now
-                <time class="timestamp" datetime="2026-02">updated Feb 2026</time>
-            </div>
-
-            <p class="p">Most of my time right now goes into building things.</p>
-
-            <p class="p">
-                Two live: <a href="https://knowyourpay.vercel.app" target="_blank" rel="noopener">KnowYourPay</a>
-                and <a href="https://www.productsenselab.com" target="_blank" rel="noopener">Product Sense Lab</a>.
-                Both started as questions I kept running into and couldn't find good answers to. So I built them.
-            </p>
-
-            <p class="p">
-                I also spend time on AI, less around the hype and more around where it actually saves
-                real time in real work. The kind people don't make YouTube tutorials about.
-            </p>
-        </section>
-
-        <div class="rule"></div>
-
-        <!-- Work -->
-        <section class="section" aria-label="Work" id="work">
-            <div class="kicker">work</div>
-
-            <div class="work-item">
-                <span class="work-name">Savior</span>
-                <span class="work-meta">
-                    Founder · 2017–2020
-                    <span class="work-tag">Acquired by Zocdoc</span>
-                </span>
-                <p class="work-thesis">
-                    Hospitals don't need more software. They need software that fits how they actually work.
-                </p>
-                <div class="work-desc">
-                    <p>I spent months inside hospitals before writing a single line of a spec. Not observing from the
-                        outside, but <strong>actually inside on the floor</strong> learning how care runs versus how it
-                        reads on paper. That gap became the product.</p>
-                    <p>I owned the product from discovery to adoption, building operations and preventive-care software
-                        that hospital teams used daily. After three years of robust growth, the company was
-                        <strong>acquired by Zocdoc in 2020</strong>.
-                    </p>
-                </div>
-            </div>
-
-            <div class="work-item">
-                <span class="work-name">Career Leap</span>
-                <span class="work-meta">
-                    Founder · 2020–2023
-                    <span class="work-tag">Shut down</span>
-                </span>
-                <p class="work-thesis">
-                    The skills that actually shape your career aren't taught anywhere.
-                </p>
-                <div class="work-desc">
-                    <p>We built a community-first learning platform to fix that. It started as a WhatsApp group and
-                        quickly grew to <strong>10,000 users in six months</strong>. We launched a mobile learning app
-                        that hit <strong>100k+ watch hours</strong> and scaled the core community to over 3,500 active
-                        members.</p>
-                    <p>After talking to users, we pivoted to live cohorts. We maintained a <strong>40% completion
-                            rate</strong> (the industry average is 5-10%) by adding gamification that lifted session
-                        times by 50% and doubled retention. We ran this tight ship with just a <strong>3-person
-                            team</strong>, producing ₹15L in revenue while testing a B2B model alongside 2 companies.
-                    </p>
-                    <p>We shut it down in 2023 when the unit economics didn't work at scale.</p>
-                </div>
-            </div>
-            </div>
-
-            <p class="p" style="margin-top: 32px;">
-                <a class="ext-link" href="work.html">Read detailed work history</a>
-            </p>
-        </section>
-
-        <div class="rule"></div>
-
-
-
-        <!-- Artifacts -->
-        <section class="section" aria-label="Artifacts" id="artifacts">
-            <div class="kicker">artifacts</div>
-
-            <!-- CHANGED: warmer invitation, not a clinical description of what this section is -->
-            <p class="p">
-                The non-work stuff I keep coming back to.
-            </p>
-
-            <div class="gallery" aria-label="Fragments gallery">
-                <div class="gitem">
-                    <img src="images/fragment-1.jpg" alt="Board game night" />
-                    <span class="caption">Board game night</span>
-                </div>
-                <div class="gitem">
-                    <img src="images/fragment-2.jpg" alt="LEGO Batman" />
-                    <span class="caption">LEGO Batman</span>
-                </div>
-                <div class="gitem">
-                    <img src="images/fragment-3.jpg" alt="Simba" />
-                    <span class="caption">Simba</span>
-                </div>
-                <div class="gitem">
-                    <img src="images/fragment-4.jpg" alt="Morning coffee" />
-                    <span class="caption">Morning coffee</span>
-                </div>
-                <div class="gitem">
-                    <img src="images/fragment-5.jpg" alt="Working outdoors" />
-                    <span class="caption">Working outdoors</span>
-                </div>
-                <div class="gitem">
-                    <img src="images/fragment-6.jpg" alt="Sunny day with a dog" />
-                    <span class="caption">Sunny day</span>
-                </div>
-                <div class="gitem">
-                    <img src="images/fragment-7.jpg" alt="Coffee and a view" />
-                    <span class="caption">Coffee and a view</span>
-                </div>
-            </div>
         </section>
 
         <!-- Footer -->
