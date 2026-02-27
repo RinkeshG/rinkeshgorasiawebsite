@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="color-scheme" content="light">
-    <title>Writing — Rinkesh Gorasia</title>
-    <meta name="description" content="Essays and thoughts on product, building, and the occasional honest failure.">
+    <title>Work — Rinkesh Gorasia</title>
+    <meta name="description"
+        content="Full work history — Savior (acquired), Career Leap, consulting, and the things that didn't make it.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -47,6 +48,7 @@
             --mid: #6b6355;
             --faint: #aea79c;
             --rule: #e5dfd6;
+            --green: #2a6b3c;
             --red: #b83410;
             --sans: 'Inter', system-ui, sans-serif;
             --serif: 'Fraunces', Georgia, serif;
@@ -146,6 +148,7 @@
         .nav-mobile {
             display: none;
             flex-direction: column;
+            gap: 0;
             border-bottom: 1px solid var(--rule);
             padding: 4px 0 16px;
         }
@@ -218,132 +221,450 @@
             line-height: 1.72;
         }
 
-        /* SECTION */
-        .writing-section {
-            padding: 38px 0 42px;
-            border-bottom: 1px solid var(--rule);
-        }
-
+        /* SECTION LABEL */
         .section-label {
             font-size: .67rem;
             font-weight: 500;
             letter-spacing: .11em;
             text-transform: uppercase;
             color: var(--faint);
-            margin-bottom: 22px;
+            margin-bottom: 24px;
         }
 
-        /* POST LIST */
-        .post-list {
-            list-style: none;
+        .section-block {
+            padding: 38px 0 0;
         }
 
-        .post-item {
-            padding: 18px 0;
+        /* WORK ENTRIES */
+        .work-entry {
+            padding: 36px 0;
             border-bottom: 1px solid var(--rule);
-            display: grid;
-            grid-template-columns: 1fr auto;
-            gap: 12px;
-            align-items: start;
         }
 
-        .post-item:first-child {
-            border-top: 1px solid var(--rule);
-        }
-
-        .post-item:last-child {
+        .work-entry:last-child {
             border-bottom: none;
         }
 
-        .post-title {
-            font-size: .9375rem;
-            font-weight: 400;
-            color: var(--ink);
-            line-height: 1.4;
-        }
-
-        .post-title a {
-            text-decoration: none;
-            color: inherit;
-            display: block;
-            transition: opacity .15s;
-        }
-
-        .post-title a:hover {
-            opacity: .62;
-        }
-
-        .post-sub {
-            display: block;
-            font-size: .8rem;
-            color: var(--mid);
-            margin-top: 4px;
-            line-height: 1.55;
-        }
-
-        .post-date {
-            font-size: .72rem;
-            color: var(--faint);
-            white-space: nowrap;
-            flex-shrink: 0;
-            padding-top: 2px;
-        }
-
-        /* TWITTER CTA */
-        .twitter-section {
-            padding: 42px 0 54px;
-        }
-
-        .twitter-cta {
+        .entry-header {
             display: flex;
-            align-items: flex-start;
             justify-content: space-between;
-            gap: 20px;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 4px;
             flex-wrap: wrap;
         }
 
-        .twitter-cta p {
-            font-size: .9rem;
-            color: var(--mid);
-            line-height: 1.74;
-            max-width: 380px;
+        .entry-name {
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: var(--ink);
         }
 
-        .twitter-cta p strong {
+        .entry-right {
+            text-align: right;
+            flex-shrink: 0;
+        }
+
+        .entry-period {
+            display: block;
+            font-size: .72rem;
+            color: var(--faint);
+            margin-bottom: 5px;
+        }
+
+        .badge {
+            display: inline-block;
+            font-size: .66rem;
+            letter-spacing: .03em;
+            padding: 2px 9px;
+            border-radius: 3px;
+        }
+
+        .badge-acq {
+            background: #eaf5ee;
+            color: var(--green);
+        }
+
+        .badge-shut {
+            background: #f2f0ec;
+            color: var(--faint);
+        }
+
+        .entry-role {
+            font-size: .74rem;
+            color: var(--faint);
+            margin-bottom: 18px;
+        }
+
+        .entry-lede {
+            font-family: var(--serif);
+            font-style: italic;
+            font-weight: 300;
+            font-size: clamp(.9rem, 2.5vw, 1.05rem);
+            line-height: 1.55;
+            color: var(--ink);
+            margin-bottom: 14px;
+        }
+
+        .entry-body {
+            font-size: .875rem;
+            line-height: 1.78;
+            color: var(--mid);
+        }
+
+        .entry-body p {
+            margin-bottom: 12px;
+        }
+
+        .entry-body p:last-child {
+            margin-bottom: 0;
+        }
+
+        .entry-body strong {
             color: var(--ink);
             font-weight: 500;
         }
 
-        .cta-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 10px 20px;
-            background: var(--ink);
-            color: var(--bg);
-            text-decoration: none;
-            font-size: .8rem;
-            font-weight: 500;
-            border-radius: 5px;
-            white-space: nowrap;
-            flex-shrink: 0;
-            transition: opacity .15s;
-            margin-top: 4px;
+        .entry-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            gap: 0;
+            margin-top: 22px;
+            padding-top: 18px;
+            border-top: 1px solid var(--rule);
         }
 
-        .cta-btn:hover {
-            opacity: .75;
-            color: var(--bg);
+        .stat-val {
+            display: block;
+            font-family: var(--serif);
+            font-size: clamp(1rem, 3vw, 1.25rem);
+            font-weight: 400;
+            letter-spacing: -.03em;
+            color: var(--ink);
+            line-height: 1;
+        }
+
+        .stat-key {
+            display: block;
+            font-size: .61rem;
+            color: var(--faint);
+            letter-spacing: .05em;
+            text-transform: uppercase;
+            margin-top: 5px;
+        }
+
+        /* SECTION DIVIDER — for consulting + graveyard */
+        .section-divider {
+            padding: 44px 0 0;
+            border-top: 1px solid var(--rule);
+            margin-top: 8px;
+        }
+
+        .section-desc {
+            font-size: .875rem;
+            color: var(--mid);
+            line-height: 1.74;
+            max-width: 480px;
+            margin-bottom: 28px;
+            margin-top: 6px;
+        }
+
+        /* CONSULTING */
+        .consulting-block {
+            padding: 4px 0 40px;
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .consulting-block p {
+            font-size: .9rem;
+            line-height: 1.76;
+            color: var(--mid);
+            margin-bottom: 12px;
+        }
+
+        .consulting-block strong {
+            color: var(--ink);
+            font-weight: 500;
+        }
+
+        .client-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            margin-top: 20px;
+        }
+
+        .client-tag {
+            display: inline-block;
+            padding: 4px 11px;
+            border: 1px solid var(--rule);
+            border-radius: 20px;
+            font-size: .74rem;
+            color: var(--mid);
+            transition: border-color .15s, color .15s;
+        }
+
+        .client-tag:hover {
+            border-color: var(--faint);
+            color: var(--ink);
+        }
+
+        /* GRAVEYARD */
+        .graveyard-entry {
+            padding: 32px 0;
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .graveyard-entry:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .grave-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 12px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .grave-name {
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: var(--ink);
+        }
+
+        .grave-meta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .grave-type {
+            font-size: .67rem;
+            color: var(--faint);
+            letter-spacing: .04em;
+            text-transform: uppercase;
+        }
+
+        .grave-year {
+            font-size: .72rem;
+            color: var(--faint);
+        }
+
+        .grave-status {
+            display: inline-block;
+            font-size: .66rem;
+            letter-spacing: .03em;
+            padding: 2px 9px;
+            border-radius: 3px;
+            background: #f2f0ec;
+            color: var(--faint);
+        }
+
+        .grave-row {
+            display: grid;
+            grid-template-columns: 96px 1fr;
+            gap: 8px 16px;
+            margin-bottom: 12px;
+            font-size: .875rem;
+            line-height: 1.68;
+        }
+
+        .grave-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .grave-label {
+            font-size: .68rem;
+            font-weight: 500;
+            letter-spacing: .05em;
+            text-transform: uppercase;
+            color: var(--faint);
+            padding-top: 3px;
+        }
+
+        .grave-text {
+            color: var(--mid);
+        }
+
+        .grave-text strong {
+            color: var(--ink);
+            font-weight: 500;
+        }
+
+        .grave-text em {
+            font-style: italic;
+            color: var(--ink);
         }
 
         @media (max-width: 420px) {
-            .twitter-cta {
-                flex-direction: column;
-                gap: 16px;
+            .grave-row {
+                grid-template-columns: 1fr;
+                gap: 3px;
             }
 
-            .cta-btn {
-                align-self: flex-start;
+            .grave-label {
+                padding-top: 0;
+            }
+
+            .grave-row {
+                margin-bottom: 16px;
+            }
+        }
+
+        /* CURRENT BUILDS */
+        .build-entry {
+            padding: 32px 0;
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .build-entry:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .build-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 12px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .build-name {
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: var(--ink);
+        }
+
+        .build-status {
+            font-size: .67rem;
+            letter-spacing: .04em;
+            text-transform: uppercase;
+            color: var(--green);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            flex-shrink: 0;
+        }
+
+        .build-status::before {
+            content: '';
+            display: inline-block;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--green);
+            animation: breathe 2.5s ease-in-out infinite;
+        }
+
+        @keyframes breathe {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: .3;
+            }
+        }
+
+        .build-row {
+            display: grid;
+            grid-template-columns: 96px 1fr;
+            gap: 8px 16px;
+            margin-bottom: 11px;
+            font-size: .875rem;
+            line-height: 1.68;
+        }
+
+        .build-row:last-of-type {
+            margin-bottom: 0;
+        }
+
+        .build-label {
+            font-size: .68rem;
+            font-weight: 500;
+            letter-spacing: .05em;
+            text-transform: uppercase;
+            color: var(--faint);
+            padding-top: 3px;
+        }
+
+        .build-text {
+            color: var(--mid);
+        }
+
+        .build-text strong {
+            color: var(--ink);
+            font-weight: 500;
+        }
+
+        .build-stats {
+            display: flex;
+            gap: 28px;
+            margin-top: 18px;
+            padding-top: 16px;
+            border-top: 1px solid var(--rule);
+            flex-wrap: wrap;
+        }
+
+        .build-stat-val {
+            display: block;
+            font-family: var(--serif);
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            font-weight: 400;
+            letter-spacing: -.03em;
+            color: var(--ink);
+            line-height: 1;
+        }
+
+        .build-stat-key {
+            display: block;
+            font-size: .61rem;
+            color: var(--faint);
+            letter-spacing: .05em;
+            text-transform: uppercase;
+            margin-top: 4px;
+        }
+
+        .build-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 18px;
+            font-size: .8rem;
+            color: var(--mid);
+            text-decoration: none;
+            border-bottom: 1px solid var(--rule);
+            padding-bottom: 1px;
+            transition: color .15s, border-color .15s;
+        }
+
+        .build-link:hover {
+            color: var(--ink);
+            border-color: var(--ink);
+        }
+
+        @media (max-width: 420px) {
+            .build-row {
+                grid-template-columns: 1fr;
+                gap: 3px;
+            }
+
+            .build-label {
+                padding-top: 0;
+            }
+
+            .build-row {
+                margin-bottom: 14px;
             }
         }
 
@@ -437,9 +758,9 @@
         <nav class="nav">
             <a href="index.html" class="nav-name">Rinkesh Gorasia</a>
             <div class="nav-links">
-                <a href="work.html">work</a>
+                <a href="work.html" class="active">work</a>
                 <a href="how-i-work.html">how i work</a>
-                <a href="writing.html" class="active">writing</a>
+                <a href="writing.html">writing</a>
             </div>
             <div class="nav-right">Bengaluru, IN</div>
             <button class="nav-toggle" aria-label="Toggle menu"
@@ -452,73 +773,250 @@
             </button>
         </nav>
         <div class="nav-mobile">
-            <a href="work.html">work</a>
+            <a href="work.html" class="active">work</a>
             <a href="how-i-work.html">how i work</a>
-            <a href="writing.html" class="active">writing</a>
+            <a href="writing.html">writing</a>
         </div>
 
         <!-- PAGE HEADER -->
         <div class="page-header fade">
-            <h1>Writing.<br><em>Things I think out loud.</em></h1>
-            <p>Most of what I write lives on Twitter — short, direct, occasionally wrong. Longer things end up here.</p>
+            <h1>Work.<br><em>The full version.</em></h1>
+            <p>Two companies founded. One acquired. One shut down honestly. Plus the experiments that didn't make it —
+                documented because those are usually more instructive.</p>
         </div>
 
-        <!-- ESSAYS -->
-        <div class="writing-section fade">
-            <p class="section-label">Essays</p>
-            <ul class="post-list">
+        <!-- COMPANIES -->
+        <div class="section-block fade">
+            <p class="section-label">Companies</p>
 
-                <li class="post-item">
-                    <div class="post-title">
-                        <a href="https://x.com/rinks__g" target="_blank">
-                            Why I shut down Career Leap
-                            <span class="post-sub">On knowing when to stop — and why that's its own skill.</span>
-                        </a>
+            <div class="work-entry">
+                <div class="entry-header">
+                    <span class="entry-name">Savior</span>
+                    <div class="entry-right">
+                        <span class="entry-period">2017 – 2020</span>
+                        <span class="badge badge-acq">Acquired by Zocdoc</span>
                     </div>
-                    <span class="post-date">2023</span>
-                </li>
+                </div>
+                <p class="entry-role">Founder &amp; Product</p>
+                <p class="entry-lede">Hospitals don't need more software. They need software that fits how they actually
+                    work.</p>
+                <div class="entry-body">
+                    <p>I spent months inside hospitals before writing a single line of spec. Not observing from the
+                        outside — <strong>actually on the floor</strong>, learning how care runs versus how it reads on
+                        paper. That gap became the product.</p>
+                    <p>Built operations and preventive-care software used daily across hospital teams. Owned the full
+                        lifecycle from discovery to adoption. The hardest part wasn't the technology — it was getting
+                        nurses and admin staff to trust software enough to actually use it.</p>
+                    <p>Grew to <strong>85+ hospitals</strong> and approximately <strong>$1M ARR</strong>. Acquired by
+                        Zocdoc in 2020.</p>
+                </div>
+                <div class="entry-stats">
+                    <div><span class="stat-val">85+</span><span class="stat-key">Hospitals</span></div>
+                    <div><span class="stat-val">~$1M</span><span class="stat-key">ARR</span></div>
+                    <div><span class="stat-val">3 yrs</span><span class="stat-key">Zero → acquired</span></div>
+                </div>
+            </div>
 
-                <li class="post-item">
-                    <div class="post-title">
-                        <a href="https://x.com/rinks__g" target="_blank">
-                            What 85 hospitals taught me about product research
-                            <span class="post-sub">User research changes when you're actually inside the
-                                building.</span>
-                        </a>
+            <div class="work-entry">
+                <div class="entry-header">
+                    <span class="entry-name">Career Leap</span>
+                    <div class="entry-right">
+                        <span class="entry-period">2020 – 2023</span>
+                        <span class="badge badge-shut">Shut down</span>
                     </div>
-                    <span class="post-date">2021</span>
-                </li>
+                </div>
+                <p class="entry-role">Founder &amp; Product</p>
+                <p class="entry-lede">The skills that actually shape your career aren't taught anywhere.</p>
+                <div class="entry-body">
+                    <p>Started as a WhatsApp group. <strong>10,000 users in six months</strong>, mostly word of mouth.
+                        Launched a mobile learning app with <strong>100k+ watch hours</strong>, grew the community to
+                        <strong>3,500 active members</strong>, run by a 3-person team.</p>
+                    <p>Pivoted to live cohorts. Maintained a <strong>40% completion rate</strong> (industry average:
+                        5–10%). Generated ₹15L in revenue. Shut it down in 2023 when the unit economics didn't work at
+                        scale. I learned more from this one than from Savior.</p>
+                </div>
+                <div class="entry-stats">
+                    <div><span class="stat-val">10K</span><span class="stat-key">Users in 6mo</span></div>
+                    <div><span class="stat-val">40%</span><span class="stat-key">Completion</span></div>
+                    <div><span class="stat-val">100K+</span><span class="stat-key">Watch hours</span></div>
+                    <div><span class="stat-val">₹15L</span><span class="stat-key">Revenue</span></div>
+                </div>
+            </div>
 
-                <li class="post-item">
-                    <div class="post-title">
-                        <a href="https://x.com/rinks__g" target="_blank">
-                            Building for completion, not conversion
-                            <span class="post-sub">How we got 40% completion rates when the industry average is
-                                5–10%.</span>
-                        </a>
-                    </div>
-                    <span class="post-date">2022</span>
-                </li>
-
-                <li class="post-item">
-                    <div class="post-title">
-                        <a href="https://x.com/rinks__g" target="_blank">
-                            On doing over planning
-                            <span class="post-sub">Not always the wisest approach. But it keeps things honest.</span>
-                        </a>
-                    </div>
-                    <span class="post-date">2024</span>
-                </li>
-
-            </ul>
         </div>
 
-        <!-- TWITTER CTA -->
-        <div class="twitter-section fade">
-            <div class="twitter-cta">
-                <p>Most of what's in my head ends up on Twitter first. <strong>Product, building, the occasional honest
-                        failure.</strong> No newsletters, no content calendars — just thinking out loud.</p>
-                <a href="https://x.com/rinks__g" target="_blank" class="cta-btn">Follow on Twitter →</a>
+        <!-- CONSULTING -->
+        <div class="section-divider fade">
+            <p class="section-label">Consulting</p>
+            <p class="section-desc">Since 2023, working independently with early-stage startups on product strategy,
+                growth, and go-to-market. Small number of engagements at a time.</p>
+        </div>
+        <div class="consulting-block fade">
+            <p>The work varies — sometimes it's helping a founder think through their first hire, sometimes it's a
+                sprint on retention or pricing. I take on a small number of engagements at a time so I can actually be
+                useful, not just present.</p>
+            <p>If you're building something and feeling stuck, <a href="mailto:rinkeshgorasia@gmail.com"
+                    style="color: var(--ink); font-weight: 500;">I'm happy to talk.</a></p>
+            <div class="client-tags">
+                <span class="client-tag">Product strategy</span>
+                <span class="client-tag">0→1 builds</span>
+                <span class="client-tag">Growth loops</span>
+                <span class="client-tag">User research</span>
+                <span class="client-tag">GTM planning</span>
+                <span class="client-tag">Pricing</span>
+            </div>
+        </div>
+
+        <!-- CURRENT BUILDS -->
+        <div class="section-divider fade">
+            <p class="section-label">Current Builds</p>
+            <p class="section-desc">Things I'm actively building on the side. Both started as questions I couldn't find
+                a decent answer to.</p>
+        </div>
+
+        <div class="build-entry fade">
+            <div class="build-header">
+                <span class="build-name">KnowYourPay</span>
+                <span class="build-status">Live</span>
+            </div>
+            <div class="build-row">
+                <span class="build-label">The problem</span>
+                <span class="build-text">Most Indian professionals have no idea if they're being paid fairly. Salary
+                    data exists but it's either US-focused, outdated, or buried behind paywalls and recruiter
+                    calls.</span>
+            </div>
+            <div class="build-row">
+                <span class="build-label">What it is</span>
+                <span class="build-text">A free salary benchmarking tool for Indian tech and product roles — by role,
+                    city, experience, and company tier. Instant, no signup, no gatekeeping.</span>
+            </div>
+            <div class="build-row">
+                <span class="build-label">Where it is</span>
+                <span class="build-text">Live and getting traffic. Built and launched in under 2 weeks. Started as a
+                    spreadsheet I was maintaining for friends asking "is this offer good?"</span>
+            </div>
+            <div class="build-stats">
+                <div><span class="build-stat-val">2.4K</span><span class="build-stat-key">Visits</span></div>
+                <div><span class="build-stat-val">~3 min</span><span class="build-stat-key">Avg. session</span></div>
+                <div><span class="build-stat-val">₹0</span><span class="build-stat-key">Marketing spend</span></div>
+            </div>
+            <a href="https://knowyourpay.vercel.app" target="_blank" class="build-link">knowyourpay.vercel.app →</a>
+        </div>
+
+        <div class="build-entry fade">
+            <div class="build-header">
+                <span class="build-name">Product Sense Lab</span>
+                <span class="build-status">Live</span>
+            </div>
+            <div class="build-row">
+                <span class="build-label">The problem</span>
+                <span class="build-text">Product thinking is a skill you can practice — but there's no good way to do
+                    it. Interview prep tools are shallow, courses are passive, and feedback from managers is rare and
+                    vague.</span>
+            </div>
+            <div class="build-row">
+                <span class="build-label">What it is</span>
+                <span class="build-text">One real product problem a day, calibrated to your level. You write your
+                    answer. You get specific, layered feedback that names the blind spot — not just what you got
+                    right.</span>
+            </div>
+            <div class="build-row">
+                <span class="build-label">Where it is</span>
+                <span class="build-text">Live with paying users. Built for PMs prepping for interviews, levelling up on
+                    the job, or founders who need to think more like product people.</span>
+            </div>
+            <div class="build-stats">
+                <div><span class="build-stat-val">180+</span><span class="build-stat-key">Users</span></div>
+                <div><span class="build-stat-val">40%</span><span class="build-stat-key">Day-7 retention</span></div>
+                <div><span class="build-stat-val">Solo</span><span class="build-stat-key">Built alone</span></div>
+            </div>
+            <a href="https://productsenselab.com" target="_blank" class="build-link">productsenselab.com →</a>
+        </div>
+
+        <!-- GRAVEYARD -->
+        <div class="section-divider fade">
+            <p class="section-label">The Graveyard</p>
+            <p class="section-desc">Products and experiments that didn't survive contact with reality. Documented here
+                because the failures are often more instructive than the wins.</p>
+        </div>
+
+        <div class="graveyard-entry fade">
+            <div class="grave-header">
+                <span class="grave-name">Hypersync</span>
+                <div class="grave-meta">
+                    <span class="grave-type">Experiment</span>
+                    <span class="grave-year">2024</span>
+                    <span class="grave-status">Never launched</span>
+                </div>
+            </div>
+            <div class="grave-row">
+                <span class="grave-label">Hypothesis</span>
+                <span class="grave-text">Developers spend too much time manually syncing environment variables across
+                    microservices. A CLI tool could handle this securely via end-to-end encryption.</span>
+            </div>
+            <div class="grave-row">
+                <span class="grave-label">Execution</span>
+                <span class="grave-text">Built a Rust-based CLI and a basic web dashboard in 3 weeks. Got it working
+                    perfectly for my own local environment.</span>
+            </div>
+            <div class="grave-row">
+                <span class="grave-label">Reality</span>
+                <span class="grave-text">Tried to onboard three engineer friends. Two couldn't install the CLI due to
+                    pathing issues on Windows. The third said, <em>"I just use Doppler for this."</em> I had built a
+                    feature, not a product. Killed it before ever launching.</span>
+            </div>
+        </div>
+
+        <div class="graveyard-entry fade">
+            <div class="grave-header">
+                <span class="grave-name">MicroMentor</span>
+                <div class="grave-meta">
+                    <span class="grave-type">Side project</span>
+                    <span class="grave-year">2019</span>
+                    <span class="grave-status">Failed to monetize</span>
+                </div>
+            </div>
+            <div class="grave-row">
+                <span class="grave-label">Hypothesis</span>
+                <span class="grave-text">Junior designers want 15-minute, highly tactical feedback sessions on specific
+                    Figma files — not months-long mentorships.</span>
+            </div>
+            <div class="grave-row">
+                <span class="grave-label">Execution</span>
+                <span class="grave-text">Spun up a marketplace. Manually recruited 10 senior designers. Hit 100 sessions
+                    booked in the first month — incredible early traction.</span>
+            </div>
+            <div class="grave-row">
+                <span class="grave-label">Reality</span>
+                <span class="grave-text">Junior designers were willing to pay $15 for feedback. Senior designers
+                    wouldn't get out of bed for less than $100/hr. Total pricing mismatch on both sides. Shut it down
+                    rather than trying to force the unit economics to work.</span>
+            </div>
+        </div>
+
+        <div class="graveyard-entry fade">
+            <div class="grave-header">
+                <span class="grave-name">Upskill India</span>
+                <div class="grave-meta">
+                    <span class="grave-type">Pre-product</span>
+                    <span class="grave-year">2019</span>
+                    <span class="grave-status">Pivoted</span>
+                </div>
+            </div>
+            <div class="grave-row">
+                <span class="grave-label">Hypothesis</span>
+                <span class="grave-text">Working professionals in India want accessible, affordable skill-building — and
+                    a community around it.</span>
+            </div>
+            <div class="grave-row">
+                <span class="grave-label">Execution</span>
+                <span class="grave-text">Grew to 10,000 users in 6 months via WhatsApp groups and content. No product
+                    yet — pure community.</span>
+            </div>
+            <div class="grave-row">
+                <span class="grave-label">Reality</span>
+                <span class="grave-text">The community wanted more structure than WhatsApp could offer. Pivoted the
+                    whole thing into Career Leap — so technically this one survived, just in a different form.</span>
             </div>
         </div>
 
