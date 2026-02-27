@@ -8,6 +8,21 @@
     <title>Work — Rinkesh Gorasia</title>
     <meta name="description"
         content="Full work history — Savior (acquired), Career Leap, consulting, and the things that didn't make it.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://rinkeshgorasia.com/work.html">
+    <meta property="og:title" content="Work — Rinkesh Gorasia">
+    <meta property="og:description"
+        content="Two companies founded. One acquired by Zocdoc. One shut down. Plus the experiments that didn't make it.">
+    <meta property="og:image" content="https://rinkeshgorasia.com/og-preview.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@rinks__g">
+    <meta name="twitter:title" content="Work — Rinkesh Gorasia">
+    <meta name="twitter:description"
+        content="Two companies founded. One acquired by Zocdoc. One shut down. Plus the experiments that didn't make it.">
+    <meta name="twitter:image" content="https://rinkeshgorasia.com/og-preview.png">
+    <link rel="canonical" href="https://rinkeshgorasia.com/work.html">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -196,7 +211,7 @@
         /* PAGE HEADER */
         .page-header {
             padding: 44px 0 40px;
-            border-bottom: 1px solid var(--rule);
+            border-bottom: none;
         }
 
         .page-header h1 {
@@ -233,6 +248,7 @@
 
         .section-block {
             padding: 38px 0 0;
+            border-top: 1px solid var(--rule);
         }
 
         /* WORK ENTRIES */
@@ -337,9 +353,9 @@
         .stat-val {
             display: block;
             font-family: var(--serif);
-            font-size: clamp(1rem, 3vw, 1.25rem);
+            font-size: clamp(1.5rem, 4vw, 1.9rem);
             font-weight: 400;
-            letter-spacing: -.03em;
+            letter-spacing: -.04em;
             color: var(--ink);
             line-height: 1;
         }
@@ -356,8 +372,8 @@
         /* SECTION DIVIDER — for consulting + graveyard */
         .section-divider {
             padding: 44px 0 0;
-            border-top: 1px solid var(--rule);
-            margin-top: 8px;
+            border-top: none;
+            margin-top: 0;
         }
 
         .section-desc {
@@ -407,6 +423,70 @@
         .client-tag:hover {
             border-color: var(--faint);
             color: var(--ink);
+        }
+
+        /* ── LOGO MARKS ── */
+        .logo-mark {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            border-radius: 7px;
+            flex-shrink: 0;
+            vertical-align: middle;
+            margin-right: 8px;
+            position: relative;
+            top: -1px;
+            overflow: hidden;
+        }
+
+        .logo-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 7px;
+            display: block;
+        }
+
+        .logo-savior {
+            background: #0f3d2b;
+        }
+
+        .logo-leap {
+            background: #000;
+            border-radius: 50%;
+        }
+
+        .logo-kyp {
+            background: #0a0f1a;
+        }
+
+        .logo-psl {
+            background: #131008;
+        }
+
+        /* CARRIED FORWARD */
+        .carried-forward {
+            margin-top: 18px;
+            padding: 12px 14px;
+            background: white;
+            border: 1px solid var(--rule);
+            border-radius: 6px;
+            font-size: .82rem;
+            color: var(--mid);
+            line-height: 1.65;
+        }
+
+        .carried-forward::before {
+            content: 'What I carried forward — ';
+            font-size: .67rem;
+            font-weight: 500;
+            letter-spacing: .05em;
+            text-transform: uppercase;
+            color: var(--faint);
+            display: block;
+            margin-bottom: 5px;
         }
 
         /* GRAVEYARD */
@@ -791,7 +871,15 @@
 
             <div class="work-entry">
                 <div class="entry-header">
-                    <span class="entry-name">Savior</span>
+                    <span class="entry-name"><span class="logo-mark logo-savior" aria-hidden="true">
+                            <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"
+                                style="width:100%;height:100%;padding:3px;">
+                                <path
+                                    d="M14 4C8.48 4 4 8.48 4 14a9.95 9.95 0 0 0 4.06 8.04l1.5-2.1A7.47 7.47 0 0 1 6.5 14c0-4.14 3.36-7.5 7.5-7.5s7.5 3.36 7.5 7.5a7.47 7.47 0 0 1-3.06 5.94l1.5 2.1A9.95 9.95 0 0 0 24 14c0-5.52-4.48-10-10-10z"
+                                    fill="rgba(255,255,255,0.88)" />
+                                <circle cx="14" cy="14" r="2.5" fill="white" />
+                            </svg>
+                        </span>Savior</span>
                     <div class="entry-right">
                         <span class="entry-period">2017 – 2020</span>
                         <span class="badge badge-acq">Acquired by Zocdoc</span>
@@ -819,7 +907,9 @@
 
             <div class="work-entry">
                 <div class="entry-header">
-                    <span class="entry-name">Career Leap</span>
+                    <span class="entry-name"><span class="logo-mark logo-leap" aria-hidden="true"><img class="logo-img"
+                                src="data:image/png;base64,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"
+                                alt="Career Leap logo" style="border-radius:50%;" /></span>Career Leap</span>
                     <div class="entry-right">
                         <span class="entry-period">2020 – 2023</span>
                         <span class="badge badge-shut">Shut down</span>
@@ -869,14 +959,16 @@
 
         <!-- CURRENT BUILDS -->
         <div class="section-divider fade">
-            <p class="section-label">Current Builds</p>
-            <p class="section-desc">Things I'm actively building on the side. Both started as questions I couldn't find
-                a decent answer to.</p>
+            <p class="section-label">Side Projects</p>
+            <p class="section-desc">Things I build and ship on the side. Both started as questions I couldn't find a
+                good answer to anywhere.</p>
         </div>
 
         <div class="build-entry fade">
             <div class="build-header">
-                <span class="build-name">KnowYourPay</span>
+                <span class="build-name"><span class="logo-mark logo-kyp" aria-hidden="true"><img class="logo-img"
+                            src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgdmlld0JveD0iMCAwIDEyMCAxMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHBhdGggZD0iTTYwIDEwIEwxMDQgMzUgTDEwNCA4NSBMNjAgMTEwIEwxNiA4NSBMMTYgMzUgWiIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA4KSIgc3Ryb2tlPSJyZ2JhKDI1NSwyNTUsMjU1LDAuNykiIHN0cm9rZS13aWR0aD0iNCIvPgogIDxsaW5lIHgxPSI2MCIgeTE9IjgyIiB4Mj0iNjAiIHkyPSI0MiIgc3Ryb2tlPSIjNjBhNWZhIiBzdHJva2Utd2lkdGg9IjkiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxwYXRoIGQ9Ik00MiA2MiBMNjAgMzggTDc4IDYyIiBzdHJva2U9IiM2MGE1ZmEiIHN0cm9rZS13aWR0aD0iOSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBmaWxsPSJub25lIi8+CiAgPGNpcmNsZSBjeD0iNjAiIGN5PSI4MyIgcj0iNS41IiBmaWxsPSIjNjBhNWZhIiBvcGFjaXR5PSIwLjUiLz4KPC9zdmc+"
+                            alt="KnowYourPay logo" /></span>KnowYourPay</span>
                 <span class="build-status">Live</span>
             </div>
             <div class="build-row">
@@ -905,7 +997,9 @@
 
         <div class="build-entry fade">
             <div class="build-header">
-                <span class="build-name">Product Sense Lab</span>
+                <span class="build-name"><span class="logo-mark logo-psl" aria-hidden="true"><img class="logo-img"
+                            src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MDAgODAwIiBmaWxsPSJub25lIj4KICA8cmVjdCB4PSIxNzAiIHk9IjE3MCIgd2lkdGg9IjQ2MCIgaGVpZ2h0PSI0NjAiIHJ4PSIxMCIgc3Ryb2tlPSIjZThjNTQ3IiBzdHJva2Utd2lkdGg9IjciIGZpbGw9Im5vbmUiLz4KICA8cmVjdCB4PSIxNzAiIHk9IjE3MCIgd2lkdGg9IjQ2MCIgaGVpZ2h0PSIxMyIgcng9IjUiIGZpbGw9IiNlOGM1NDciLz4KICA8cmVjdCB4PSIyODAiIHk9IjI4OCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjIyMCIgZmlsbD0iI2U4YzU0NyIvPgogIDxyZWN0IHg9IjMyMCIgeT0iMjg4IiB3aWR0aD0iMTUwIiBoZWlnaHQ9IjM0IiBmaWxsPSIjZThjNTQ3Ii8+CiAgPHJlY3QgeD0iNDcwIiB5PSIyODgiIHdpZHRoPSIzNCIgaGVpZ2h0PSIxMzAiIGZpbGw9IiNlOGM1NDciLz4KICA8cmVjdCB4PSIzMjAiIHk9IjM4NCIgd2lkdGg9IjE1MCIgaGVpZ2h0PSIzNCIgZmlsbD0iI2U4YzU0NyIvPgogIDxyZWN0IHg9IjUyNCIgeT0iMzc2IiB3aWR0aD0iNDIiIGhlaWdodD0iNDIiIGZpbGw9IiNlOGM1NDciLz4KPC9zdmc+"
+                            alt="Product Sense Lab logo" /></span>Product Sense Lab</span>
                 <span class="build-status">Live</span>
             </div>
             <div class="build-row">
@@ -965,6 +1059,8 @@
                     pathing issues on Windows. The third said, <em>"I just use Doppler for this."</em> I had built a
                     feature, not a product. Killed it before ever launching.</span>
             </div>
+            <div class="carried-forward">Always validate with people outside your own head before you build anything. A
+                single honest conversation would have saved three weeks.</div>
         </div>
 
         <div class="graveyard-entry fade">
@@ -992,6 +1088,8 @@
                     wouldn't get out of bed for less than $100/hr. Total pricing mismatch on both sides. Shut it down
                     rather than trying to force the unit economics to work.</span>
             </div>
+            <div class="carried-forward">Unit economics need to work from day one on both sides of a marketplace.
+                Traction that can't survive its own pricing model is not real traction.</div>
         </div>
 
         <div class="graveyard-entry fade">
@@ -1018,6 +1116,8 @@
                 <span class="grave-text">The community wanted more structure than WhatsApp could offer. Pivoted the
                     whole thing into Career Leap — so technically this one survived, just in a different form.</span>
             </div>
+            <div class="carried-forward">Community is the product. The real thing I was building was trust and belonging
+                — the platform was almost irrelevant. Career Leap carried that forward.</div>
         </div>
 
         <!-- FOOTER -->

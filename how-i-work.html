@@ -5,8 +5,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="color-scheme" content="light">
-    <title>How I Work — Rinkesh Gorasia</title>
-    <meta name="description" content="Process, principles and tools — how a product goes from napkin to shipped.">
+    <title>Writing — Rinkesh Gorasia</title>
+    <meta name="description" content="Essays and thoughts on product, building, and the occasional honest failure.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://rinkeshgorasia.com/writing.html">
+    <meta property="og:title" content="Writing — Rinkesh Gorasia">
+    <meta property="og:description"
+        content="Essays and thoughts on product, building, and the occasional honest failure.">
+    <meta property="og:image" content="https://rinkeshgorasia.com/og-preview.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@rinks__g">
+    <meta name="twitter:title" content="Writing — Rinkesh Gorasia">
+    <meta name="twitter:description"
+        content="Essays and thoughts on product, building, and the occasional honest failure.">
+    <meta name="twitter:image" content="https://rinkeshgorasia.com/og-preview.png">
+    <link rel="canonical" href="https://rinkeshgorasia.com/writing.html">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -193,7 +208,7 @@
         /* PAGE HEADER */
         .page-header {
             padding: 44px 0 40px;
-            border-bottom: 1px solid var(--rule);
+            border-bottom: none;
         }
 
         .page-header h1 {
@@ -218,186 +233,133 @@
             line-height: 1.72;
         }
 
-        /* BLOCKS */
-        .block {
-            padding: 38px 0;
+        /* SECTION */
+        .writing-section {
+            padding: 38px 0 42px;
             border-bottom: 1px solid var(--rule);
         }
 
-        .block-label {
+        .section-label {
             font-size: .67rem;
             font-weight: 500;
             letter-spacing: .11em;
             text-transform: uppercase;
             color: var(--faint);
-            margin-bottom: 26px;
+            margin-bottom: 22px;
         }
 
-        /* PHASE STEPS */
-        .phase-list {
+        /* POST LIST */
+        .post-list {
             list-style: none;
         }
 
-        .phase-item {
-            display: grid;
-            grid-template-columns: 32px 1fr;
-            gap: 0 12px;
-            padding: 20px 0;
+        .post-item {
+            padding: 18px 0;
             border-bottom: 1px solid var(--rule);
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 12px;
+            align-items: start;
         }
 
-        .phase-item:first-child {
-            padding-top: 0;
+        .post-item:first-child {
             border-top: 1px solid var(--rule);
         }
 
-        .phase-item:last-child {
+        .post-item:last-child {
             border-bottom: none;
-            padding-bottom: 0;
         }
 
-        .phase-num {
-            font-family: var(--serif);
-            font-size: .9rem;
-            color: var(--faint);
-            padding-top: 2px;
-        }
-
-        .phase-title {
+        .post-title {
             font-size: .9375rem;
-            font-weight: 500;
+            font-weight: 400;
             color: var(--ink);
-            margin-bottom: 7px;
-            line-height: 1.3;
+            line-height: 1.4;
         }
 
-        .phase-body {
-            font-size: .875rem;
+        .post-title a {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            transition: opacity .15s;
+        }
+
+        .post-title a:hover {
+            opacity: .62;
+        }
+
+        .post-sub {
+            display: block;
+            font-size: .8rem;
             color: var(--mid);
-            line-height: 1.74;
-        }
-
-        .phase-body strong {
-            color: var(--ink);
-            font-weight: 500;
-        }
-
-        .phase-body em {
-            font-style: italic;
-        }
-
-        /* PRINCIPLES */
-        .principles-list {
-            list-style: none;
-        }
-
-        .principle-item {
-            padding: 15px 0;
-            border-bottom: 1px solid var(--rule);
-            display: flex;
-            gap: 14px;
-        }
-
-        .principle-item:first-child {
-            border-top: 1px solid var(--rule);
-        }
-
-        .principle-item:last-child {
-            border-bottom: none;
-        }
-
-        .principle-marker {
-            font-size: .7rem;
-            color: var(--faint);
-            flex-shrink: 0;
-            margin-top: 2px;
-        }
-
-        .principle-text {
-            font-size: .9rem;
-            color: var(--mid);
-            line-height: 1.68;
-        }
-
-        .principle-text strong {
-            color: var(--ink);
-            font-weight: 500;
-        }
-
-        /* TOOLS GRID */
-        .tools-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1px;
-            background: var(--rule);
-            border: 1px solid var(--rule);
-            border-radius: 6px;
-            overflow: hidden;
-        }
-
-        .tool-item {
-            background: var(--bg);
-            padding: 14px 16px;
-            transition: background .15s;
-        }
-
-        .tool-item:hover {
-            background: white;
-        }
-
-        .tool-name {
-            font-size: .875rem;
-            font-weight: 500;
-            color: var(--ink);
-            margin-bottom: 3px;
-        }
-
-        .tool-use {
-            font-size: .78rem;
-            color: var(--faint);
+            margin-top: 4px;
             line-height: 1.55;
         }
 
-        @media (max-width: 420px) {
-            .tools-grid {
-                grid-template-columns: 1fr;
-            }
+        .post-date {
+            font-size: .72rem;
+            color: var(--faint);
+            white-space: nowrap;
+            flex-shrink: 0;
+            padding-top: 2px;
         }
 
-        /* NOPE LIST */
-        .nope-list {
-            list-style: none;
+        /* TWITTER CTA */
+        .twitter-section {
+            padding: 42px 0 54px;
         }
 
-        .nope-item {
-            padding: 14px 0;
-            border-bottom: 1px solid var(--rule);
+        .twitter-cta {
             display: flex;
-            gap: 14px;
             align-items: flex-start;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .twitter-cta p {
             font-size: .9rem;
             color: var(--mid);
-            line-height: 1.68;
+            line-height: 1.74;
+            max-width: 380px;
         }
 
-        .nope-item:first-child {
-            border-top: 1px solid var(--rule);
-        }
-
-        .nope-item:last-child {
-            border-bottom: none;
-        }
-
-        .nope-mark {
-            font-size: .8rem;
-            color: var(--faint);
-            flex-shrink: 0;
-            margin-top: 2px;
-        }
-
-        .nope-item strong {
+        .twitter-cta p strong {
             color: var(--ink);
             font-weight: 500;
+        }
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 20px;
+            background: var(--ink);
+            color: var(--bg);
+            text-decoration: none;
+            font-size: .8rem;
+            font-weight: 500;
+            border-radius: 5px;
+            white-space: nowrap;
+            flex-shrink: 0;
+            transition: opacity .15s;
+            margin-top: 4px;
+        }
+
+        .cta-btn:hover {
+            opacity: .75;
+            color: var(--bg);
+        }
+
+        @media (max-width: 420px) {
+            .twitter-cta {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .cta-btn {
+                align-self: flex-start;
+            }
         }
 
         /* FOOTER */
@@ -491,8 +453,8 @@
             <a href="index.html" class="nav-name">Rinkesh Gorasia</a>
             <div class="nav-links">
                 <a href="work.html">work</a>
-                <a href="how-i-work.html" class="active">how i work</a>
-                <a href="writing.html">writing</a>
+                <a href="how-i-work.html">how i work</a>
+                <a href="writing.html" class="active">writing</a>
             </div>
             <div class="nav-right">Bengaluru, IN</div>
             <button class="nav-toggle" aria-label="Toggle menu"
@@ -506,188 +468,73 @@
         </nav>
         <div class="nav-mobile">
             <a href="work.html">work</a>
-            <a href="how-i-work.html" class="active">how i work</a>
-            <a href="writing.html">writing</a>
+            <a href="how-i-work.html">how i work</a>
+            <a href="writing.html" class="active">writing</a>
         </div>
 
         <!-- PAGE HEADER -->
         <div class="page-header fade">
-            <h1>How I work.<br><em>0 to shipped.</em></h1>
-            <p>Not a methodology. Just how a product actually moves from a vague problem to something real — based on
-                doing this twice from scratch.</p>
+            <h1>Writing.<br><em>Things I think out loud.</em></h1>
+            <p>Most of what I write lives on Twitter — short, direct, occasionally wrong. Longer things end up here.</p>
         </div>
 
-        <!-- PROCESS -->
-        <div class="block fade">
-            <p class="block-label">The process</p>
-            <ol class="phase-list">
+        <!-- ESSAYS -->
+        <div class="writing-section fade">
+            <p class="section-label">Essays</p>
+            <ul class="post-list">
 
-                <li class="phase-item">
-                    <span class="phase-num">01</span>
-                    <div>
-                        <p class="phase-title">Get into the room</p>
-                        <p class="phase-body">Before any brief, any wireframe, any doc — I try to be physically present
-                            where the problem lives. With Savior, that meant months inside hospitals before touching a
-                            spec. <strong>The gap between how things are supposed to work and how they actually work is
-                                almost always where the product lives.</strong> You can't see that on a call.</p>
+                <li class="post-item">
+                    <div class="post-title">
+                        <a href="https://x.com/rinks__g" target="_blank">
+                            Why I shut down Career Leap
+                            <span class="post-sub">On knowing when to stop — and why that's its own skill.</span>
+                        </a>
                     </div>
+                    <span class="post-date">2023</span>
                 </li>
 
-                <li class="phase-item">
-                    <span class="phase-num">02</span>
-                    <div>
-                        <p class="phase-title">Find the actual problem</p>
-                        <p class="phase-body">The brief is usually a symptom. Someone says "we need a dashboard" — okay,
-                            but why? What decision are they trying to make faster? I spend a lot of time here before
-                            writing anything down. <strong>The real problem is almost never the stated problem.</strong>
-                            It's usually one layer deeper.</p>
+                <li class="post-item">
+                    <div class="post-title">
+                        <a href="https://x.com/rinks__g" target="_blank">
+                            What 85 hospitals taught me about product research
+                            <span class="post-sub">User research changes when you're actually inside the
+                                building.</span>
+                        </a>
                     </div>
+                    <span class="post-date">2021</span>
                 </li>
 
-                <li class="phase-item">
-                    <span class="phase-num">03</span>
-                    <div>
-                        <p class="phase-title">Build the smallest useful thing</p>
-                        <p class="phase-body">Not an MVP in the buzzword sense. The smallest thing that <em>actually
-                                does the job for one real person.</em> Career Leap started as a WhatsApp group.
-                            KnowYourPay started as a spreadsheet I shared with a few people. <strong>If the thing
-                                doesn't work before it's a product, it won't work after.</strong></p>
+                <li class="post-item">
+                    <div class="post-title">
+                        <a href="https://x.com/rinks__g" target="_blank">
+                            Building for completion, not conversion
+                            <span class="post-sub">How we got 40% completion rates when the industry average is
+                                5–10%.</span>
+                        </a>
                     </div>
+                    <span class="post-date">2022</span>
                 </li>
 
-                <li class="phase-item">
-                    <span class="phase-num">04</span>
-                    <div>
-                        <p class="phase-title">Ship early, watch what happens</p>
-                        <p class="phase-body">I have a bias toward shipping early over debating internally. <strong>Real
-                                users in 3 days beats a perfectly refined prototype in 3 weeks.</strong> The feedback
-                            you get from watching someone actually use something is worth more than any survey or
-                            interview.</p>
+                <li class="post-item">
+                    <div class="post-title">
+                        <a href="https://x.com/rinks__g" target="_blank">
+                            On doing over planning
+                            <span class="post-sub">Not always the wisest approach. But it keeps things honest.</span>
+                        </a>
                     </div>
+                    <span class="post-date">2024</span>
                 </li>
 
-                <li class="phase-item">
-                    <span class="phase-num">05</span>
-                    <div>
-                        <p class="phase-title">Know when to kill it</p>
-                        <p class="phase-body">I shut down Career Leap when the unit economics didn't work. I killed
-                            Hypersync before it launched when the third person I showed it to said <em>"I just use
-                                Doppler."</em> <strong>The willingness to stop is as important as the willingness to
-                                start.</strong> Sunk cost is the enemy of good judgment.</p>
-                    </div>
-                </li>
-
-            </ol>
-        </div>
-
-        <!-- PRINCIPLES -->
-        <div class="block fade">
-            <p class="block-label">Principles I actually follow</p>
-            <ul class="principles-list">
-                <li class="principle-item">
-                    <span class="principle-marker">—</span>
-                    <p class="principle-text"><strong>Doing beats planning.</strong> A working thing teaches you more
-                        than a perfect document. I'll always bias toward making something real, even if it's rough.</p>
-                </li>
-                <li class="principle-item">
-                    <span class="principle-marker">—</span>
-                    <p class="principle-text"><strong>Small teams are a feature.</strong> Career Leap peaked at 3
-                        people. Savior was tiny until it wasn't. Overhead kills speed, and speed is usually the
-                        advantage.</p>
-                </li>
-                <li class="principle-item">
-                    <span class="principle-marker">—</span>
-                    <p class="principle-text"><strong>Distribution is part of the product.</strong> How people find it,
-                        share it, and explain it to someone else — that's not a marketing problem. That's a product
-                        problem.</p>
-                </li>
-                <li class="principle-item">
-                    <span class="principle-marker">—</span>
-                    <p class="principle-text"><strong>Honest numbers over comfortable ones.</strong> I'd rather know
-                        that retention is bad at week 2 than celebrate week 1 activation. The uncomfortable metric is
-                        always the useful one.</p>
-                </li>
-                <li class="principle-item">
-                    <span class="principle-marker">—</span>
-                    <p class="principle-text"><strong>Shutting down is a decision, not a failure.</strong> Career Leap
-                        didn't work at scale. That's data. Acting on it is what kept me from wasting another two years
-                        on something that wasn't going to work.</p>
-                </li>
             </ul>
         </div>
 
-        <!-- TOOLS -->
-        <div class="block fade">
-            <p class="block-label">Tools I reach for</p>
-            <div class="tools-grid">
-                <div class="tool-item">
-                    <p class="tool-name">Figma</p>
-                    <p class="tool-use">Wireframes, flows, quick prototypes. Mostly low-fidelity until something needs
-                        to be handed off.</p>
-                </div>
-                <div class="tool-item">
-                    <p class="tool-name">Notion</p>
-                    <p class="tool-use">PRDs, research notes, everything that needs to be shared and commented on.</p>
-                </div>
-                <div class="tool-item">
-                    <p class="tool-name">Linear</p>
-                    <p class="tool-use">Tracking work when there's a team. For solo projects, a plain text file works
-                        fine.</p>
-                </div>
-                <div class="tool-item">
-                    <p class="tool-name">Mixpanel</p>
-                    <p class="tool-use">Retention curves and funnel analysis. I set up event tracking before launch, not
-                        after.</p>
-                </div>
-                <div class="tool-item">
-                    <p class="tool-name">Claude</p>
-                    <p class="tool-use">First draft of almost everything written. Also for thinking through edge cases I
-                        haven't considered.</p>
-                </div>
-                <div class="tool-item">
-                    <p class="tool-name">WhatsApp</p>
-                    <p class="tool-use">Still the fastest way to get early feedback from real people. Career Leap
-                        started here.</p>
-                </div>
-                <div class="tool-item">
-                    <p class="tool-name">Loom</p>
-                    <p class="tool-use">Async walkthroughs. Way faster than writing a long Slack message for anything
-                        visual.</p>
-                </div>
-                <div class="tool-item">
-                    <p class="tool-name">Google Sheets</p>
-                    <p class="tool-use">KnowYourPay started as a spreadsheet. Still the fastest way to validate
-                        something that processes numbers.</p>
-                </div>
+        <!-- TWITTER CTA -->
+        <div class="twitter-section fade">
+            <div class="twitter-cta">
+                <p>Most of what's in my head ends up on Twitter first. <strong>Product, building, the occasional honest
+                        failure.</strong> No newsletters, no content calendars — just thinking out loud.</p>
+                <a href="https://x.com/rinks__g" target="_blank" class="cta-btn">Follow on Twitter →</a>
             </div>
-        </div>
-
-        <!-- WHAT I DON'T DO -->
-        <div class="block fade">
-            <p class="block-label">What I don't do</p>
-            <ul class="nope-list">
-                <li class="nope-item">
-                    <span class="nope-mark">✕</span>
-                    <span><strong>Six-week discovery phases before any output.</strong> If I can't form a useful
-                        hypothesis in a week of real conversations, the problem isn't well-defined enough to build
-                        against.</span>
-                </li>
-                <li class="nope-item">
-                    <span class="nope-mark">✕</span>
-                    <span><strong>Pixel-perfect prototypes before validation.</strong> I've seen too many teams fall in
-                        love with a Figma file. Real users interact with real things differently.</span>
-                </li>
-                <li class="nope-item">
-                    <span class="nope-mark">✕</span>
-                    <span><strong>Vanity metrics as north stars.</strong> Downloads, impressions, signups — only useful
-                        in relation to something that matters. I want to know who came back and why.</span>
-                </li>
-                <li class="nope-item">
-                    <span class="nope-mark">✕</span>
-                    <span><strong>Consensus-driven product decisions.</strong> Feedback is an input, not a vote. Someone
-                        has to make the call and own it. That's the job.</span>
-                </li>
-            </ul>
         </div>
 
         <!-- FOOTER -->
