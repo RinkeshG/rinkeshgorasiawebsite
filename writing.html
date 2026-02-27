@@ -1,551 +1,553 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Rinkesh — Writing</title>
-    <!-- SEO -->
-    <meta name="description"
-        content="Rinkesh Gorasia's Operating Manual. Mental models and frameworks for shipping product." />
-    <meta name="author" content="Rinkesh Gorasia" />
-    <link rel="canonical" href="https://www.rinkeshgorasia.com/writing" />
-
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://www.rinkeshgorasia.com/writing" />
-    <meta property="og:title" content="Rinkesh Gorasia — Writing" />
-    <meta property="og:description" content="Mental models and frameworks for shipping product." />
-    <meta property="og:image" content="https://www.rinkeshgorasia.com/images/og-writing.jpg" />
-
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="https://www.rinkeshgorasia.com/writing" />
-    <meta name="twitter:title" content="Rinkesh Gorasia — Writing" />
-    <meta name="twitter:description" content="Mental models and frameworks for shipping product." />
-    <meta name="twitter:image" content="https://www.rinkeshgorasia.com/images/og-writing.jpg" />
-    <meta name="twitter:creator" content="@rinks__g" />
-
-    <link rel="icon" type="image/svg+xml"
-        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23101010'/><text x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui,sans-serif' font-size='18' font-weight='700' fill='white'>R</text></svg>" />
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Inter:wght@400;500;700&display=swap"
-        rel="stylesheet" />
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light">
+    <title>Writing — Rinkesh Gorasia</title>
+    <meta name="description" content="Essays and thoughts on product, building, and the occasional honest failure.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Inter:wght@300;400;500&display=swap"
+        rel="stylesheet">
     <style>
-        /* ============================================================
-       PREVIEW — Rinkesh Personal Site
-       All changes visible here before going live
-    ============================================================ */
-
-        :root {
-            --ink: #101010;
-            --muted: rgba(16, 16, 16, .76);
-            /* was .66 — easier to read */
-            --faint: rgba(16, 16, 16, .44);
-            --rule: rgba(16, 16, 16, .12);
-
-            --max: 820px;
-            --pad: clamp(18px, 4vw, 44px);
-
-            --s1: 18px;
-            --s2: 28px;
-            --s3: 40px;
-            --s4: 54px;
-            --s5: 72px;
-
-            --r: 18px;
-        }
-
-        html,
-        body {
-            height: 100%;
-        }
-
-        body {
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
             margin: 0;
-            color: var(--ink);
-            font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, sans-serif;
-
-            /* Simplified 2-stop gradient: warm top-right, cool bottom-left */
-            background:
-                radial-gradient(900px 600px at 85% 5%, #fff4e8, transparent 60%),
-                radial-gradient(800px 600px at 10% 95%, #f4fbff, transparent 60%),
-                #ffffff;
-
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        /* ---- Links ---- */
-        a {
-            color: inherit;
-            text-decoration: none;
-            border-bottom: 1px solid rgba(16, 16, 16, .18);
-            transition: border-bottom-color 0.2s ease;
-        }
-
-        a:hover {
-            border-bottom-color: rgba(16, 16, 16, .6);
-        }
-
-        /* ---- Layout ---- */
-        .wrap {
-            max-width: var(--max);
-            margin: 0 auto;
-            padding: var(--s5) var(--pad) var(--s5);
-            position: relative;
-        }
-
-        /* ---- Typography ---- */
-        h1 {
-            margin: 0 0 var(--s1);
-            font-family: Sora, Inter, system-ui, sans-serif;
-            font-size: clamp(28px, 3.5vw, 40px);
-            /* was clamp(36px,5vw,56px) — was too loud */
-            letter-spacing: -0.02em;
-            line-height: 1.08;
-        }
-
-        .lede {
-            margin: 0 0 var(--s2);
-            font-size: clamp(17px, 2vw, 21px);
-            /* up to 21px, stronger visual tier */
-            font-weight: 500;
-            color: rgba(16, 16, 16, .88);
-        }
-
-        .p {
-            margin: 0 0 var(--s2);
-            color: var(--muted);
-            font-size: 16px;
-            line-height: 1.65;
-            /* was 1.72 — tighter, more intentional */
-        }
-
-        /* ---- Hero image ---- */
-        .hero {
-            margin: var(--s2) 0 var(--s4);
-        }
-
-        .hero img {
-            width: 100%;
-            height: auto;
-            display: block;
-            border-radius: var(--r);
-            border: 1px solid rgba(16, 16, 16, .10);
-            box-shadow: 0 18px 60px rgba(16, 16, 16, .10);
-            max-height: 320px;
-            object-fit: cover;
-        }
-
-        /* ---- Sections ---- */
-        .section {
             padding: 0;
         }
 
-        .kicker {
-            font-family: Sora, Inter, system-ui, sans-serif;
-            font-size: 12px;
-            letter-spacing: .09em;
-            /* was .18em — less dated */
-            text-transform: uppercase;
-            color: rgba(16, 16, 16, .42);
-            margin: 0 0 14px;
-            /* was 10px — visual breathing room */
-        }
-
-        .rule {
-            height: 1px;
-            background: var(--rule);
-            margin: var(--s4) 0;
-        }
-
-        /* ---- Timestamp badge ---- */
-        .timestamp {
-            display: inline-block;
-            font-size: 12px;
-            color: var(--faint);
-            margin-left: 10px;
-            vertical-align: middle;
-            letter-spacing: 0;
-            font-family: Inter, system-ui, sans-serif;
-            font-weight: 400;
-        }
-
-        /* ---- Gallery ---- */
-        .gallery {
-            margin-top: var(--s2);
-            column-count: 3;
-            column-gap: 16px;
-        }
-
-        .gitem {
-            break-inside: avoid;
-            -webkit-column-break-inside: avoid;
-            margin: 0 0 16px;
-            position: relative;
-            overflow: hidden;
-            border-radius: var(--r);
-        }
-
-        .gitem img {
-            width: 100%;
-            aspect-ratio: 4 / 3;
-            /* enforced ratio — looks intentional */
-            object-fit: cover;
+        img {
             display: block;
-            border-radius: var(--r);
-            border: 1px solid rgba(16, 16, 16, .08);
-            background: rgba(16, 16, 16, .03);
-            box-shadow: 0 10px 30px rgba(16, 16, 16, .06);
-            transition: transform 0.3s ease;
+            max-width: 100%;
         }
 
-        /* Caption on hover — CSS only, no JS */
-        .gitem .caption {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(transparent, rgba(16, 16, 16, .55));
-            color: rgba(255, 255, 255, .92);
-            font-size: 12px;
-            font-weight: 500;
-            padding: 28px 12px 10px;
-            border-radius: 0 0 var(--r) var(--r);
-            opacity: 0;
-            transform: translateY(4px);
-            transition: opacity 0.25s ease, transform 0.25s ease;
-            pointer-events: none;
+        :root {
+            color-scheme: light;
         }
 
-        .gitem:hover img {
-            transform: scale(1.02);
+        @media (prefers-color-scheme: dark) {
+            html {
+                background: #f8f6f2 !important;
+            }
+
+            body {
+                background: #f8f6f2 !important;
+                color: #18160f !important;
+            }
         }
 
-        .gitem:hover .caption {
-            opacity: 1;
-            transform: translateY(0);
+        :root {
+            --bg: #f8f6f2;
+            --ink: #18160f;
+            --mid: #6b6355;
+            --faint: #aea79c;
+            --rule: #e5dfd6;
+            --red: #b83410;
+            --sans: 'Inter', system-ui, sans-serif;
+            --serif: 'Fraunces', Georgia, serif;
+            --col: 600px;
+            --pad: clamp(18px, 5vw, 56px);
         }
 
-        /* ---- Footer ---- */
-        footer {
-            margin-top: var(--s5);
-            padding-top: var(--s3);
-            border-top: 1px solid var(--rule);
-            color: rgba(16, 16, 16, .52);
-            font-size: 14px;
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
         }
 
-        .footer-inner {
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: var(--sans);
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            color: inherit;
+            text-underline-offset: 3px;
+            text-decoration-thickness: 1px;
+            transition: color .15s;
+        }
+
+        .page {
+            max-width: calc(var(--col) + var(--pad) * 2);
+            margin: 0 auto;
+            padding: 0 var(--pad);
+        }
+
+        /* NAV */
+        .nav {
             display: flex;
             justify-content: space-between;
-            align-items: flex-end;
-            gap: 24px;
-            flex-wrap: wrap;
+            align-items: center;
+            padding: 24px 0 26px;
+            border-bottom: 1px solid var(--rule);
+            gap: 12px;
         }
 
-
-        .footer-credit {
-            font-size: 12px;
-            color: rgba(16, 16, 16, .44);
-            text-align: right;
-            line-height: 1.7;
+        .nav-name {
+            font-size: .875rem;
+            font-weight: 500;
+            color: var(--ink);
+            text-decoration: none;
+            white-space: nowrap;
             flex-shrink: 0;
         }
 
-        footer .row {
-            margin-top: 10px;
-        }
-
-        footer a {
-            color: rgba(16, 16, 16, .66);
-        }
-
-        /* ---- Responsive ---- */
-        @media (max-width: 900px) {
-            .gallery {
-                column-count: 2;
-                column-gap: 14px;
-            }
-
-            .gitem {
-                margin-bottom: 14px;
-            }
-        }
-
-        @media (max-width: 560px) {
-            .wrap {
-                padding-top: clamp(32px, 6vh, 48px);
-                padding-bottom: 72px;
-            }
-
-            .nav {
-                margin-bottom: 40px;
-                gap: 16px;
-            }
-
-            h1 {
-                margin-bottom: 12px;
-            }
-
-            .hero img {
-                max-height: 220px;
-            }
-
-            .gallery {
-                column-count: 1;
-                column-gap: 12px;
-            }
-
-            .gitem {
-                margin-bottom: 12px;
-            }
-
-            /* Fix 9: footer credit left-aligns and gets spacing on mobile */
-            .footer-inner {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 16px;
-            }
-
-            .footer-credit {
-                text-align: left;
-            }
-        }
-
-        /* Fix 2: external link arrow — scoped to project links only */
-        .ext-link::after {
-            content: " ↗";
-            font-size: 0.75em;
-            opacity: 0.45;
-            display: inline;
-        }
-
-        /* ---- Work items ---- */
-        .work-item {
-            margin-top: 44px;
-            padding-left: 20px;
-            border-left: 2px solid rgba(16, 16, 16, .10);
-        }
-
-        .work-name {
-            font-family: Sora, Inter, system-ui, sans-serif;
-            font-size: 22px;
-            letter-spacing: -0.015em;
-            color: var(--ink);
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        .work-meta {
-            font-size: 12px;
-            color: rgba(16, 16, 16, .42);
-            letter-spacing: 0.03em;
-            text-transform: uppercase;
+        .nav-links {
             display: flex;
+            gap: 18px;
             align-items: center;
-            gap: 10px;
-            margin-bottom: 16px;
         }
 
-        .work-tag {
-            display: inline-block;
-            font-size: 11px;
+        .nav-links a {
+            font-size: .78rem;
+            color: var(--mid);
+            text-decoration: none;
+            transition: color .15s;
+            white-space: nowrap;
+        }
+
+        .nav-links a:hover {
+            color: var(--ink);
+        }
+
+        .nav-links a.active {
+            color: var(--ink);
             font-weight: 500;
-            letter-spacing: 0.02em;
-            text-transform: none;
-            color: rgba(16, 16, 16, .55);
-            background: rgba(16, 16, 16, .05);
-            padding: 2px 8px;
-            border-radius: 4px;
         }
 
-        .work-thesis {
-            font-size: 17px;
+        .nav-right {
+            font-size: .7rem;
+            color: var(--faint);
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            color: var(--ink);
+            flex-shrink: 0;
+        }
+
+        .nav-toggle svg {
+            display: block;
+        }
+
+        .nav-mobile {
+            display: none;
+            flex-direction: column;
+            border-bottom: 1px solid var(--rule);
+            padding: 4px 0 16px;
+        }
+
+        .nav-mobile.open {
+            display: flex;
+        }
+
+        .nav-mobile a {
+            font-size: .875rem;
+            color: var(--mid);
+            text-decoration: none;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--rule);
+            transition: color .15s;
+        }
+
+        .nav-mobile a:last-child {
+            border-bottom: none;
+        }
+
+        .nav-mobile a:hover,
+        .nav-mobile a.active {
+            color: var(--ink);
+        }
+
+        .nav-mobile a.active {
             font-weight: 500;
-            color: rgba(16, 16, 16, .88);
-            line-height: 1.5;
-            margin: 0 0 16px;
         }
 
-        .work-desc {
-            color: var(--muted);
-            font-size: 15px;
-            line-height: 1.6;
+        @media (max-width: 520px) {
+            .nav-links {
+                display: none;
+            }
+
+            .nav-right {
+                display: none;
+            }
+
+            .nav-toggle {
+                display: block;
+            }
+        }
+
+        /* PAGE HEADER */
+        .page-header {
+            padding: 44px 0 40px;
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .page-header h1 {
+            font-family: var(--serif);
+            font-size: clamp(1.9rem, 6vw, 2.75rem);
+            font-weight: 400;
+            line-height: 1.18;
+            letter-spacing: -.03em;
+            color: var(--ink);
+            margin-bottom: 14px;
+        }
+
+        .page-header h1 em {
+            font-style: italic;
+            font-weight: 300;
+        }
+
+        .page-header p {
+            font-size: .9rem;
+            color: var(--mid);
+            max-width: 480px;
+            line-height: 1.72;
+        }
+
+        /* SECTION */
+        .writing-section {
+            padding: 38px 0 42px;
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .section-label {
+            font-size: .67rem;
+            font-weight: 500;
+            letter-spacing: .11em;
+            text-transform: uppercase;
+            color: var(--faint);
+            margin-bottom: 22px;
+        }
+
+        /* POST LIST */
+        .post-list {
+            list-style: none;
+        }
+
+        .post-item {
+            padding: 18px 0;
+            border-bottom: 1px solid var(--rule);
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 12px;
+            align-items: start;
+        }
+
+        .post-item:first-child {
+            border-top: 1px solid var(--rule);
+        }
+
+        .post-item:last-child {
+            border-bottom: none;
+        }
+
+        .post-title {
+            font-size: .9375rem;
+            font-weight: 400;
+            color: var(--ink);
+            line-height: 1.4;
+        }
+
+        .post-title a {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            transition: opacity .15s;
+        }
+
+        .post-title a:hover {
+            opacity: .62;
+        }
+
+        .post-sub {
+            display: block;
+            font-size: .8rem;
+            color: var(--mid);
+            margin-top: 4px;
+            line-height: 1.55;
+        }
+
+        .post-date {
+            font-size: .72rem;
+            color: var(--faint);
+            white-space: nowrap;
+            flex-shrink: 0;
+            padding-top: 2px;
+        }
+
+        /* TWITTER CTA */
+        .twitter-section {
+            padding: 42px 0 54px;
+        }
+
+        .twitter-cta {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .twitter-cta p {
+            font-size: .9rem;
+            color: var(--mid);
+            line-height: 1.74;
+            max-width: 380px;
+        }
+
+        .twitter-cta p strong {
+            color: var(--ink);
+            font-weight: 500;
+        }
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 20px;
+            background: var(--ink);
+            color: var(--bg);
+            text-decoration: none;
+            font-size: .8rem;
+            font-weight: 500;
+            border-radius: 5px;
+            white-space: nowrap;
+            flex-shrink: 0;
+            transition: opacity .15s;
+            margin-top: 4px;
+        }
+
+        .cta-btn:hover {
+            opacity: .75;
+            color: var(--bg);
+        }
+
+        @media (max-width: 420px) {
+            .twitter-cta {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .cta-btn {
+                align-self: flex-start;
+            }
+        }
+
+        /* FOOTER */
+        .footer {
+            padding: 60px 0 56px;
+            border-top: 1px solid var(--rule);
+        }
+
+        .footer-cta {
+            font-family: var(--serif);
+            font-weight: 300;
+            font-size: clamp(1.6rem, 5vw, 2.4rem);
+            line-height: 1.2;
+            letter-spacing: -.03em;
+            color: var(--ink);
             margin-bottom: 8px;
         }
 
-        .work-desc p {
-            margin-bottom: 12px;
-        }
-
-        .work-desc p:last-child {
-            margin-bottom: 0;
-        }
-
-        .work-desc strong {
-            color: var(--ink);
-            font-weight: 500;
-        }
-
-        .work-closer {
-            margin-top: 14px;
-            font-size: 15px;
-            color: rgba(16, 16, 16, .55);
+        .footer-cta em {
             font-style: italic;
         }
 
-        /* ---- Navigation ---- */
-        .nav {
+        .footer-cta a {
+            text-decoration: underline;
+            text-decoration-color: var(--rule);
+            text-underline-offset: 4px;
+            transition: color .2s, text-decoration-color .2s;
+        }
+
+        .footer-cta a:hover {
+            color: var(--red);
+            text-decoration-color: var(--red);
+        }
+
+        .footer-honest {
+            font-size: .8rem;
+            color: var(--faint);
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
+        .footer-bottom {
             display: flex;
-            gap: 24px;
-            margin-bottom: 56px;
-            font-family: Inter, system-ui, sans-serif;
-            font-size: 14px;
-            letter-spacing: 0.01em;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            border-top: 1px solid var(--rule);
+            padding-top: 18px;
         }
 
-        .nav a {
-            color: rgba(16, 16, 16, .5);
+        .footer-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer-links a {
+            font-size: .78rem;
+            color: var(--mid);
             text-decoration: none;
-            transition: color 0.15s ease;
+            transition: color .15s;
         }
 
-        .nav a:hover,
-        .nav a.active {
+        .footer-links a:hover {
             color: var(--ink);
         }
 
-        /* ---- Operating Manual ---- */
-        .manual-item {
-            display: block;
-            text-decoration: none;
-            border-bottom: 1px solid rgba(16, 16, 16, .08);
-            padding: 24px 0;
-            transition: transform 0.2s ease, padding-left 0.2s ease;
+        .footer-credit {
+            font-size: .68rem;
+            color: var(--faint);
         }
 
-        .manual-item:first-of-type {
-            border-top: 1px solid rgba(16, 16, 16, .08);
-            margin-top: 24px;
+        .fade {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity .55s ease, transform .55s ease;
         }
 
-        .manual-item:hover {
-            border-bottom-color: rgba(16, 16, 16, .08);
-            transform: translateX(4px);
-        }
-
-        .m-tag {
-            font-family: Sora, Inter, system-ui, sans-serif;
-            font-size: 11px;
-            letter-spacing: 0.04em;
-            text-transform: uppercase;
-            color: rgba(16, 16, 16, .4);
-            margin-bottom: 8px;
-            display: block;
-        }
-
-        .m-title {
-            font-size: 18px;
-            font-weight: 500;
-            color: var(--ink);
-            margin: 0 0 6px;
-            line-height: 1.3;
-        }
-
-        .m-teaser {
-            font-size: 15px;
-            color: var(--muted);
-            margin: 0;
-            line-height: 1.5;
+        .fade.on {
+            opacity: 1;
+            transform: none;
         }
     </style>
 </head>
 
 <body>
+    <div class="page">
 
-
-
-    <main class="wrap">
-
-        <!-- Nav -->
-        <nav class="nav" aria-label="Main Navigation">
-            <a href="preview.html">Home</a>
-            <a href="work.html">Work</a>
-            <a href="writing.html" class="active">Writing</a>
+        <!-- NAV -->
+        <nav class="nav">
+            <a href="index.html" class="nav-name">Rinkesh Gorasia</a>
+            <div class="nav-links">
+                <a href="work.html">work</a>
+                <a href="how-i-work.html">how i work</a>
+                <a href="writing.html" class="active">writing</a>
+            </div>
+            <div class="nav-right">Bengaluru, IN</div>
+            <button class="nav-toggle" aria-label="Toggle menu"
+                onclick="document.querySelector('.nav-mobile').classList.toggle('open')">
+                <svg width="18" height="14" viewBox="0 0 18 14" fill="none">
+                    <rect y="0" width="18" height="1.5" rx=".75" fill="currentColor" />
+                    <rect y="6" width="18" height="1.5" rx=".75" fill="currentColor" />
+                    <rect y="12" width="18" height="1.5" rx=".75" fill="currentColor" />
+                </svg>
+            </button>
         </nav>
+        <div class="nav-mobile">
+            <a href="work.html">work</a>
+            <a href="how-i-work.html">how i work</a>
+            <a href="writing.html" class="active">writing</a>
+        </div>
 
-        <!-- Writing -->
-        <section class="section" aria-label="Writing" id="writing">
-            <div class="kicker">Operating Manual</div>
+        <!-- PAGE HEADER -->
+        <div class="page-header fade">
+            <h1>Writing.<br><em>Things I think out loud.</em></h1>
+            <p>Most of what I write lives on Twitter — short, direct, occasionally wrong. Longer things end up here.</p>
+        </div>
 
-            <p class="p" style="margin-bottom: 32px;">
-                A collection of frameworks and mental models that I actually use when building products.
-                Written down mostly so I don't forget them.
+        <!-- ESSAYS -->
+        <div class="writing-section fade">
+            <p class="section-label">Essays</p>
+            <ul class="post-list">
+
+                <li class="post-item">
+                    <div class="post-title">
+                        <a href="https://x.com/rinks__g" target="_blank">
+                            Why I shut down Career Leap
+                            <span class="post-sub">On knowing when to stop — and why that's its own skill.</span>
+                        </a>
+                    </div>
+                    <span class="post-date">2023</span>
+                </li>
+
+                <li class="post-item">
+                    <div class="post-title">
+                        <a href="https://x.com/rinks__g" target="_blank">
+                            What 85 hospitals taught me about product research
+                            <span class="post-sub">User research changes when you're actually inside the
+                                building.</span>
+                        </a>
+                    </div>
+                    <span class="post-date">2021</span>
+                </li>
+
+                <li class="post-item">
+                    <div class="post-title">
+                        <a href="https://x.com/rinks__g" target="_blank">
+                            Building for completion, not conversion
+                            <span class="post-sub">How we got 40% completion rates when the industry average is
+                                5–10%.</span>
+                        </a>
+                    </div>
+                    <span class="post-date">2022</span>
+                </li>
+
+                <li class="post-item">
+                    <div class="post-title">
+                        <a href="https://x.com/rinks__g" target="_blank">
+                            On doing over planning
+                            <span class="post-sub">Not always the wisest approach. But it keeps things honest.</span>
+                        </a>
+                    </div>
+                    <span class="post-date">2024</span>
+                </li>
+
+            </ul>
+        </div>
+
+        <!-- TWITTER CTA -->
+        <div class="twitter-section fade">
+            <div class="twitter-cta">
+                <p>Most of what's in my head ends up on Twitter first. <strong>Product, building, the occasional honest
+                        failure.</strong> No newsletters, no content calendars — just thinking out loud.</p>
+                <a href="https://x.com/rinks__g" target="_blank" class="cta-btn">Follow on Twitter →</a>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <footer class="footer fade">
+            <p class="footer-cta">
+                If something here resonated,<br>
+                <em>just say hi.</em> <a href="mailto:rinkeshgorasia@gmail.com">rinkeshgorasia@gmail.com</a>
             </p>
-
-            <a href="#" class="manual-item">
-                <span class="m-tag">Product · Feb 2026</span>
-                <h2 class="m-title">Why I never write 10-page specs</h2>
-                <p class="m-teaser">If you need 10 pages to explain what you're building, you don't actually know what
-                    you're building yet. How to align a team with wireframes and a 1-pager.</p>
-            </a>
-
-            <a href="#" class="manual-item">
-                <span class="m-tag">Startups · Jan 2026</span>
-                <h2 class="m-title">How I decide when to kill a project</h2>
-                <p class="m-teaser">Unit economics don't care about your ego. The exact mathematical threshold I use to
-                    decide whether to pivot, push through, or shut it down.</p>
-            </a>
-
-            <a href="#" class="manual-item">
-                <span class="m-tag">Engineering · Nov 2025</span>
-                <h2 class="m-title">The only 2 metrics that matter in the first 30 days</h2>
-                <p class="m-teaser">Stop looking at vanity user signups. Why I only track activation velocity and day-7
-                    retention when launching V1.</p>
-            </a>
-
-        </section>
-
-        <!-- Footer -->
-        <footer class="footer">
-            <div class="footer-inner">
-                <div class="footer-left">
-                    <div>
-                        <a href="https://x.com/rinks__g" aria-label="Twitter" target="_blank" rel="noopener">twitter</a>
-                        ·
-                        <a href="https://www.linkedin.com/in/rinksg/" aria-label="LinkedIn" target="_blank"
-                            rel="noopener">linkedin</a>
-                    </div>
-                    <div class="row">
-                        <a href="mailto:rinkeshgorasia@gmail.com">rinkeshgorasia@gmail.com</a>
-                    </div>
+            <p class="footer-honest">I tend to prefer doing over planning. Replies included.</p>
+            <div class="footer-bottom">
+                <div class="footer-links">
+                    <a href="https://x.com/rinks__g" target="_blank">Twitter</a>
+                    <a href="https://www.linkedin.com/in/rinksg/" target="_blank">LinkedIn</a>
                 </div>
-                <div class="footer-credit">
-                    built by Rinkesh<br />
-                    <span style="color: rgba(16,16,16,.38);">powered by Claude, tokens &amp; coffee ☕</span>
-                </div>
+                <span class="footer-credit">built by rinkesh · powered by claude, tokens &amp; coffee ☕</span>
             </div>
         </footer>
 
-    </main>
-
+    </div>
     <script>
-        // Easter egg — developers who inspect the console deserve a hello
-        console.log(
-            "%c👋 Hey there.",
-            "font-size: 14px; font-weight: bold;"
-        );
-        console.log(
-            "%cYou found the secret part. I'm Rinkesh — if you're poking around my code, we should probably talk.\nrinkeshgorasia@gmail.com",
-            "font-size: 13px; color: #555;"
-        );
+        var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } });
+        }, { threshold: 0.05 });
+        document.querySelectorAll('.fade').forEach(function (el) { io.observe(el); });
+        document.querySelectorAll('.nav-mobile a').forEach(function (a) {
+            a.addEventListener('click', function () { document.querySelector('.nav-mobile').classList.remove('open'); });
+        });
     </script>
-
 </body>
 
 </html>
