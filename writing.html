@@ -12,7 +12,7 @@
     <meta property="og:title" content="Writing — Rinkesh Gorasia">
     <meta property="og:description"
         content="Essays and thoughts on product, building, and the occasional honest failure.">
-    <meta property="og:image" content="https://rinkeshgorasia.com/og-preview.png">
+    <meta property="og:image" content="https://rinkeshgorasia.com/images/og-writing.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
@@ -20,7 +20,7 @@
     <meta name="twitter:title" content="Writing — Rinkesh Gorasia">
     <meta name="twitter:description"
         content="Essays and thoughts on product, building, and the occasional honest failure.">
-    <meta name="twitter:image" content="https://rinkeshgorasia.com/og-preview.png">
+    <meta name="twitter:image" content="https://rinkeshgorasia.com/images/og-writing.jpg">
     <link rel="canonical" href="https://rinkeshgorasia.com/writing.html">
     <link rel="icon" type="image/svg+xml"
         href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2318160f'/%3E%3Ctext x='16' y='23' font-family='Georgia%2C serif' font-size='20' font-style='italic' fill='%23f8f6f2' text-anchor='middle'%3ER%3C/text%3E%3C/svg%3E">
@@ -29,241 +29,12 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Inter:wght@300;400;500&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
     <style>
-        *,
-        *::before,
-        *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        img {
-            display: block;
-            max-width: 100%;
-        }
-
-        :root {
-            color-scheme: light;
-        }
-
-        @media (prefers-color-scheme: dark) {
-            html {
-                background: #f8f6f2 !important;
-            }
-
-            body {
-                background: #f8f6f2 !important;
-                color: #18160f !important;
-            }
-        }
-
-        :root {
-            --bg: #f8f6f2;
-            --ink: #18160f;
-            --mid: #6b6355;
-            --faint: #aea79c;
-            --rule: #e5dfd6;
-            --red: #b83410;
-            --sans: 'Inter', system-ui, sans-serif;
-            --serif: 'Fraunces', Georgia, serif;
-            --col: 600px;
-            --pad: clamp(18px, 5vw, 56px);
-        }
-
-        html {
-            font-size: 16px;
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background: var(--bg);
-            color: var(--ink);
-            font-family: var(--sans);
-            line-height: 1.65;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        a {
-            color: inherit;
-            text-underline-offset: 3px;
-            text-decoration-thickness: 1px;
-            transition: color .15s;
-        }
-
-        .page {
-            max-width: calc(var(--col) + var(--pad) * 2);
-            margin: 0 auto;
-            padding: 0 var(--pad);
-        }
-
-        /* NAV */
-        .nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 24px 0 26px;
-            border-bottom: 1px solid var(--rule);
-            gap: 12px;
-        }
-
-        .nav-name {
-            font-size: .875rem;
-            font-weight: 500;
-            color: var(--ink);
-            text-decoration: none;
-            white-space: nowrap;
-            flex-shrink: 0;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 18px;
-            align-items: center;
-        }
-
-        .nav-links a {
-            font-size: .78rem;
-            color: var(--mid);
-            text-decoration: none;
-            transition: color .15s;
-            white-space: nowrap;
-        }
-
-        .nav-links a:hover {
-            color: var(--ink);
-        }
-
-        .nav-links a.active {
-            color: var(--ink);
-            font-weight: 500;
-        }
-
-        .nav-right {
-            font-size: .7rem;
-            color: var(--faint);
-            white-space: nowrap;
-            flex-shrink: 0;
-        }
-
-        .nav-toggle {
-            display: none;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 4px;
-            color: var(--ink);
-            flex-shrink: 0;
-        }
-
-        .nav-toggle svg {
-            display: block;
-        }
-
-        .nav-mobile {
-            display: none;
-            flex-direction: column;
-            border-bottom: 1px solid var(--rule);
-            padding: 4px 0 16px;
-        }
-
-        .nav-mobile.open {
-            display: flex;
-        }
-
-        .nav-mobile a {
-            font-size: .875rem;
-            color: var(--mid);
-            text-decoration: none;
-            padding: 10px 0;
-            border-bottom: 1px solid var(--rule);
-            transition: color .15s;
-        }
-
-        .nav-mobile a:last-child {
-            border-bottom: none;
-        }
-
-        .nav-mobile a:hover,
-        .nav-mobile a.active {
-            color: var(--ink);
-        }
-
-        .nav-mobile a.active {
-            font-weight: 500;
-        }
-
-        @media (max-width: 520px) {
-            .nav-links {
-                display: none;
-            }
-
-            .nav-right {
-                display: none;
-            }
-
-            .nav-toggle {
-                display: block;
-            }
-        }
-
-        @media (max-width: 600px) {
-            .post-title {
-                font-size: .95rem;
-            }
-
-            .footer-cta {
-                font-size: clamp(1.3rem, 6vw, 2rem);
-            }
-
-            .footer-bottom {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 12px;
-            }
-        }
-
-        /* PAGE HEADER */
-        .page-header {
-            padding: 44px 0 40px;
-            border-bottom: none;
-        }
-
-        .page-header h1 {
-            font-family: var(--serif);
-            font-size: clamp(1.9rem, 6vw, 2.75rem);
-            font-weight: 400;
-            line-height: 1.18;
-            letter-spacing: -.03em;
-            color: var(--ink);
-            margin-bottom: 14px;
-        }
-
-        .page-header h1 em {
-            font-style: italic;
-            font-weight: 300;
-        }
-
-        .page-header p {
-            font-size: .9rem;
-            color: var(--mid);
-            max-width: 480px;
-            line-height: 1.72;
-        }
-
-        /* SECTION */
+        /* WRITING SECTION */
         .writing-section {
             padding: 38px 0 42px;
             border-bottom: 1px solid var(--rule);
-        }
-
-        .section-label {
-            font-size: .67rem;
-            font-weight: 500;
-            letter-spacing: .11em;
-            text-transform: uppercase;
-            color: var(--faint);
-            margin-bottom: 22px;
         }
 
         /* POST LIST */
@@ -369,6 +140,12 @@
             color: var(--bg);
         }
 
+        @media (max-width: 600px) {
+            .post-title {
+                font-size: .95rem;
+            }
+        }
+
         @media (max-width: 420px) {
             .twitter-cta {
                 flex-direction: column;
@@ -378,87 +155,6 @@
             .cta-btn {
                 align-self: flex-start;
             }
-        }
-
-        /* FOOTER */
-        .footer {
-            padding: 60px 0 56px;
-            border-top: 1px solid var(--rule);
-        }
-
-        .footer-cta {
-            font-family: var(--serif);
-            font-weight: 300;
-            font-size: clamp(1.6rem, 5vw, 2.4rem);
-            line-height: 1.2;
-            letter-spacing: -.03em;
-            color: var(--ink);
-            margin-bottom: 8px;
-        }
-
-        .footer-cta em {
-            font-style: italic;
-        }
-
-        .footer-cta a {
-            text-decoration: underline;
-            text-decoration-color: var(--rule);
-            text-underline-offset: 4px;
-            transition: color .2s, text-decoration-color .2s;
-        }
-
-        .footer-cta a:hover {
-            color: var(--red);
-            text-decoration-color: var(--red);
-        }
-
-        .footer-honest {
-            font-size: .8rem;
-            color: var(--faint);
-            margin-bottom: 40px;
-            font-style: italic;
-        }
-
-        .footer-bottom {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            border-top: 1px solid var(--rule);
-            padding-top: 18px;
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 20px;
-        }
-
-        .footer-links a {
-            font-size: .78rem;
-            color: var(--mid);
-            text-decoration: none;
-            transition: color .15s;
-        }
-
-        .footer-links a:hover {
-            color: var(--ink);
-        }
-
-        .footer-credit {
-            font-size: .68rem;
-            color: var(--faint);
-        }
-
-        .fade {
-            opacity: 0;
-            transform: translateY(10px);
-            transition: opacity .55s ease, transform .55s ease;
-        }
-
-        .fade.on {
-            opacity: 1;
-            transform: none;
         }
     </style>
 </head>
@@ -475,7 +171,9 @@
                 <a href="how-i-work.html">how i work</a>
                 <a href="writing.html" class="active">writing</a>
             </div>
-            <div class="nav-right">Bengaluru, IN</div>
+            <div class="nav-right">
+                Bengaluru &nbsp;·&nbsp; <span id="nav-temp">—</span>
+            </div>
             <button class="nav-toggle" aria-label="Toggle menu"
                 onclick="document.querySelector('.nav-mobile').classList.toggle('open')">
                 <svg width="18" height="14" viewBox="0 0 18 14" fill="none">
@@ -505,7 +203,7 @@
 
                 <li class="post-item">
                     <div class="post-title">
-                        <a href="https://x.com/rinks__g" target="_blank">
+                        <a href="https://x.com/rinks__g" target="_blank" rel="noopener">
                             Why I shut down Career Leap
                             <span class="post-sub">On knowing when to stop — and why that's its own skill.</span>
                         </a>
@@ -515,18 +213,7 @@
 
                 <li class="post-item">
                     <div class="post-title">
-                        <a href="https://x.com/rinks__g" target="_blank">
-                            What 85 hospitals taught me about product research
-                            <span class="post-sub">User research changes when you're actually inside the
-                                building.</span>
-                        </a>
-                    </div>
-                    <span class="post-date">2021</span>
-                </li>
-
-                <li class="post-item">
-                    <div class="post-title">
-                        <a href="https://x.com/rinks__g" target="_blank">
+                        <a href="https://x.com/rinks__g" target="_blank" rel="noopener">
                             Building for completion, not conversion
                             <span class="post-sub">How we got 40% completion rates when the industry average is
                                 5–10%.</span>
@@ -537,7 +224,18 @@
 
                 <li class="post-item">
                     <div class="post-title">
-                        <a href="https://x.com/rinks__g" target="_blank">
+                        <a href="https://x.com/rinks__g" target="_blank" rel="noopener">
+                            What 85 hospitals taught me about product research
+                            <span class="post-sub">User research changes when you're actually inside the
+                                building.</span>
+                        </a>
+                    </div>
+                    <span class="post-date">2021</span>
+                </li>
+
+                <li class="post-item">
+                    <div class="post-title">
+                        <a href="https://x.com/rinks__g" target="_blank" rel="noopener">
                             On doing over planning
                             <span class="post-sub">Not always the wisest approach. But it keeps things honest.</span>
                         </a>
@@ -553,7 +251,7 @@
             <div class="twitter-cta">
                 <p>Most of what's in my head ends up on Twitter first. <strong>Product, building, the occasional honest
                         failure.</strong> No newsletters, no content calendars. Just thinking out loud.</p>
-                <a href="https://x.com/rinks__g" target="_blank" class="cta-btn">Follow on Twitter →</a>
+                <a href="https://x.com/rinks__g" target="_blank" rel="noopener" class="cta-btn">Follow on X →</a>
             </div>
         </div>
 
@@ -587,10 +285,22 @@
 
     </div>
     <script>
+        // Live temperature
+        fetch('https://api.open-meteo.com/v1/forecast?latitude=12.97&longitude=77.59&current_weather=true&temperature_unit=celsius')
+            .then(function (r) { return r.json(); })
+            .then(function (d) {
+                var el = document.getElementById('nav-temp');
+                if (el && d.current_weather) el.textContent = Math.round(d.current_weather.temperature) + '°C';
+            })
+            .catch(function () { });
+
+        // Scroll reveal
         var io = new IntersectionObserver(function (entries) {
             entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } });
         }, { threshold: 0.05 });
         document.querySelectorAll('.fade').forEach(function (el) { io.observe(el); });
+
+        // Mobile nav close on link click
         document.querySelectorAll('.nav-mobile a').forEach(function (a) {
             a.addEventListener('click', function () { document.querySelector('.nav-mobile').classList.remove('open'); });
         });
