@@ -32,11 +32,16 @@
         rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <style>
+        /* ── PAGE HEADER OVERRIDE (work-specific) ── */
+        .page-header {
+            padding-bottom: 28px;
+        }
+
         /* ── WORK AVAILABLE ── */
         .work-available {
-            margin-top: 16px;
+            margin-top: 14px;
             font-size: .82rem;
-            color: var(--faint);
+            color: var(--mid);
             line-height: 1.55;
         }
 
@@ -51,6 +56,23 @@
         .work-available a:hover {
             color: var(--ink);
             text-decoration-color: var(--ink);
+        }
+
+        /* ── FOOTER CV LINK ── */
+        .footer-cv-link {
+            display: inline-block;
+            font-size: .78rem;
+            color: var(--faint);
+            text-decoration: none;
+            border-bottom: 1px solid var(--rule);
+            padding-bottom: 1px;
+            margin-top: 14px;
+            transition: color .15s, border-color .15s;
+        }
+
+        .footer-cv-link:hover {
+            color: var(--ink);
+            border-color: var(--ink);
         }
 
         /* ── RESPONSIVE (work-specific) ── */
@@ -580,8 +602,8 @@
         <div class="page-header fade">
             <h1>Work.<br><em>The full version.</em></h1>
             <p>Two companies. One acquired, one shut down on purpose. Plus the things that didn't make it.</p>
+            <p class="work-available">Also open to product roles. <a href="cv.html">View CV →</a></p>
         </div>
-        <p class="work-available fade">Also currently open to the right senior product role. <a href="cv.html">View CV →</a></p>
 
         <!-- COMPANIES -->
         <div class="section-block fade">
@@ -766,6 +788,7 @@
                 Want to talk product?<br>
                 <em>I'm easy to reach.</em> <a href="mailto:rinkeshgorasia@gmail.com">rinkeshgorasia@gmail.com</a>
             </p>
+            <a href="cv.html" class="footer-cv-link">View CV →</a>
             <div class="footer-bottom">
                 <div class="footer-links">
                     <a href="https://x.com/rinks__g" target="_blank" rel="noopener" aria-label="X / Twitter"
