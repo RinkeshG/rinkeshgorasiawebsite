@@ -276,26 +276,12 @@
             font-weight: 500;
         }
 
-        .client-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 7px;
-            margin-top: 20px;
-        }
-
-        .client-tag {
-            display: inline-block;
-            padding: 4px 11px;
-            border: 1px solid var(--rule);
-            border-radius: 20px;
-            font-size: .74rem;
+        .client-areas {
+            font-size: .8rem;
             color: var(--mid);
-            transition: border-color .15s, color .15s;
-        }
-
-        .client-tag:hover {
-            border-color: var(--faint);
-            color: var(--ink);
+            margin-top: 18px;
+            line-height: 1.8;
+            letter-spacing: .01em;
         }
 
         /* ── LOGO MARKS ── */
@@ -449,6 +435,14 @@
             font-size: 1.05rem;
             font-weight: 500;
             color: var(--ink);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            transition: color .15s;
+        }
+
+        .build-name:hover {
+            color: var(--mid);
         }
 
         .build-status {
@@ -677,28 +671,20 @@
                 useful, not just present.</p>
             <p>If you're building something and feeling stuck, <a href="mailto:rinkeshgorasia@gmail.com"
                     style="color: var(--ink); font-weight: 500;">I'm happy to talk.</a></p>
-            <div class="client-tags">
-                <span class="client-tag">Product strategy</span>
-                <span class="client-tag">0→1 builds</span>
-                <span class="client-tag">Growth loops</span>
-                <span class="client-tag">User research</span>
-                <span class="client-tag">GTM planning</span>
-                <span class="client-tag">Pricing</span>
-            </div>
+            <p class="client-areas">Product strategy · 0→1 builds · Growth loops · User research · GTM planning · Pricing</p>
         </div>
 
         <!-- CURRENT BUILDS -->
         <div class="section-divider fade">
             <p class="section-label">Side Projects</p>
-            <p class="section-desc">Things I build and ship on the side. Both started as questions I couldn't find a
-                good answer to anywhere.</p>
+            <p class="section-desc">Things I build and ship on the side.</p>
         </div>
 
         <div class="build-entry fade">
             <div class="build-header">
-                <span class="build-name"><span class="logo-mark logo-kyp" aria-hidden="true"><img class="logo-img"
+                <a href="https://knowyourpay.vercel.app" target="_blank" rel="noopener" class="build-name"><span class="logo-mark logo-kyp" aria-hidden="true"><img class="logo-img"
                             src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgdmlld0JveD0iMCAwIDEyMCAxMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHBhdGggZD0iTTYwIDEwIEwxMDQgMzUgTDEwNCA4NSBMNjAgMTEwIEwxNiA4NSBMMTYgMzUgWiIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA4KSIgc3Ryb2tlPSJyZ2JhKDI1NSwyNTUsMjU1LDAuNykiIHN0cm9rZS13aWR0aD0iNCIvPgogIDxsaW5lIHgxPSI2MCIgeTE9IjgyIiB4Mj0iNjAiIHkyPSI0MiIgc3Ryb2tlPSIjNjBhNWZhIiBzdHJva2Utd2lkdGg9IjkiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxwYXRoIGQ9Ik00MiA2MiBMNjAgMzggTDc4IDYyIiBzdHJva2U9IiM2MGE1ZmEiIHN0cm9rZS13aWR0aD0iOSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBmaWxsPSJub25lIi8+CiAgPGNpcmNsZSBjeD0iNjAiIGN5PSI4MyIgcj0iNS41IiBmaWxsPSIjNjBhNWZhIiBvcGFjaXR5PSIwLjUiLz4KPC9zdmc+"
-                            alt="KnowYourPay logo" /></span>KnowYourPay</span>
+                            alt="KnowYourPay logo" /></span>KnowYourPay ↗</a>
                 <span class="build-status">Live</span>
             </div>
             <div class="build-row">
@@ -722,14 +708,13 @@
                 <div><span class="build-stat-val">~3 min</span><span class="build-stat-key">Avg. session</span></div>
                 <div><span class="build-stat-val">₹0</span><span class="build-stat-key">Marketing spend</span></div>
             </div>
-            <a href="https://knowyourpay.vercel.app" target="_blank" rel="noopener" class="build-link">knowyourpay.vercel.app →</a>
         </div>
 
         <div class="build-entry fade">
             <div class="build-header">
-                <span class="build-name"><span class="logo-mark logo-psl" aria-hidden="true"><img class="logo-img"
+                <a href="https://www.productsenselab.com" target="_blank" rel="noopener" class="build-name"><span class="logo-mark logo-psl" aria-hidden="true"><img class="logo-img"
                             src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MDAgODAwIiBmaWxsPSJub25lIj4KICA8cmVjdCB4PSIxNzAiIHk9IjE3MCIgd2lkdGg9IjQ2MCIgaGVpZ2h0PSI0NjAiIHJ4PSIxMCIgc3Ryb2tlPSIjZThjNTQ3IiBzdHJva2Utd2lkdGg9IjciIGZpbGw9Im5vbmUiLz4KICA8cmVjdCB4PSIxNzAiIHk9IjE3MCIgd2lkdGg9IjQ2MCIgaGVpZ2h0PSIxMyIgcng9IjUiIGZpbGw9IiNlOGM1NDciLz4KICA8cmVjdCB4PSIyODAiIHk9IjI4OCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjIyMCIgZmlsbD0iI2U4YzU0NyIvPgogIDxyZWN0IHg9IjMyMCIgeT0iMjg4IiB3aWR0aD0iMTUwIiBoZWlnaHQ9IjM0IiBmaWxsPSIjZThjNTQ3Ii8+CiAgPHJlY3QgeD0iNDcwIiB5PSIyODgiIHdpZHRoPSIzNCIgaGVpZ2h0PSIxMzAiIGZpbGw9IiNlOGM1NDciLz4KICA8cmVjdCB4PSIzMjAiIHk9IjM4NCIgd2lkdGg9IjE1MCIgaGVpZ2h0PSIzNCIgZmlsbD0iI2U4YzU0NyIvPgogIDxyZWN0IHg9IjUyNCIgeT0iMzc2IiB3aWR0aD0iNDIiIGhlaWdodD0iNDIiIGZpbGw9IiNlOGM1NDciLz4KPC9zdmc+"
-                            alt="Product Sense Lab logo" /></span>Product Sense Lab</span>
+                            alt="Product Sense Lab logo" /></span>Product Sense Lab ↗</a>
                 <span class="build-status">Live</span>
             </div>
             <div class="build-row">
@@ -754,7 +739,6 @@
                 <div><span class="build-stat-val">40%</span><span class="build-stat-key">Day-7 retention</span></div>
                 <div><span class="build-stat-val">Solo</span><span class="build-stat-key">Built alone</span></div>
             </div>
-            <a href="https://www.productsenselab.com" target="_blank" rel="noopener" class="build-link">productsenselab.com →</a>
         </div>
 
         <!-- GRAVEYARD -->
@@ -801,7 +785,6 @@
                 Want to work together,<br>
                 <em>or just talk product?</em> <a href="mailto:rinkeshgorasia@gmail.com">rinkeshgorasia@gmail.com</a>
             </p>
-            <p class="footer-honest">I tend to prefer doing over planning. Replies included.</p>
             <div class="footer-bottom">
                 <div class="footer-links">
                     <a href="https://x.com/rinks__g" target="_blank" rel="noopener" aria-label="X / Twitter"

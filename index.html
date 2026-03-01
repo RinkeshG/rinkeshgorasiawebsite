@@ -653,7 +653,6 @@
                 If something here resonated,<br>
                 <em>just say hi.</em> <a href="mailto:rinkeshgorasia@gmail.com">rinkeshgorasia@gmail.com</a>
             </p>
-            <p class="footer-honest">I tend to prefer doing over planning. Replies included.</p>
             <div class="footer-bottom">
                 <div class="footer-links">
                     <a href="https://x.com/rinks__g" target="_blank" rel="noopener" aria-label="X / Twitter"
@@ -690,14 +689,17 @@
             }
         })();
 
-        /* Artifact image fallback */
+        /* Artifact image loading — handles both cached and fresh loads */
         document.querySelectorAll('.artifact-card').forEach(function (card) {
             var img = card.querySelector('.artifact-real');
             var sw = card.querySelector('.artifact-swatch');
-            img.addEventListener('load', function () {
-                if (img.naturalWidth > 0) { sw.style.display = 'none'; img.style.display = 'block'; }
-            });
-            img.addEventListener('error', function () { img.style.display = 'none'; });
+            function show() { sw.style.display = 'none'; img.style.display = 'block'; }
+            if (img.complete && img.naturalWidth > 0) {
+                show();
+            } else {
+                img.addEventListener('load', function () { if (img.naturalWidth > 0) show(); });
+                img.addEventListener('error', function () { img.style.display = 'none'; });
+            }
         });
 
         /* Scroll reveal */
