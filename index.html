@@ -76,105 +76,6 @@
             border-bottom: 1px solid var(--rule);
         }
 
-        /* ── NOW BULLETS ── */
-        .summary-list {
-            list-style: none;
-        }
-
-        .summary-list li {
-            display: flex;
-            gap: 12px;
-            align-items: flex-start;
-            padding: 11px 0;
-            border-bottom: 1px solid var(--rule);
-            font-size: .9rem;
-            color: var(--mid);
-            line-height: 1.62;
-        }
-
-        .summary-list li:first-child {
-            border-top: 1px solid var(--rule);
-        }
-
-        .bullet {
-            flex-shrink: 0;
-            font-size: .65rem;
-            color: var(--faint);
-            margin-top: 4px;
-            user-select: none;
-        }
-
-        .summary-list strong {
-            color: var(--ink);
-            font-weight: 500;
-        }
-
-        /* chips */
-        .chips {
-            display: inline-flex;
-            flex-wrap: wrap;
-            gap: 5px;
-            margin: 0 2px;
-            vertical-align: middle;
-        }
-
-        .chip {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            padding: 1px 8px 1px 5px;
-            background: white;
-            border: 1px solid var(--rule);
-            border-radius: 20px;
-            font-size: .73rem;
-            color: var(--ink);
-            text-decoration: none;
-            white-space: nowrap;
-            transition: border-color .15s, background .15s, color .15s;
-        }
-
-        .chip:hover {
-            border-color: var(--ink);
-            background: var(--ink);
-            color: var(--bg);
-        }
-
-        .chip:hover .chip-dot {
-            background: white;
-        }
-
-        .chip-dot {
-            width: 5px;
-            height: 5px;
-            border-radius: 50%;
-            background: #4ade80;
-            flex-shrink: 0;
-            transition: background .15s;
-        }
-
-        .live-row {
-            display: flex;
-            align-items: center;
-            gap: 7px;
-            margin-top: 16px;
-            font-size: .73rem;
-            color: var(--faint);
-        }
-
-        .live-dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: #4ade80;
-            flex-shrink: 0;
-            animation: breathe 2.5s ease-in-out infinite;
-        }
-
-        @keyframes breathe {
-            0%, 100% { opacity: 1; }
-            50% { opacity: .3; }
-        }
-
         /* ── WORK ITEMS ── */
         .work-item {
             padding: 30px 0;
@@ -446,27 +347,12 @@
 
         /* ── RESPONSIVE (index-specific) ── */
         @media (max-width: 600px) {
-            .summary-list li {
-                font-size: .88rem;
-            }
-
             .work-stats {
                 gap: 12px 0;
             }
 
             .stat-val {
                 font-size: 1.4rem;
-            }
-
-            .chips {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 4px;
-                margin: 2px 0;
-            }
-
-            .chip {
-                font-size: .7rem;
             }
         }
     </style>
@@ -511,37 +397,9 @@
                 <p>Built two companies from scratch. One got <strong>acquired by Zocdoc</strong> (US healthcare
                     marketplace). The other I shut down when the unit economics didn't work. No regrets, that one taught
                     me more anyway.</p>
-                <p>Now I build things on the side — starting from a real problem, shipping before it's perfect. Small
-                    teams, tight loops. <strong>That's where I work best.</strong></p>
+                <p>Now I build things on the side — KnowYourPay and Product Sense Lab, both live — starting from a real problem, shipping before it's perfect. Small teams, tight loops. <strong>That's where I work best.</strong></p>
             </div>
             <p class="intro-available">Currently open to product roles. <a href="cv.html">View CV →</a></p>
-        </section>
-
-        <!-- NOW -->
-        <section class="section fade" id="now">
-            <p class="section-label">Now</p>
-            <ul class="summary-list stagger">
-                <li>
-                    <span class="bullet">→</span>
-                    <span>Building
-                        <span class="chips">
-                            <a href="https://knowyourpay.vercel.app" target="_blank" rel="noopener" class="chip"><span
-                                    class="chip-dot"></span>KnowYourPay</a>
-                            <a href="https://www.productsenselab.com" target="_blank" rel="noopener" class="chip"><span
-                                    class="chip-dot"></span>Product Sense Lab</a>
-                        </span>
-                    </span>
-                </li>
-                <li>
-                    <span class="bullet">→</span>
-                    <span>Deep in AI right now. Not the hype, the part where it <strong>actually changes how work gets
-                            done</strong></span>
-                </li>
-            </ul>
-            <div class="live-row">
-                <span class="live-dot"></span>
-                Updated Mar 2026
-            </div>
         </section>
 
         <!-- WORK -->
