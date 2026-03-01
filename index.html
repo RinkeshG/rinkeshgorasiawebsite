@@ -423,59 +423,25 @@
         .logo-kyp    { background: #0a0f1a; }
         .logo-psl    { background: #131008; }
 
-        .open-note {
+        /* ── INTRO AVAILABLE ── */
+        .intro-available {
+            margin-top: 20px;
             font-size: .82rem;
-            color: var(--mid);
-            font-style: italic;
-            margin-top: 18px;
-            padding-top: 16px;
-            border-top: 1px solid var(--rule);
-            max-width: 460px;
-            line-height: 1.7;
-        }
-
-        /* ── STATUS ROW ── */
-        .status-row {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-top: 24px;
-            padding-top: 18px;
-            border-top: 1px solid var(--rule);
-        }
-
-        .status-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 7px;
-            font-size: .8rem;
-            color: var(--mid);
-        }
-
-        .status-live {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: var(--green);
-            flex-shrink: 0;
-            animation: breathe 2.5s ease-in-out infinite;
-        }
-
-        .cv-link {
-            margin-left: auto;
-            font-size: .76rem;
             color: var(--faint);
-            text-decoration: none;
-            border-bottom: 1px solid transparent;
-            padding-bottom: 1px;
-            transition: color .15s, border-color .15s;
-            flex-shrink: 0;
-            white-space: nowrap;
+            line-height: 1.55;
         }
 
-        .cv-link:hover {
+        .intro-available a {
+            color: var(--mid);
+            text-decoration: underline;
+            text-decoration-color: var(--rule);
+            text-underline-offset: 3px;
+            transition: color .15s, text-decoration-color .15s;
+        }
+
+        .intro-available a:hover {
             color: var(--ink);
-            border-color: var(--rule);
+            text-decoration-color: var(--ink);
         }
 
         /* ── RESPONSIVE (index-specific) ── */
@@ -501,10 +467,6 @@
 
             .chip {
                 font-size: .7rem;
-            }
-
-            .open-note {
-                font-size: .8rem;
             }
         }
     </style>
@@ -552,13 +514,7 @@
                 <p>Now I build things on the side — starting from a real problem, shipping before it's perfect. Small
                     teams, tight loops. <strong>That's where I work best.</strong></p>
             </div>
-            <div class="status-row">
-                <span class="status-pill">
-                    <span class="status-live"></span>
-                    Available for senior product roles
-                </span>
-                <a href="cv.html" class="cv-link">View CV →</a>
-            </div>
+            <p class="intro-available">Currently open to the right senior product role. <a href="cv.html">View CV →</a></p>
         </section>
 
         <!-- NOW -->
@@ -582,8 +538,6 @@
                             done</strong></span>
                 </li>
             </ul>
-            <p class="open-note">Open to the right full-time role. Senior product, 0→1, somewhere with real scope
-                and a small team.</p>
             <div class="live-row">
                 <span class="live-dot"></span>
                 Updated Mar 2026
