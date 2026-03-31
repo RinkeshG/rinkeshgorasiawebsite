@@ -102,6 +102,24 @@ a {
     text-decoration: none;
     transition: color .15s;
     white-space: nowrap;
+    position: relative;
+    padding-bottom: 2px;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1.5px;
+    background: var(--ink);
+    transition: width .25s cubic-bezier(.4, 0, .2, 1);
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    width: 100%;
 }
 
 .nav-links a:hover {
@@ -308,8 +326,8 @@ a {
 /* ── REVEAL ANIMATIONS ── */
 .fade {
     opacity: 0;
-    transform: translateY(10px);
-    transition: opacity .55s ease, transform .55s ease;
+    transform: translateY(16px);
+    transition: opacity .7s cubic-bezier(.4, 0, .2, 1), transform .7s cubic-bezier(.4, 0, .2, 1);
 }
 
 .fade.on {
@@ -317,10 +335,21 @@ a {
     transform: none;
 }
 
+.fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity .8s cubic-bezier(.4, 0, .2, 1), transform .8s cubic-bezier(.4, 0, .2, 1);
+}
+
+.fade-up.on {
+    opacity: 1;
+    transform: none;
+}
+
 .stagger > * {
     opacity: 0;
-    transform: translateY(6px);
-    transition: opacity .45s ease, transform .45s ease;
+    transform: translateY(8px);
+    transition: opacity .5s cubic-bezier(.4, 0, .2, 1), transform .5s cubic-bezier(.4, 0, .2, 1);
 }
 
 .stagger.on > * {
@@ -329,10 +358,24 @@ a {
 }
 
 .stagger.on > *:nth-child(1) { transition-delay: 0s; }
-.stagger.on > *:nth-child(2) { transition-delay: .07s; }
-.stagger.on > *:nth-child(3) { transition-delay: .14s; }
-.stagger.on > *:nth-child(4) { transition-delay: .21s; }
-.stagger.on > *:nth-child(5) { transition-delay: .28s; }
+.stagger.on > *:nth-child(2) { transition-delay: .08s; }
+.stagger.on > *:nth-child(3) { transition-delay: .16s; }
+.stagger.on > *:nth-child(4) { transition-delay: .24s; }
+.stagger.on > *:nth-child(5) { transition-delay: .32s; }
+
+/* ── GRAIN OVERLAY ── */
+body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: .35;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 256px 256px;
+}
 
 /* ── RESPONSIVE SHARED ── */
 @media (max-width: 600px) {
