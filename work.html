@@ -61,6 +61,9 @@
             background: var(--rule);
         }
 
+        /* ── WIDER LAYOUT FOR CARDS ── */
+        .page { --col: 680px; }
+
         /* ── SECTION BLOCK ── */
         .section-block {
             padding: 48px 0 0;
@@ -71,23 +74,63 @@
             color: var(--mid);
             line-height: 1.74;
             max-width: 480px;
-            margin-bottom: 28px;
+            margin-bottom: 32px;
             margin-top: 6px;
+        }
+
+        /* ── TIMELINE CONTAINER ── */
+        .timeline {
+            position: relative;
+            padding-left: 28px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 4px;
+            top: 8px;
+            bottom: 8px;
+            width: 1.5px;
+            background: var(--rule);
+        }
+
+        /* ── TIMELINE DOT ── */
+        .timeline-dot {
+            position: absolute;
+            left: -28px;
+            top: 28px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            border: 2px solid var(--faint);
+            background: var(--bg);
+            z-index: 1;
+        }
+
+        .card--acq .timeline-dot {
+            border-color: var(--green);
+            background: var(--green);
+        }
+
+        .card--shut .timeline-dot {
+            border-color: var(--faint);
+            background: var(--faint);
         }
 
         /* ── WORK CARD (companies) ── */
         .work-card {
             position: relative;
-            padding: 32px 0;
-            border-bottom: 1px solid var(--rule);
+            background: #fff;
+            border: 1px solid var(--rule);
+            border-radius: 12px;
+            padding: 28px 28px 24px;
+            margin-bottom: 20px;
+            transition: box-shadow .3s ease, transform .3s ease;
         }
 
-        .work-card:first-child {
-            padding-top: 0;
-        }
-
-        .work-card:last-child {
-            border-bottom: none;
+        .work-card:hover {
+            box-shadow: 0 4px 24px rgba(24, 22, 15, .06);
+            transform: translateY(-2px);
         }
 
         /* ── CARD HEADER ── */
@@ -96,18 +139,18 @@
             justify-content: space-between;
             align-items: flex-start;
             gap: 12px;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
             flex-wrap: wrap;
         }
 
         .card-identity {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
 
         .card-name {
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             font-weight: 500;
             color: var(--ink);
             text-decoration: none;
@@ -117,31 +160,32 @@
         a.card-name { transition: color .15s; }
         a.card-name:hover { color: var(--mid); }
 
-        .card-meta {
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        .card-right {
+            text-align: right;
             flex-shrink: 0;
         }
 
         .card-period {
-            font-size: .75rem;
+            display: block;
+            font-size: .72rem;
             color: var(--faint);
+            margin-bottom: 5px;
         }
 
         .badge {
-            font-size: .65rem;
+            display: inline-block;
+            font-size: .64rem;
             font-weight: 500;
-            letter-spacing: .02em;
-            padding: 3px 9px;
-            border-radius: 3px;
+            letter-spacing: .03em;
+            padding: 3px 10px;
+            border-radius: 4px;
         }
 
-        .badge-acq { background: #eaf5ee; color: #2a6b3c; }
+        .badge-acq { background: #eaf5ee; color: var(--green); }
         .badge-shut { background: #f2f0ec; color: var(--faint); }
         .badge-live {
             background: #eaf5ee;
-            color: #2a6b3c;
+            color: var(--green);
             display: inline-flex;
             align-items: center;
             gap: 5px;
@@ -152,7 +196,7 @@
             width: 5px;
             height: 5px;
             border-radius: 50%;
-            background: #2a6b3c;
+            background: var(--green);
             animation: breathe 2.5s ease-in-out infinite;
         }
 
@@ -162,17 +206,17 @@
         }
 
         .card-role {
-            font-size: .78rem;
+            font-size: .74rem;
             color: var(--faint);
-            margin-bottom: 18px;
+            margin-bottom: 16px;
         }
 
         .card-origin {
-            font-size: .8rem;
+            font-size: .78rem;
             color: var(--faint);
             font-style: italic;
             margin-bottom: 14px;
-            margin-top: -6px;
+            margin-top: -4px;
         }
 
         /* ── CARD LEDE ── */
@@ -180,7 +224,7 @@
             font-family: var(--serif);
             font-style: italic;
             font-weight: 300;
-            font-size: clamp(.92rem, 2.5vw, 1.05rem);
+            font-size: clamp(.9rem, 2.5vw, 1.05rem);
             line-height: 1.55;
             color: var(--ink);
             margin-bottom: 14px;
@@ -199,17 +243,19 @@
 
         /* ── CARD STATS ── */
         .card-stats {
-            display: flex;
-            gap: 32px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            gap: 2px;
             margin-top: 20px;
-            padding-top: 16px;
-            border-top: 1px solid var(--rule);
+            padding: 16px 20px;
+            background: #f5f3ef;
+            border-radius: 8px;
         }
 
         .stat-val {
             display: block;
             font-family: var(--serif);
-            font-size: clamp(1.3rem, 3vw, 1.6rem);
+            font-size: clamp(1.4rem, 3.5vw, 1.75rem);
             font-weight: 400;
             letter-spacing: -.04em;
             color: var(--ink);
@@ -218,9 +264,9 @@
 
         .stat-key {
             display: block;
-            font-size: .6rem;
+            font-size: .58rem;
             color: var(--faint);
-            letter-spacing: .04em;
+            letter-spacing: .05em;
             text-transform: uppercase;
             margin-top: 5px;
         }
@@ -230,9 +276,9 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 28px;
-            height: 28px;
-            border-radius: 7px;
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
             flex-shrink: 0;
             overflow: hidden;
         }
@@ -241,6 +287,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            border-radius: 8px;
             display: block;
         }
 
@@ -248,47 +295,44 @@
         .logo-leap   { background: #000; border-radius: 50%; }
         .logo-kyp    { background: #eef1f5; }
         .logo-psl    { background: #131008; }
-        .logo-gems   { background: #1da1f2; border-radius: 7px; }
+        .logo-gems   { background: #1da1f2; }
 
         /* ── SIDE PROJECTS GRID ── */
         .builds-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 14px;
-        }
-
-        .builds-grid--three {
-            grid-template-columns: 1fr 1fr 1fr;
+            gap: 16px;
         }
 
         .build-card {
+            position: relative;
             background: #fff;
             border: 1px solid var(--rule);
-            border-radius: 10px;
-            padding: 22px 20px 18px;
+            border-radius: 12px;
+            padding: 24px 22px 20px;
             transition: box-shadow .3s ease, transform .3s ease;
             display: flex;
             flex-direction: column;
         }
 
         .build-card:hover {
-            box-shadow: 0 2px 16px rgba(24, 22, 15, .05);
-            transform: translateY(-1px);
+            box-shadow: 0 4px 24px rgba(24, 22, 15, .06);
+            transform: translateY(-2px);
         }
 
         .build-card .card-header {
-            margin-bottom: 12px;
+            margin-bottom: 14px;
             flex-wrap: nowrap;
             align-items: center;
         }
 
         .build-card .card-name {
-            font-size: .9rem;
+            font-size: .95rem;
             min-width: 0;
         }
 
         .build-desc {
-            font-size: .8rem;
+            font-size: .82rem;
             line-height: 1.65;
             color: var(--mid);
             margin-bottom: 16px;
@@ -299,17 +343,17 @@
 
         .build-stats-row {
             display: flex;
-            gap: 18px;
-            padding: 10px 12px;
+            gap: 20px;
+            padding: 12px 14px;
             background: #f5f3ef;
-            border-radius: 6px;
+            border-radius: 8px;
             flex-wrap: wrap;
         }
 
         .build-stat-val {
             display: block;
             font-family: var(--serif);
-            font-size: clamp(.88rem, 2vw, 1rem);
+            font-size: clamp(.95rem, 2.5vw, 1.1rem);
             font-weight: 400;
             letter-spacing: -.03em;
             color: var(--ink);
@@ -318,16 +362,16 @@
 
         .build-stat-key {
             display: block;
-            font-size: .52rem;
+            font-size: .55rem;
             color: var(--faint);
-            letter-spacing: .04em;
+            letter-spacing: .05em;
             text-transform: uppercase;
-            margin-top: 3px;
+            margin-top: 4px;
         }
 
         /* ── GRAVEYARD ── */
         .graveyard-section {
-            margin-top: 48px;
+            margin-top: 52px;
             padding-top: 40px;
             border-top: 1px solid var(--rule);
         }
@@ -335,18 +379,20 @@
         .grave-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 14px;
+            gap: 16px;
         }
 
         .grave-card {
-            background: #f5f3ef;
-            border-radius: 10px;
-            padding: 22px 20px 18px;
-            transition: box-shadow .3s ease;
+            background: #fff;
+            border: 1px solid var(--rule);
+            border-radius: 12px;
+            padding: 24px 22px 20px;
+            transition: box-shadow .3s ease, transform .3s ease;
         }
 
         .grave-card:hover {
-            box-shadow: 0 2px 12px rgba(24, 22, 15, .04);
+            box-shadow: 0 4px 24px rgba(24, 22, 15, .06);
+            transform: translateY(-2px);
         }
 
         .grave-card-top {
@@ -359,7 +405,7 @@
         }
 
         .grave-name {
-            font-size: .9rem;
+            font-size: .95rem;
             font-weight: 500;
             color: var(--ink);
         }
@@ -372,7 +418,7 @@
         }
 
         .grave-type {
-            font-size: .6rem;
+            font-size: .62rem;
             color: var(--faint);
             letter-spacing: .04em;
             text-transform: uppercase;
@@ -384,7 +430,7 @@
         }
 
         .grave-story {
-            font-size: .8rem;
+            font-size: .82rem;
             color: var(--mid);
             line-height: 1.62;
         }
@@ -392,22 +438,27 @@
         .grave-lesson {
             font-family: var(--serif);
             font-style: italic;
-            font-size: .8rem;
+            font-size: .82rem;
             color: var(--faint);
             margin-top: 10px;
             font-weight: 300;
             padding-top: 10px;
-            border-top: 1px solid rgba(174, 167, 156, .2);
+            border-top: 1px solid rgba(174, 167, 156, .3);
         }
 
         /* ── RESPONSIVE ── */
         @media (max-width: 600px) {
+            .page { --col: 600px; }
+
+            .timeline { padding-left: 0; }
+            .timeline::before { display: none; }
+            .timeline-dot { display: none; }
+
             .work-card {
-                padding: 24px 0;
+                padding: 22px 18px 20px;
             }
 
-            .builds-grid,
-            .builds-grid--three {
+            .builds-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -416,21 +467,25 @@
             }
 
             .card-header { flex-wrap: wrap; gap: 6px; }
-            .card-meta { flex-wrap: wrap; }
+            .card-right { flex-direction: row; gap: 8px; }
 
             .card-stats {
-                flex-wrap: wrap;
-                gap: 20px;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 14px;
             }
 
-            .build-card { padding: 18px 16px 16px; }
+            .build-card { padding: 20px 16px 18px; }
 
             .section-label { font-size: .6rem; }
         }
 
         @media (max-width: 420px) {
-            .stat-val { font-size: 1.2rem; }
-            .card-name { font-size: 1rem; }
+            .card-stats {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .stat-val { font-size: 1.3rem; }
+            .card-name { font-size: .95rem; }
         }
     </style>
 </head>
@@ -477,73 +532,78 @@
         <div class="section-block">
             <p class="section-label fade">Companies</p>
 
-            <!-- Savior -->
-            <div class="work-card fade">
-                <div class="card-header">
-                    <div class="card-identity">
-                        <span class="logo-mark logo-savior" aria-hidden="true"><img class="logo-img" src="images/savior-mark.png" alt="Savior logo" /></span>
-                        <span class="card-name">Savior</span>
-                    </div>
-                    <div class="card-meta">
-                        <span class="card-period">2017 – 2020</span>
-                        <span class="badge badge-acq">Acquired by Zocdoc</span>
-                    </div>
-                </div>
-                <p class="card-role">Founder &amp; Product</p>
-                <p class="card-lede">Hospitals don't need more software. They need software that fits how they
-                    actually work.</p>
-                <div class="card-body">
-                    <p>I spent months inside hospitals before writing a single line of spec. Not observing from the
-                        outside — <strong>actually on the floor</strong>, learning how care runs versus how it reads
-                        on paper. That gap became the product.</p>
-                    <p>Built operations and preventive-care software used daily across hospital teams. Owned the full
-                        lifecycle from discovery to adoption. The hardest part wasn't the technology — it was getting
-                        nurses and admin staff to trust software enough to actually use it.</p>
-                    <p>Grew to <strong>85+ hospitals</strong> and approximately <strong>$1M ARR</strong>. Acquired by
-                        Zocdoc — a US healthcare marketplace — in 2020.</p>
-                </div>
-                <div class="card-stats">
-                    <div><span class="stat-val">85+</span><span class="stat-key">Hospitals</span></div>
-                    <div><span class="stat-val">~$1M</span><span class="stat-key">ARR</span></div>
-                    <div><span class="stat-val">3 yrs</span><span class="stat-key">Zero → acquired</span></div>
-                </div>
-            </div>
+            <div class="timeline">
 
-            <!-- Career Leap -->
-            <div class="work-card fade">
-                <div class="card-header">
-                    <div class="card-identity">
-                        <span class="logo-mark logo-leap" aria-hidden="true"><img
-                                class="logo-img"
-                                src="data:image/png;base64,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"
-                                alt="Career Leap logo" style="border-radius:50%;" /></span>
-                        <span class="card-name">Career Leap</span>
+                <!-- Savior -->
+                <div class="work-card card--acq fade">
+                    <span class="timeline-dot"></span>
+                    <div class="card-header">
+                        <div class="card-identity">
+                            <span class="logo-mark logo-savior" aria-hidden="true"><img class="logo-img" src="images/savior-mark.png" alt="Savior logo" /></span>
+                            <span class="card-name">Savior</span>
+                        </div>
+                        <div class="card-right">
+                            <span class="card-period">2017 – 2020</span>
+                            <span class="badge badge-acq">Acquired by Zocdoc</span>
+                        </div>
                     </div>
-                    <div class="card-meta">
-                        <span class="card-period">2020 – 2023</span>
-                        <span class="badge badge-shut">Shut down</span>
+                    <p class="card-role">Founder &amp; Product</p>
+                    <p class="card-lede">Hospitals don't need more software. They need software that fits how they
+                        actually work.</p>
+                    <div class="card-body">
+                        <p>I spent months inside hospitals before writing a single line of spec. Not observing from the
+                            outside — <strong>actually on the floor</strong>, learning how care runs versus how it reads
+                            on paper. That gap became the product.</p>
+                        <p>Built operations and preventive-care software used daily across hospital teams. Owned the full
+                            lifecycle from discovery to adoption. The hardest part wasn't the technology — it was getting
+                            nurses and admin staff to trust software enough to actually use it.</p>
+                        <p>Grew to <strong>85+ hospitals</strong> and approximately <strong>$1M ARR</strong>. Acquired by
+                            Zocdoc — a US healthcare marketplace — in 2020.</p>
+                    </div>
+                    <div class="card-stats">
+                        <div><span class="stat-val">85+</span><span class="stat-key">Hospitals</span></div>
+                        <div><span class="stat-val">~$1M</span><span class="stat-key">ARR</span></div>
+                        <div><span class="stat-val">3 yrs</span><span class="stat-key">Zero → acquired</span></div>
                     </div>
                 </div>
-                <p class="card-role">Founder &amp; Product</p>
-                <p class="card-origin">Started as Upskill India, a WhatsApp community of 10K members, before
-                    becoming Career Leap.</p>
-                <p class="card-lede">The skills that actually shape your career aren't taught anywhere.</p>
-                <div class="card-body">
-                    <p>Started as a WhatsApp group. <strong>10,000 users in six months</strong>, mostly word of
-                        mouth. Launched a mobile learning app with <strong>100k+ watch hours</strong>, grew the
-                        community to <strong>3,500 active members</strong>, run by a 3-person team.</p>
-                    <p>Pivoted to live cohorts. Maintained a <strong>40% completion rate</strong> (industry average:
-                        5–10%). Generated ₹15L in revenue. Shut it down in 2023 when the unit economics didn't work
-                        at scale. I learned more from this one than from Savior.</p>
-                </div>
-                <div class="card-stats">
-                    <div><span class="stat-val">10K</span><span class="stat-key">Users in 6mo</span></div>
-                    <div><span class="stat-val">40%</span><span class="stat-key">Completion</span></div>
-                    <div><span class="stat-val">100K+</span><span class="stat-key">Watch hours</span></div>
-                    <div><span class="stat-val">₹15L</span><span class="stat-key">Revenue</span></div>
-                </div>
-            </div>
 
+                <!-- Career Leap -->
+                <div class="work-card card--shut fade">
+                    <span class="timeline-dot"></span>
+                    <div class="card-header">
+                        <div class="card-identity">
+                            <span class="logo-mark logo-leap" aria-hidden="true"><img
+                                    class="logo-img"
+                                    src="data:image/png;base64,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"
+                                    alt="Career Leap logo" style="border-radius:50%;" /></span>
+                            <span class="card-name">Career Leap</span>
+                        </div>
+                        <div class="card-right">
+                            <span class="card-period">2020 – 2023</span>
+                            <span class="badge badge-shut">Shut down</span>
+                        </div>
+                    </div>
+                    <p class="card-role">Founder &amp; Product</p>
+                    <p class="card-origin">Started as Upskill India, a WhatsApp community of 10K members, before
+                        becoming Career Leap.</p>
+                    <p class="card-lede">The skills that actually shape your career aren't taught anywhere.</p>
+                    <div class="card-body">
+                        <p>Started as a WhatsApp group. <strong>10,000 users in six months</strong>, mostly word of
+                            mouth. Launched a mobile learning app with <strong>100k+ watch hours</strong>, grew the
+                            community to <strong>3,500 active members</strong>, run by a 3-person team.</p>
+                        <p>Pivoted to live cohorts. Maintained a <strong>40% completion rate</strong> (industry average:
+                            5–10%). Generated ₹15L in revenue. Shut it down in 2023 when the unit economics didn't work
+                            at scale. I learned more from this one than from Savior.</p>
+                    </div>
+                    <div class="card-stats">
+                        <div><span class="stat-val">10K</span><span class="stat-key">Users in 6mo</span></div>
+                        <div><span class="stat-val">40%</span><span class="stat-key">Completion</span></div>
+                        <div><span class="stat-val">100K+</span><span class="stat-key">Watch hours</span></div>
+                        <div><span class="stat-val">₹15L</span><span class="stat-key">Revenue</span></div>
+                    </div>
+                </div>
+
+            </div><!-- /timeline -->
         </div>
 
         <!-- SIDE PROJECTS -->
@@ -551,7 +611,7 @@
             <p class="section-label fade">Side Projects</p>
             <p class="section-desc fade">Things I build and ship on the side.</p>
 
-            <div class="builds-grid builds-grid--three">
+            <div class="builds-grid">
 
                 <!-- KnowYourPay -->
                 <div class="build-card fade">
@@ -563,11 +623,13 @@
                         <span class="badge badge-live">Live</span>
                     </div>
                     <p class="build-desc">Free salary benchmarking for Indian tech roles — by role, city, experience,
-                        and company tier. <strong>No signup, no gatekeeping.</strong></p>
+                        and company tier. <strong>No signup, no gatekeeping.</strong> Built in under 2 weeks from a
+                        spreadsheet I kept for friends.</p>
                     <div class="build-stats-row">
                         <div><span class="build-stat-val">2.4K</span><span class="build-stat-key">Visits</span></div>
                         <div><span class="build-stat-val">~3 min</span><span class="build-stat-key">Avg.
                                 session</span></div>
+                        <div><span class="build-stat-val">₹0</span><span class="build-stat-key">Mkt spend</span></div>
                     </div>
                 </div>
 
@@ -575,15 +637,21 @@
                 <div class="build-card fade">
                     <div class="card-header">
                         <div class="card-identity">
-                            <span class="logo-mark logo-psl" aria-hidden="true"><img class="logo-img" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MDAgODAwIiBmaWxsPSJub25lIj4KICA8cmVjdCB4PSIxNzAiIHk9IjE3MCIgd2lkdGg9IjQ2MCIgaGVpZ2h0PSI0NjAiIHJ4PSIxMCIgc3Ryb2tlPSIjZThjNTQ3IiBzdHJva2Utd2lkdGg9IjciIGZpbGw9Im5vbmUiLz4KICA8cmVjdCB4PSIxNzAiIHk9IjE3MCIgd2lkdGg9IjQ2MCIgaGVpZ2h0PSIxMyIgcng9IjUiIGZpbGw9IiNlOGM1NDciLz4KICA8cmVjdCB4PSIyODAiIHk9IjI4OCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjIyMCIgZmlsbD0iI2U4YzU0NyIvPgogIDxyZWN0IHg9IjMyMCIgeT0iMjg4IiB3aWR0aD0iMTUwIiBoZWlnaHQ9IjM0IiBmaWxsPSIjZThjNTQ3Ii8+CiAgPHJlY3QgeD0iNDcwIiB5PSIyODgiIHdpZHRoPSIzNCIgaGVpZ2h0PSIxMzAiIGZpbGw9IiNlOGM1NDciLz4KICA8cmVjdCB4PSIzMjAiIHk9IjM4NCIgd2lkdGg9IjE1MCIgaGVpZ2h0PSIzNCIgZmlsbD0iI2U4YzU0NyIvPgogIDxyZWN0IHg9IjUyNCIgeT0iMzc2IiB3aWR0aD0iNDIiIGhlaWdodD0iNDIiIGZpbGw9IiNlOGM1NDciLz4KPC9zdmc+" alt="Product Sense Lab logo" /></span>
-                            <a href="https://www.productsenselab.com" target="_blank" rel="noopener" class="card-name">PSL ↗</a>
+                            <span class="logo-mark logo-psl" aria-hidden="true"><img class="logo-img"
+                                    src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MDAgODAwIiBmaWxsPSJub25lIj4KICA8cmVjdCB4PSIxNzAiIHk9IjE3MCIgd2lkdGg9IjQ2MCIgaGVpZ2h0PSI0NjAiIHJ4PSIxMCIgc3Ryb2tlPSIjZThjNTQ3IiBzdHJva2Utd2lkdGg9IjciIGZpbGw9Im5vbmUiLz4KICA8cmVjdCB4PSIxNzAiIHk9IjE3MCIgd2lkdGg9IjQ2MCIgaGVpZ2h0PSIxMyIgcng9IjUiIGZpbGw9IiNlOGM1NDciLz4KICA8cmVjdCB4PSIyODAiIHk9IjI4OCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjIyMCIgZmlsbD0iI2U4YzU0NyIvPgogIDxyZWN0IHg9IjMyMCIgeT0iMjg4IiB3aWR0aD0iMTUwIiBoZWlnaHQ9IjM0IiBmaWxsPSIjZThjNTQ3Ii8+CiAgPHJlY3QgeD0iNDcwIiB5PSIyODgiIHdpZHRoPSIzNCIgaGVpZ2h0PSIxMzAiIGZpbGw9IiNlOGM1NDciLz4KICA8cmVjdCB4PSIzMjAiIHk9IjM4NCIgd2lkdGg9IjE1MCIgaGVpZ2h0PSIzNCIgZmlsbD0iI2U4YzU0NyIvPgogIDxyZWN0IHg9IjUyNCIgeT0iMzc2IiB3aWR0aD0iNDIiIGhlaWdodD0iNDIiIGZpbGw9IiNlOGM1NDciLz4KPC9zdmc+"
+                                    alt="Product Sense Lab logo" /></span>
+                            <a href="https://www.productsenselab.com" target="_blank" rel="noopener" class="card-name">Product Sense Lab ↗</a>
                         </div>
                         <span class="badge badge-live">Live</span>
                     </div>
-                    <p class="build-desc">One real product problem a day. You write your answer, get <strong>specific, layered feedback</strong> that names the blind spot.</p>
+                    <p class="build-desc">One real product problem a day, calibrated to your level. You write your
+                        answer, get <strong>specific, layered feedback</strong> that names the blind spot. For PMs
+                        prepping for interviews or levelling up.</p>
                     <div class="build-stats-row">
                         <div><span class="build-stat-val">180+</span><span class="build-stat-key">Users</span></div>
                         <div><span class="build-stat-val">40%</span><span class="build-stat-key">Day-7 ret.</span>
+                        </div>
+                        <div><span class="build-stat-val">Solo</span><span class="build-stat-key">Built alone</span>
                         </div>
                     </div>
                 </div>
@@ -593,7 +661,7 @@
                     <div class="card-header">
                         <div class="card-identity">
                             <span class="logo-mark logo-gems" aria-hidden="true">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="#fff">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff">
                                     <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.259 5.649 5.905-5.649zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                                 </svg>
                             </span>
@@ -601,9 +669,10 @@
                         </div>
                         <span class="badge badge-live">Live</span>
                     </div>
-                    <p class="build-desc">Curated threads on product, startups, and career thinking. Built an audience of engaged followers, mostly organic.</p>
+                    <p class="build-desc">Curated threads on product thinking, startup lessons, and career frameworks. Built an engaged audience organically — no ads, no growth hacks, just writing that resonates.</p>
                     <div class="build-stats-row">
                         <div><span class="build-stat-val">@rinks__g</span><span class="build-stat-key">Handle</span></div>
+                        <div><span class="build-stat-val">Organic</span><span class="build-stat-key">Growth</span></div>
                     </div>
                 </div>
 
