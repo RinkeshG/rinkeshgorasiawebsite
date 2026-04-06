@@ -247,6 +247,55 @@
         .card-body p:last-child { margin-bottom: 0; }
         .card-body strong { color: var(--ink); font-weight: 500; }
 
+        /* ── CARD HIGHLIGHTS ── */
+        .card-section-label {
+            font-size: .65rem;
+            font-weight: 500;
+            letter-spacing: .07em;
+            text-transform: uppercase;
+            color: var(--faint);
+            margin-top: 16px;
+            margin-bottom: 8px;
+        }
+
+        .card-highlights {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .card-highlights li {
+            font-size: .84rem;
+            line-height: 1.6;
+            color: var(--mid);
+            padding: 4px 0 4px 16px;
+            position: relative;
+        }
+
+        .card-highlights li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 12px;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: var(--faint);
+        }
+
+        .card-highlights li strong {
+            color: var(--ink);
+            font-weight: 500;
+        }
+
+        .card-closer {
+            font-size: .84rem;
+            line-height: 1.6;
+            color: var(--mid);
+            margin-top: 14px;
+            font-style: italic;
+        }
+
         /* ── CARD STATS ── */
         .card-stats {
             display: grid;
@@ -588,10 +637,25 @@
                     <p class="card-role">Founder &amp; CEO</p>
                     <p class="card-lede">Started this in college. What began as a side project grew into a platform used by 85+ hospitals.</p>
                     <div class="card-body">
-                        <p>Built operations and preventive-care software for hospitals — OPD management, patient follow-ups, preventive health screening workflows, and a dashboard that gave hospital admins visibility into daily operations they'd never had before.</p>
-                        <p>The hard part was never the tech. It was getting nurses and admin staff to trust software enough to change how they work. So I spent time inside hospitals first — shadowing workflows, sitting in on rounds, understanding how care actually runs versus how it reads on paper. That gap became the product.</p>
-                        <p>Did everything: product, sales, hiring, ops. Cold-walked into hospitals to demo, handled onboarding personally for the first 30 clients, built a small team of 8. Grew to <strong>85+ hospitals</strong> and roughly <strong>$1M ARR</strong> before being <strong>acquired by Zocdoc</strong> in 2020.</p>
+                        <p>Built operations and preventive-care software for hospitals. Spent time inside hospitals first — shadowing workflows, sitting in on rounds — because the gap between how care actually runs and how it reads on paper became the product.</p>
                     </div>
+
+                    <p class="card-section-label">What I built</p>
+                    <ul class="card-highlights">
+                        <li>OPD management and patient follow-up system</li>
+                        <li>Preventive health screening workflows for nursing staff</li>
+                        <li>Admin dashboard — first time most hospitals had visibility into daily ops</li>
+                    </ul>
+
+                    <p class="card-section-label">What I owned</p>
+                    <ul class="card-highlights">
+                        <li>Cold-walked into hospitals to demo and sell</li>
+                        <li>Onboarded the first <strong>30 clients</strong> personally</li>
+                        <li>Hired and managed a team of <strong>8</strong></li>
+                        <li>Product, sales, ops, hiring — all of it, end-to-end</li>
+                    </ul>
+
+                    <p class="card-closer">Grew to <strong>85+ hospitals</strong>, roughly <strong>$1M ARR</strong>, acquired by <strong>Zocdoc</strong> in 2020.</p>
                     <div class="card-stats">
                         <div><span class="stat-val">85+</span><span class="stat-key">Hospitals</span></div>
                         <div><span class="stat-val">~$1M</span><span class="stat-key">ARR</span></div>
@@ -619,11 +683,26 @@
                     <p class="card-origin">Started as Upskill India, a WhatsApp community, before becoming Career Leap.</p>
                     <p class="card-lede">An edtech platform where we spent 3 years experimenting, pivoting, and scaling.</p>
                     <div class="card-body">
-                        <p>Started a WhatsApp group sharing career advice for college students. It grew to <strong>10,000 users in six months</strong>, entirely word of mouth. That signal was strong enough to build a product around.</p>
-                        <p>Built a mobile app with short video courses on resume writing, interview prep, and communication skills. Hit <strong>100K+ watch hours</strong>. Grew the community to <strong>3,500 active members</strong> with a 3-person team. Ran the content pipeline end-to-end — scripting, recording, editing, distribution.</p>
-                        <p>Pivoted to live cohorts when async completion rates plateaued. The cohort model worked — <strong>40% completion rate</strong> versus the 5-10% industry average. Generated <strong>₹15L in early revenue</strong>. But CAC kept climbing and LTV didn't follow. Shut it down in 2023 when the unit economics didn't hold at scale.</p>
-                        <p>Learned more from this one than from Savior. Especially about when to pivot versus when to stop.</p>
+                        <p>Started a WhatsApp group sharing career advice for college students. Grew to <strong>10,000 users in six months</strong>, entirely word of mouth. That signal was strong enough to build a product around.</p>
                     </div>
+
+                    <p class="card-section-label">What I built &amp; shipped</p>
+                    <ul class="card-highlights">
+                        <li>Mobile app with short video courses — resume writing, interview prep, communication skills</li>
+                        <li>Ran the content pipeline end-to-end: scripting, recording, editing, distribution</li>
+                        <li>Grew community to <strong>3,500 active members</strong> with a 3-person team</li>
+                        <li>Hit <strong>100K+ watch hours</strong> on the platform</li>
+                    </ul>
+
+                    <p class="card-section-label">The pivot</p>
+                    <ul class="card-highlights">
+                        <li>Moved to live cohorts when async completion rates plateaued</li>
+                        <li>Cohort model hit <strong>40% completion</strong> — industry average is 5-10%</li>
+                        <li>Generated <strong>₹15L in early revenue</strong></li>
+                        <li>CAC kept climbing, LTV didn't follow — shut it down in 2023</li>
+                    </ul>
+
+                    <p class="card-closer">Learned more from this one than from Savior. Especially about when to pivot versus when to stop.</p>
                     <div class="card-stats">
                         <div><span class="stat-val">10K</span><span class="stat-key">Users in 6mo</span></div>
                         <div><span class="stat-val">40%</span><span class="stat-key">Completion</span></div>
