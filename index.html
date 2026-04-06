@@ -82,29 +82,6 @@
 
         /* ── WORK ITEMS ── */
         .work-item {
-            padding: 30px 20px;
-            border-bottom: 1px solid var(--rule);
-            margin: 0 -20px;
-            border-radius: 10px;
-            transition: background .3s ease, box-shadow .3s ease;
-        }
-
-        .work-item:hover {
-            background: rgba(229, 223, 214, .25);
-            box-shadow: 0 2px 20px rgba(24, 22, 15, .04);
-        }
-
-        .work-item:first-child {
-            padding-top: 20px;
-        }
-
-        .work-item:last-child {
-            border-bottom: none;
-            padding-bottom: 20px;
-        }
-
-        /* ── WORK ITEMS ── */
-        .work-item {
             background: #fff;
             border: 1px solid var(--rule);
             border-radius: 12px;
@@ -178,33 +155,26 @@
             margin-bottom: 16px;
         }
 
-        .work-lede {
-            font-family: var(--serif);
-            font-style: italic;
-            font-weight: 300;
-            font-size: clamp(.88rem, 2.5vw, 1.025rem);
-            line-height: 1.52;
-            color: var(--ink);
-            margin-bottom: 12px;
-        }
-
-        .work-body {
+        .work-oneliner {
             font-size: .875rem;
-            line-height: 1.72;
+            line-height: 1.6;
             color: var(--mid);
+            margin-bottom: 16px;
         }
 
-        .work-body p {
-            margin-bottom: 10px;
-        }
-
-        .work-body p:last-child {
-            margin-bottom: 0;
-        }
-
-        .work-body strong {
-            color: var(--ink);
+        .work-item-link {
+            display: inline-block;
+            font-size: .75rem;
             font-weight: 500;
+            color: var(--faint);
+            text-decoration: none;
+            letter-spacing: .02em;
+            transition: color .15s;
+            margin-top: 12px;
+        }
+
+        .work-item-link:hover {
+            color: var(--ink);
         }
 
         .work-stats {
@@ -419,25 +389,52 @@
             100% { opacity: 0; transform: translateY(-14px) scaleY(.5); }
         }
 
-        /* ── INTRO AVAILABLE ── */
-        .intro-available {
-            margin-top: 20px;
-            font-size: .82rem;
-            color: var(--mid);
-            line-height: 1.55;
+        /* ── AVAILABLE SECTION ── */
+        .available-section {
+            padding: 36px 0 40px;
+            border-bottom: 1px solid var(--rule);
         }
 
-        .intro-available a {
-            color: var(--mid);
-            text-decoration: underline;
-            text-decoration-color: var(--rule);
-            text-underline-offset: 3px;
-            transition: color .15s, text-decoration-color .15s;
-        }
-
-        .intro-available a:hover {
+        .available-section h2 {
+            font-family: var(--serif);
+            font-size: clamp(1.15rem, 3vw, 1.35rem);
+            font-weight: 400;
             color: var(--ink);
-            text-decoration-color: var(--ink);
+            line-height: 1.35;
+            letter-spacing: -.02em;
+            margin-bottom: 12px;
+        }
+
+        .available-section h2 em {
+            font-style: italic;
+            font-weight: 300;
+        }
+
+        .available-body {
+            font-size: .875rem;
+            line-height: 1.72;
+            color: var(--mid);
+            max-width: 480px;
+            margin-bottom: 18px;
+        }
+
+        .available-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: .8rem;
+            font-weight: 500;
+            color: var(--ink);
+            text-decoration: none;
+            padding: 9px 18px;
+            border: 1px solid var(--ink);
+            border-radius: 5px;
+            transition: background .15s, color .15s;
+        }
+
+        .available-cta:hover {
+            background: var(--ink);
+            color: var(--bg);
         }
 
         /* ── RESPONSIVE (index-specific) ── */
@@ -493,7 +490,6 @@
                 <p>Since then, I've worked closely with founders as a product and growth partner, helping them build, scale, and raise.</p>
                 <p>Lately, I'm back to building. Exploring AI through projects like <a href="https://knowyourpay.vercel.app" target="_blank" rel="noopener"><strong>KnowYourPay</strong></a> and <a href="https://www.productsenselab.com" target="_blank" rel="noopener"><strong>Product Sense Lab</strong></a>.</p>
             </div>
-            <p class="intro-available">Based in Bengaluru. Open to product roles. <a href="cv.html">View CV →</a></p>
         </section>
 
         <!-- WORK -->
@@ -512,18 +508,13 @@
                     </div>
                 </div>
                 <p class="work-role">Founder &amp; CEO</p>
-                <p class="work-lede">Hospitals don't need more software. They need software that fits how they actually
-                    work.</p>
-                <div class="work-body">
-                    <p>Spent months inside hospitals before writing a single line of spec — actually on the floor,
-                        learning how care runs versus how it reads on paper. That gap became the product.</p>
-                    <p>Owned discovery to adoption. After three years, <strong>acquired by Zocdoc in 2020.</strong></p>
-                </div>
+                <p class="work-oneliner">Healthcare SaaS built from inside hospital walls. Started in college, scaled to 85+ hospitals, acquired by Zocdoc.</p>
                 <div class="work-stats">
                     <div><span class="stat-val">85+</span><span class="stat-key">Hospitals</span></div>
                     <div><span class="stat-val">~$1M</span><span class="stat-key">ARR</span></div>
                     <div><span class="stat-val">3 yrs</span><span class="stat-key">Zero → acquired</span></div>
                 </div>
+                <a href="work.html" class="work-item-link">Full story →</a>
             </div>
 
             <div class="work-item fade">
@@ -537,20 +528,22 @@
                     </div>
                 </div>
                 <p class="work-role">Founder &amp; CEO</p>
-                <p class="work-lede">The skills that actually shape your career aren't taught anywhere.</p>
-                <div class="work-body">
-                    <p>Started as a WhatsApp group. <strong>10,000 users in six months.</strong> 100k+ watch hours,
-                        3,500 active members — run by a 3-person team.</p>
-                    <p>Kept a <strong>40% completion rate</strong> (industry average: 5–10%). Shut it down in 2023 when
-                        unit economics didn't scale. No regrets.</p>
-                </div>
+                <p class="work-oneliner">Edtech platform for career skills. 10K users, 40% completion (8x industry average), early revenue. Shut down when unit economics didn't scale.</p>
                 <div class="work-stats">
                     <div><span class="stat-val">10K</span><span class="stat-key">Users in 6mo</span></div>
                     <div><span class="stat-val">40%</span><span class="stat-key">Completion</span></div>
                     <div><span class="stat-val">₹15L</span><span class="stat-key">Revenue</span></div>
                 </div>
+                <a href="work.html" class="work-item-link">Full story →</a>
             </div>
 
+        </section>
+
+        <!-- AVAILABLE -->
+        <section class="available-section fade">
+            <h2>Looking for the right team.<br><em>Not just any role.</em></h2>
+            <p class="available-body">I've built two companies from scratch and spent the last few years helping other founders do the same. Now I want to go deep again, with a team that cares about the craft as much as the outcome. Product, growth, 0-to-1. Bengaluru or remote.</p>
+            <a href="cv.html" class="available-cta">View CV →</a>
         </section>
 
         <!-- ARTIFACTS -->
