@@ -377,27 +377,6 @@
             overflow: hidden;
         }
 
-        .intro-glow {
-            position: absolute !important;
-            width: 340px;
-            height: 340px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(42, 107, 60, .07) 0%, transparent 70%);
-            pointer-events: none;
-            transform: translate(-50%, -50%);
-            transition: opacity .4s ease;
-            opacity: 0;
-            z-index: 0 !important;
-        }
-
-        .intro:hover .intro-glow {
-            opacity: 1;
-        }
-
-        .intro > *:not(.intro-glow) {
-            position: relative;
-            z-index: 1;
-        }
 
         /* ── FOOTER COFFEE ── */
         .footer-coffee {
@@ -506,14 +485,13 @@
 
         <!-- INTRO -->
         <section class="intro fade">
-            <div class="intro-glow" id="intro-glow"></div>
             <h1>Hi, I'm Rinkesh.</h1>
             <p class="intro-subtitle">Product & growth leader, and a two-time founder.</p>
             <div class="intro-body">
-                <p>I started my first company, <strong>Savior</strong>, in healthcare while still in college. What began as a side project grew into a platform used by 85+ leading hospitals across India and was eventually <strong>acquired by Zocdoc</strong> in 2021.</p>
-                <p>I then built <strong>Career Leap</strong>, an edtech platform where we spent 3 years experimenting, pivoting, and scaling to 10,000 users with early revenue before shutting it down when the unit economics didn't hold at scale.</p>
+                <p>I started my first company, <a href="work.html"><strong>Savior</strong></a>, in healthcare while still in college. What began as a side project grew into a platform used by 85+ leading hospitals across India and was eventually <strong>acquired by Zocdoc</strong> in 2021.</p>
+                <p>I then built <a href="work.html"><strong>Career Leap</strong></a>, an edtech platform where we spent 3 years experimenting, pivoting, and scaling to 10,000 users with early revenue before shutting it down when the unit economics didn't hold at scale.</p>
                 <p>Since then, I've worked closely with founders as a product and growth partner, helping them build, scale, and raise.</p>
-                <p>Lately, I'm back to building. Exploring AI through projects like <strong>KnowYourPay</strong> and <strong>Product Sense Lab</strong>.</p>
+                <p>Lately, I'm back to building. Exploring AI through projects like <a href="https://knowyourpay.vercel.app" target="_blank" rel="noopener"><strong>KnowYourPay</strong></a> and <a href="https://www.productsenselab.com" target="_blank" rel="noopener"><strong>Product Sense Lab</strong></a>.</p>
             </div>
             <p class="intro-available">Based in Bengaluru. Open to product roles. <a href="cv.html">View CV →</a></p>
         </section>
@@ -712,17 +690,6 @@
             });
         }, { threshold: 0.3 });
         document.querySelectorAll('.work-stats').forEach(function (s) { statsObserver.observe(s); });
-
-        /* Hero glow follows cursor */
-        var introEl = document.querySelector('.intro');
-        var glowEl = document.getElementById('intro-glow');
-        if (introEl && glowEl) {
-            introEl.addEventListener('mousemove', function (e) {
-                var rect = introEl.getBoundingClientRect();
-                glowEl.style.left = (e.clientX - rect.left) + 'px';
-                glowEl.style.top = (e.clientY - rect.top) + 'px';
-            });
-        }
 
         /* Close mobile nav on link click */
         document.querySelectorAll('.nav-mobile a').forEach(function (a) {
