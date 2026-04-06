@@ -320,7 +320,7 @@
         .stat-key {
             display: block;
             font-size: .58rem;
-            color: var(--faint);
+            color: var(--mid);
             letter-spacing: .05em;
             text-transform: uppercase;
             margin-top: 5px;
@@ -357,6 +357,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 16px;
+            align-items: start;
         }
 
         .build-card {
@@ -390,8 +391,11 @@
             font-size: .82rem;
             line-height: 1.65;
             color: var(--mid);
+            margin-bottom: 12px;
+        }
+
+        .build-desc:last-of-type {
             margin-bottom: 16px;
-            flex: 1;
         }
 
         .build-desc strong { color: var(--ink); font-weight: 500; }
@@ -402,7 +406,11 @@
             padding: 12px 14px;
             background: #f5f3ef;
             border-radius: 8px;
-            flex-wrap: wrap;
+        }
+
+        .build-stats-row > div {
+            flex: 1;
+            min-width: 0;
         }
 
         .build-stat-val {
@@ -417,8 +425,8 @@
 
         .build-stat-key {
             display: block;
-            font-size: .55rem;
-            color: var(--faint);
+            font-size: .58rem;
+            color: var(--mid);
             letter-spacing: .05em;
             text-transform: uppercase;
             margin-top: 4px;
@@ -729,8 +737,7 @@
                         </div>
                         <span class="badge badge-live">Live</span>
                     </div>
-                    <p class="build-desc">See what people in your exact role and city are making — and whether you're leaving money on the table. Filter by role, city, YOE, and company tier. No signup, no paywall.</p>
-                    <p class="build-desc">Started as a spreadsheet I maintained for friends. Turned it into a product when I realized everyone kept asking for the same data.</p>
+                    <p class="build-desc">See what people in your exact role and city are making and whether you're leaving money on the table. Know if you're underpaid or not and stop settling for another 5% raise.</p>
                     <div class="build-stats-row">
                         <div><span class="build-stat-val">10K+</span><span class="build-stat-key">Visits</span></div>
                         <div><span class="build-stat-val">850+</span><span class="build-stat-key">Reports generated</span></div>
@@ -766,7 +773,6 @@
                         <span class="badge badge-live">Live</span>
                     </div>
                     <p class="build-desc">Find, discover, and read from 500+ of the best Twitter threads by your favourite creators — organized across 25+ categories.</p>
-                    <p class="build-desc">Built it as a side project to solve my own problem of losing great threads in the timeline. Shipped it, launched on Product Hunt.</p>
                     <div class="build-stats-row">
                         <div><span class="build-stat-val">#1</span><span class="build-stat-key">Product of the Day</span></div>
                         <div><span class="build-stat-val">10K+</span><span class="build-stat-key">Users in 1 week</span></div>
