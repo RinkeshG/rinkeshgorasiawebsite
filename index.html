@@ -178,33 +178,33 @@
         }
 
         .work-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-            gap: 2px;
-            margin-top: 20px;
-            padding: 14px 18px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 14px;
+        }
+
+        .work-stats .stat {
+            display: inline-flex;
+            align-items: baseline;
+            gap: 4px;
+            font-size: .75rem;
+            padding: 4px 10px;
             background: #f5f3ef;
-            border-radius: 8px;
+            border-radius: 4px;
+            white-space: nowrap;
         }
 
         .stat-val {
-            display: block;
-            font-family: var(--serif);
-            font-size: clamp(1.35rem, 3.5vw, 1.7rem);
-            font-weight: 400;
-            letter-spacing: -.04em;
+            font-weight: 500;
             color: var(--ink);
-            line-height: 1;
+            letter-spacing: -.01em;
         }
 
         .stat-key {
-            display: block;
-            font-size: .58rem;
             color: var(--faint);
-            letter-spacing: .05em;
-            text-transform: uppercase;
-            margin-top: 5px;
-            line-height: 1.35;
+            font-size: .68rem;
+            text-transform: lowercase;
         }
 
         /* ── ARTIFACTS ── */
@@ -438,15 +438,6 @@
         }
 
         /* ── RESPONSIVE (index-specific) ── */
-        @media (max-width: 600px) {
-            .work-stats {
-                gap: 12px 0;
-            }
-
-            .stat-val {
-                font-size: 1.4rem;
-            }
-        }
     </style>
 </head>
 
@@ -510,9 +501,9 @@
                 <p class="work-role">Founder &amp; CEO</p>
                 <p class="work-oneliner">Healthcare SaaS built from inside hospital walls. Started in college, scaled to 85+ hospitals, acquired by Zocdoc.</p>
                 <div class="work-stats">
-                    <div><span class="stat-val">85+</span><span class="stat-key">Hospitals</span></div>
-                    <div><span class="stat-val">~$1M</span><span class="stat-key">ARR</span></div>
-                    <div><span class="stat-val">3 yrs</span><span class="stat-key">Zero → acquired</span></div>
+                    <span class="stat"><span class="stat-val">85+</span><span class="stat-key">hospitals</span></span>
+                    <span class="stat"><span class="stat-val">~$1M</span><span class="stat-key">ARR</span></span>
+                    <span class="stat"><span class="stat-val">3 yrs</span><span class="stat-key">to acquisition</span></span>
                 </div>
                 <a href="work.html" class="work-item-link">Full story →</a>
             </div>
@@ -530,9 +521,9 @@
                 <p class="work-role">Founder &amp; CEO</p>
                 <p class="work-oneliner">Edtech platform for career skills. 10K users, 40% completion (8x industry average), early revenue. Shut down when unit economics didn't scale.</p>
                 <div class="work-stats">
-                    <div><span class="stat-val">10K</span><span class="stat-key">Users in 6mo</span></div>
-                    <div><span class="stat-val">40%</span><span class="stat-key">Completion</span></div>
-                    <div><span class="stat-val">₹15L</span><span class="stat-key">Revenue</span></div>
+                    <span class="stat"><span class="stat-val">10K</span><span class="stat-key">users</span></span>
+                    <span class="stat"><span class="stat-val">40%</span><span class="stat-key">completion</span></span>
+                    <span class="stat"><span class="stat-val">₹15L</span><span class="stat-key">revenue</span></span>
                 </div>
                 <a href="work.html" class="work-item-link">Full story →</a>
             </div>
@@ -542,7 +533,7 @@
         <!-- AVAILABLE -->
         <section class="available-section fade">
             <h2>Looking for the right team.<br><em>Not just any role.</em></h2>
-            <p class="available-body">I've built two companies from scratch and spent the last few years helping other founders do the same. Now I want to go deep again, with a team that cares about the craft as much as the outcome. Product, growth, 0-to-1. Bengaluru or remote.</p>
+            <p class="available-body">I'm the person who talks to users before writing specs, ships v1 in weeks not quarters, and kills features that don't earn their place. I think in funnels, care about retention more than launches, and do my best work when the problem is messy and the team is small. Bengaluru or remote.</p>
             <a href="cv.html" class="available-cta">View CV →</a>
         </section>
 
@@ -651,38 +642,6 @@
             });
         }, { threshold: 0.05 });
         document.querySelectorAll('.fade, .fade-up, .stagger').forEach(function (el) { io.observe(el); });
-
-        /* Stats count-up animation */
-        function animateValue(el, target, suffix, prefix, duration) {
-            var start = 0;
-            var startTime = null;
-            function step(ts) {
-                if (!startTime) startTime = ts;
-                var progress = Math.min((ts - startTime) / duration, 1);
-                var eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
-                var current = Math.round(eased * target);
-                el.textContent = (prefix || '') + current.toLocaleString() + (suffix || '');
-                if (progress < 1) requestAnimationFrame(step);
-            }
-            requestAnimationFrame(step);
-        }
-
-        var statsObserver = new IntersectionObserver(function (entries) {
-            entries.forEach(function (e) {
-                if (!e.isIntersecting) return;
-                var vals = e.target.querySelectorAll('.stat-val');
-                vals.forEach(function (v) {
-                    var text = v.textContent.trim();
-                    var num = parseInt(text.replace(/[^0-9]/g, ''), 10);
-                    if (isNaN(num) || num === 0) return;
-                    var prefix = text.match(/^[^0-9]*/)[0] || '';
-                    var suffix = text.match(/[^0-9]*$/)[0] || '';
-                    animateValue(v, num, suffix, prefix, 1200);
-                });
-                statsObserver.unobserve(e.target);
-            });
-        }, { threshold: 0.3 });
-        document.querySelectorAll('.work-stats').forEach(function (s) { statsObserver.observe(s); });
 
         /* Close mobile nav on link click */
         document.querySelectorAll('.nav-mobile a').forEach(function (a) {
