@@ -71,7 +71,17 @@
 
         /* ── SECTION BLOCK ── */
         .section-block {
-            padding: 28px 0 0;
+            padding: 36px 0 0;
+            border-top: 1px solid var(--rule);
+        }
+
+        .section-block .section-label,
+        .graveyard-section .section-label {
+            font-size: .85rem;
+            font-weight: 500;
+            letter-spacing: .06em;
+            color: var(--ink);
+            margin-bottom: 6px;
         }
 
         .section-desc {
@@ -574,7 +584,8 @@
 
             .build-card { padding: 20px 16px 18px; }
 
-            .section-label { font-size: .6rem; }
+            .section-block .section-label,
+            .graveyard-section .section-label { font-size: .75rem; }
         }
 
         @media (max-width: 420px) {
