@@ -64,9 +64,14 @@
         /* ── WIDER LAYOUT FOR CARDS ── */
         .page { --col: 680px; }
 
+        /* ── PAGE HEADER TIGHTEN ── */
+        .page-header {
+            padding: 44px 0 28px;
+        }
+
         /* ── SECTION BLOCK ── */
         .section-block {
-            padding: 48px 0 0;
+            padding: 28px 0 0;
         }
 
         .section-desc {
@@ -74,7 +79,7 @@
             color: var(--mid);
             line-height: 1.74;
             max-width: 480px;
-            margin-bottom: 32px;
+            margin-bottom: 24px;
             margin-top: 6px;
         }
 
@@ -161,15 +166,16 @@
         a.card-name:hover { color: var(--mid); }
 
         .card-right {
-            text-align: right;
+            display: flex;
+            align-items: center;
+            gap: 8px;
             flex-shrink: 0;
         }
 
         .card-period {
-            display: block;
             font-size: .72rem;
             color: var(--faint);
-            margin-bottom: 5px;
+            white-space: nowrap;
         }
 
         .badge {
@@ -208,7 +214,7 @@
         .card-role {
             font-size: .74rem;
             color: var(--faint);
-            margin-bottom: 16px;
+            margin-bottom: 12px;
         }
 
         .card-origin {
@@ -371,8 +377,8 @@
 
         /* ── GRAVEYARD ── */
         .graveyard-section {
-            margin-top: 52px;
-            padding-top: 40px;
+            margin-top: 36px;
+            padding-top: 28px;
             border-top: 1px solid var(--rule);
         }
 
@@ -449,8 +455,8 @@
         /* ── FOOTER OVERRIDES ── */
         .footer-cta {
             font-size: clamp(.95rem, 2.5vw, 1.1rem);
-            line-height: 1.5;
-            margin-bottom: 8px;
+            line-height: 1.45;
+            margin-bottom: 10px;
         }
 
         .footer-cta em {
@@ -460,7 +466,7 @@
         .footer-sub {
             font-size: .82rem;
             color: var(--mid);
-            margin-bottom: 14px;
+            margin-bottom: 16px;
         }
 
         .footer-reach {
@@ -472,7 +478,7 @@
             padding: 7px 14px;
             border: 1px solid var(--ink);
             border-radius: 5px;
-            margin-bottom: 6px;
+            margin-bottom: 20px;
             transition: background .15s, color .15s;
         }
 
