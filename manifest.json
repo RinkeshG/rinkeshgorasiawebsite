@@ -1,0 +1,18 @@
+{
+  "name": "Rinkesh Gorasia",
+  "short_name": "Rinkesh",
+  "description": "Product builder. 2× founder. Savior (acquired by Zocdoc). Career Leap. Based in Bengaluru.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "browser",
+  "background_color": "#f8f6f2",
+  "theme_color": "#f8f6f2",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2318160f'/%3E%3Ctext x='16' y='23' font-family='Georgia%2C serif' font-size='20' font-style='italic' fill='%23f8f6f2' text-anchor='middle'%3ER%3C/text%3E%3C/svg%3E",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

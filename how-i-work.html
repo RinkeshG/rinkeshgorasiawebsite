@@ -5,9 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="color-scheme" content="light">
+    <meta name="theme-color" content="#f8f6f2">
+    <meta name="author" content="Rinkesh Gorasia">
+    <meta name="robots" content="index, follow, max-image-preview:large">
     <title>How I Work — Rinkesh Gorasia</title>
     <meta name="description" content="Process, principles and how I think — how a product goes from napkin to shipped.">
     <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Rinkesh Gorasia">
+    <meta property="og:locale" content="en_US">
     <meta property="og:url" content="https://rinkeshgorasia.com/how-i-work.html">
     <meta property="og:title" content="How I Work — Rinkesh Gorasia">
     <meta property="og:description"
@@ -17,11 +22,33 @@
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@rinks__g">
+    <meta name="twitter:creator" content="@rinks__g">
     <meta name="twitter:title" content="How I Work — Rinkesh Gorasia">
     <meta name="twitter:description"
         content="Process, principles, and how I think. How a product goes from napkin to shipped.">
     <meta name="twitter:image" content="https://rinkeshgorasia.com/images/og-image.jpg">
     <link rel="canonical" href="https://rinkeshgorasia.com/how-i-work.html">
+    <link rel="manifest" href="/manifest.json">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://rinkeshgorasia.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "How I Work",
+          "item": "https://rinkeshgorasia.com/how-i-work.html"
+        }
+      ]
+    }
+    </script>
     <link rel="icon" type="image/svg+xml"
         href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2318160f'/%3E%3Ctext x='16' y='23' font-family='Georgia%2C serif' font-size='20' font-style='italic' fill='%23f8f6f2' text-anchor='middle'%3ER%3C/text%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -205,10 +232,12 @@
 </head>
 
 <body>
+    <a href="#main-content" class="skip-link">Skip to content</a>
     <div class="page">
 
         <!-- NAV -->
-        <nav class="nav">
+        <header>
+        <nav class="nav" aria-label="Primary">
             <a href="index.html" class="nav-name">Rinkesh Gorasia</a>
             <div class="nav-links">
                 <a href="index.html">home</a>
@@ -232,7 +261,9 @@
             <a href="work.html">work</a>
             <a href="how-i-work.html" class="active">how i work</a>
         </div>
+        </header>
 
+        <main id="main-content">
         <!-- PAGE HEADER -->
         <div class="page-header fade">
             <h1>How I work.<br><em>In practice.</em></h1>
@@ -364,6 +395,7 @@
                 </li>
             </ul>
         </div>
+        </main>
 
         <!-- FOOTER -->
         <footer class="footer fade">

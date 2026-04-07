@@ -1,0 +1,32 @@
+# Rinkesh Gorasia
+
+> Product builder and two-time founder based in Bengaluru, India. Built Savior (healthcare ops platform, acquired by Zocdoc) and Career Leap (EdTech, shut down 2023). Currently building KnowYourPay, Product Sense Lab, and Twittr Gems while looking for the next thing.
+
+Rinkesh is a product and growth generalist who has worked end-to-end across founding, building, selling, and shipping. He focuses on going deep on a single problem and shipping fast. He's currently open to new opportunities — product and growth roles where he can take ownership end-to-end.
+
+## Pages
+
+- [Home](https://rinkeshgorasia.com/): Intro, current availability, and a snapshot of work
+- [Work](https://rinkeshgorasia.com/work.html): Full work history — companies founded, side projects shipped, and the experiments that didn't make it
+- [How I Work](https://rinkeshgorasia.com/how-i-work.html): Process, principles, and how a product goes from napkin to shipped
+
+## Companies
+
+- **Savior** (2017–2020): Healthcare operations and preventive-care software for hospitals. Built OPD management, patient follow-up systems, and admin dashboards. Onboarded 30+ hospitals. Acquired by Zocdoc.
+- **Career Leap** (2021–2023): EdTech platform for career transitions. Grew to 10K users in 6 months, hit 40% completion rate (vs industry 5-10%), generated ₹15L in revenue. Shut down when CAC outpaced LTV.
+
+## Currently Building
+
+- **KnowYourPay** (Live): Salary transparency tool for Indian tech. Filter by role, city, YOE, company tier. 10K+ visits, 850+ reports generated. https://knowyourpay.vercel.app
+- **Product Sense Lab** (In beta): Daily product sense questions with AI-powered feedback. https://www.productsenselab.com
+- **Twittr Gems** (Live): 500+ best Twitter threads across 25+ categories. #1 Product of the Day on Product Hunt, 10K+ users in first week.
+
+## Contact
+
+- Email: rinkeshgorasia@gmail.com
+- X / Twitter: https://x.com/rinks__g
+- LinkedIn: https://www.linkedin.com/in/rinksg/
+
+## Looking For
+
+Currently looking for the next thing. Specifically: product and growth roles, end-to-end ownership, at a team where he can go deep. Open to founding-team and senior IC positions.
