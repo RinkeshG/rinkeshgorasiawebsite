@@ -311,13 +311,14 @@
 
         /* ─────────────────────────────────────────────── */
         /* VISUAL 1 — DIAGNOSTIC CASCADE                   */
-        /* User flows top to bottom; a fail at any         */
-        /* checkpoint branches to a problem type.          */
+        /* User flows top to bottom along a thin           */
+        /* centerline. A fail at any checkpoint branches   */
+        /* right to a numbered problem pill.               */
         /* ─────────────────────────────────────────────── */
         .cascade {
             margin: 26px 0 28px;
-            padding: 26px 22px 30px;
-            background: rgba(255, 255, 255, .35);
+            padding: 28px 24px 32px;
+            background: rgba(255, 255, 255, .38);
             border: 1px solid var(--rule);
             border-radius: 6px;
             display: flex;
@@ -326,7 +327,7 @@
 
         .cascade-stage {
             align-self: center;
-            padding: 9px 20px;
+            padding: 9px 22px;
             background: var(--bg);
             border: 1px solid var(--ink);
             border-radius: 4px;
@@ -335,7 +336,7 @@
             color: var(--ink);
             letter-spacing: .015em;
             position: relative;
-            z-index: 1;
+            z-index: 2;
         }
 
         .cascade-stage--end {
@@ -348,10 +349,11 @@
             display: grid;
             grid-template-columns: 1fr auto;
             align-items: center;
-            padding: 18px 0;
+            padding: 22px 0;
             position: relative;
         }
 
+        /* Vertical centerline runs the full height of the bridge */
         .cascade-bridge::before {
             content: '';
             position: absolute;
@@ -360,19 +362,20 @@
             left: 50%;
             width: 1px;
             background: var(--faint);
+            transform: translateX(-0.5px);
             z-index: 0;
         }
 
         .cascade-q {
-            font-size: .8rem;
+            font-size: .82rem;
             color: var(--mid);
             font-style: italic;
             text-align: right;
-            padding: 4px 30px 4px 0;
-            background: rgba(255, 255, 255, .55);
+            padding-right: 32px;
+            line-height: 1.4;
             position: relative;
             z-index: 1;
-            line-height: 1.4;
+            /* No background — line passes cleanly through empty space to the left of text */
         }
 
         .cascade-leak {
@@ -380,8 +383,8 @@
             align-items: center;
             gap: 9px;
             padding: 5px 13px 5px 5px;
-            background: rgba(184, 52, 16, .055);
-            border: 1px solid rgba(184, 52, 16, .2);
+            background: rgba(184, 52, 16, .06);
+            border: 1px solid rgba(184, 52, 16, .22);
             border-radius: 14px;
             font-size: .77rem;
             font-weight: 500;
@@ -389,7 +392,19 @@
             letter-spacing: .015em;
             position: relative;
             z-index: 1;
-            margin-left: 14px;
+            margin-left: 18px;
+        }
+
+        /* Short connector segment from the centerline to the leak pill */
+        .cascade-leak::before {
+            content: '';
+            position: absolute;
+            left: -18px;
+            top: 50%;
+            width: 18px;
+            height: 1px;
+            background: rgba(184, 52, 16, .35);
+            transform: translateY(-0.5px);
         }
 
         .cascade-leak-num {
@@ -411,11 +426,12 @@
             .cascade-bridge {
                 grid-template-columns: 1fr;
                 gap: 10px;
-                padding: 14px 0;
+                padding: 16px 0;
             }
             .cascade-bridge::before { display: none; }
             .cascade-q { text-align: center; padding: 0 8px; }
             .cascade-leak { justify-self: center; margin-left: 0; }
+            .cascade-leak::before { display: none; }
         }
 
         /* ─────────────────────────────────────────────── */
@@ -508,109 +524,38 @@
         }
 
         /* ─────────────────────────────────────────────── */
-        /* VISUAL 3 — COMPOUND TRAP                        */
-        /* New #4 feature at the peak; unfixed #1/#2/#3    */
-        /* problems form an ever-widening base below.      */
+        /* VISUAL 3 — COMPOUND TRAP (SVG PYRAMID)          */
+        /* Continuous pyramid built from four trapezoids:  */
+        /* tip = new #4 feature, base = unfixed #1/#2/#3.  */
         /* ─────────────────────────────────────────────── */
-        .compound {
+        .pyramid {
             margin: 24px 0 26px;
-            padding: 26px 18px 22px;
-            background: rgba(255, 255, 255, .35);
+            padding: 18px 18px 22px;
+            background: rgba(255, 255, 255, .38);
             border: 1px solid var(--rule);
             border-radius: 6px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0;
         }
 
-        .compound-tip {
-            padding: 12px 22px;
-            background: rgba(184, 52, 16, .07);
-            border: 1px solid rgba(184, 52, 16, .35);
-            border-radius: 4px;
+        .pyramid-svg {
+            display: block;
+            width: 100%;
+            max-width: 480px;
+            height: auto;
+            margin: 0 auto;
+        }
+
+        .pyramid-caption {
+            font-size: .78rem;
+            color: var(--mid);
+            font-style: italic;
+            margin: 12px auto 0;
             text-align: center;
-            position: relative;
-            z-index: 2;
-            min-width: 180px;
+            max-width: 360px;
+            line-height: 1.5;
         }
 
-        .compound-tip-num {
-            font-family: var(--serif);
+        .pyramid-caption em {
             font-style: italic;
-            font-weight: 300;
-            font-size: 1rem;
-            color: rgba(184, 52, 16, .7);
-            line-height: 1;
-            margin-bottom: 4px;
-        }
-
-        .compound-tip-label {
-            font-size: .8rem;
-            font-weight: 500;
-            color: var(--red);
-            letter-spacing: .04em;
-            text-transform: uppercase;
-            line-height: 1.25;
-        }
-
-        .compound-tip-sub {
-            font-size: .68rem;
-            color: var(--mid);
-            font-style: italic;
-            margin-top: 3px;
-        }
-
-        .compound-base {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            padding: 9px 18px;
-            background: rgba(174, 167, 156, .12);
-            border: 1px solid var(--rule);
-            border-top: none;
-            font-size: .77rem;
-            color: var(--mid);
-            letter-spacing: .015em;
-            line-height: 1.3;
-        }
-
-        .compound-base-num {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            background: rgba(174, 167, 156, .35);
-            color: var(--mid);
-            font-size: .65rem;
-            font-weight: 600;
-            line-height: 1;
-            font-family: var(--sans);
-            flex-shrink: 0;
-        }
-
-        .compound-base-3 { width: 60%; }
-        .compound-base-2 { width: 80%; }
-        .compound-base-1 { width: 100%; background: rgba(174, 167, 156, .18); }
-
-        .compound-caption {
-            font-size: .77rem;
-            color: var(--mid);
-            font-style: italic;
-            margin: 18px 0 0;
-            text-align: center;
-            max-width: 320px;
-        }
-
-        @media (max-width: 480px) {
-            .compound-tip { min-width: 160px; padding: 10px 16px; }
-            .compound-base { padding: 8px 12px; font-size: .73rem; }
-            .compound-base-3 { width: 78%; }
-            .compound-base-2 { width: 92%; }
-            .compound-base-1 { width: 100%; }
         }
     </style>
 </head>
@@ -762,25 +707,38 @@
                     <p class="cluster-label">The compound trap</p>
                     <p>Worse: if your product has unfixed problems at #1, #2, and #3, the new #4 feature inherits all of them on day one.</p>
 
-                    <div class="compound" aria-label="Compound trap diagram">
-                        <div class="compound-tip">
-                            <div class="compound-tip-num">4</div>
-                            <div class="compound-tip-label">new feature</div>
-                            <div class="compound-tip-sub">just shipped</div>
-                        </div>
-                        <div class="compound-base compound-base-3">
-                            <span class="compound-base-num">3</span>
-                            <span>unfixed quality</span>
-                        </div>
-                        <div class="compound-base compound-base-2">
-                            <span class="compound-base-num">2</span>
-                            <span>unfixed use case</span>
-                        </div>
-                        <div class="compound-base compound-base-1">
-                            <span class="compound-base-num">1</span>
-                            <span>unfixed discovery</span>
-                        </div>
-                        <p class="compound-caption">what <em>"just build the feature"</em> actually ships</p>
+                    <div class="pyramid" aria-label="Compound trap pyramid">
+                        <svg viewBox="0 0 480 280" xmlns="http://www.w3.org/2000/svg" class="pyramid-svg">
+                            <!-- Layer 1: foundation, widest -->
+                            <polygon points="20,255 460,255 400,196 80,196" fill="#cac4bb" fill-opacity="0.24" stroke="#aea79c" stroke-width="0.7"/>
+                            <!-- Layer 2 -->
+                            <polygon points="80,196 400,196 350,137 130,137" fill="#cac4bb" fill-opacity="0.18" stroke="#aea79c" stroke-width="0.7"/>
+                            <!-- Layer 3 -->
+                            <polygon points="130,137 350,137 300,78 180,78" fill="#cac4bb" fill-opacity="0.11" stroke="#aea79c" stroke-width="0.7"/>
+                            <!-- Tip: new #4 feature -->
+                            <polygon points="180,78 300,78 270,20 210,20" fill="#b83410" fill-opacity="0.09" stroke="#b83410" stroke-opacity="0.5" stroke-width="1"/>
+
+                            <!-- Layer 1 label -->
+                            <circle cx="190" cy="225" r="10.5" fill="#aea79c" fill-opacity="0.5"/>
+                            <text x="190" y="225" text-anchor="middle" dominant-baseline="middle" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="600" fill="#5d574c">1</text>
+                            <text x="258" y="225" text-anchor="middle" dominant-baseline="middle" font-family="Inter, system-ui, sans-serif" font-size="13" fill="#6b6355" letter-spacing="0.3">unfixed discovery</text>
+
+                            <!-- Layer 2 label -->
+                            <circle cx="200" cy="166.5" r="10" fill="#aea79c" fill-opacity="0.5"/>
+                            <text x="200" y="166.5" text-anchor="middle" dominant-baseline="middle" font-family="Inter, system-ui, sans-serif" font-size="10.5" font-weight="600" fill="#5d574c">2</text>
+                            <text x="262" y="166.5" text-anchor="middle" dominant-baseline="middle" font-family="Inter, system-ui, sans-serif" font-size="12.5" fill="#6b6355" letter-spacing="0.3">unfixed use case</text>
+
+                            <!-- Layer 3 label -->
+                            <circle cx="212" cy="108" r="9" fill="#aea79c" fill-opacity="0.5"/>
+                            <text x="212" y="108" text-anchor="middle" dominant-baseline="middle" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="600" fill="#5d574c">3</text>
+                            <text x="263" y="108" text-anchor="middle" dominant-baseline="middle" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#6b6355" letter-spacing="0.2">unfixed quality</text>
+
+                            <!-- Tip text -->
+                            <text x="240" y="36" text-anchor="middle" dominant-baseline="middle" font-family="Fraunces, Georgia, serif" font-size="13" font-style="italic" font-weight="300" fill="#b83410" opacity="0.7">4</text>
+                            <text x="240" y="52" text-anchor="middle" dominant-baseline="middle" font-family="Inter, system-ui, sans-serif" font-size="9.5" font-weight="500" fill="#b83410" letter-spacing="1.5">NEW FEATURE</text>
+                            <text x="240" y="66" text-anchor="middle" dominant-baseline="middle" font-family="Inter, system-ui, sans-serif" font-size="8.5" font-style="italic" fill="#6b6355">just shipped</text>
+                        </svg>
+                        <p class="pyramid-caption">what <em>"just build the feature"</em> actually ships</p>
                     </div>
 
                     <p>Adding code does not fix discovery, use case, or quality. It just gives those problems a bigger surface area to live on.</p>
