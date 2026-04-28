@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light">
+    <meta name="theme-color" content="#f8f6f2">
+    <meta name="author" content="Rinkesh Gorasia">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <title>Why your feature isn't getting used | Rinkesh Gorasia</title>
+    <meta name="description"
+        content="Four problems that prevent feature use, in the order you should fix them. The cost compounds upward; fixing the wrong layer is roughly 10x as expensive as fixing the right one.">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Rinkesh Gorasia">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:url" content="https://rinkeshgorasia.com/feature-usage.html">
+    <meta property="og:title" content="Why your feature isn't getting used">
+    <meta property="og:description"
+        content="Four problems, in the order you should fix them. Cost compounds upward; fixing the wrong layer is 10x as expensive as fixing the right one.">
+    <meta property="og:image" content="https://rinkeshgorasia.com/images/og-writing.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@rinks__g">
+    <meta name="twitter:creator" content="@rinks__g">
+    <meta name="twitter:title" content="Why your feature isn't getting used">
+    <meta name="twitter:description"
+        content="Four problems, in the order you should fix them.">
+    <meta name="twitter:image" content="https://rinkeshgorasia.com/images/og-writing.jpg">
+    <link rel="canonical" href="https://rinkeshgorasia.com/feature-usage.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Why your feature isn't getting used",
+      "description": "Four problems that prevent feature use, in the order you should fix them.",
+      "author": { "@type": "Person", "name": "Rinkesh Gorasia", "url": "https://rinkeshgorasia.com/" },
+      "publisher": { "@type": "Person", "name": "Rinkesh Gorasia" },
+      "url": "https://rinkeshgorasia.com/feature-usage.html",
+      "mainEntityOfPage": "https://rinkeshgorasia.com/feature-usage.html"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://rinkeshgorasia.com/"},
+        {"@type": "ListItem", "position": 2, "name": "Writing", "item": "https://rinkeshgorasia.com/writing.html"},
+        {"@type": "ListItem", "position": 3, "name": "Why your feature isn't getting used", "item": "https://rinkeshgorasia.com/feature-usage.html"}
+      ]
+    }
+    </script>
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2318160f'/%3E%3Ctext x='16' y='23' font-family='Georgia%2C serif' font-size='20' font-style='italic' fill='%23f8f6f2' text-anchor='middle'%3ER%3C/text%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Inlined copy of styles.css. Source of truth: styles.css. Kept inline so sandboxed previews (which can't load subresources) render correctly. Update both when changing shared styles. -->
+    <style>
+        /* ── RESET ── */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        img { display: block; max-width: 100%; }
+
+        /* ── SKIP LINK ── */
+        .skip-link { position: absolute; top: -100px; left: 8px; padding: 10px 16px; background: #18160f; color: #f8f6f2; text-decoration: none; border-radius: 6px; font-size: .85rem; font-weight: 500; z-index: 9999; transition: top .15s ease; }
+        .skip-link:focus { top: 8px; outline: 2px solid #f8f6f2; outline-offset: 2px; }
+
+        /* ── FOCUS STYLES ── */
+        a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; border-radius: 2px; }
+
+        /* ── LOCK LIGHT MODE ── */
+        :root { color-scheme: light; }
+        @media (prefers-color-scheme: dark) {
+            html { background: #f8f6f2 !important; }
+            body { background: #f8f6f2 !important; color: #18160f !important; }
+        }
+
+        /* ── TOKENS ── */
+        :root { --bg: #f8f6f2; --ink: #18160f; --mid: #6b6355; --faint: #aea79c; --rule: #e5dfd6; --green: #2a6b3c; --red: #b83410; --sans: 'Inter', system-ui, sans-serif; --serif: 'Fraunces', Georgia, serif; --col: 600px; --pad: clamp(18px, 5vw, 56px); }
+
+        /* ── BASE ── */
+        html { font-size: 16px; scroll-behavior: smooth; }
+        body { background: var(--bg); color: var(--ink); font-family: var(--sans); line-height: 1.65; -webkit-font-smoothing: antialiased; }
+        a { color: inherit; text-underline-offset: 3px; text-decoration-thickness: 1px; transition: color .15s; }
+
+        /* ── PAGE SHELL ── */
+        .page { max-width: calc(var(--col) + var(--pad) * 2); margin: 0 auto; padding: 0 var(--pad); }
+
+        /* ── NAV ── */
+        .nav { display: flex; justify-content: space-between; align-items: center; padding: 24px 0 26px; border-bottom: 1px solid var(--rule); gap: 12px; }
+        .nav-name { font-size: .875rem; font-weight: 500; color: var(--ink); text-decoration: none; white-space: nowrap; flex-shrink: 0; }
+        .nav-links { display: flex; gap: 18px; align-items: center; }
+        .nav-links a { font-size: .78rem; color: var(--mid); text-decoration: none; transition: color .15s; white-space: nowrap; position: relative; padding-bottom: 2px; }
+        .nav-links a::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 1.5px; background: var(--ink); transition: width .25s cubic-bezier(.4, 0, .2, 1); }
+        .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+        .nav-links a:hover { color: var(--ink); }
+        .nav-links a.active { color: var(--ink); font-weight: 500; }
+        .nav-right { font-size: .7rem; color: var(--faint); display: flex; align-items: center; gap: 4px; white-space: nowrap; flex-shrink: 0; }
+        .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 4px; color: var(--ink); flex-shrink: 0; }
+        .nav-toggle svg { display: block; }
+        .nav-mobile { display: none; flex-direction: column; gap: 0; border-bottom: 1px solid var(--rule); padding: 4px 0 16px; }
+        .nav-mobile.open { display: flex; }
+        .nav-mobile a { font-size: .875rem; color: var(--mid); text-decoration: none; padding: 10px 0; border-bottom: 1px solid var(--rule); transition: color .15s; }
+        .nav-mobile a:last-child { border-bottom: none; }
+        .nav-mobile a:hover { color: var(--ink); }
+        .nav-mobile a.active { color: var(--ink); font-weight: 500; }
+        @media (max-width: 520px) {
+            .nav-links { display: none; }
+            .nav-right { display: none; }
+            .nav-toggle { display: block; }
+        }
+
+        /* ── SECTION LABEL ── */
+        .section-label { font-size: .75rem; font-weight: 500; letter-spacing: .09em; text-transform: uppercase; color: var(--mid); margin-bottom: 22px; }
+
+        /* ── PAGE HEADER ── */
+        .page-header { padding: 44px 0 40px; }
+        .page-header h1 { font-family: var(--serif); font-size: clamp(1.9rem, 6vw, 2.75rem); font-weight: 400; line-height: 1.18; letter-spacing: -.03em; color: var(--ink); margin-bottom: 14px; }
+        .page-header h1 em { font-style: italic; font-weight: 300; }
+        .page-header p { font-size: .9rem; color: var(--mid); max-width: 480px; line-height: 1.72; }
+
+        /* ── SOCIAL ICONS ── */
+        .social-icon { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; color: var(--faint); text-decoration: none; border-radius: 50%; transition: color .15s, background .15s; }
+        .social-icon:hover { color: var(--ink); background: var(--rule); }
+
+        /* ── FOOTER (default; landing pages only) ── */
+        .footer { padding: 60px 0 56px; border-top: 1px solid var(--rule); }
+        .footer-cta { font-family: var(--serif); font-weight: 400; font-size: clamp(1.6rem, 5vw, 2.4rem); line-height: 1.2; letter-spacing: -.03em; color: var(--ink); margin-bottom: 44px; }
+        .footer-cta em { font-style: italic; font-weight: 300; }
+        .footer-cta a { text-decoration: underline; text-decoration-color: var(--faint); text-underline-offset: 4px; transition: color .2s, text-decoration-color .2s; }
+        .footer-cta a:hover { color: var(--red); text-decoration-color: var(--red); }
+        .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; border-top: 1px solid var(--rule); padding-top: 18px; }
+        .footer-links { display: flex; gap: 20px; }
+        .footer-links a { font-size: .78rem; color: var(--mid); text-decoration: none; transition: color .15s; }
+        .footer-links a:hover { color: var(--ink); }
+        .footer-credit { font-size: .68rem; color: var(--faint); letter-spacing: .01em; }
+
+        /* ── REVEAL ANIMATIONS ── */
+        .fade { opacity: 0; transform: translateY(16px); transition: opacity .7s cubic-bezier(.4, 0, .2, 1), transform .7s cubic-bezier(.4, 0, .2, 1); }
+        .fade.on { opacity: 1; transform: none; }
+
+        /* ── GRAIN OVERLAY ── */
+        body::after { content: ''; position: fixed; inset: 0; z-index: 9999; pointer-events: none; opacity: .35; mix-blend-mode: overlay; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E"); background-repeat: repeat; background-size: 256px 256px; }
+
+        /* ── ESSAY/WRITING FOOTER ── */
+        .essay-footer { padding: 56px 0 50px; border-top: 1px solid var(--rule); }
+        .essay-footer-back { margin-bottom: 30px; }
+        .essay-footer-back a { font-size: .82rem; color: var(--mid); text-decoration: none; transition: color .15s, transform .15s; display: inline-block; }
+        .essay-footer-back a:hover { color: var(--ink); transform: translateX(-3px); }
+        .essay-footer-hello { font-family: var(--serif); font-weight: 300; font-size: 1.05rem; line-height: 1.3; letter-spacing: -.012em; color: var(--ink); margin-bottom: 8px; }
+        .essay-footer-hello em { font-style: italic; }
+        .essay-footer-contact { font-size: .88rem; color: var(--mid); line-height: 1.7; margin-bottom: 28px; }
+        .essay-footer-contact a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--faint); text-underline-offset: 3px; transition: color .2s, text-decoration-color .2s; }
+        .essay-footer-contact a:hover { color: var(--red); text-decoration-color: var(--red); }
+        .essay-footer .footer-bottom { border-top: 1px solid var(--rule); padding-top: 18px; }
+
+        /* ── RESPONSIVE SHARED ── */
+        @media (max-width: 600px) {
+            .page-header h1 { font-size: clamp(1.7rem, 7vw, 2.4rem); }
+            .footer-cta { font-size: clamp(1.3rem, 6vw, 2rem); }
+            .footer-bottom { flex-direction: column; align-items: flex-start; gap: 12px; }
+            .essay-footer-contact { font-size: .85rem; }
+        }
+    </style>
+    <style>
+        /* ── ESSAY BASE ── */
+        .essay {
+            padding: 0 0 24px;
+        }
+
+        .essay > p,
+        .cluster > p {
+            font-size: .94rem;
+            line-height: 1.74;
+            color: var(--ink);
+            margin-bottom: 18px;
+        }
+
+        .essay em,
+        .cluster em {
+            font-style: italic;
+        }
+
+        .essay strong,
+        .cluster strong {
+            font-weight: 500;
+            color: var(--ink);
+        }
+
+        .essay blockquote {
+            margin: 22px 0 0;
+            padding: 0 0 0 18px;
+            border-left: 2px solid var(--ink);
+            font-family: var(--serif);
+            font-style: italic;
+            font-weight: 300;
+            font-size: 1.08rem;
+            line-height: 1.5;
+            color: var(--ink);
+            letter-spacing: -.012em;
+        }
+
+        /* ── CLUSTER ── */
+        .cluster {
+            padding: 38px 0 30px;
+            border-top: 1px solid var(--rule);
+        }
+
+        .cluster:first-of-type {
+            padding-top: 30px;
+        }
+
+        .cluster-label {
+            font-size: .75rem;
+            font-weight: 500;
+            letter-spacing: .09em;
+            text-transform: uppercase;
+            color: var(--mid);
+            margin-bottom: 18px;
+        }
+
+        /* ── NUMBERED LIST (used twice; same numbers refer to same problems) ── */
+        .numbered-list {
+            list-style: none;
+            padding: 0;
+            margin: 16px 0 8px;
+            counter-reset: item;
+        }
+
+        .numbered-list li {
+            position: relative;
+            padding: 16px 0 16px 46px;
+            border-top: 1px solid var(--rule);
+            font-size: .92rem;
+            line-height: 1.68;
+            color: var(--ink);
+        }
+
+        .numbered-list li:last-child {
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .numbered-list li::before {
+            counter-increment: item;
+            content: counter(item);
+            position: absolute;
+            left: 0;
+            top: 14px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--bg);
+            border: 1px solid var(--ink);
+            color: var(--ink);
+            font-family: var(--serif);
+            font-style: italic;
+            font-weight: 400;
+            font-size: .98rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+        }
+
+        .numbered-list li strong {
+            font-weight: 500;
+        }
+
+        /* Compact variant for the signals section */
+        .numbered-list--compact li {
+            padding: 11px 0 11px 38px;
+            font-size: .88rem;
+        }
+
+        .numbered-list--compact li::before {
+            width: 22px;
+            height: 22px;
+            font-size: .8rem;
+            top: 10px;
+        }
+
+        /* ── DOT LIST (bulleted, plain) ── */
+        .dot-list {
+            list-style: none;
+            padding: 0;
+            margin: 12px 0 18px;
+        }
+
+        .dot-list li {
+            padding: 5px 0 5px 18px;
+            position: relative;
+            font-size: .92rem;
+            line-height: 1.65;
+            color: var(--ink);
+        }
+
+        .dot-list li::before {
+            content: '·';
+            position: absolute;
+            left: 0;
+            top: -1px;
+            color: var(--faint);
+            font-weight: 700;
+            font-size: 1.15rem;
+        }
+
+        /* ─────────────────────────────────────────────── */
+        /* VISUAL 1 — DIAGNOSTIC CASCADE                   */
+        /* User flows top to bottom; a fail at any         */
+        /* checkpoint branches to a problem type.          */
+        /* ─────────────────────────────────────────────── */
+        .cascade {
+            margin: 26px 0 28px;
+            padding: 26px 22px 30px;
+            background: rgba(255, 255, 255, .35);
+            border: 1px solid var(--rule);
+            border-radius: 6px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cascade-stage {
+            align-self: center;
+            padding: 9px 20px;
+            background: var(--bg);
+            border: 1px solid var(--ink);
+            border-radius: 4px;
+            font-size: .84rem;
+            font-weight: 500;
+            color: var(--ink);
+            letter-spacing: .015em;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cascade-stage--end {
+            background: rgba(42, 107, 60, .07);
+            border-color: var(--green);
+            color: var(--green);
+        }
+
+        .cascade-bridge {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: center;
+            padding: 18px 0;
+            position: relative;
+        }
+
+        .cascade-bridge::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 1px;
+            background: var(--faint);
+            z-index: 0;
+        }
+
+        .cascade-q {
+            font-size: .8rem;
+            color: var(--mid);
+            font-style: italic;
+            text-align: right;
+            padding: 4px 30px 4px 0;
+            background: rgba(255, 255, 255, .55);
+            position: relative;
+            z-index: 1;
+            line-height: 1.4;
+        }
+
+        .cascade-leak {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            padding: 5px 13px 5px 5px;
+            background: rgba(184, 52, 16, .055);
+            border: 1px solid rgba(184, 52, 16, .2);
+            border-radius: 14px;
+            font-size: .77rem;
+            font-weight: 500;
+            color: var(--red);
+            letter-spacing: .015em;
+            position: relative;
+            z-index: 1;
+            margin-left: 14px;
+        }
+
+        .cascade-leak-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 19px;
+            height: 19px;
+            border-radius: 50%;
+            background: var(--red);
+            color: var(--bg);
+            font-size: .68rem;
+            font-weight: 600;
+            line-height: 1;
+            font-family: var(--sans);
+        }
+
+        @media (max-width: 540px) {
+            .cascade-bridge {
+                grid-template-columns: 1fr;
+                gap: 10px;
+                padding: 14px 0;
+            }
+            .cascade-bridge::before { display: none; }
+            .cascade-q { text-align: center; padding: 0 8px; }
+            .cascade-leak { justify-self: center; margin-left: 0; }
+        }
+
+        /* ─────────────────────────────────────────────── */
+        /* VISUAL 2 — COST STAIRCASE                       */
+        /* Each step is wider than the one below.          */
+        /* The width of the bar IS the cost.               */
+        /* ─────────────────────────────────────────────── */
+        .stairs {
+            margin: 24px 0 26px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .stairs-step {
+            display: grid;
+            grid-template-columns: 36px 1fr auto auto;
+            align-items: center;
+            gap: 16px;
+            padding: 14px 18px 13px;
+            border: 1px solid var(--rule);
+            background: rgba(255, 255, 255, .4);
+            border-radius: 4px;
+        }
+
+        /* Increasing width visualizes increasing cost. Top step (#4) is widest. */
+        .stairs-step-4 { width: 100%; background: rgba(184, 52, 16, .04); border-color: rgba(184, 52, 16, .2); }
+        .stairs-step-3 { width: 80%; }
+        .stairs-step-2 { width: 62%; }
+        .stairs-step-1 { width: 45%; background: rgba(42, 107, 60, .05); border-color: rgba(42, 107, 60, .25); }
+
+        .stairs-num {
+            font-family: var(--serif);
+            font-style: italic;
+            font-weight: 300;
+            font-size: 1.5rem;
+            color: var(--faint);
+            text-align: center;
+            line-height: 1;
+        }
+
+        .stairs-step-4 .stairs-num { color: rgba(184, 52, 16, .55); }
+        .stairs-step-1 .stairs-num { color: rgba(42, 107, 60, .65); }
+
+        .stairs-name {
+            font-size: .92rem;
+            color: var(--ink);
+            font-weight: 500;
+            line-height: 1.3;
+        }
+
+        .stairs-time {
+            font-size: .74rem;
+            color: var(--mid);
+            font-style: italic;
+            white-space: nowrap;
+            line-height: 1.2;
+        }
+
+        .stairs-mult {
+            font-size: .68rem;
+            font-weight: 500;
+            letter-spacing: .07em;
+            text-transform: uppercase;
+            color: var(--faint);
+            white-space: nowrap;
+            line-height: 1.2;
+        }
+
+        .stairs-step-4 .stairs-mult { color: var(--red); }
+        .stairs-step-1 .stairs-mult { color: var(--green); }
+
+        .stairs-foot {
+            margin-top: 8px;
+            font-size: .72rem;
+            color: var(--mid);
+            font-style: italic;
+            letter-spacing: .015em;
+            padding-left: 8px;
+        }
+
+        @media (max-width: 600px) {
+            .stairs-step,
+            .stairs-step-1,
+            .stairs-step-2,
+            .stairs-step-3,
+            .stairs-step-4 { width: 100%; }
+            .stairs-step { grid-template-columns: 32px 1fr auto; gap: 12px; padding: 12px 14px; }
+            .stairs-mult { display: none; }
+        }
+
+        /* ─────────────────────────────────────────────── */
+        /* VISUAL 3 — COMPOUND TRAP                        */
+        /* New #4 feature at the peak; unfixed #1/#2/#3    */
+        /* problems form an ever-widening base below.      */
+        /* ─────────────────────────────────────────────── */
+        .compound {
+            margin: 24px 0 26px;
+            padding: 26px 18px 22px;
+            background: rgba(255, 255, 255, .35);
+            border: 1px solid var(--rule);
+            border-radius: 6px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+        }
+
+        .compound-tip {
+            padding: 12px 22px;
+            background: rgba(184, 52, 16, .07);
+            border: 1px solid rgba(184, 52, 16, .35);
+            border-radius: 4px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            min-width: 180px;
+        }
+
+        .compound-tip-num {
+            font-family: var(--serif);
+            font-style: italic;
+            font-weight: 300;
+            font-size: 1rem;
+            color: rgba(184, 52, 16, .7);
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .compound-tip-label {
+            font-size: .8rem;
+            font-weight: 500;
+            color: var(--red);
+            letter-spacing: .04em;
+            text-transform: uppercase;
+            line-height: 1.25;
+        }
+
+        .compound-tip-sub {
+            font-size: .68rem;
+            color: var(--mid);
+            font-style: italic;
+            margin-top: 3px;
+        }
+
+        .compound-base {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 9px 18px;
+            background: rgba(174, 167, 156, .12);
+            border: 1px solid var(--rule);
+            border-top: none;
+            font-size: .77rem;
+            color: var(--mid);
+            letter-spacing: .015em;
+            line-height: 1.3;
+        }
+
+        .compound-base-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: rgba(174, 167, 156, .35);
+            color: var(--mid);
+            font-size: .65rem;
+            font-weight: 600;
+            line-height: 1;
+            font-family: var(--sans);
+            flex-shrink: 0;
+        }
+
+        .compound-base-3 { width: 60%; }
+        .compound-base-2 { width: 80%; }
+        .compound-base-1 { width: 100%; background: rgba(174, 167, 156, .18); }
+
+        .compound-caption {
+            font-size: .77rem;
+            color: var(--mid);
+            font-style: italic;
+            margin: 18px 0 0;
+            text-align: center;
+            max-width: 320px;
+        }
+
+        @media (max-width: 480px) {
+            .compound-tip { min-width: 160px; padding: 10px 16px; }
+            .compound-base { padding: 8px 12px; font-size: .73rem; }
+            .compound-base-3 { width: 78%; }
+            .compound-base-2 { width: 92%; }
+            .compound-base-1 { width: 100%; }
+        }
+    </style>
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to content</a>
+    <div class="page">
+
+        <!-- NAV -->
+        <header>
+            <nav class="nav" aria-label="Primary">
+                <a href="index.html" class="nav-name">Rinkesh Gorasia</a>
+                <div class="nav-links">
+                    <a href="index.html">home</a>
+                    <a href="work.html">work</a>
+                    <a href="writing.html" class="active">writing</a>
+                </div>
+                <div class="nav-right">
+                    Bengaluru &nbsp;·&nbsp; <span id="nav-temp"></span>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle menu"
+                    onclick="document.querySelector('.nav-mobile').classList.toggle('open')">
+                    <svg width="18" height="14" viewBox="0 0 18 14" fill="none">
+                        <rect y="0" width="18" height="1.5" rx=".75" fill="currentColor" />
+                        <rect y="6" width="18" height="1.5" rx=".75" fill="currentColor" />
+                        <rect y="12" width="18" height="1.5" rx=".75" fill="currentColor" />
+                    </svg>
+                </button>
+            </nav>
+            <div class="nav-mobile">
+                <a href="index.html">home</a>
+                <a href="work.html">work</a>
+                <a href="writing.html" class="active">writing</a>
+            </div>
+        </header>
+
+        <main id="main-content">
+
+            <!-- PAGE HEADER -->
+            <div class="page-header fade">
+                <h1>Why your feature isn't getting used.<br><em>Four problems, in the order you should fix them.</em></h1>
+                <p>A feature that isn't being used has one of four problems. Misdiagnose the level and you'll spend ten times what the fix needs.</p>
+            </div>
+
+            <!-- ESSAY -->
+            <article class="essay">
+
+                <!-- ── THE FUNNEL ── -->
+                <section class="cluster fade">
+                    <p class="cluster-label">The funnel</p>
+                    <p>Every user passes four checkpoints before they actually use a feature. A drop at any one of them is a different kind of problem.</p>
+
+                    <div class="cascade" aria-label="Diagnostic cascade">
+                        <div class="cascade-stage">all users</div>
+
+                        <div class="cascade-bridge">
+                            <div class="cascade-q">do they know it exists?</div>
+                            <div class="cascade-leak"><span class="cascade-leak-num">1</span><span>Discovery</span></div>
+                        </div>
+
+                        <div class="cascade-stage">aware</div>
+
+                        <div class="cascade-bridge">
+                            <div class="cascade-q">do they know what to use it for?</div>
+                            <div class="cascade-leak"><span class="cascade-leak-num">2</span><span>Use case</span></div>
+                        </div>
+
+                        <div class="cascade-stage">knows what for</div>
+
+                        <div class="cascade-bridge">
+                            <div class="cascade-q">does it work better than the alternative?</div>
+                            <div class="cascade-leak"><span class="cascade-leak-num">3</span><span>Quality</span></div>
+                        </div>
+
+                        <div class="cascade-stage">tried and worked</div>
+
+                        <div class="cascade-bridge">
+                            <div class="cascade-q">enough vs. competitors?</div>
+                            <div class="cascade-leak"><span class="cascade-leak-num">4</span><span>Missing pieces</span></div>
+                        </div>
+
+                        <div class="cascade-stage cascade-stage--end">kept using</div>
+                    </div>
+                </section>
+
+                <!-- ── THE FOUR ── -->
+                <section class="cluster fade">
+                    <p class="cluster-label">The four, in plain terms</p>
+                    <ol class="numbered-list">
+                        <li><strong>Discovery.</strong> Users don't know the feature exists. Or it isn't the first thing they think of when they need its category.</li>
+                        <li><strong>Use case.</strong> Users know it exists, but can't think of when they'd use it.</li>
+                        <li><strong>Quality.</strong> Users tried it. The feature is worse than the alternative, or doesn't do the job they hired the product for.</li>
+                        <li><strong>Missing pieces.</strong> Your product has X. A competitor has X + Y. Users haven't found a reason to switch yet.</li>
+                    </ol>
+                </section>
+
+                <!-- ── HOW TO TELL ── -->
+                <section class="cluster fade">
+                    <p class="cluster-label">How to tell which one</p>
+                    <p>Customer interviews and surveys for all four. Beyond that, one specific signal per type:</p>
+                    <ol class="numbered-list numbered-list--compact">
+                        <li><strong>Discovery.</strong> Users using the feature ÷ users who land on its screen.</li>
+                        <li><strong>Use case.</strong> Users using the feature ÷ users who <em>know</em> it exists.</li>
+                        <li><strong>Quality.</strong> Satisfaction scores. Support tickets named to that feature.</li>
+                        <li><strong>Missing pieces.</strong> Competitors named by users in interviews.</li>
+                    </ol>
+                    <p>If you don't know which type your problem is, run them in order. The first one that fails is your problem.</p>
+                </section>
+
+                <!-- ── COST COMPOUNDS ── -->
+                <section class="cluster fade">
+                    <p class="cluster-label">Why the order matters: cost compounds upward</p>
+                    <p>Each level costs roughly ten times the one below.</p>
+
+                    <div class="stairs" aria-label="Cost staircase">
+                        <div class="stairs-step stairs-step-4">
+                            <div class="stairs-num">4</div>
+                            <div class="stairs-name">Missing pieces</div>
+                            <div class="stairs-time">months → quarters</div>
+                            <div class="stairs-mult">10× #3</div>
+                        </div>
+                        <div class="stairs-step stairs-step-3">
+                            <div class="stairs-num">3</div>
+                            <div class="stairs-name">Quality</div>
+                            <div class="stairs-time">weeks → months</div>
+                            <div class="stairs-mult">10× #2</div>
+                        </div>
+                        <div class="stairs-step stairs-step-2">
+                            <div class="stairs-num">2</div>
+                            <div class="stairs-name">Use case</div>
+                            <div class="stairs-time">days → weeks</div>
+                            <div class="stairs-mult">10× #1</div>
+                        </div>
+                        <div class="stairs-step stairs-step-1">
+                            <div class="stairs-num">1</div>
+                            <div class="stairs-name">Discovery</div>
+                            <div class="stairs-time">hours → days</div>
+                            <div class="stairs-mult">baseline</div>
+                        </div>
+                        <div class="stairs-foot">↑ start fixes here. work upward.</div>
+                    </div>
+
+                    <p>A discovery fix is a tooltip, a copy change, a navigation tweak. Days of work. A missing-pieces fix is a new feature, plus the discovery, use-case, and quality work that comes with it. Months to quarters.</p>
+                    <p>If your real problem is #1 and you fix at #4, you've spent quarter-scale effort on a problem that needed days.</p>
+                </section>
+
+                <!-- ── COMPOUND TRAP ── -->
+                <section class="cluster fade">
+                    <p class="cluster-label">The compound trap</p>
+                    <p>Worse: if your product has unfixed problems at #1, #2, and #3, the new #4 feature inherits all of them on day one.</p>
+
+                    <div class="compound" aria-label="Compound trap diagram">
+                        <div class="compound-tip">
+                            <div class="compound-tip-num">4</div>
+                            <div class="compound-tip-label">new feature</div>
+                            <div class="compound-tip-sub">just shipped</div>
+                        </div>
+                        <div class="compound-base compound-base-3">
+                            <span class="compound-base-num">3</span>
+                            <span>unfixed quality</span>
+                        </div>
+                        <div class="compound-base compound-base-2">
+                            <span class="compound-base-num">2</span>
+                            <span>unfixed use case</span>
+                        </div>
+                        <div class="compound-base compound-base-1">
+                            <span class="compound-base-num">1</span>
+                            <span>unfixed discovery</span>
+                        </div>
+                        <p class="compound-caption">what <em>"just build the feature"</em> actually ships</p>
+                    </div>
+
+                    <p>Adding code does not fix discovery, use case, or quality. It just gives those problems a bigger surface area to live on.</p>
+                </section>
+
+                <!-- ── FOUND VS PAID GROWTH ── -->
+                <section class="cluster fade">
+                    <p class="cluster-label">Found growth vs. paid growth</p>
+                    <p>There's a second asymmetry worth naming. Fixing #1, #2, or #3 <em>finds</em> users you already have. They're in the product. They just need to reach the feature, learn it, or have it work better. Distribution is free.</p>
+                    <p>Fixing #4 means you have to <em>acquire</em> users to come use the new thing. Distribution is paid.</p>
+                    <p>The lower three levels are free growth. The top level is paid growth. Most teams treat them as the same kind of work. They aren't.</p>
+                </section>
+
+                <!-- ── WHY TEAMS JUMP ── -->
+                <section class="cluster fade">
+                    <p class="cluster-label">Why teams jump to #4 anyway</p>
+                    <p>The reasons are structural, not stupid:</p>
+                    <ul class="dot-list">
+                        <li>Building new feels like progress. Tooltips don't show up in demos.</li>
+                        <li>Engineering wants to write code, not edit copy.</li>
+                        <li>Investors and execs are calmer when they see new features on the roadmap.</li>
+                        <li>The team was hired to build, so building feels like the job.</li>
+                    </ul>
+                    <p>The framework's job is to slow that reflex down for fifteen minutes. Run #1, #2, #3 before you commit a quarter to #4.</p>
+                </section>
+
+                <!-- ── HOW TO USE ── -->
+                <section class="cluster fade">
+                    <p class="cluster-label">How to use this</p>
+                    <p>Three moves that work:</p>
+                    <ol class="numbered-list">
+                        <li><strong>Audit your underused features.</strong> Pick the three lowest-usage features in the product. Walk each through the four levels. Most will land at #1 or #2.</li>
+                        <li><strong>Reserve at least 30% of roadmap capacity for the bottom three levels.</strong> If 100% of your roadmap is "build new things," your team is shipping waste.</li>
+                        <li><strong>Make the diagnosis the first deliverable in a feature kickoff.</strong> Before scoping, the PM declares which level the feature is solving. If it's a #4 fix, the PM also declares what #1, #2, #3 work is queued for the new feature itself.</li>
+                    </ol>
+                </section>
+
+                <!-- ── ROADMAP DIAGNOSTIC ── -->
+                <section class="cluster fade">
+                    <p class="cluster-label">The roadmap diagnostic</p>
+                    <p>Sample your last quarter. Tag each shipped thing as level 1, 2, 3, or 4. If 70% is level 4, the team is in the trap.</p>
+                    <blockquote>The roadmap is the diagnosis.</blockquote>
+                </section>
+
+            </article>
+        </main>
+
+        <!-- FOOTER -->
+        <footer class="footer essay-footer fade">
+            <p class="essay-footer-back"><a href="writing.html">← back to writing</a></p>
+            <p class="essay-footer-hello"><em>Say hi.</em></p>
+            <p class="essay-footer-contact">
+                <a href="mailto:rinkeshgorasia@gmail.com">rinkeshgorasia@gmail.com</a>
+                &nbsp;·&nbsp;
+                <a href="https://x.com/rinks__g" target="_blank" rel="noopener">@rinks__g</a>
+                &nbsp;·&nbsp;
+                <a href="https://www.linkedin.com/in/rinksg/" target="_blank" rel="noopener">LinkedIn</a>
+            </p>
+            <div class="footer-bottom">
+                <span class="footer-credit">built by rinkesh · powered by claude, tokens &amp; coffee ☕</span>
+            </div>
+        </footer>
+
+    </div>
+    <script>
+        // Live temperature
+        fetch('https://api.open-meteo.com/v1/forecast?latitude=12.97&longitude=77.59&current_weather=true&temperature_unit=celsius')
+            .then(function (r) { return r.json(); })
+            .then(function (d) {
+                var el = document.getElementById('nav-temp');
+                if (el && d.current_weather) el.textContent = Math.round(d.current_weather.temperature) + '°C';
+            })
+            .catch(function () { });
+
+        // Scroll reveal
+        var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } });
+        }, { threshold: 0.05 });
+        document.querySelectorAll('.fade').forEach(function (el) { io.observe(el); });
+
+        // Mobile nav close on link click
+        document.querySelectorAll('.nav-mobile a').forEach(function (a) {
+            a.addEventListener('click', function () { document.querySelector('.nav-mobile').classList.remove('open'); });
+        });
+    </script>
+</body>
+
+</html>

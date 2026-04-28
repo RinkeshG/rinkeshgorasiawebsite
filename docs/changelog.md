@@ -25,6 +25,18 @@ Anchor reference: [`docs/about.md`](about.md). If a change contradicts the ancho
 
 Reverse-chronological. Most recent first.
 
+### 2026-04-28 — `feature-usage.html` shipped (second on-site essay)
+
+- **What changed:** new page `feature-usage.html` — second on-site essay. Title: *"Why your feature isn't getting used. Four problems, in the order you should fix them."* Linked from writing.html as the most recent post (2026), pushing field-notes to second.
+- **Content shape:** ~750 words, nine sections (funnel / the four / how to tell / cost compounds / compound trap / found-vs-paid growth / why teams jump to #4 / how to use this / the roadmap diagnostic).
+- **Three custom visuals (no tables, all CSS-styled):**
+  - **Diagnostic cascade.** User flow with stage-boxes connected by a vertical centerline, each step branching right to a numbered "leak" pill (red, with a circle-numbered badge) when that stage fails. The four leaks correspond 1:1 to the four problem types.
+  - **Cost staircase.** Four steps stacked top-to-bottom with widths varying (#4 = 100%, #3 = 80%, #2 = 62%, #1 = 45%) so the visual width is the cost. Top step tinted red; bottom step tinted green. Each step labelled with time range and "10× #N" multiplier.
+  - **Compound trap.** A small red "new feature" tip at the top sitting on three progressively wider gray base layers labelled "unfixed quality / use case / discovery." Caption: *"what 'just build the feature' actually ships."*
+- **Iteration history:** v1 was generic ("4 reasons + table"). v2 added depth — cost asymmetry, compound trap, found-vs-paid growth, why teams jump to #4, roadmap diagnostic. v2 visuals replaced the generic table with three custom diagnostic visuals. Final = v2.
+- **Numbering carries through:** the same circled `1/2/3/4` style is used in the cascade leaks, the "four in plain terms" list, the "how to tell which one" list, and the staircase. Visual continuity reinforces that all four references are the same problem set.
+- **Tags:** `#writing` `#essay` `#feature-usage` `#visual-design` `#cascade` `#staircase`
+
 ### 2026-04-28 — Inline styles.css into writing.html and field-notes.html (preview rendering)
 
 - **What changed:** added an inline `<style>` block to `writing.html` and `field-notes.html` mirroring the contents of `styles.css`. Kept the `<link rel="stylesheet" href="styles.css">` so production still loads the external file (cache-friendly).
