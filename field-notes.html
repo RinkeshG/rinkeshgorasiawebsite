@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light">
+    <meta name="theme-color" content="#f8f6f2">
+    <meta name="author" content="Rinkesh Gorasia">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <title>Field notes — On building. Rinkesh Gorasia</title>
+    <meta name="description"
+        content="A growing list of things I keep coming back to when I'm building products. Some are mine, most aren't.">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Rinkesh Gorasia">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:url" content="https://rinkeshgorasia.com/field-notes.html">
+    <meta property="og:title" content="Field notes — On building">
+    <meta property="og:description"
+        content="A growing list of things I keep coming back to when I'm building products. Some are mine, most aren't.">
+    <meta property="og:image" content="https://rinkeshgorasia.com/images/og-writing.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@rinks__g">
+    <meta name="twitter:creator" content="@rinks__g">
+    <meta name="twitter:title" content="Field notes — On building">
+    <meta name="twitter:description"
+        content="A growing list of things I keep coming back to when I'm building products. Some are mine, most aren't.">
+    <meta name="twitter:image" content="https://rinkeshgorasia.com/images/og-writing.jpg">
+    <link rel="canonical" href="https://rinkeshgorasia.com/field-notes.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Field notes — On building",
+      "description": "A growing list of things I keep coming back to when I'm building products.",
+      "author": {
+        "@type": "Person",
+        "name": "Rinkesh Gorasia",
+        "url": "https://rinkeshgorasia.com/"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Rinkesh Gorasia"
+      },
+      "url": "https://rinkeshgorasia.com/field-notes.html",
+      "mainEntityOfPage": "https://rinkeshgorasia.com/field-notes.html"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://rinkeshgorasia.com/"},
+        {"@type": "ListItem", "position": 2, "name": "Writing", "item": "https://rinkeshgorasia.com/writing.html"},
+        {"@type": "ListItem", "position": 3, "name": "Field notes", "item": "https://rinkeshgorasia.com/field-notes.html"}
+      ]
+    }
+    </script>
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2318160f'/%3E%3Ctext x='16' y='23' font-family='Georgia%2C serif' font-size='20' font-style='italic' fill='%23f8f6f2' text-anchor='middle'%3ER%3C/text%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* ── ESSAY BASE ── */
+        .essay {
+            padding: 0 0 24px;
+        }
+
+        .essay > p,
+        .entry > p {
+            font-size: .92rem;
+            line-height: 1.74;
+            color: var(--ink);
+            margin-bottom: 18px;
+        }
+
+        .essay em,
+        .entry em {
+            font-style: italic;
+        }
+
+        .essay strong,
+        .entry strong {
+            font-weight: 500;
+            color: var(--ink);
+        }
+
+        .essay blockquote {
+            margin: 24px 0;
+            padding: 0 0 0 18px;
+            border-left: 2px solid var(--ink);
+            font-family: var(--serif);
+            font-style: italic;
+            font-weight: 300;
+            font-size: 1rem;
+            line-height: 1.55;
+            color: var(--mid);
+        }
+
+        /* ── CLUSTER ── */
+        .cluster {
+            padding: 38px 0 30px;
+            border-top: 1px solid var(--rule);
+        }
+
+        .cluster:first-of-type {
+            padding-top: 30px;
+        }
+
+        .cluster-label {
+            font-size: .75rem;
+            font-weight: 500;
+            letter-spacing: .09em;
+            text-transform: uppercase;
+            color: var(--mid);
+            margin-bottom: 12px;
+        }
+
+        .cluster-intro {
+            font-family: var(--serif);
+            font-style: italic;
+            font-weight: 300;
+            font-size: 1.04rem;
+            line-height: 1.55;
+            color: var(--mid);
+            max-width: 520px;
+            margin-bottom: 30px;
+        }
+
+        /* ── ENTRY ── */
+        .entry {
+            margin-bottom: 38px;
+        }
+
+        .entry:last-child {
+            margin-bottom: 0;
+        }
+
+        .entry h2 {
+            font-family: var(--serif);
+            font-weight: 400;
+            font-size: 1.18rem;
+            line-height: 1.42;
+            letter-spacing: -.012em;
+            color: var(--ink);
+            margin-bottom: 16px;
+        }
+
+        .entry h2 .num {
+            color: var(--faint);
+            font-style: italic;
+            font-weight: 300;
+            margin-right: 4px;
+        }
+
+        .entry h2 em {
+            font-style: italic;
+            font-weight: 300;
+        }
+
+        /* ── BODY LISTS ── */
+        .entry ul.signs {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 22px;
+        }
+
+        .entry ul.signs li {
+            padding: 4px 0 4px 18px;
+            position: relative;
+            font-size: .92rem;
+            line-height: 1.65;
+            color: var(--ink);
+        }
+
+        .entry ul.signs li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: var(--faint);
+        }
+
+        /* ── STAGE DIAGRAM (#1) ── */
+        .stages {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 24px 0 26px;
+        }
+
+        .stage {
+            padding: 18px 16px 16px;
+            background: rgba(255, 255, 255, .45);
+            border: 1px solid var(--rule);
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stage-title {
+            font-size: .68rem;
+            font-weight: 500;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: var(--mid);
+            margin-bottom: 12px;
+        }
+
+        .stage ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .stage ul li {
+            padding: 3px 0 3px 12px;
+            position: relative;
+            font-size: .85rem;
+            line-height: 1.55;
+            color: var(--ink);
+        }
+
+        .stage ul li::before {
+            content: '·';
+            position: absolute;
+            left: 0;
+            color: var(--faint);
+        }
+
+        .stage-note {
+            margin-top: auto;
+            padding-top: 14px;
+            border-top: 1px dashed var(--rule);
+            font-size: .76rem;
+            line-height: 1.5;
+            color: var(--mid);
+            font-style: italic;
+        }
+
+        .stage-note .arrow {
+            color: var(--red);
+            font-style: normal;
+            margin-right: 4px;
+            font-weight: 500;
+        }
+
+        @media (max-width: 520px) {
+            .stages { grid-template-columns: 1fr; }
+            .stage { min-height: 0; }
+        }
+
+        /* ── QUADRANT (#2) ── */
+        .quadrant {
+            margin: 24px 0 28px;
+            display: grid;
+            grid-template-columns: 22px 1fr;
+            grid-template-rows: 1fr auto;
+            gap: 6px;
+        }
+
+        .q-yaxis {
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+            font-size: .68rem;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: var(--mid);
+            align-self: center;
+            justify-self: end;
+            text-align: center;
+            line-height: 1;
+        }
+
+        .q-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            border: 1px solid var(--rule);
+            background: rgba(255, 255, 255, .35);
+            min-height: 220px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .q-cell {
+            padding: 22px 14px;
+            text-align: center;
+            font-size: .82rem;
+            line-height: 1.4;
+            color: var(--mid);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .q-cell:nth-child(1) { border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+        .q-cell:nth-child(2) { border-bottom: 1px solid var(--rule); }
+        .q-cell:nth-child(3) { border-right: 1px solid var(--rule); }
+
+        .q-highlight {
+            background: rgba(42, 107, 60, .07);
+            color: var(--green);
+            font-weight: 500;
+            letter-spacing: .03em;
+            font-size: .8rem;
+        }
+
+        .q-xaxis {
+            grid-column: 2;
+            grid-row: 2;
+            display: flex;
+            justify-content: space-between;
+            font-size: .68rem;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: var(--mid);
+            padding-top: 4px;
+        }
+
+        @media (max-width: 480px) {
+            .q-grid { min-height: 180px; }
+            .q-cell { padding: 16px 8px; font-size: .76rem; }
+            .q-highlight { font-size: .72rem; }
+        }
+
+        /* ── CALLOUT (formula) ── */
+        .callout {
+            margin: 22px 0;
+            padding: 18px 22px;
+            background: rgba(255, 255, 255, .55);
+            border-left: 2px solid var(--ink);
+            border-radius: 0 4px 4px 0;
+        }
+
+        .callout-formula {
+            font-family: var(--serif);
+            font-weight: 500;
+            font-size: 1rem;
+            letter-spacing: -.01em;
+            color: var(--ink);
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .callout p {
+            margin: 0;
+            font-size: .88rem;
+            line-height: 1.6;
+            color: var(--mid);
+        }
+
+        /* ── FOUNDATION STACK (#5) ── */
+        .stack {
+            margin: 24px 0 26px;
+            border: 1px solid var(--rule);
+            border-radius: 5px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, .35);
+        }
+
+        .stack-layer {
+            padding: 16px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 18px;
+            font-size: .88rem;
+            color: var(--ink);
+            line-height: 1.5;
+        }
+
+        .stack-layer + .stack-layer {
+            border-top: 1px solid var(--rule);
+        }
+
+        .stack-layer-top { background: rgba(184, 52, 16, .035); }
+        .stack-layer-bottom { background: rgba(42, 107, 60, .055); }
+
+        .stack-note {
+            font-size: .72rem;
+            color: var(--mid);
+            font-style: italic;
+            white-space: nowrap;
+            flex-shrink: 0;
+            letter-spacing: .01em;
+        }
+
+        .stack-layer-bottom .stack-note {
+            color: var(--green);
+            font-weight: 500;
+            font-style: normal;
+        }
+
+        @media (max-width: 480px) {
+            .stack-layer {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 6px;
+            }
+            .stack-note {
+                white-space: normal;
+            }
+        }
+
+        /* ── ICEBERG (#7) ── */
+        .iceberg {
+            margin: 26px 0;
+            display: grid;
+            grid-template-columns: 130px 1fr;
+            gap: 24px;
+            align-items: center;
+            padding: 16px 18px 16px 0;
+        }
+
+        .iceberg-svg {
+            width: 130px;
+            height: auto;
+            display: block;
+        }
+
+        .iceberg-line {
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px dashed var(--rule);
+        }
+
+        .iceberg-line:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .iceberg-pct {
+            display: inline-block;
+            font-family: var(--serif);
+            font-style: italic;
+            font-weight: 300;
+            color: var(--faint);
+            margin-right: 10px;
+            font-size: 1.1rem;
+            vertical-align: -1px;
+        }
+
+        .iceberg-strong {
+            font-weight: 500;
+            color: var(--ink);
+            letter-spacing: .04em;
+            text-transform: uppercase;
+            font-size: .72rem;
+        }
+
+        .iceberg-detail {
+            color: var(--mid);
+            margin-top: 4px;
+            font-size: .85rem;
+            line-height: 1.55;
+            margin-left: 36px;
+        }
+
+        @media (max-width: 480px) {
+            .iceberg {
+                grid-template-columns: 1fr;
+                gap: 18px;
+                padding: 0;
+            }
+            .iceberg-svg {
+                margin: 0 auto;
+            }
+            .iceberg-detail {
+                margin-left: 32px;
+            }
+        }
+
+        /* ── FLOW DIAGRAMS (#9) ── */
+        .flows {
+            margin: 24px 0 26px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .flow {
+            padding: 16px 20px 18px;
+            background: rgba(255, 255, 255, .4);
+            border: 1px solid var(--rule);
+            border-radius: 5px;
+        }
+
+        .flow-label {
+            font-size: .68rem;
+            font-weight: 500;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: var(--mid);
+            margin-bottom: 12px;
+        }
+
+        .flow-content {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: .9rem;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+
+        .flow-node {
+            padding: 6px 12px;
+            background: var(--bg);
+            border: 1px solid var(--rule);
+            border-radius: 4px;
+            color: var(--ink);
+            font-size: .85rem;
+        }
+
+        .flow-arrow {
+            color: var(--faint);
+            font-size: 1rem;
+        }
+
+        .flow-note {
+            font-size: .76rem;
+            color: var(--mid);
+            font-style: italic;
+            letter-spacing: .01em;
+        }
+
+        .flow-marker {
+            color: var(--red);
+            font-style: normal;
+            font-weight: 500;
+            margin-right: 4px;
+        }
+
+        /* ── ESSAY CREDIT ── */
+        .essay-credit {
+            margin-top: 56px;
+            padding-top: 24px;
+            border-top: 1px solid var(--rule);
+            font-size: .82rem;
+            color: var(--mid);
+            font-style: italic;
+            line-height: 1.7;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to content</a>
+    <div class="page">
+
+        <!-- NAV -->
+        <header>
+            <nav class="nav" aria-label="Primary">
+                <a href="index.html" class="nav-name">Rinkesh Gorasia</a>
+                <div class="nav-links">
+                    <a href="index.html">home</a>
+                    <a href="work.html">work</a>
+                    <a href="writing.html" class="active">writing</a>
+                </div>
+                <div class="nav-right">
+                    Bengaluru &nbsp;·&nbsp; <span id="nav-temp">—</span>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle menu"
+                    onclick="document.querySelector('.nav-mobile').classList.toggle('open')">
+                    <svg width="18" height="14" viewBox="0 0 18 14" fill="none">
+                        <rect y="0" width="18" height="1.5" rx=".75" fill="currentColor" />
+                        <rect y="6" width="18" height="1.5" rx=".75" fill="currentColor" />
+                        <rect y="12" width="18" height="1.5" rx=".75" fill="currentColor" />
+                    </svg>
+                </button>
+            </nav>
+            <div class="nav-mobile">
+                <a href="index.html">home</a>
+                <a href="work.html">work</a>
+                <a href="writing.html" class="active">writing</a>
+            </div>
+        </header>
+
+        <main id="main-content">
+
+            <!-- PAGE HEADER -->
+            <div class="page-header fade">
+                <h1>Field notes.<br><em>On building.</em></h1>
+                <p>A growing list of things I keep coming back to when I'm building. Some are mine, most aren't. The credits are at the bottom; the lessons are above.</p>
+            </div>
+
+            <!-- ESSAY -->
+            <article class="essay">
+
+                <!-- ── CLUSTER 1 ── -->
+                <section class="cluster fade">
+                    <p class="cluster-label">What to build, before how</p>
+                    <p class="cluster-intro">Two stages, two different jobs. Most failed products fail in the first one — and don't realize it.</p>
+
+                    <div class="entry">
+                        <h2><span class="num">1.</span> Build the right thing first; then build it right.</h2>
+                        <p>Two stages, two completely different jobs:</p>
+
+                        <div class="stages">
+                            <div class="stage">
+                                <div class="stage-title">Stage 1 — what to build</div>
+                                <ul>
+                                    <li>Anyone want this?</li>
+                                    <li>Can people use it?</li>
+                                    <li>Can we build &amp; run it?</li>
+                                </ul>
+                                <div class="stage-note"><span class="arrow">▲</span> Most products fail here, silently.</div>
+                            </div>
+                            <div class="stage">
+                                <div class="stage-title">Stage 2 — how to build it</div>
+                                <ul>
+                                    <li>Ship it well.</li>
+                                </ul>
+                                <div class="stage-note"><span class="arrow">▲</span> But everyone blames the failure on here.</div>
+                            </div>
+                        </div>
+
+                        <p>The signs you're still in stage one even though you think you're past it:</p>
+                        <ul class="signs">
+                            <li>You're still adjusting the problem to fit what you're building.</li>
+                            <li>The people who'd use this haven't seen it yet.</li>
+                            <li>You're talking to engineering about <em>how</em> before you're confident about <em>what</em>.</li>
+                        </ul>
+
+                        <p>Stage one doesn't <em>feel</em> like progress — no demo, no screenshots, just conversations and a slowly sharpening problem. So we skip it. Then a polished thing ships and turns out to solve a problem no one had.</p>
+
+                        <p>A test for which stage you're really in: when you describe what you're working on, are you describing <em>the shape of someone's day getting better</em>, or <em>the shape of the product</em>? If the second, you haven't left stage one yet.</p>
+
+                        <blockquote>The corollary: if you're spending more time in stage two than stage one, that's a signal — not a virtue.</blockquote>
+                    </div>
+                </section>
+
+                <!-- ── CLUSTER 2 ── -->
+                <section class="cluster fade">
+                    <p class="cluster-label">Where to spend the energy</p>
+                    <p class="cluster-intro">Energy is finite. The question isn't "how much can we build" — it's "where does an extra hour move the product the most."</p>
+
+                    <div class="entry">
+                        <h2><span class="num">2.</span> "Where do we suck, and where does it matter?"</h2>
+                        <p>The opportunity is at the overlap of <em>important</em> and <em>disappointing</em>:</p>
+
+                        <div class="quadrant">
+                            <div class="q-yaxis">↑ important</div>
+                            <div class="q-grid">
+                                <div class="q-cell">Don't break it</div>
+                                <div class="q-cell q-highlight">The opportunity ✓</div>
+                                <div class="q-cell">Don't bother</div>
+                                <div class="q-cell">Don't bother</div>
+                            </div>
+                            <div class="q-xaxis">
+                                <span>← working fine</span>
+                                <span>disappointing →</span>
+                            </div>
+                        </div>
+
+                        <p>The trap: bugs are loud, importance is quiet. Most teams over-fix what's loud and under-fix what's quiet but matters most.</p>
+
+                        <p>A move: rank the top 20 user complaints twice — once by frequency, once by <em>what the user actually loses if you don't fix it</em>. The two lists overlap less than anyone expects. The gap is where the real work is hiding.</p>
+
+                        <div class="callout">
+                            <div class="callout-formula">Opportunity = Importance + (Importance − Satisfaction)</div>
+                            <p>The math version of the same question. If something matters to your user <em>and</em> they're disappointed in the current solution, it's a high-opportunity space. Useful as a sanity check on your gut.</p>
+                        </div>
+                    </div>
+
+                    <div class="entry">
+                        <h2><span class="num">3.</span> Don't only ship features. Don't only ship repairs.</h2>
+                        <p><em>Mile wide, inch deep</em> — when you only chase new things.<br><em>Repair-only</em> — how a product goes invisible while you work.</p>
+                        <p>The right mix is roughly 70/30 in one direction or the other, depending on stage. The trap is treating it as identity — <em>"we're a builder team"</em> vs. <em>"we're a craft team"</em> — instead of a roadmap call to make every quarter.</p>
+                    </div>
+                </section>
+
+                <!-- ── CLUSTER 3 ── -->
+                <section class="cluster fade">
+                    <p class="cluster-label">What to chase</p>
+                    <p class="cluster-intro">Some products work because they catch a moment. Most last because they sit on top of something that doesn't change. The first is luck. The second is a choice.</p>
+
+                    <div class="entry">
+                        <h2><span class="num">4.</span> Make things people want. Not the other way around.</h2>
+                        <p>Two kinds of products: ones that catch demand that already exists, and ones that try to <em>create</em> demand for something new. The first is much, much easier.</p>
+                        <p>If you're constantly explaining why your product matters — that's a tell. The version of the product that wins doesn't need explaining.</p>
+                        <p>A test: hand someone the product cold, with no setup, and watch their first move. If they reach for it, you have the first kind of product. If they ask <em>"what's this for?"</em> — you're trying to make people want a thing.</p>
+                    </div>
+
+                    <div class="entry">
+                        <h2><span class="num">5.</span> Focus on what doesn't change.</h2>
+                        <p>Bezos: people don't ask what <em>won't</em> be different in ten years. But that's the better question.</p>
+
+                        <div class="stack">
+                            <div class="stack-layer stack-layer-top">
+                                <span>trends, fashions, hot apps</span>
+                                <span class="stack-note">→ here today, gone tomorrow</span>
+                            </div>
+                            <div class="stack-layer">
+                                <span>current behaviors</span>
+                                <span class="stack-note">→ change slowly</span>
+                            </div>
+                            <div class="stack-layer stack-layer-bottom">
+                                <span><strong>durable demand:</strong> cheap, fast, easy, reliable, status</span>
+                                <span class="stack-note">→ doesn't change. build here.</span>
+                            </div>
+                        </div>
+
+                        <p>If you bet on something that won't change, you only have to be right about <em>execution</em>. If you bet on something that will, you have to be right about <em>the future</em> and execution. Two bets are harder than one.</p>
+                    </div>
+
+                    <div class="entry">
+                        <h2><span class="num">6.</span> If a product is going to take five years of your life, the only thing that earns those years is whether it'll matter.</h2>
+                        <p><em>Trendy</em> is rarely <em>meaningful</em>. Most flavor-of-the-month builds don't survive their own hype cycle.</p>
+                        <p>A test: if this thing works exactly as you hope, will you be proud of it in ten years? If you can't honestly say yes, you're spending the years on the wrong thing.</p>
+                    </div>
+                </section>
+
+                <!-- ── CLUSTER 4 ── -->
+                <section class="cluster fade">
+                    <p class="cluster-label">Who to listen to</p>
+                    <p class="cluster-intro">Customers say a lot. Most of it is the symptom, not the disease. The job isn't to gather requests — it's to figure out what the requests are about.</p>
+
+                    <div class="entry">
+                        <h2><span class="num">7.</span> What customers ask for is never as interesting as <em>why</em>.</h2>
+                        <p>The feature request is the symptom. The <em>why</em> underneath is the actual product.</p>
+
+                        <div class="iceberg">
+                            <svg class="iceberg-svg" viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg" aria-label="Iceberg illustration">
+                                <polygon points="80,32 120,32 132,82 68,82" fill="#e5dfd6" stroke="#18160f" stroke-width="0.8"/>
+                                <line x1="6" y1="82" x2="194" y2="82" stroke="#aea79c" stroke-width="0.6" stroke-dasharray="4,3"/>
+                                <polygon points="68,82 132,82 162,170 100,222 38,170" fill="#cac4bb" opacity="0.5" stroke="#18160f" stroke-width="0.5"/>
+                            </svg>
+                            <div>
+                                <div class="iceberg-line">
+                                    <span class="iceberg-pct">10%</span><span class="iceberg-strong">The request</span>
+                                    <div class="iceberg-detail">"can you add X?"</div>
+                                </div>
+                                <div class="iceberg-line">
+                                    <span class="iceberg-pct">90%</span><span class="iceberg-strong">The why</span>
+                                    <div class="iceberg-detail">the situation, the constraint, the hassle they want to escape</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p>Build for the request and you ship a feature that misses. Build for the why and you often ship something different from what was asked — and better.</p>
+                        <p>A move: when someone asks for X, ask <em>"what would you do with X?"</em> Then ask the same question on the answer. Three layers down, you're usually at the actual problem.</p>
+                    </div>
+
+                    <div class="entry">
+                        <h2><span class="num">8.</span> If you want to charge money, don't optimize for people who try to get everything for free.</h2>
+                        <p>People on the free tier forever and people who pay you are not the same group. Their feedback is shaped by what they don't have to commit to. They'll happily ask for a feature they wouldn't pay for, or complain about a price they'd never pay anyway.</p>
+                        <p>This doesn't mean ignore them — they may convert when the product becomes a category default. But until then, their feedback shapes the wrong product.</p>
+                        <p>A move: when pricing or deciding features, weight the feedback by <em>who actually pays</em>. That's the population you're optimizing for.</p>
+                    </div>
+                </section>
+
+                <!-- ── CLUSTER 5 ── -->
+                <section class="cluster fade">
+                    <p class="cluster-label">The industry, honestly</p>
+                    <p class="cluster-intro">Two observations about the shape of this industry I keep finding useful when sizing up a market — or my own product.</p>
+
+                    <div class="entry">
+                        <h2><span class="num">9.</span> The hardest problem in B2C is distribution. The hardest problem in B2B is sales.</h2>
+                        <p>Two different jobs that look the same on the surface:</p>
+
+                        <div class="flows">
+                            <div class="flow">
+                                <div class="flow-label">B2C</div>
+                                <div class="flow-content">
+                                    <span class="flow-node">product</span>
+                                    <span class="flow-arrow">→</span>
+                                    <span class="flow-node">user</span>
+                                </div>
+                                <div class="flow-note"><span class="flow-marker">↑</span> distribution (the hard part)</div>
+                            </div>
+                            <div class="flow">
+                                <div class="flow-label">B2B</div>
+                                <div class="flow-content">
+                                    <span class="flow-node">product</span>
+                                    <span class="flow-arrow">→</span>
+                                    <span class="flow-node">buyer</span>
+                                    <span class="flow-arrow">→</span>
+                                    <span class="flow-node">user</span>
+                                </div>
+                                <div class="flow-note"><span class="flow-marker">↑</span> sales (the hard part)</div>
+                            </div>
+                        </div>
+
+                        <p>The structural difference is the whole game — in B2B there's a buyer who isn't the user, and bridging <em>product → buyer</em> is the work. In B2C the user decides for themselves, but <em>getting in front of them</em> is the work.</p>
+                        <p>If you're a builder who hates this part — pick the half whose hard part you can stomach. The other half is where most products quietly die.</p>
+                    </div>
+
+                    <div class="entry">
+                        <h2><span class="num">10.</span> Tech, mostly, does two things.</h2>
+                        <p>In <strong>B2C</strong>, the work is developing new habits in consumers — getting people to do something different than they used to.</p>
+                        <p>In <strong>B2B</strong>, the work is taking a process that exists in a hundred places and dropping the cost of running it — usually by replacing manual work with software.</p>
+                        <p>Almost everything that's worked is one of those two. If your product isn't doing one of them, ask hard whether you're building something — or just adding noise.</p>
+                    </div>
+                </section>
+
+                <p class="essay-credit">Many of these aren't original to me — paraphrased from people like Marty Cagan, Tony Fadell, Anthony Ulwick, Dan Olsen, Jeff Bezos, and Patrick McKenzie, among others I've read over the years. My versions are what stuck.</p>
+
+            </article>
+        </main>
+
+        <!-- FOOTER -->
+        <footer class="footer fade">
+            <p class="footer-cta">
+                Something here worth a conversation?<br>
+                <em>I'm easy to reach.</em> <a href="mailto:rinkeshgorasia@gmail.com">rinkeshgorasia@gmail.com</a>
+            </p>
+            <div class="footer-bottom">
+                <div class="footer-links">
+                    <a href="https://x.com/rinks__g" target="_blank" rel="noopener" aria-label="X / Twitter"
+                        class="social-icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.259 5.649 5.905-5.649zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                        </svg>
+                    </a>
+                    <a href="https://www.linkedin.com/in/rinksg/" target="_blank" rel="noopener" aria-label="LinkedIn"
+                        class="social-icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                        </svg>
+                    </a>
+                </div>
+                <span class="footer-credit">built by rinkesh · powered by claude, tokens &amp; coffee ☕</span>
+            </div>
+        </footer>
+
+    </div>
+    <script>
+        // Live temperature
+        fetch('https://api.open-meteo.com/v1/forecast?latitude=12.97&longitude=77.59&current_weather=true&temperature_unit=celsius')
+            .then(function (r) { return r.json(); })
+            .then(function (d) {
+                var el = document.getElementById('nav-temp');
+                if (el && d.current_weather) el.textContent = Math.round(d.current_weather.temperature) + '°C';
+            })
+            .catch(function () { });
+
+        // Scroll reveal
+        var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } });
+        }, { threshold: 0.05 });
+        document.querySelectorAll('.fade').forEach(function (el) { io.observe(el); });
+
+        // Mobile nav close on link click
+        document.querySelectorAll('.nav-mobile a').forEach(function (a) {
+            a.addEventListener('click', function () { document.querySelector('.nav-mobile').classList.remove('open'); });
+        });
+    </script>
+</body>
+
+</html>
