@@ -25,9 +25,20 @@ Four living docs, all in [`docs/`](docs/), are the brain of this project:
 3. Grep [`docs/inspirations.md`](docs/inspirations.md) for the same tag. Use what's there as concrete reference, not just "for inspiration."
 
 **While designing:**
-- Voice should match the site's voice (plainspoken, concrete, unembarrassed about failure). Surface-specific rules in [`docs/writingstyle.md`](docs/writingstyle.md). The AI-voice anti-patterns section is mandatory reading before writing any copy.
+- Voice should match the site's voice (plainspoken, concrete, unembarrassed about failure). Surface-specific rules in [`docs/writingstyle.md`](docs/writingstyle.md). The AI-voice anti-patterns and Pinned anti-patterns sections are mandatory reading before writing any copy.
 - Design should respect the non-negotiables: warm cream background, Fraunces + Inter, 600px content column, light mode locked, no popups/modals/newsletter capture.
 - Restraint over flourish. If a feature needs a tutorial in the footer to be appreciated, it doesn't belong.
+
+**Before committing any prose change (mandatory):**
+Run the audit script and address every flag:
+
+```bash
+./scripts/audit-prose.sh
+```
+
+This greps the live prose surfaces (`writing.html`, `field-notes.html`, `feature-usage.html`) for every AI pattern Rinkesh has flagged in past sessions. **Do not commit prose without running it.** If a flag is a genuine false positive, exercise judgment and note why in the commit message.
+
+Whenever Rinkesh flags a NEW pattern, add it to BOTH [`docs/writingstyle.md`](docs/writingstyle.md#pinned-anti-patterns-from-past-feedback) and the regex list in [`scripts/audit-prose.sh`](scripts/audit-prose.sh). The guardrail tightens over time.
 
 **When Rinkesh gives a draft:**
 Follow the iteration protocol in [`docs/writingstyle.md`](docs/writingstyle.md#the-iteration-protocol--when-rinkesh-gives-a-draft). Do **not** rewrite from scratch. The draft is the anchor. Make surgical proposals (cut these words / this drifts AI / here are 2–3 ways to phrase this). When a sentence has multiple good shapes, offer 2–3 options — never silently pick one.

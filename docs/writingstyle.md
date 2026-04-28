@@ -311,6 +311,76 @@ Lines that would read fine on first pass but fail on second. Don't write these h
 
 ---
 
+## Pinned anti-patterns (from past feedback)
+
+These are patterns Rinkesh has explicitly flagged as AI voice across past sessions. Banned. Any prose draft must be checked against this list before commit. New entries get added here whenever Rinkesh flags one — and to [`scripts/audit-prose.sh`](../scripts/audit-prose.sh) at the same time, so the guardrail tightens over time.
+
+### Mirror constructions
+- **Pattern:** "X is Y, Z is W" with parallel rhythm.
+- **Examples flagged:** *"bugs are loud, importance is quiet"* / *"the request is the symptom, the why is the product"* / *"In B2C, ... In B2B, ..."* (when both halves carry the same shape).
+- **Why it sounds AI:** the parallel construction is doing rhythm, not information. AI prose loves this; people don't talk this way.
+- **Fix:** rewrite without the mirror. Or pick one half — the other is usually padding.
+
+### Triplet rhythm padding
+- **Pattern:** "no X, no Y, just Z" or any forced three-list where the items aren't doing distinct work.
+- **Example flagged:** *"no demo, no screenshots, just conversations and a slowly sharpening problem."*
+- **Why:** AI reaches for three because three has rhythm.
+- **Fix:** if the items aren't distinct, cut to one or two. Or split into separate sentences.
+
+### Aphoristic punchlines and blockquotes
+- **Pattern:** a short, polished closing line meant to "land." Often a `<blockquote>`.
+- **Examples flagged:** *"that's a signal, not a virtue"* / *"the roadmap is the diagnosis"* / *"trendy is rarely meaningful."*
+- **Why:** sounds like an essayist trying to be quotable, not a person talking.
+- **Fix:** drop. The substance already made the point. If you can't drop without losing meaning, the substance was thin.
+
+### Italic essay flourishes
+- **Pattern:** italic phrases used for emphasis on abstract claims (`<em>X</em> is rarely <em>Y</em>`).
+- **Example flagged:** *"<em>Trendy</em> is rarely <em>meaningful</em>."*
+- **Why:** italic on abstract concepts reads as decorative essay-writing.
+- **Fix:** save italic for *warmth* (*"just say hi"*, *"let's talk"*) and quoted phrases. Not for emphasis on ideas.
+
+### Essayist connectives
+- **Pattern:** *"Worse:"*, *"There's a second X worth naming"*, *"Note also:"*, *"Notably,"*.
+- **Examples flagged:** *"Worse: if your product has unfixed problems..."* / *"There's a second asymmetry worth naming."*
+- **Why:** essayist trying to add gravitas to the next sentence.
+- **Fix:** use a casual link. *"And here's the worse version."* / *"One more thing on that."*
+
+### Mirror cluster intros
+- **Pattern:** *"Two X, two Y."* / *"X. Y. The job isn't Z. It's W."*
+- **Examples flagged:** *"Two stages, two different jobs."* / *"Customers say a lot. Most of it is the symptom, not the disease. The job isn't to gather requests. It's to figure out what the requests are about."*
+- **Why:** mirror rhythm without information work.
+- **Fix:** rewrite as a single conversational sentence.
+
+### Hedging filler ("actually", "really", "essentially")
+- **Pattern:** these words used as emphasis on already-clear sentences.
+- **Why:** AI prose loves them; people use them sparingly.
+- **Fix:** cut by default. Keep only where the word is doing real contrast work (*"what tech actually does"* — emphasis on contrast — keep; *"actually run through"* — filler — cut).
+
+### Em dashes (already banned)
+See universal rule #13. The audit script catches em dashes in prose; CSS section dividers are excluded.
+
+---
+
+## Audit before commit (mandatory)
+
+Before committing any prose change, run:
+
+```bash
+./scripts/audit-prose.sh
+```
+
+(or pass specific files as arguments). The script flags every known AI pattern with line numbers.
+
+**Address each flag.** If a flag is a genuine false positive, exercise judgment and note why in the commit message — so future sessions don't get confused.
+
+If a NEW pattern shows up that the script doesn't catch, add it to BOTH:
+- This section above (with example, why, fix)
+- The regex list in `scripts/audit-prose.sh`
+
+The guardrail tightens with every flagged pattern.
+
+---
+
 ## When this doc disagrees with itself
 
 A real edit will surface a tension between rules. When it does:

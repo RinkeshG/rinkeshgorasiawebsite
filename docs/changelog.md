@@ -25,6 +25,18 @@ Anchor reference: [`docs/about.md`](about.md). If a change contradicts the ancho
 
 Reverse-chronological. Most recent first.
 
+### 2026-04-28 — Install AI-voice guardrails (audit script + pinned anti-patterns)
+
+- **What changed:**
+  - **New script:** [`scripts/audit-prose.sh`](../scripts/audit-prose.sh). Greps the live prose surfaces for every AI pattern flagged in past sessions: em dashes, forbidden words, hedging filler, transition crutches, throat-clearing, aphoristic blockquotes, *"Worse:"* connectives, *"worth naming"* essay flourishes, mirror constructions, mirror cluster intros, italic essay flourishes, triplet rhythm padding. Outputs file + line for each match.
+  - **Pinned anti-patterns section** added to [`docs/writingstyle.md`](writingstyle.md#pinned-anti-patterns-from-past-feedback). Every pattern Rinkesh has explicitly flagged is documented with example, why, and fix. Banned by reference.
+  - **Mandatory audit step** added to [`CLAUDE.md`](../CLAUDE.md). No prose commit ships without running the audit and addressing the flags.
+  - **Audit ran clean** on this commit except for seven deliberate uses of *"actually"* doing emphasis/contrast work (e.g., *"who's actually paying"*, *"what tech actually does"*) — judged legit and kept.
+  - **Cluster intro fixes** found by the audit: *"Two stages, two completely different jobs"* → *"The two stages do different work"*; several filler *"actually"* / *"really"* uses cut.
+- **Why:** Rinkesh has flagged AI patterns four times in this session. Rules in prose aren't enough — needed a mechanical guardrail. The script catches what discipline misses. Pinned anti-patterns list grows with every new flag, so the guardrail tightens over time.
+- **How to use:** before any prose commit, run `./scripts/audit-prose.sh`. Address each flag. False positives get acknowledged in the commit message. New patterns get added to BOTH the script's regex list and the writingstyle.md pinned list.
+- **Tags:** `#guardrails` `#audit` `#voice` `#tooling`
+
 ### 2026-04-28 — Voice rewrite on both essays: cut AI patterns
 
 - **What changed:** ruthless audit of `field-notes.html` and `feature-usage.html` for AI-flavored writing patterns. Specifically rewrote:
