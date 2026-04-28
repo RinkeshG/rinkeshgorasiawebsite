@@ -25,6 +25,19 @@ Anchor reference: [`docs/about.md`](about.md). If a change contradicts the ancho
 
 Reverse-chronological. Most recent first.
 
+### 2026-04-28 — Voice rewrite on both essays: cut AI patterns
+
+- **What changed:** ruthless audit of `field-notes.html` and `feature-usage.html` for AI-flavored writing patterns. Specifically rewrote:
+  - **Mirror constructions:** *"bugs are loud, importance is quiet"* / *"X is symptom, Y is product"* / *"In B2C…, In B2B…"* — replaced with prose that doesn't lean on parallel rhythm.
+  - **Triplets used as rhythm padding:** *"no demo, no screenshots, just conversations and a slowly sharpening problem"* — broken up.
+  - **Aphoristic punchlines and blockquotes:** *"that's a signal, not a virtue"* / *"the roadmap is the diagnosis"* — removed or rewritten as plain sentences.
+  - **Italic essay flourishes:** *"trendy is rarely meaningful"* — dropped.
+  - **"Worse:" / "There's a second asymmetry worth naming"** — replaced with conversational connectives.
+  - **Cluster intros that mirror-rhymed** — rewritten in plain prose. *"Two stages, two different jobs"* → *"There are two stages to building, and they're not the same job."*
+- **Why:** Rinkesh flagged specific lines (the highlighted "no demo, no screenshots…" passage and the "bugs are loud, importance is quiet" line) as unmistakably AI in voice. The whole essay was leaning on the same patterns. The fix is less polished, more conversational, more "person talking" than "essay writing."
+- **Companion update:** `writingstyle.md` already names mirror-rhythm and aphoristic punchlines as AI tells. Reinforced by this rewrite.
+- **Tags:** `#voice` `#ai-tells` `#rewrite` `#field-notes` `#feature-usage`
+
 ### 2026-04-28 — `feature-usage.html` shipped (second on-site essay)
 
 - **What changed:** new page `feature-usage.html` — second on-site essay. Title: *"Why your feature isn't getting used. Four problems, in the order you should fix them."* Linked from writing.html as the most recent post (2026), pushing field-notes to second.

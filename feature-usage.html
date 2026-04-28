@@ -597,7 +597,7 @@
             <!-- PAGE HEADER -->
             <div class="page-header fade">
                 <h1>Why your feature isn't getting used.<br><em>Four problems, in the order you should fix them.</em></h1>
-                <p>A feature that isn't being used has one of four problems. Misdiagnose the level and you'll spend ten times what the fix needs.</p>
+                <p>When a feature isn't getting used, there's usually one of four reasons. Figuring out which one is most of the work. Pick wrong and you'll spend a quarter on something that needed a tooltip.</p>
             </div>
 
             <!-- ESSAY -->
@@ -606,7 +606,7 @@
                 <!-- ── THE FUNNEL ── -->
                 <section class="cluster fade">
                     <p class="cluster-label">The funnel</p>
-                    <p>Every user passes four checkpoints before they actually use a feature. A drop at any one of them is a different kind of problem.</p>
+                    <p>Before someone actually uses a feature, there's a sequence they go through. Something can break at any of four points along the way. Each break is a different problem.</p>
 
                     <div class="cascade" aria-label="Diagnostic cascade">
                         <div class="cascade-stage">all users</div>
@@ -645,30 +645,30 @@
                 <section class="cluster fade">
                     <p class="cluster-label">The four, in plain terms</p>
                     <ol class="numbered-list">
-                        <li><strong>Discovery.</strong> Users don't know the feature exists. Or it isn't the first thing they think of when they need its category.</li>
-                        <li><strong>Use case.</strong> Users know it exists, but can't think of when they'd use it.</li>
-                        <li><strong>Quality.</strong> Users tried it. The feature is worse than the alternative, or doesn't do the job they hired the product for.</li>
-                        <li><strong>Missing pieces.</strong> Your product has X. A competitor has X + Y. Users haven't found a reason to switch yet.</li>
+                        <li><strong>Discovery.</strong> They don't know the feature exists. Or they know but it's not what comes to mind first when they need that kind of thing.</li>
+                        <li><strong>Use case.</strong> They know it exists, but they don't have a clear sense of when they'd reach for it.</li>
+                        <li><strong>Quality.</strong> They tried it once. Either it didn't work as well as what they were already using, or it didn't actually do what they came to your product for.</li>
+                        <li><strong>Missing pieces.</strong> You have something. A competitor has more. People haven't seen enough reason to leave the competitor and come over.</li>
                     </ol>
                 </section>
 
                 <!-- ── HOW TO TELL ── -->
                 <section class="cluster fade">
                     <p class="cluster-label">How to tell which one</p>
-                    <p>Customer interviews and surveys for all four. Beyond that, one specific signal per type:</p>
+                    <p>All four show up in customer interviews and surveys if you actually talk to people. Beyond that, each one has its own signal:</p>
                     <ol class="numbered-list numbered-list--compact">
                         <li><strong>Discovery.</strong> Users using the feature ÷ users who land on its screen.</li>
                         <li><strong>Use case.</strong> Users using the feature ÷ users who <em>know</em> it exists.</li>
                         <li><strong>Quality.</strong> Satisfaction scores. Support tickets named to that feature.</li>
                         <li><strong>Missing pieces.</strong> Competitors named by users in interviews.</li>
                     </ol>
-                    <p>If you don't know which type your problem is, run them in order. The first one that fails is your problem.</p>
+                    <p>If you're not sure which one you're dealing with, just run through them in order. Whichever one fails first is your answer.</p>
                 </section>
 
                 <!-- ── COST COMPOUNDS ── -->
                 <section class="cluster fade">
                     <p class="cluster-label">Why the order matters: cost compounds upward</p>
-                    <p>Each level costs roughly ten times the one below.</p>
+                    <p>Each level costs about ten times what fixing the level below it costs.</p>
 
                     <div class="stairs" aria-label="Cost staircase">
                         <div class="stairs-step stairs-step-4">
@@ -698,14 +698,14 @@
                         <div class="stairs-foot">↑ start fixes here. work upward.</div>
                     </div>
 
-                    <p>A discovery fix is a tooltip, a copy change, a navigation tweak. Days of work. A missing-pieces fix is a new feature, plus the discovery, use-case, and quality work that comes with it. Months to quarters.</p>
-                    <p>If your real problem is #1 and you fix at #4, you've spent quarter-scale effort on a problem that needed days.</p>
+                    <p>Fixing discovery is usually a few days of work. Some copy, a tooltip, a different place in the nav. Building a missing feature, on the other hand, takes a quarter or longer, and the new feature also needs its own discovery, use case, and quality work after it ships.</p>
+                    <p>If the real issue is at #1 and you go after it as a #4, you've put a quarter into something that wanted three days.</p>
                 </section>
 
                 <!-- ── COMPOUND TRAP ── -->
                 <section class="cluster fade">
                     <p class="cluster-label">The compound trap</p>
-                    <p>Worse: if your product has unfixed problems at #1, #2, and #3, the new #4 feature inherits all of them on day one.</p>
+                    <p>And here's the worse version. If you've got #1, #2, and #3 problems still sitting around, your new #4 feature is going to walk into all of them on day one.</p>
 
                     <div class="pyramid" aria-label="Compound trap pyramid">
                         <svg viewBox="0 0 480 280" xmlns="http://www.w3.org/2000/svg" class="pyramid-svg">
@@ -741,46 +741,45 @@
                         <p class="pyramid-caption">what <em>"just build the feature"</em> actually ships</p>
                     </div>
 
-                    <p>Adding code does not fix discovery, use case, or quality. It just gives those problems a bigger surface area to live on.</p>
+                    <p>More code doesn't fix the lower problems. It just gives them more places to show up.</p>
                 </section>
 
                 <!-- ── FOUND VS PAID GROWTH ── -->
                 <section class="cluster fade">
-                    <p class="cluster-label">Found growth vs. paid growth</p>
-                    <p>There's a second asymmetry worth naming. Fixing #1, #2, or #3 <em>finds</em> users you already have. They're in the product. They just need to reach the feature, learn it, or have it work better. Distribution is free.</p>
-                    <p>Fixing #4 means you have to <em>acquire</em> users to come use the new thing. Distribution is paid.</p>
-                    <p>The lower three levels are free growth. The top level is paid growth. Most teams treat them as the same kind of work. They aren't.</p>
+                    <p class="cluster-label">There's also a growth thing</p>
+                    <p>One more reason the order matters. With levels 1, 2, and 3, you're working with people who are already in your product. They're already there. You just need to get them to the feature, or help them figure out it's for them, or make it work better.</p>
+                    <p>With #4, the people who'll use the new thing aren't there yet. So before any of them touch it, you have to spend money getting them in.</p>
+                    <p>Most teams don't think of those as different kinds of work. They are.</p>
                 </section>
 
                 <!-- ── WHY TEAMS JUMP ── -->
                 <section class="cluster fade">
                     <p class="cluster-label">Why teams jump to #4 anyway</p>
-                    <p>The reasons are structural, not stupid:</p>
+                    <p>None of these are bad reasons, the incentives just point that way:</p>
                     <ul class="dot-list">
-                        <li>Building new feels like progress. Tooltips don't show up in demos.</li>
-                        <li>Engineering wants to write code, not edit copy.</li>
-                        <li>Investors and execs are calmer when they see new features on the roadmap.</li>
-                        <li>The team was hired to build, so building feels like the job.</li>
+                        <li>Building something new feels like progress. A copy change in a tooltip doesn't show up in a demo.</li>
+                        <li>Engineering would rather write code than edit copy.</li>
+                        <li>Investors and execs see a roadmap with new features and feel like things are happening.</li>
+                        <li>The team was hired to build things. So they build.</li>
                     </ul>
-                    <p>The framework's job is to slow that reflex down for fifteen minutes. Run #1, #2, #3 before you commit a quarter to #4.</p>
+                    <p>What this is supposed to do is slow that reflex down for a few minutes. Long enough to actually run through #1, #2, and #3 before committing a quarter to #4.</p>
                 </section>
 
                 <!-- ── HOW TO USE ── -->
                 <section class="cluster fade">
                     <p class="cluster-label">How to use this</p>
-                    <p>Three moves that work:</p>
+                    <p>Three things that work in practice:</p>
                     <ol class="numbered-list">
-                        <li><strong>Audit your underused features.</strong> Pick the three lowest-usage features in the product. Walk each through the four levels. Most will land at #1 or #2.</li>
-                        <li><strong>Reserve at least 30% of roadmap capacity for the bottom three levels.</strong> If 100% of your roadmap is "build new things," your team is shipping waste.</li>
-                        <li><strong>Make the diagnosis the first deliverable in a feature kickoff.</strong> Before scoping, the PM declares which level the feature is solving. If it's a #4 fix, the PM also declares what #1, #2, #3 work is queued for the new feature itself.</li>
+                        <li><strong>Look at your underused features.</strong> Pick three of them in your product. Walk each one through these four levels. You'll find most of them are sitting at #1 or #2.</li>
+                        <li><strong>Reserve at least a third of your roadmap for fixes at the bottom three levels.</strong> If everything you ship is new, a lot of it is going to be wasted.</li>
+                        <li><strong>Make the level the first thing on a feature kickoff.</strong> Before scoping, before tickets, the PM has to say which of the four it is. And if it's a #4, the PM also has to say what's planned to handle the #1, #2, and #3 work the feature itself is going to need.</li>
                     </ol>
                 </section>
 
                 <!-- ── ROADMAP DIAGNOSTIC ── -->
                 <section class="cluster fade">
                     <p class="cluster-label">The roadmap diagnostic</p>
-                    <p>Sample your last quarter. Tag each shipped thing as level 1, 2, 3, or 4. If 70% is level 4, the team is in the trap.</p>
-                    <blockquote>The roadmap is the diagnosis.</blockquote>
+                    <p>Look at what you shipped last quarter. Tag every item as 1, 2, 3, or 4. If most of it is level 4, you're in the trap. What you ship is the most honest answer to where your team's actually spending its time.</p>
                 </section>
 
             </article>
