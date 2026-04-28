@@ -407,6 +407,84 @@ body::after {
     background-size: 256px 256px;
 }
 
+/* ── ESSAY/WRITING FOOTER (subtle variant for read-pages) ── */
+.essay-footer {
+    padding: 56px 0 50px;
+    border-top: 1px solid var(--rule);
+}
+
+.essay-footer-back {
+    margin-bottom: 30px;
+}
+
+.essay-footer-back a {
+    font-size: .82rem;
+    color: var(--mid);
+    text-decoration: none;
+    transition: color .15s, transform .15s;
+    display: inline-block;
+}
+
+.essay-footer-back a:hover {
+    color: var(--ink);
+    transform: translateX(-3px);
+}
+
+.essay-footer-contact {
+    font-size: .88rem;
+    color: var(--mid);
+    line-height: 1.7;
+    margin-bottom: 28px;
+}
+
+.essay-footer-contact a {
+    color: var(--ink);
+    text-decoration: underline;
+    text-decoration-color: var(--faint);
+    text-underline-offset: 3px;
+    transition: color .2s, text-decoration-color .2s;
+}
+
+.essay-footer-contact a:hover {
+    color: var(--red);
+    text-decoration-color: var(--red);
+}
+
+.essay-footer .footer-bottom {
+    border-top: 1px solid var(--rule);
+    padding-top: 18px;
+}
+
+/* ── WRITING-LIST NOTE (subtle "more coming" line) ── */
+.writing-note {
+    font-size: .82rem;
+    color: var(--mid);
+    font-style: italic;
+    margin-top: 28px;
+    line-height: 1.6;
+}
+
+/* ── PENDING POST (essay listed but not yet published) ── */
+.post-item-pending {
+    opacity: .6;
+}
+
+.post-item-pending .post-title {
+    color: var(--mid);
+}
+
+.post-item-pending .post-sub {
+    color: var(--faint);
+}
+
+.post-item-pending .post-date {
+    font-style: italic;
+    color: var(--faint);
+    font-size: .7rem;
+    letter-spacing: .04em;
+    text-transform: lowercase;
+}
+
 /* ── RESPONSIVE SHARED ── */
 @media (max-width: 600px) {
     .page-header h1 {
@@ -421,5 +499,9 @@ body::after {
         flex-direction: column;
         align-items: flex-start;
         gap: 12px;
+    }
+
+    .essay-footer-contact {
+        font-size: .85rem;
     }
 }

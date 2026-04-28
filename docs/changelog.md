@@ -25,6 +25,25 @@ Anchor reference: [`docs/about.md`](about.md). If a change contradicts the ancho
 
 Reverse-chronological. Most recent first.
 
+### 2026-04-28 — Refine essay + writing.html: subtler footers, retitle, drop intro line, trim list
+
+- **What changed:**
+  - **Field notes essay retitled.** From *"Field notes — On building"* to *"On building products — Things I keep coming back to"*. Reason: "Field notes" is journalist/researcher jargon many visitors don't know; the new title says what's inside.
+  - **Dropped the intro meta-line** *"Some are mine, most aren't. The credits are at the bottom; the lessons are above."* Felt like talking about the page; the page should just be the page. Credits stay at the bottom — readers find them.
+  - **Replaced the big-CTA footer on field-notes and writing.html.** New shape: hairline rule + `← back to writing` link (essay only) + plain contact line (`email · @rinks__g · LinkedIn`) + credit. Big serif *"Something here worth a conversation?"* removed from these two pages.
+  - **Trimmed writing.html essay list** to two: field-notes (live) and Career Leap (`soon`, dimmed and unlinked instead of bouncing to Twitter).
+  - **Removed the Twitter CTA** *("Most of what's in my head ends up on Twitter first… Follow on X →")* from writing.html. Replaced with one quiet italic line: *"More as the list earns it."*
+  - **Page header sub-copy** on writing.html no longer points at Twitter. Now: *"Where the longer pieces live. Posted when something earns the long form."*
+  - **`writing.html` un-noindexed.** Now that it has a real essay, it's `index, follow`.
+- **Why:** Rinkesh's call after seeing the essay live — the big CTA was shouting after a contemplative read, "Field notes" wasn't conveying content, and writing.html was bouncing visitors to Twitter (which contradicts the "no Twitter redirect long-term" decision in [`about.md`](about.md#information-architecture)).
+- **Alternatives considered:**
+  - Footer Option B (signature: *"— rinkesh, bengaluru"*) — not picked; user wanted clean over signed.
+  - Footer Option C (closing line *"more as more sticks"* with email below) — rejected; the closing line read as a CTA in disguise.
+  - Keeping the "If something landed — for or against — write back" sign-off — explicitly rejected as mechanical.
+  - Hard-removing the Career Leap entry until it's written — rejected; user wanted it visible as a planned piece. Solved with `post-item-pending` styling.
+- **Scope:** Subtle footer applies to *read* pages (field-notes, writing). Landing pages (home, work, how-i-work) keep the bigger CTA — they're meant to convert visitors into conversations. Different page types, different footers.
+- **Tags:** `#footer` `#field-notes` `#writing` `#twitter-redirect` `#voice`
+
 ### 2026-04-28 — `field-notes.html` shipped (first on-site essay)
 - **What changed:** new page `field-notes.html` — first real essay on the site. 10 numbered observations on building, grouped into 5 clusters (what to build before how / where to spend energy / what to chase / who to listen to / the industry honestly). Five visual diagrams: two-stage split (#1), 2×2 opportunity quadrant (#2), foundation stack for durable demand (#5), iceberg SVG for request-vs-why (#7), B2C/B2B flow comparison (#9). Linked from writing.html as the most recent post (2026).
 - **Why:** writing.html was previously redirecting to Twitter for all essays; this is the first piece that actually lives on the site. Sets the publishing pattern for future essays.
