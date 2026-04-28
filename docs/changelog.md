@@ -25,6 +25,14 @@ Anchor reference: [`docs/about.md`](about.md). If a change contradicts the ancho
 
 Reverse-chronological. Most recent first.
 
+### 2026-04-28 — Inline styles.css into writing.html and field-notes.html (preview rendering)
+
+- **What changed:** added an inline `<style>` block to `writing.html` and `field-notes.html` mirroring the contents of `styles.css`. Kept the `<link rel="stylesheet" href="styles.css">` so production still loads the external file (cache-friendly).
+- **Why:** local sandboxed previews (the Launch panel) can't load subresources via `file://`, so the page rendered with browser defaults — blue links, no layout, broken visuals. Inlining lets the preview render without a server. Production is unchanged.
+- **Trade-off:** shared style changes now have to be made in both `styles.css` AND the inline block of each affected HTML page. `styles.css` stays the canonical source. If this maintenance becomes painful, switch to a small build step or pick one source-of-truth.
+- **Scope:** read pages we're actively iterating on (`writing.html`, `field-notes.html`). Other pages (`index.html`, `work.html`, `how-i-work.html`, `cv.html`) still rely on the external link. Inline them too if preview-iteration on those becomes important.
+- **Tags:** `#preview` `#styles` `#dx`
+
 ### 2026-04-28 — Em dashes banned site-wide; "Say hi." footer note; trim writing-note
 
 - **What changed:**
