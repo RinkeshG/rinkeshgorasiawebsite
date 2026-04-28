@@ -430,6 +430,20 @@ body::after {
     transform: translateX(-3px);
 }
 
+.essay-footer-hello {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: 1.05rem;
+    line-height: 1.3;
+    letter-spacing: -.012em;
+    color: var(--ink);
+    margin-bottom: 8px;
+}
+
+.essay-footer-hello em {
+    font-style: italic;
+}
+
 .essay-footer-contact {
     font-size: .88rem;
     color: var(--mid);
@@ -453,15 +467,6 @@ body::after {
 .essay-footer .footer-bottom {
     border-top: 1px solid var(--rule);
     padding-top: 18px;
-}
-
-/* ── WRITING-LIST NOTE (subtle "more coming" line) ── */
-.writing-note {
-    font-size: .82rem;
-    color: var(--mid);
-    font-style: italic;
-    margin-top: 28px;
-    line-height: 1.6;
 }
 
 /* ── PENDING POST (essay listed but not yet published) ── */

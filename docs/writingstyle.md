@@ -35,9 +35,10 @@ These apply to every word on the site, regardless of surface.
 7. **Cut every sentence twice.** Read each draft and ask *"what gets removed without loss?"* Cut. Then ask again.
 8. **Story before principle.** A specific moment ("the third person I showed it to said *I just use Doppler*") earns the right to a general claim. Never the reverse.
 9. **Periods over commas.** Short sentences land. Long sentences drift.
-10. **Italic for warmth, not decoration.** Save it for lines that mean something personally — *"just say hi"*, *"let's talk"*. Don't sprinkle.
+10. **Italic for warmth, not decoration.** Save it for lines that mean something personally (*"just say hi"*, *"let's talk"*). Don't sprinkle.
 11. **First person, present tense.** "I shut down Career Leap." Not "Career Leap was shut down."
 12. **Trust the reader.** Skip the obvious. They followed the link; they're paying attention.
+13. **No em dashes (`—`). Ever.** Hard rule. Replace with a period (for a hard pause), a comma (for a parenthetical or soft pause), a colon (for an introduction or list), or a middle dot `·` (for a divider in a label). The em dash is a tell of AI prose; we don't ship it. This applies to the body text, headings, alt text, meta tags, titles, and any UI string. The only acceptable dashes on the site are hyphens in compound words (`high-pressure`) and the en dash inside numerical ranges if needed.
 
 ---
 
@@ -95,10 +96,10 @@ If you covered it, you covered it. Stop when the last point lands. No *"In summa
 
 ### Sentence-rhythm tells
 
-Real prose has rhythm — short, long, short, very short — driven by what each sentence is doing. AI prose has metronome rhythm. Tells:
+Real prose has rhythm (short, long, short, very short) driven by what each sentence is doing. AI prose has metronome rhythm. Tells:
 
 - All sentences the same length.
-- Em dashes everywhere with no purpose.
+- **Em dashes anywhere.** See universal rule #13. Hard ban. Replace with period, comma, colon, or middle dot `·` per context.
 - Every other sentence in passive voice.
 - Lists when prose would do.
 - Every paragraph the same shape.

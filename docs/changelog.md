@@ -25,6 +25,18 @@ Anchor reference: [`docs/about.md`](about.md). If a change contradicts the ancho
 
 Reverse-chronological. Most recent first.
 
+### 2026-04-28 — Em dashes banned site-wide; "Say hi." footer note; trim writing-note
+
+- **What changed:**
+  - **All em dashes (`—`) removed** from `field-notes.html` and `writing.html`. Replaced contextually with periods, commas, colons, or `·`. Title-tag separators changed from ` — ` to ` | `.
+  - **`Say hi.`** italic line added above the contact line on both essay and writing-page footers.
+  - **Removed** the *"More as the list earns it."* line from writing.html (and the `.writing-note` style from styles.css). Felt like padding.
+  - **Hard rule added to [`writingstyle.md`](writingstyle.md#universal-rules)** as universal rule #13: no em dashes ever, in body text, headings, alt text, meta tags, titles, or any UI string. Replace with period, comma, colon, or `·` per context.
+  - Fixed inline CSS: bullet for `.entry ul.signs li::before` was `—`, now `·`.
+  - The nav-temp loading placeholder went from `—` to empty `<span></span>` (JS still fills it in when temp loads).
+- **Why:** em dashes are a tell of AI prose. Even when each one had purpose, the *cumulative density* read as machine-generated. Going to a hard ban is simpler than judging case by case.
+- **Tags:** `#voice` `#em-dash` `#footer` `#say-hi`
+
 ### 2026-04-28 — Refine essay + writing.html: subtler footers, retitle, drop intro line, trim list
 
 - **What changed:**
