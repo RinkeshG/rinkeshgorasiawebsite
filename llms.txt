@@ -1,25 +1,28 @@
 # Rinkesh Gorasia
 
-> Product builder and two-time founder based in Bengaluru, India. Built Savior (healthcare ops platform, acquired by Zocdoc) and Career Leap (EdTech, shut down 2023). Currently building KnowYourPay, Product Sense Lab, and Twittr Gems while looking for the next thing.
+> Two-time founder based in Bengaluru, India. Built Savior (healthcare ops platform, acquired by Zocdoc) and Career Leap (EdTech, which he shut down himself). Spent two years at Accel India leading the Accel Atoms pre-seed program, backing early-stage founders. Now looking for an early-stage product or founding (0 to 1) role, and building heavily with AI.
 
-Rinkesh is a product and growth generalist who has worked end-to-end across founding, building, selling, and shipping. He focuses on going deep on a single problem and shipping fast. He's currently open to new opportunities — product and growth roles where he can take ownership end-to-end.
+Rinkesh is a 0-to-1 product person who has both built (two companies) and evaluated (hundreds of founders at Accel) early-stage products. He goes deep on the real problem, ships fast, and knows when to stop. He builds with Claude daily and treats AI as leverage on judgment, not a replacement for it.
 
 ## Pages
 
-- [Home](https://rinkeshgorasia.com/): Intro, current availability, and a snapshot of work
-- [Work](https://rinkeshgorasia.com/work.html): Full work history — companies founded, side projects shipped, and the experiments that didn't make it
-- [How I Work](https://rinkeshgorasia.com/how-i-work.html): Process, principles, and how a product goes from napkin to shipped
+- [Home](https://rinkeshgorasia.com/): Intro, what he's looking for, and a snapshot of the work
+- [Work](https://rinkeshgorasia.com/work.html): The longer version, companies founded, two years at Accel, side projects, and the ones that didn't make it
+- [Writing](https://rinkeshgorasia.com/writing.html): Notes on building, knowing when to stop, and working with AI
+- [How I build with Claude](https://rinkeshgorasia.com/claude.html): A playable Claude Code session showing how he actually uses AI to build
+- [Coffee](https://rinkeshgorasia.com/coffee.html): His favourite coffee places in Bengaluru
 
-## Companies
+## Experience
 
-- **Savior** (2017–2020): Healthcare operations and preventive-care software for hospitals. Built OPD management, patient follow-up systems, and admin dashboards. Onboarded 30+ hospitals. Acquired by Zocdoc.
-- **Career Leap** (2021–2023): EdTech platform for career transitions. Grew to 10K users in 6 months, hit 40% completion rate (vs industry 5-10%), generated ₹15L in revenue. Shut down when CAC outpaced LTV.
+- **Accel India** (2023-2025): Led Accel Atoms, Accel's pre-seed program for 0-to-1 founders. Ran it end to end across four cohorts and two tracks (AI and LeapTech), from choosing founders to taking them from a rough idea to their first cheque.
+- **Savior** (2017-2020): Healthcare operations and preventive-care software. Grew to 85+ hospitals and roughly $1M ARR. Sold it, onboarded the first 30 clients himself, ran a team of 8. Acquired by Zocdoc.
+- **Career Leap** (2020-2023): EdTech for career transitions. Reached 10K users in six months, hit 40% completion on live cohorts (industry average 5-10%), generated about Rs 15L in revenue. He shut it down when growth got too expensive to keep going.
 
-## Currently Building
+## Currently Building (with AI)
 
-- **KnowYourPay** (Live): Salary transparency tool for Indian tech. Filter by role, city, YOE, company tier. 10K+ visits, 850+ reports generated. https://knowyourpay.vercel.app
-- **Product Sense Lab** (In beta): Daily product sense questions with AI-powered feedback. https://www.productsenselab.com
-- **Twittr Gems** (Live): 500+ best Twitter threads across 25+ categories. #1 Product of the Day on Product Hunt, 10K+ users in first week.
+- **KnowYourPay** (Live): Salary-transparency tool for Indian tech. Filter by role, city, and experience. 10K+ visits, 850+ reports generated. https://knowyourpay.vercel.app
+- **Product Sense Lab** (In beta): Daily product-sense questions with AI feedback. https://www.productsenselab.com
+- **Sniff** and **Vouch**: smaller experiments in progress.
 
 ## Contact
 
@@ -29,4 +32,4 @@ Rinkesh is a product and growth generalist who has worked end-to-end across foun
 
 ## Looking For
 
-Currently looking for the next thing. Specifically: product and growth roles, end-to-end ownership, at a team where he can go deep. Open to founding-team and senior IC positions.
+An early-stage product or founding-team / 0-to-1 role. He is best before there is a playbook: finding the real problem, shipping the first version, and using AI to move fast. Location is flexible.

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>How I build with Claude · Rinkesh Gorasia</title>
+<meta name="description" content="A playable Claude Code session: how I actually build with AI." />
+<meta property="og:title" content="How I build with Claude" />
+<meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F0EDE4; --ink:#2b2722;
+    --term:#211e1a; --termbar:#2b2823; --line:#39342c;
+    --txt:#e9e3d6; --mut:#9c9384; --dim:#6f6757;
+    --coral:#d6845a; --coral2:#c2703f; --green:#7faa6b;
+    --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{background:var(--term);color:var(--txt);font-family:var(--mono);-webkit-font-smoothing:antialiased;
+    display:flex;flex-direction:column;height:100vh;height:100dvh;overflow:hidden;
+    background-image:radial-gradient(1200px 600px at 50% -6%,rgba(214,132,90,.10),transparent 60%)}
+  a{color:inherit}
+
+  .bar{flex:none;display:flex;align-items:center;gap:12px;background:var(--termbar);padding:11px clamp(16px,5vw,40px);border-bottom:1px solid var(--line)}
+  .dots{display:flex;gap:7px}.dots i{width:11px;height:11px;border-radius:50%}
+  .dots i:nth-child(1){background:#d6845a}.dots i:nth-child(2){background:#cdb15a}.dots i:nth-child(3){background:#7faa6b}
+  .bt{font-size:.74rem;color:#8d8575;letter-spacing:.02em}
+  .bar .sp{flex:1}
+  .bar a{text-decoration:none;color:var(--dim);transition:color .2s;font-size:.74rem}.bar a:hover{color:var(--txt)}
+  .bar .tag{display:inline-flex;align-items:center;gap:7px;font-size:.74rem;color:#8d8575}.bar .tag .ast{color:var(--coral)}
+  .lede{font-size:.86rem;color:var(--mut);margin:0 0 18px;line-height:1.6}
+  .lede b{color:var(--txt);font-weight:700}
+
+  .scroll{flex:1 1 auto;overflow-y:auto;overflow-x:hidden}
+  .col{max-width:880px;margin:0 auto;padding:26px clamp(16px,5vw,40px) 12px;font-size:.86rem;line-height:1.7;color:var(--txt)}
+  @media(min-width:600px){.col{font-size:.9rem}}
+  .ln{opacity:0;transform:translateY(6px);transition:opacity .35s ease,transform .35s ease}
+  .ln.show{opacity:1;transform:none}
+
+  .welcome{border:1px solid var(--line);border-radius:10px;padding:15px 18px;margin-bottom:18px;background:rgba(214,132,90,.05)}
+  .welcome .w1{color:var(--coral);font-weight:700;display:flex;align-items:center;gap:9px}.welcome .w1 .ast{font-size:1.05rem}
+  .welcome .w2{color:var(--mut);font-size:.82rem;margin-top:6px}
+
+  .prompt{margin-top:20px;display:flex;gap:10px}.prompt .car{color:var(--coral);font-weight:700}.prompt .q{color:#f3eee2}
+  .resp{margin-top:11px;color:#d8d2c5}.resp .em{color:#fff}
+  .mini{margin-top:9px;color:var(--dim);font-size:.82rem}
+  .think{color:var(--coral);font-size:.82rem;margin-top:14px;display:inline-flex;align-items:center;gap:8px}
+  .think .ast{animation:spin 1.5s linear infinite;display:inline-block}@keyframes spin{to{transform:rotate(360deg)}}
+
+  .tools{margin-top:12px;display:flex;flex-direction:column;gap:8px}
+  .tool{display:flex;gap:11px;align-items:baseline;flex-wrap:wrap}.tool .b{color:var(--coral)}.tool .fn{color:#ece6d9}
+  .tool .res{color:var(--dim)}.tool .res .hook{color:#5f5a4e}.tool .res .ok{color:var(--green)}
+  .bullets{margin-top:11px;display:flex;flex-direction:column;gap:7px}.bullets div{display:flex;gap:11px}.bullets .b{color:var(--coral)}
+  .convo{margin-top:12px;border-left:2px solid var(--line);padding-left:14px;display:flex;flex-direction:column;gap:6px}
+  .convo .me{color:#cfc8ba}.convo .me b{color:var(--coral)}
+  .convo .cl{color:var(--mut)}.convo .cl b{color:var(--coral)}
+  .cmds{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px}
+
+  .suggest{flex:none;display:flex;gap:8px;flex-wrap:wrap;width:100%;max-width:880px;margin:0 auto;padding:10px clamp(16px,5vw,40px);background:var(--term)}
+  .chip{font-family:var(--mono);font-size:.74rem;color:var(--mut);background:transparent;border:1px solid var(--line);border-radius:30px;padding:6px 12px;cursor:pointer;transition:.15s}
+  .chip:hover{border-color:var(--coral);color:var(--txt)}
+  .inputbar{flex:none;border-top:1px solid var(--line);background:var(--termbar)}
+  .inputrow{display:flex;align-items:center;gap:10px;width:100%;max-width:880px;margin:0 auto;padding:14px clamp(16px,5vw,40px)}
+  .inputrow .car{color:var(--coral);font-weight:700}
+  #cmd{flex:1;background:transparent;border:0;outline:0;color:var(--txt);font-family:var(--mono);font-size:.9rem}
+  #cmd::placeholder{color:#5f5a4e}
+  .ret{font-size:.7rem;color:var(--dim);border:1px solid var(--line);border-radius:5px;padding:2px 7px}
+
+  .quote{margin-top:12px;border-left:2px solid var(--coral);padding:5px 0 5px 14px;color:#e7dfce;font-style:italic}
+  .quote.dim{border-color:var(--line);color:#7c7567}
+  .quote .qw{font-style:normal;color:var(--coral);font-weight:700;margin-right:7px}
+  .editb{margin-top:12px}
+  .editb .diff{margin-top:7px;border-left:2px solid var(--line);padding-left:13px;display:flex;flex-direction:column;gap:3px;font-size:.82rem}
+  .editb .dl{white-space:pre-wrap;font-family:var(--mono)}
+  .editb .del{color:#d18f7c}
+  .editb .add{color:var(--green)}
+  .caret{display:inline-block;width:7px;height:1.02em;background:var(--coral);margin-left:3px;vertical-align:-2px;border-radius:1px;animation:blink 1.05s steps(1) infinite}
+  @keyframes blink{50%{opacity:0}}
+  .handover{color:var(--dim);font-size:.84rem;margin-top:18px}
+  .handover b{color:var(--coral)}
+  body.playing #cmd{opacity:.45;cursor:pointer}
+  .note{text-align:center;font-size:.74rem;color:#8a8274;margin-top:16px}
+  .foot{text-align:center;font-size:.76rem;color:var(--dim);margin-top:8px}
+  .foot a{color:var(--coral2);text-decoration:none;border-bottom:1px solid rgba(194,112,63,.35)}
+  @media(max-width:600px){.bar .bt{display:none}}
+  @media(prefers-reduced-motion:reduce){.ln{opacity:1;transform:none}.think .ast{animation:none}}
+</style>
+</head>
+<body>
+
+  <header class="bar">
+    <span class="dots"><i></i><i></i><i></i></span>
+    <span class="tag"><span class="ast">✻</span> claude code</span>
+    <span class="sp"></span>
+    <span class="bt">how i build with claude</span>
+    <a href="mailto:rinkeshgorasia@gmail.com">say hi</a>
+    <a href="index.html">← back</a>
+  </header>
+
+  <main class="scroll">
+    <div class="col" id="log">
+      <p class="lede">every profile says "builds with AI" now, which tells you nothing. so instead of telling you, here's the real thing: the session behind this site. real prompts, a bug i caught, the call claude couldn't make. <b>poke around, or take over the terminal.</b></p>
+      <div class="ln show welcome">
+        <div class="w1"><span class="ast">✻</span> how i build with claude</div>
+        <div class="w2">a real session, replaying. it types itself out. jump in and take over whenever.</div>
+      </div>
+    </div>
+  </main>
+
+  <div class="suggest" id="chips">
+    <button class="chip">/the-bug</button>
+    <button class="chip">/the-call</button>
+    <button class="chip">/the-tells</button>
+    <button class="chip">/watch-me-steer</button>
+    <button class="chip">/the-loop</button>
+    <button class="chip">/why-this-matters</button>
+  </div>
+  <div class="inputbar"><div class="inputrow">
+    <span class="car">›</span>
+    <input id="cmd" autocomplete="off" spellcheck="false" placeholder="ask how i actually work   (or type /commands)">
+    <span class="ret">↵</span>
+  </div></div>
+
+<script>
+  var log=document.getElementById('log'), input=document.getElementById('cmd'), busy=false;
+  function esc(s){return s.replace(/[&<>]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;'}[c];});}
+  function scrollEnd(){ (document.querySelector('.inputrow')).scrollIntoView({behavior:'smooth',block:'nearest'}); }
+
+  var R={
+    how:[
+      {t:'text',h:"honest version: i don't use claude to write code i couldn't. i use it to move the bottleneck off the typing and onto the part that's actually hard, knowing what's good."},
+      {t:'bullets',items:["claude drafts. i argue. the arguing is the job.","i catch what it ships wrong, and it ships plenty wrong.","i strip its default voice, every tell.","i'd rather redo a thing six times cheap than get it right once slow."]},
+      {t:'mini',h:"everything below actually happened, building this site. go look."}
+    ],
+    bug:[
+      {t:'text',h:"the coffee page on this site has cards that flip. claude built the back of the card with space-between, content up top, button at the bottom. fine on a square card."},
+      {t:'text',h:"on a tall card it shoved the button to the floor and left a hole in the middle. claude didn't catch it. i did, in the screenshot:"},
+      {t:'quote',who:'me:',h:"the bigger cards have too much of gaps."},
+      {t:'edit',file:"Edit(coffee.html)",del:["justify-content: space-between"],add:["justify-content: center"]},
+      {t:'text',h:"one line. but the job was never typing the css, it was noticing it was wrong. the model is fast, confident, and often wrong. i'm the one who has to know the difference."}
+    ],
+    call:[
+      {t:'text',h:"same coffee page. i wanted it to feel special without being gimmicky. the lazy ai move is to bolt on random easter eggs."},
+      {t:'text',h:"the actual call: my spots were already named by moment, the morning one, the slump-killer, the wind-down. so a live 'what should you drink right now' isn't a gimmick, it falls straight out of the content. the page reads the bengaluru clock and points you to the right one."},
+      {t:'text',h:"claude built that in minutes. but it would never have made the call. that's a product decision, and product decisions are mine. that, honestly, is the whole pitch."}
+    ],
+    tells:[
+      {t:'text',h:"here's the part most people miss. ai has a default voice, and it leaks. em-dashes everywhere, 'in today's fast-paced world', tidy little three-part lists. tells."},
+      {t:'text',h:"i hunt them. on this whole site i swept every em-dash out by hand. a stray one, to me, means a robot wrote it and nobody bothered to look."},
+      {t:'mini',h:"go on, search this site for one. there aren't any."},
+      {t:'text',h:"using ai well is partly knowing what it reaches for by default, and refusing to ship it."}
+    ],
+    loop:[
+      {t:'text',h:"the part that matters isn't the first draft, it's how fast i can disagree with it:"},
+      {t:'convo',items:[
+        {w:'me',h:"smallest real version of this."},
+        {w:'cl',h:"[ drafts it ]"},
+        {w:'me',h:"no. this part's wrong, the gap, the voice, the vibe. closer to this."},
+        {w:'cl',h:"[ fixes it ]"},
+        {w:'me',h:"again. again. ship."}
+      ]},
+      {t:'text',h:"i rebuilt parts of this site five, six times. that's not waste, it's the unlock. when redo is cheap, 'good enough' stops being the ceiling."}
+    ],
+    steer:[
+      {t:'text',h:"a useless prompt and a useful one run on the exact same model. the difference is judgment, loaded up front. lazy:"},
+      {t:'quote',dim:true,h:"make a coffee page."},
+      {t:'text',h:"what i actually sent:"},
+      {t:'quote',who:'me:',h:"translate the word coffee into visuals, motion and design. think like a top product and visual designer first, then the best frontend engineer. premium, interesting, not editorial, not generic. the scroll and the motion should feel intentional."},
+      {t:'text',h:"the second one carries taste, constraints, a reference point. that's the skill. the typing was never the skill."}
+    ],
+    why:[
+      {t:'text',h:"why this matters for the roles i want: ai drops the cost of the first version to almost nothing."},
+      {t:'text',h:"that doesn't just make me faster, it changes what's worth trying. i'll build the throwaway to settle an argument instead of writing a doc about it. for 0 to 1, that's the whole game, more shots, cheaper to be wrong."},
+      {t:'text',h:"and when the first version is basically free, taste becomes the bottleneck. that's the part i've spent ten years on, two companies and four cohorts of founders at accel. the building, i can now do in an afternoon."}
+    ],
+    site:[
+      {t:'text',h:"you're standing in the proof. this site, the flip cards, the live clock, the coffee crawl, this terminal you're typing into, all of it is a few days of me and claude arguing toward something good."},
+      {t:'mini',h:"the back-card bug in /the-bug? i fixed it about an hour before writing this."}
+    ],
+    help:[
+      {t:'text',h:"things you can ask, or type a / command:"},
+      {t:'cmds',items:["/the-bug","/the-call","/the-tells","/watch-me-steer","/the-loop","/why-this-matters","/this-site"]}
+    ]
+  };
+  var ALIAS={'the-bug':'bug',bug:'bug','the-call':'call',call:'call','the-tells':'tells',tells:'tells','the-tell':'tells',
+    'watch-me-steer':'steer',steer:'steer','the-loop':'loop',loop:'loop','why-this-matters':'why',why:'why',
+    'this-site':'site',site:'site','how-i-work':'how',how:'how',commands:'help',help:'help'};
+  var FALLBACK=[
+    {t:'text',h:"that one needs the actual me, not this little demo."},
+    {t:'mini',h:"→ rinkeshgorasia@gmail.com, or type /commands."}
+  ];
+
+  function classify(raw){
+    var s=raw.trim().toLowerCase(); if(!s) return 'help';
+    if(s[0]==='/'){ var k=s.slice(1).split(' ')[0]; return ALIAS[k]||'help'; }
+    if(/bug|wrong|mistake|\bgap|caught|catch|verif|error|broke|\bfix/.test(s)) return 'bug';
+    if(/taste|the call|decision|product sense|judg|wow|easter|special/.test(s)) return 'call';
+    if(/tell|em.?dash|dash|voice|generic|sound|ai.?written|robot|detect/.test(s)) return 'tells';
+    if(/prompt|steer|instruct|how.*(ask|tell|word)|brief/.test(s)) return 'steer';
+    if(/loop|iterat|argue|disagree|redo|rebuild|process|workflow/.test(s)) return 'loop';
+    if(/why|matter|0.?1|zero to one|hire|role|founding|\bpm\b|early.?stage|leverage/.test(s)) return 'why';
+    if(/this (site|page)|meta|built this|made this/.test(s)) return 'site';
+    if(/how|work|use (claude|ai)|approach/.test(s)) return 'how';
+    return null;
+  }
+
+  /* ---------- typed + streamed session engine ---------- */
+  var term=document.body;
+  var caret=document.createElement('span'); caret.className='caret';
+  var RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var skip=false, cancelQueue=false, handedOver=false, pendingUser=null;
+
+  function mk(cls){ var d=document.createElement('div'); d.className=cls; return d; }
+  function inslog(d){ log.appendChild(d); return d; }
+  function follow(){ caret.scrollIntoView({block:'nearest'}); }
+  function put(el){ el.appendChild(caret); follow(); }
+
+  function wait(ms){ return new Promise(function(res){ if(skip||RM) return res(); setTimeout(res, ms); }); }
+  function typeInto(el, text, ms){
+    return new Promise(function(res){
+      if(RM){ el.textContent=text; put(el); return res(); }
+      var i=0;
+      (function step(){
+        if(skip){ el.textContent=text; put(el); return res(); }
+        i++; el.textContent=text.slice(0,i); put(el);
+        if(i>=text.length) return res();
+        setTimeout(step, ms + (text.charAt(i)===' '?22:0));
+      })();
+    });
+  }
+  function streamWords(el, text, ms){
+    return new Promise(function(res){
+      if(RM){ el.textContent=text; put(el); return res(); }
+      var w=text.split(' '), i=0;
+      (function step(){
+        if(skip){ el.textContent=text; put(el); return res(); }
+        i++; el.textContent=w.slice(0,i).join(' '); put(el);
+        if(i>=w.length) return res();
+        setTimeout(step, ms);
+      })();
+    });
+  }
+
+  async function emit(b){
+    if(b.t==='text'||b.t==='mini'){
+      var d=inslog(mk(b.t==='mini'?'mini':'resp')); await streamWords(d, b.h, b.t==='mini'?16:22); await wait(150);
+    } else if(b.t==='quote'){
+      var d=inslog(mk('quote'+(b.dim?' dim':'')));
+      if(b.who){ var wsp=document.createElement('span'); wsp.className='qw'; wsp.textContent=b.who+' '; d.appendChild(wsp); }
+      var qs=document.createElement('span'); d.appendChild(qs);
+      await typeInto(qs, b.h, 18); await wait(200);
+    } else if(b.t==='bullets'){
+      var d=inslog(mk('bullets'));
+      for(var i=0;i<b.items.length;i++){ var row=document.createElement('div'); row.innerHTML='<span class="b">⏺</span> '; var t=document.createElement('span'); row.appendChild(t); d.appendChild(row); await streamWords(t, b.items[i], 14); await wait(80); }
+    } else if(b.t==='convo'){
+      var d=inslog(mk('convo'));
+      for(var i=0;i<b.items.length;i++){ var it=b.items[i]; var row=document.createElement('div'); row.className=(it.w==='me'?'me':'cl'); row.innerHTML=(it.w==='me'?'<b>›</b> me: ':'<b>✻</b> claude: '); var t=document.createElement('span'); row.appendChild(t); d.appendChild(row); await (it.w==='me'?typeInto(t,it.h,22):streamWords(t,it.h,16)); await wait(130); }
+    } else if(b.t==='tools'){
+      var d=inslog(mk('tools'));
+      for(var i=0;i<b.items.length;i++){ var x=b.items[i]; var row=document.createElement('div'); row.className='tool'; row.innerHTML='<span class="b">⏺</span><span class="fn">'+esc(x.c)+'</span>'; d.appendChild(row); follow(); await wait(380); var r=document.createElement('span'); r.className='res'; r.innerHTML='<span class="hook">⎿</span> <span class="ok">'+esc(x.r)+'</span>'; row.appendChild(r); await wait(220); }
+    } else if(b.t==='edit'){
+      var d=inslog(mk('editb'));
+      var head=document.createElement('div'); head.className='tool'; head.innerHTML='<span class="b">⏺</span><span class="fn">'+esc(b.file)+'</span>'; d.appendChild(head); follow(); await wait(420);
+      var diff=document.createElement('div'); diff.className='diff'; d.appendChild(diff);
+      var rows=[]; (b.del||[]).forEach(function(x){rows.push(['del',x]);}); (b.add||[]).forEach(function(x){rows.push(['add',x]);});
+      for(var j=0;j<rows.length;j++){ var dl=document.createElement('div'); dl.className='dl '+rows[j][0]; dl.textContent=(rows[j][0]==='del'?'- ':'+ ')+rows[j][1]; diff.appendChild(dl); follow(); await wait(300); }
+      await wait(140);
+    } else if(b.t==='cmds'){
+      var d=inslog(mk('cmds')); d.innerHTML=b.items.map(function(x){return '<button class="chip">'+x+'</button>';}).join(''); follow(); await wait(140);
+    }
+  }
+
+  async function play(raw){
+    if(busy) return; busy=true;
+    var p=inslog(mk('prompt')); p.innerHTML='<span class="car">›</span> '; var q=document.createElement('span'); q.className='q'; p.appendChild(q);
+    await typeInto(q, raw, 30); await wait(260);
+    var th=inslog(mk('think')); th.innerHTML='<span class="ast">✻</span> thinking'; put(th);
+    await wait(740); th.remove();
+    var key=classify(raw), blocks=key?R[key]:FALLBACK;
+    for(var i=0;i<blocks.length;i++){ await emit(blocks[i]); }
+    busy=false;
+    if(handedOver){ caret.remove(); input.focus(); }
+  }
+
+  /* ---- autoplay a real session, then hand the terminal over ---- */
+  var SCRIPT=['how do you actually use claude?','/the-bug'];
+  function setPlaying(on){ term.classList.toggle('playing', on);
+    if(on){ input.readOnly=true; input.placeholder='● replaying a real session, click anywhere to take over'; }
+    else { input.readOnly=false; input.placeholder='ask how i actually work   (or type /commands)'; } }
+  function handover(){
+    if(handedOver) return; handedOver=true; skip=false; cancelQueue=true; setPlaying(false); caret.remove();
+    if(pendingUser){ var u=pendingUser; pendingUser=null; play(u); return; }
+    var h=inslog(mk('handover')); h.innerHTML="the terminal's yours now. ask anything, or try <b>/the-call</b>, <b>/watch-me-steer</b> or <b>/why-this-matters</b>."; follow(); input.focus();
+  }
+  async function autoplay(){
+    setPlaying(true);
+    for(var i=0;i<SCRIPT.length;i++){ if(cancelQueue) break; await play(SCRIPT[i]); skip=false; if(cancelQueue) break; await wait(1000); }
+    handover();
+  }
+  function takeOver(userCmd){
+    if(handedOver){ if(userCmd) play(userCmd); return; }
+    pendingUser=userCmd||null; cancelQueue=true; skip=true;   // flush current play, loop breaks, then handover
+  }
+
+  /* interactions */
+  input.addEventListener('keydown',function(e){ if(e.key==='Enter'){ var v=input.value; if(!v.trim()) return; input.value='';
+    if(!handedOver){ takeOver(v); } else { play(v); } } });
+  term.addEventListener('click',function(e){
+    var c=e.target.closest('.chip');
+    if(!handedOver){ takeOver(c?c.textContent:null); if(!c) input.focus(); return; }
+    if(c) play(c.textContent);
+  });
+
+  /* boot: deep-link, reduced-motion, or the autoplay replay */
+  var ask=(location.search.match(/[?&]ask=([^&]+)/)||[])[1];
+  if(ask){ handedOver=true; setPlaying(false); play(decodeURIComponent(ask.replace(/\+/g,' '))); }
+  else if(RM){ handedOver=true; setPlaying(false); play('how do you actually use claude?'); }
+  else { setTimeout(autoplay, 650); }
+
+  console.log('%c✻ this whole page is a replayed claude session. click in to take over.','color:#d6845a;font-weight:700');
+</script>
+</body>
+</html>

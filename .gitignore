@@ -1,0 +1,4 @@
+# scratch screenshots used while building
+_*.png
+# os cruft
+.DS_Store
