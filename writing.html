@@ -1,64 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="color-scheme" content="light dark" />
-<title>Writing, Rinkesh Gorasia</title>
-<meta name="description" content="Notes on building, shutting things down, and working with AI." />
-<link rel="canonical" href="https://rinkeshgorasia.com/writing.html" />
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>writing — Rinkesh Gorasia</title>
+<meta name="description" content="Longer thoughts on building, knowing when to stop, and what working with AI actually feels like." />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231f1e1b'/%3E%3Ctext x='16' y='23' font-family='Inter,system-ui,sans-serif' font-size='19' font-weight='600' fill='%23fbfaf7' text-anchor='middle'%3Er%3C/text%3E%3C/svg%3E" />
-<meta property="og:type" content="website" />
-<meta property="og:site_name" content="Rinkesh Gorasia" />
-<meta property="og:url" content="https://rinkeshgorasia.com/writing.html" />
-<meta property="og:title" content="Writing, Rinkesh Gorasia" />
-<meta property="og:description" content="Notes on building, knowing when to stop, and what working with AI actually feels like." />
-<meta property="og:image" content="https://rinkeshgorasia.com/assets/og.png" />
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:creator" content="@rinks__g" />
-<meta name="twitter:title" content="Writing, Rinkesh Gorasia" />
-<meta name="twitter:image" content="https://rinkeshgorasia.com/assets/og.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600&display=swap" rel="stylesheet">
-<script>if(location.search.indexOf('dark')>-1)document.documentElement.setAttribute('data-theme','dark')</script>
-<link rel="stylesheet" href="assets/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/v3.css">
 </head>
 <body>
-<div class="wrap">
+<div class="page">
 
-  <header class="bar reveal">
-    <nav class="nav">
-      <a href="index.html">home</a>
-      <a href="work.html">work</a>
-      <a href="writing.html" class="active">writing</a>
-    </nav>
-    <div class="util">
-      <span class="clock" id="clock">Bengaluru</span>
-      <button class="theme-btn" id="theme" aria-label="Toggle light / dark" title="Toggle light / dark">
-        <svg id="theme-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></svg>
-      </button>
-    </div>
+  <header class="bar rv">
+    <nav><a href="index.html">home</a><a href="work.html">work</a><a href="writing.html" class="on">writing</a></nav>
+    <span class="right"><span class="clock" id="clock">Bengaluru</span><span class="status"><span class="pulse"></span>open to 0→1 roles</span></span>
   </header>
 
-  <p class="hi reveal">writing.</p>
-  <p class="lede reveal">most of it starts as a tweet. the longer thoughts end up here, on building, knowing when to stop, and what working with AI actually feels like.</p>
+  <section class="phead rv">
+    <p class="eyebrow">// writing</p>
+    <h1>writing.</h1>
+    <p>most of it starts as a tweet. the longer thoughts end up here, on building, knowing when to stop, and what working with AI actually feels like. some are essays, some are still drafts, and i'd rather be honest about which.</p>
+  </section>
 
   <section class="reveal">
     <div class="posts">
-      <div class="post"><a href="#">why i shut down Career Leap</a><span class="sub">, on knowing when to stop, and why that's its own skill.</span></div>
-      <div class="post"><a href="#">what 85 hospitals taught me</a><span class="sub">, research changes when you're actually in the building.</span></div>
-      <div class="post"><a href="#">building for completion, not conversion</a><span class="sub">, how we got 40% completion when the average is 5-10%.</span></div>
-      <div class="post"><a href="#">building with AI, honestly</a><span class="sub">, where it helps, where it gets in the way.</span></div>
+      <a class="post" href="writing-career-leap.html">
+        <div class="post-top"><span class="post-title">why i shut down Career Leap</span><span class="post-meta"><span class="post-tag">founder</span><span class="post-tag draft">draft</span></span></div>
+        <p class="post-ex">it had 10k users and 40% completion and i still turned it off. on telling the difference between a thing that's alive and a thing that's just warm.</p>
+      </a>
+      <a class="post" href="writing-hospitals.html">
+        <div class="post-top"><span class="post-title">what 85 hospitals taught me</span><span class="post-meta"><span class="post-tag">product</span><span class="post-tag draft">draft</span></span></div>
+        <p class="post-ex">you can't understand a system from the outside. what changed in how i do research once i started doing it from inside the building.</p>
+      </a>
+      <a class="post" href="writing-completion.html">
+        <div class="post-top"><span class="post-title">building for completion, not conversion</span><span class="post-meta"><span class="post-tag">growth</span><span class="post-tag draft">draft</span></span></div>
+        <p class="post-ex">most of edtech optimizes the wrong number. how designing for the last lesson instead of the first signup got us 8× the category norm.</p>
+      </a>
+      <a class="post" href="writing-ai.html">
+        <div class="post-top"><span class="post-title">building with AI, honestly</span><span class="post-meta"><span class="post-tag">ai</span><span class="post-tag draft">draft</span></span></div>
+        <p class="post-ex">not the hype, not the backlash. where AI actually moves the needle when you're shipping solo, and where it quietly eats your week.</p>
+      </a>
     </div>
   </section>
 
-  <footer class="reveal">
-    <span class="links"><a href="mailto:rinkeshgorasia@gmail.com">email</a><a href="https://x.com/rinks__g">twitter</a><a href="https://www.linkedin.com/in/rinksg/">linkedin</a></span>
-    <span class="sig">built with <a href="claude.html" class="sig-link">Claude</a> &amp; <a href="coffee.html" class="coffee" title="my bengaluru coffee crawl">coffee<span class="steam"><i></i><i></i><i></i></span> ☕</a></span>
+  <footer class="foot reveal">
+    <span class="fl"><a href="mailto:rinkeshgorasia@gmail.com">email</a><a href="https://x.com/rinks__g">twitter</a><a href="https://www.linkedin.com/in/rinksg/">linkedin</a></span>
+    <span class="fr" id="openk">press <kbd>⌘K</kbd> for quick actions</span>
   </footer>
 
 </div>
-<script src="assets/app.js"></script>
-</body>
-</html>
+<script src="assets/v3.js"></script>
+</body></html>
