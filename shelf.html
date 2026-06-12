@@ -22,11 +22,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/v3.css">
 <style>
-:root{--sans:'Space Grotesk',system-ui,sans-serif;--mono:'JetBrains Mono',monospace;--lime:#9fe14b;
+:root{--sans:'Space Grotesk',system-ui,sans-serif;--mono:'JetBrains Mono',monospace;--lime:#c4e86b;
   --spring:cubic-bezier(.34,1.4,.5,1)}
 *{margin:0;box-sizing:border-box}
 html,body{height:100%;overflow:hidden}
-body{background:radial-gradient(130% 110% at 50% -8%,#1a1a24,#08080b 72%);font-family:var(--sans);color:#e8e6df}
+body{background:radial-gradient(125% 105% at 50% -8%,#15140f,#0b0b0a 70%);font-family:var(--sans);color:#e8e6df}
 
 .dbar{position:fixed;top:0;left:0;right:0;z-index:91;display:flex;justify-content:space-between;align-items:center;padding:20px 34px;font-family:var(--mono);font-size:.76rem}
 .dnav a{color:#807d75;text-decoration:none;margin-left:18px;transition:color .15s}
@@ -48,7 +48,7 @@ body{background:radial-gradient(130% 110% at 50% -8%,#1a1a24,#08080b 72%);font-f
 .close.show{opacity:1;pointer-events:auto;width:auto;padding:9px 14px;border:1px solid #2a2a35}
 
 .stage{position:fixed;inset:0;perspective:1500px}
-.spot{position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(540px circle at var(--mx,50%) var(--my,42%),rgba(180,190,230,.10),transparent 62%);transition:opacity .4s}
+.spot{position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(540px circle at var(--mx,50%) var(--my,42%),rgba(214,206,182,.07),transparent 62%);transition:opacity .4s}
 .ambient{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0;transition:opacity .7s;background:radial-gradient(75% 60% at 50% 82%,var(--amb,transparent),transparent 72%)}
 .ambient.on{opacity:1}
 /* ---- table of decks ---- */
@@ -104,7 +104,7 @@ body{background:radial-gradient(130% 110% at 50% -8%,#1a1a24,#08080b 72%);font-f
 .card .face::before{content:"";position:absolute;inset:0;border-radius:14px;padding:1.4px;z-index:6;pointer-events:none;
   background:conic-gradient(from 0deg,#7af0d0,#9fe14b,#f5c451,#e26a8a,#8a7af0,#5ad1e0,#7af0d0);
   -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.7}
-.front{background:linear-gradient(165deg,#1a1a24,#0e0e13);padding:11px;display:flex;flex-direction:column}
+.front{background:linear-gradient(165deg,#1a1812,#0e0d0a);padding:11px;display:flex;flex-direction:column}
 .hd{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:.54rem;letter-spacing:.1em;text-transform:uppercase;color:#cfcabd}
 .hd .gem{color:#0e0e13;background:linear-gradient(90deg,#f5c451,#9fe14b);padding:2px 7px;border-radius:4px;white-space:nowrap}
 .win{margin-top:9px;border-radius:8px;overflow:hidden;flex:1;position:relative;box-shadow:inset 0 0 0 1px rgba(255,255,255,.07)}
@@ -146,10 +146,10 @@ body{background:radial-gradient(130% 110% at 50% -8%,#1a1a24,#08080b 72%);font-f
 .fface::before{content:"";position:absolute;inset:0;border-radius:20px;padding:1.6px;z-index:6;pointer-events:none;
   background:conic-gradient(from 0deg,#7af0d0,#9fe14b,#f5c451,#e26a8a,#8a7af0,#5ad1e0,#7af0d0);
   -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.85}
-.ffront{background:linear-gradient(165deg,#1a1a24,#0e0e13);padding:16px;display:flex;flex-direction:column}
+.ffront{background:linear-gradient(165deg,#1a1812,#0e0d0a);padding:16px;display:flex;flex-direction:column}
 .ffront .win{margin-top:13px;border-radius:11px}.ffront .hd{font-size:.62rem}.ffront .nm{font-size:1.4rem;margin-top:13px}
 .ffront .ln{font-size:.82rem;color:#a3a094;margin-top:5px;line-height:1.4}
-.fback{transform:rotateY(180deg);background:linear-gradient(165deg,#15151f,#0c0c11);padding:24px 22px;display:flex;flex-direction:column;overflow:hidden}
+.fback{transform:rotateY(180deg);background:linear-gradient(165deg,#16140f,#0c0b09);padding:24px 22px;display:flex;flex-direction:column;overflow:hidden}
 .fwm{position:absolute;right:-22px;bottom:30px;font-size:13rem;line-height:.8;color:#fff;opacity:.07;pointer-events:none;user-select:none}
 .fwm .ico-wm{stroke-width:1.1}
 .fback .cap{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--lime)}
@@ -232,10 +232,10 @@ body{background:radial-gradient(130% 110% at 50% -8%,#1a1a24,#08080b 72%);font-f
 <script>
 (function(){
   var SUITS=[
-    {key:'read',sym:'✸',nm:'read',d1:'#2a3a52',d2:'#141d2b',ac:'#4f74b8'},
-    {key:'play',sym:'♟',nm:'play',d1:'#4a2f5c',d2:'#241632',ac:'#9a5fc4'},
-    {key:'build',sym:'🧱',nm:'build',d1:'#5c3a1e',d2:'#2e1d10',ac:'#cf7a32'},
-    {key:'brew',sym:'☕',nm:'brew',d1:'#3a2a18',d2:'#1c140c',ac:'#b58a50'}
+    {key:'read',sym:'✸',nm:'read',d1:'#27313c',d2:'#141a20',ac:'#6f90a8'},
+    {key:'play',sym:'♟',nm:'play',d1:'#322839',d2:'#191420',ac:'#9a7cad'},
+    {key:'build',sym:'🧱',nm:'build',d1:'#3a2b1a',d2:'#1d150c',ac:'#c0834c'},
+    {key:'brew',sym:'☕',nm:'brew',d1:'#2d2317',d2:'#16110a',ac:'#ab885a'}
   ];
   var JOKER={type:'joker',nm:'The Joker',rar:'wildcard',ln:'the card that lives in no deck. you found it anyway.',vd:'2x founder, one exit, one graveyard, a thousand tabs open. still shipping, still here.',st:[['belongs to','every deck'],['drawn by','the curious']]};
 

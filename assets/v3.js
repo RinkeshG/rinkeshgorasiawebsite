@@ -84,15 +84,15 @@
     var I_X='<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M18.24 2.25h3.31l-7.23 8.26 8.5 11.24h-6.66l-5.21-6.82-5.97 6.82H1.66l7.73-8.84L1.25 2.25h6.83l4.71 6.23 5.45-6.23Zm-1.16 17.52h1.83L7.01 4.13H5.04l12.04 15.64Z"/></svg>';
     var I_IN='<svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M6.94 5a2 2 0 1 1-4-.002 2 2 0 0 1 4 .002ZM7 8.48H3V21h4V8.48Zm6.32 0H9.34V21h3.94v-6.57c0-3.66 4.77-4 4.77 0V21H22v-7.93c0-6.17-7.06-5.94-8.72-2.91l.04-1.68Z"/></svg>';
     foot.innerHTML=''
-      +'<div class="foot-top">'
-      +  '<span class="foot-off"><a class="foot-shelf" href="shelf.html">the shelf <span class="ar">↗</span></a><span class="foot-off-sub">books, board games, lego &amp; coffee — off the clock</span></span>'
+      +'<div class="foot-row">'
+      +  '<a class="foot-shelf" href="shelf.html"><svg class="fs-ico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"/></svg>the shelf <span class="ar">↗</span></a>'
+      +  '<span class="foot-sig">built by rinkesh, fuelled by <a href="coffee.html">coffee</a></span>'
       +  '<div class="foot-social">'
       +    '<a href="mailto:rinkeshgorasia@gmail.com" aria-label="Email">'+I_MAIL+'</a>'
       +    '<a href="https://x.com/rinks__g" target="_blank" rel="noopener" aria-label="Twitter / X">'+I_X+'</a>'
       +    '<a href="https://www.linkedin.com/in/rinksg/" target="_blank" rel="noopener" aria-label="LinkedIn">'+I_IN+'</a>'
       +  '</div>'
-      +'</div>'
-      +'<div class="foot-bot"><span class="foot-sig">built by rinkesh, fuelled by <a href="coffee.html">coffee</a></span></div>';
+      +'</div>';
   }
 
   /* email CTAs copy the address + toast instead of a jarring mailto handoff.
