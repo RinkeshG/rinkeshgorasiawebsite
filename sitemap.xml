@@ -19,10 +19,28 @@
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://rinkeshgorasia.com/claude.html</loc>
+        <loc>https://rinkeshgorasia.com/writing-hospitals.html</loc>
         <lastmod>2026-06-03</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
+        <changefreq>yearly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://rinkeshgorasia.com/writing-career-leap.html</loc>
+        <lastmod>2026-06-03</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://rinkeshgorasia.com/writing-completion.html</loc>
+        <lastmod>2026-06-03</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://rinkeshgorasia.com/writing-ai.html</loc>
+        <lastmod>2026-06-03</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.6</priority>
     </url>
     <url>
         <loc>https://rinkeshgorasia.com/coffee.html</loc>

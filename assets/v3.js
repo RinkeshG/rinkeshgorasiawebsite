@@ -43,7 +43,6 @@
   var actions=[
     {l:'email rinkesh',h:'↵',k:'email contact mail hi say',run:function(){location.href='mailto:rinkeshgorasia@gmail.com';}},
     {l:'copy email address',h:'clipboard',k:'copy email address clipboard',run:function(){if(navigator.clipboard){navigator.clipboard.writeText('rinkeshgorasia@gmail.com');}toast('email copied to clipboard');}},
-    {l:'view résumé',h:'pdf',k:'resume cv download',run:function(){window.open('cv.html','_blank');}},
     {l:'home',h:'↗',k:'home index',run:function(){location.href='index.html';}},
     {l:'work, the long version',h:'↗',k:'work career story',run:function(){location.href='work.html';}},
     {l:'writing',h:'↗',k:'writing essays notes',run:function(){location.href='writing.html';}},

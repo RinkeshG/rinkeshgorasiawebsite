@@ -1,10 +1,21 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>the shelf — Rinkesh Gorasia</title>
 <meta name="description" content="The books, board games, lego and coffee that explain me, dealt out as a deck of collectible cards." />
+<link rel="canonical" href="https://rinkeshgorasia.com/shelf.html" />
+<meta name="theme-color" content="#0d0d0c" />
+<link rel="manifest" href="manifest.json" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Rinkesh Gorasia" />
+<meta property="og:url" content="https://rinkeshgorasia.com/shelf.html" />
 <meta property="og:title" content="the shelf — Rinkesh Gorasia" />
-<meta property="og:description" content="The stuff that explains me, as a deck of collectible cards." />
+<meta property="og:description" content="The books, board games, lego and coffee that explain me, dealt out as a deck of collectible cards." />
+<meta property="og:image" content="https://rinkeshgorasia.com/assets/og.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="the shelf — Rinkesh Gorasia" />
+<meta name="twitter:description" content="The books, board games, lego and coffee that explain me, dealt out as a deck of collectible cards." />
+<meta name="twitter:image" content="https://rinkeshgorasia.com/assets/og.png" />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231f1e1b'/%3E%3Ctext x='16' y='23' font-family='Inter,system-ui,sans-serif' font-size='19' font-weight='600' fill='%23fbfaf7' text-anchor='middle'%3Er%3C/text%3E%3C/svg%3E" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -146,6 +157,44 @@ body{background:radial-gradient(130% 110% at 50% -8%,#1a1a24,#08080b 72%);font-f
 .fsig{font-family:var(--mono);font-size:.58rem;color:#56544e;margin-top:16px}
 .fhint{position:fixed;bottom:28px;left:0;right:0;text-align:center;font-family:var(--mono);font-size:.72rem;color:#6a685f}
 .fhint b{color:var(--lime)}
+
+/* ===== mobile: 2x2 deck grid + swipe carousel (no hover/tilt/fan) ===== */
+@media(max-width:640px){
+  .dbar{flex-wrap:wrap;row-gap:11px;padding:13px 18px;align-items:center}
+  .dnav{order:1;width:100%;display:flex;justify-content:space-between;gap:6px}
+  .dnav a{margin-left:0}
+  .ctrls{order:2;width:100%;justify-content:flex-end;gap:10px}
+  .dbar .clock{display:none}
+  .cbtn{padding:8px 12px}
+  .close.show{padding:8px 12px}
+  .lede{top:88px;left:18px;right:18px}
+  .lede h1{font-size:1.5rem}.lede .sub{font-size:.7rem}
+
+  .stage{perspective:none}
+  .ambient{background:radial-gradient(90% 50% at 50% 70%,var(--amb,transparent),transparent 72%)}
+  .table{place-items:start center;padding-top:150px}
+  .deckrow{display:grid;grid-template-columns:1fr 1fr;gap:18px 16px;width:100%;max-width:340px;padding:0 4px;transform:none!important}
+  .deck{width:auto}.deck:hover{transform:none}
+  .deck .pool{display:none}
+  .stack{height:180px;animation:none}
+  .bk .sym .ico-big{width:44px;height:44px}
+  .deck .meta{margin-top:11px}.deck .nm{font-size:.96rem}
+  /* hover-peek off on touch */
+  .deck:hover .l1,.deck:hover .l2,.deck:hover .bk:last-child{transform:none}
+
+  /* open deck = horizontal swipe carousel */
+  .felt.mob{display:flex;overflow-x:auto;overflow-y:hidden;align-items:center;gap:14px;padding:0 13vw;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+  .felt.mob::-webkit-scrollbar{display:none}
+  .felt.mob .card{position:relative;left:auto;top:auto;bottom:auto;margin:0;width:74vw;max-width:300px;height:auto;aspect-ratio:178/250;scroll-snap-align:center;flex:0 0 auto;transform-origin:center}
+  .felt.mob .card .face{box-shadow:0 16px 34px rgba(0,0,0,.5)}
+
+  .fcard{width:84vw;max-width:340px;height:auto;aspect-ratio:316/444}
+  .fwm{font-size:9rem;right:-14px;bottom:24px}
+  .deckfoot{bottom:52px;font-size:.76rem;padding:0 18px;line-height:1.5}
+  .fhint{bottom:22px;font-size:.68rem;padding:0 18px}
+  .hint-d{display:none}.hint-m{display:inline}
+}
+.hint-m{display:none}
 </style></head>
 <body>
   <div class="ambient" id="ambient"></div>
@@ -169,7 +218,7 @@ body{background:radial-gradient(130% 110% at 50% -8%,#1a1a24,#08080b 72%);font-f
       <div class="fface fback"><div class="fwm" id="fwm" aria-hidden="true"></div><span class="cap" id="fcap">the verdict</span><p class="vd" id="fvd"></p>
         <div class="fstats" id="fstats"></div><span class="fsig">// rinkesh's deck</span></div>
     </div></div></div></div>
-    <p class="fhint">tilt it · <b>click to flip</b> · click outside to put it back</p>
+    <p class="fhint"><span class="hint-d">tilt it · <b>click to flip</b> · click outside to put it back</span><span class="hint-m"><b>tap to flip</b> · tap outside to close</span></p>
   </div>
 
 <script>
@@ -259,6 +308,7 @@ body{background:radial-gradient(130% 110% at 50% -8%,#1a1a24,#08080b 72%);font-f
 
   /* ---- open a deck into a hand ---- */
   var cards=[], curSuit=null;
+  function isMobile(){ return window.matchMedia('(max-width:640px)').matches; }
   function cOf(i,n){ return i-(n-1)/2; }
   function fanT(i,n){ var c=cOf(i,n); return 'translateX('+(c*92)+'px) translateY('+(c*c*3.4)+'px) rotate('+(c*5)+'deg)'; }
   function hoverT(i,n){ var c=cOf(i,n); return 'translateX('+(c*92)+'px) translateY(-150px) rotate(0deg) scale(1.14)'; }
@@ -268,7 +318,7 @@ body{background:radial-gradient(130% 110% at 50% -8%,#1a1a24,#08080b 72%);font-f
   function openDeck(s){
     curSuit=s; var list=CARDS[s.key]; au(); swoosh(true); riffle(list.length*3);
     ambient.style.setProperty('--amb',s.ac+'30'); ambient.classList.add('on');
-    document.getElementById('sub').textContent=s.nm+' deck · '+list.length+' cards · hover to lift, click to read';
+    document.getElementById('sub').textContent=s.nm+' deck · '+list.length+' cards · '+(isMobile()?'swipe · tap to read':'hover to lift, click to read');
     table.classList.add('hide'); document.getElementById('close').classList.add('show');
     felt.innerHTML=''; cards=[];
     list.forEach(function(c,i){
@@ -283,7 +333,16 @@ body{background:radial-gradient(130% 110% at 50% -8%,#1a1a24,#08080b 72%);font-f
       el.addEventListener('click',function(){ openCard(c,s); });
       cards.push(el);
     });
-    setTimeout(function(){ felt.classList.add('live'); deal(); startFoot(s.key); },120);
+    if(isMobile()){
+      felt.classList.add('live','mob'); felt.scrollLeft=0;
+      cards.forEach(function(el){ el.style.opacity='0'; el.style.transform='translateY(16px)'; });
+      requestAnimationFrame(function(){ requestAnimationFrame(function(){
+        cards.forEach(function(el,i){ el.style.transition='opacity .4s '+(i*.05)+'s, transform .5s var(--spring) '+(i*.05)+'s'; el.style.opacity='1'; el.style.transform='none'; });
+      }); });
+      startFoot(s.key);
+    } else {
+      setTimeout(function(){ felt.classList.add('live'); deal(); startFoot(s.key); },120);
+    }
   }
 
   /* rotating footer */
@@ -301,9 +360,15 @@ body{background:radial-gradient(130% 110% at 50% -8%,#1a1a24,#08080b 72%);font-f
   }
   function lift(i,up){ var el=cards[i]; if(up){ el.style.zIndex=90; el.style.transform=hoverT(i,cards.length); } else { el.style.zIndex=zOf(i,cards.length); el.style.transform=fanT(i,cards.length); } }
   var closing=false;
-  function closeDeck(){ if(closing||!felt.classList.contains('live'))return; closing=true; swoosh(false); riffle(cards.length*2); stopFoot(); ambient.classList.remove('on');
-    var n=cards.length;
+  function closeDeck(){ if(closing||!felt.classList.contains('live'))return; closing=true; swoosh(false); stopFoot(); ambient.classList.remove('on');
     document.getElementById('close').classList.remove('show');
+    if(isMobile()){
+      riffle(4); felt.classList.remove('live'); /* fades via .felt opacity transition */
+      setTimeout(function(){ felt.classList.remove('mob'); felt.innerHTML=''; table.classList.remove('hide'); document.getElementById('sub').textContent='pick a deck. it\'s the stuff that explains me.'; closing=false; },360);
+      return;
+    }
+    riffle(cards.length*2);
+    var n=cards.length;
     /* gather: cards fall back onto the table one by one, the layer stays visible */
     cards.forEach(function(el,i){ var dl=(n-1-i)*0.05; el.style.transition='transform .52s cubic-bezier(.5,0,.78,.2) '+dl+'s,opacity .42s '+(dl+.1)+'s'; el.style.transform='translateX(0px) translateY(140px) rotate('+(cOf(i,n)*2.6)+'deg) scale(.72)'; el.style.opacity='0'; });
     var dur=520+(n-1)*50+140;
@@ -343,7 +408,7 @@ body{background:radial-gradient(130% 110% at 50% -8%,#1a1a24,#08080b 72%);font-f
     if(pframe) return;
     pframe=requestAnimationFrame(function(){ pframe=0;
       spot.style.setProperty('--mx',pmx+'px'); spot.style.setProperty('--my',pmy+'px');
-      if(!REDUCE && !table.classList.contains('hide')){
+      if(!REDUCE && !isMobile() && !table.classList.contains('hide')){
         var px=(pmx/window.innerWidth-.5), py=(pmy/window.innerHeight-.5);
         deckrow.style.transform='rotateX('+(-py*6)+'deg) rotateY('+(px*9)+'deg)';
       }
