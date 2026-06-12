@@ -188,7 +188,12 @@ body{background:radial-gradient(130% 110% at 50% -8%,#1a1a24,#08080b 72%);font-f
   .felt.mob .card{position:relative;left:auto;top:auto;bottom:auto;margin:0;height:100%;max-height:430px;width:auto;aspect-ratio:178/250;max-width:78vw;scroll-snap-align:center;flex:0 0 auto;transform-origin:center}
   .felt.mob .card .face{box-shadow:0 16px 36px rgba(0,0,0,.55)}
 
-  .fcard{width:84vw;max-width:340px;height:auto;aspect-ratio:316/444}
+  /* no motion on touch: instant deck swap + instant focus, just a quick flip */
+  .table{transition:none}
+  .felt{transition:none}
+  .scrim{transition:opacity .14s,visibility .14s}
+  .fwrap{transform:none;opacity:1;transition:none}
+  .fcard{width:84vw;max-width:340px;height:auto;aspect-ratio:316/444;transition:transform .4s var(--eout)}
   .fwm{font-size:9rem;right:-14px;bottom:24px}
   .deckfoot{bottom:42px;font-size:.76rem;padding:0 20px;line-height:1.55}
   .fhint{bottom:20px;font-size:.68rem;padding:0 20px}
@@ -316,7 +321,7 @@ body{background:radial-gradient(130% 110% at 50% -8%,#1a1a24,#08080b 72%);font-f
 
   var ambient=document.getElementById('ambient');
   function openDeck(s){
-    curSuit=s; var list=CARDS[s.key]; au(); swoosh(true); riffle(list.length*3);
+    curSuit=s; var list=CARDS[s.key]; au(); if(!isMobile()){ swoosh(true); riffle(list.length*3); }
     ambient.style.setProperty('--amb',s.ac+'30'); ambient.classList.add('on');
     document.getElementById('sub').textContent=s.nm+' deck · '+list.length+' cards · '+(isMobile()?'swipe · tap to read':'hover to lift, click to read');
     table.classList.add('hide'); document.getElementById('close').classList.add('show');
@@ -334,11 +339,9 @@ body{background:radial-gradient(130% 110% at 50% -8%,#1a1a24,#08080b 72%);font-f
       cards.push(el);
     });
     if(isMobile()){
+      /* mobile: just lay the cards out, no motion. scroll + tap. */
       felt.classList.add('live','mob'); felt.scrollLeft=0;
-      cards.forEach(function(el){ el.style.opacity='0'; el.style.transform='translateY(16px)'; });
-      requestAnimationFrame(function(){ requestAnimationFrame(function(){
-        cards.forEach(function(el,i){ el.style.transition='opacity .4s '+(i*.05)+'s, transform .5s var(--spring) '+(i*.05)+'s'; el.style.opacity='1'; el.style.transform='none'; });
-      }); });
+      cards.forEach(function(el){ el.style.transition='none'; el.style.opacity='1'; el.style.transform='none'; });
       startFoot(s.key);
     } else {
       setTimeout(function(){ felt.classList.add('live'); deal(); startFoot(s.key); },120);
@@ -349,7 +352,8 @@ body{background:radial-gradient(130% 110% at 50% -8%,#1a1a24,#08080b 72%);font-f
   var dfoot=document.getElementById('deckfoot'), dfin=document.getElementById('dfin'), footTimer=null, footIdx=0;
   function renderFoot(items){ var it=items[footIdx%items.length]; dfin.innerHTML=it.t+(it.a?('<a class="dfa" href="'+it.href+'" target="_blank" rel="noopener">'+it.a+'</a>'):''); }
   function startFoot(key){ var items=FOOT[key]||[]; if(!items.length){ return; } footIdx=0; renderFoot(items); dfoot.classList.add('show');
-    clearInterval(footTimer); footTimer=setInterval(function(){ dfin.classList.add('fade'); setTimeout(function(){ footIdx++; renderFoot(items); dfin.classList.remove('fade'); },360); }, 4200); }
+    clearInterval(footTimer); if(isMobile())return; /* static on touch, no rotation */
+    footTimer=setInterval(function(){ dfin.classList.add('fade'); setTimeout(function(){ footIdx++; renderFoot(items); dfin.classList.remove('fade'); },360); }, 4200); }
   function stopFoot(){ clearInterval(footTimer); footTimer=null; dfoot.classList.remove('show'); }
   function deal(){
     var n=cards.length;
@@ -360,14 +364,15 @@ body{background:radial-gradient(130% 110% at 50% -8%,#1a1a24,#08080b 72%);font-f
   }
   function lift(i,up){ var el=cards[i]; if(up){ el.style.zIndex=90; el.style.transform=hoverT(i,cards.length); } else { el.style.zIndex=zOf(i,cards.length); el.style.transform=fanT(i,cards.length); } }
   var closing=false;
-  function closeDeck(){ if(closing||!felt.classList.contains('live'))return; closing=true; swoosh(false); stopFoot(); ambient.classList.remove('on');
+  function closeDeck(){ if(closing||!felt.classList.contains('live'))return; closing=true; stopFoot(); ambient.classList.remove('on');
     document.getElementById('close').classList.remove('show');
     if(isMobile()){
-      riffle(4); felt.classList.remove('live'); /* fades via .felt opacity transition */
-      setTimeout(function(){ felt.classList.remove('mob'); felt.innerHTML=''; table.classList.remove('hide'); document.getElementById('sub').textContent='pick a deck. it\'s the stuff that explains me.'; closing=false; },360);
+      /* instant, no motion */
+      felt.classList.remove('live','mob'); felt.innerHTML=''; table.classList.remove('hide');
+      document.getElementById('sub').textContent='pick a deck. it\'s the stuff that explains me.'; closing=false;
       return;
     }
-    riffle(cards.length*2);
+    swoosh(false); riffle(cards.length*2);
     var n=cards.length;
     /* gather: cards fall back onto the table one by one, the layer stays visible */
     cards.forEach(function(el,i){ var dl=(n-1-i)*0.05; el.style.transition='transform .52s cubic-bezier(.5,0,.78,.2) '+dl+'s,opacity .42s '+(dl+.1)+'s'; el.style.transform='translateX(0px) translateY(140px) rotate('+(cOf(i,n)*2.6)+'deg) scale(.72)'; el.style.opacity='0'; });
