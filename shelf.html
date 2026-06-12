@@ -55,9 +55,12 @@ body{background:radial-gradient(130% 110% at 50% -8%,#1a1a24,#08080b 72%);font-f
 .table{position:absolute;inset:0;display:grid;place-items:center;transition:opacity .45s,transform .45s;z-index:2}
 .table.hide{opacity:0;transform:scale(.94);pointer-events:none}
 .deckrow{display:flex;align-items:center;justify-content:center;gap:46px;transform-style:preserve-3d;transition:transform .25s ease-out}
-.deck{position:relative;width:188px;cursor:pointer;text-align:center;transition:transform .4s var(--spring)}
-.deck:hover{transform:translateY(-16px)}
-.deck:focus-visible{outline:none;transform:translateY(-16px)}
+.deck{position:relative;width:188px;cursor:pointer;text-align:center}
+/* lift an inner wrapper, never the .deck hit-box itself — so the lift can't move the
+   deck out from under the cursor and cause a hover/drop flicker loop on the table. */
+.deck-in{transition:transform .45s var(--spring)}
+.deck:hover .deck-in,.deck:focus-visible .deck-in{transform:translateY(-16px)}
+.deck:focus-visible{outline:none}
 .deck:focus-visible .bk:last-child{box-shadow:0 0 0 2px var(--lime),0 26px 50px rgba(0,0,0,.6)}
 .cbtn:focus-visible,h1:focus-visible{outline:2px solid var(--lime);outline-offset:3px;border-radius:8px}
 .deck .pool{position:absolute;left:50%;bottom:50px;width:160px;height:60px;margin-left:-80px;border-radius:50%;
@@ -295,7 +298,7 @@ body{background:radial-gradient(130% 110% at 50% -8%,#1a1a24,#08080b 72%);font-f
   var table=document.getElementById('table'), felt=document.getElementById('felt'), deckrow=document.getElementById('deckrow');
   SUITS.forEach(function(s){
     var d=document.createElement('div'); d.className='deck'; d.style.setProperty('--d1',s.d1); d.style.setProperty('--d2',s.d2); d.style.setProperty('--ac',s.ac);
-    d.innerHTML='<div class="pool"></div><div class="stack"><div class="bk l2"></div><div class="bk l1"></div><div class="bk"><span class="sym">'+ico(s.key,'ico-big')+'</span><span class="sheen"></span></div></div>'
+    d.innerHTML='<div class="pool"></div><div class="deck-in"><div class="stack"><div class="bk l2"></div><div class="bk l1"></div><div class="bk"><span class="sym">'+ico(s.key,'ico-big')+'</span><span class="sheen"></span></div></div></div>'
       +'<div class="meta"><div class="nm">'+s.nm+'</div><div class="ct">'+CARDS[s.key].length+' cards</div></div>';
     d.tabIndex=0; d.setAttribute('role','button'); d.setAttribute('aria-label','open the '+s.nm+' deck, '+CARDS[s.key].length+' cards');
     d.addEventListener('click',function(){ openDeck(s); });

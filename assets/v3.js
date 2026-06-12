@@ -92,11 +92,7 @@
       +    '<a href="https://www.linkedin.com/in/rinksg/" target="_blank" rel="noopener" aria-label="LinkedIn">'+I_IN+'</a>'
       +  '</div>'
       +'</div>'
-      +'<div class="foot-bot">'
-      +  '<span class="foot-sig">built by rinkesh, fuelled by <a href="coffee.html">coffee</a></span>'
-      +  '<span class="fr" id="openk">⌘K for quick actions</span>'
-      +'</div>';
-    var ob=foot.querySelector('#openk');if(ob)ob.addEventListener('click',openK);
+      +'<div class="foot-bot"><span class="foot-sig">built by rinkesh, fuelled by <a href="coffee.html">coffee</a></span></div>';
   }
 
   /* email CTAs copy the address + toast instead of a jarring mailto handoff.

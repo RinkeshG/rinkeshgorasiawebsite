@@ -153,6 +153,8 @@ a{color:inherit}
 .post-ex{margin-top:9px;font-size:.97rem;color:var(--mut);line-height:1.6;max-width:62ch}
 .post-arrow{font-family:var(--mono);font-size:1rem;color:var(--accent);padding-top:5px;opacity:0;transform:translateX(-7px);transition:opacity .2s,transform .25s var(--eout)}
 .post:hover .post-arrow{opacity:1;transform:translateX(0)}
+.morelink{display:inline-block;margin-top:18px;font-family:var(--mono);font-size:.76rem;color:var(--mut);text-decoration:none;transition:color .18s}
+.morelink:hover{color:var(--accent)}
 
 /* home cards — projects & ventures, always-open, low cognitive load */
 .pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(218px,1fr));gap:14px;margin-top:18px}
@@ -181,9 +183,9 @@ a.pcard:hover{border-color:color-mix(in srgb,var(--accent) 38%,transparent);tran
 .tc-points li::before{content:"›";position:absolute;left:0;color:var(--accent);font-weight:600}
 .tc-side{border-left:1px solid var(--line);padding-left:26px;display:flex;flex-direction:column}
 .tc-stats{display:flex;flex-direction:column;gap:17px}
-.tc-stat .n{display:block;font-family:var(--sans);font-size:1.34rem;font-weight:600;color:var(--ink);line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
-.tc-stat .n .u{font-size:.66em;color:var(--mut);font-weight:500;letter-spacing:0}
-.tc-stat .l{display:block;font-family:var(--mono);font-size:.6rem;color:var(--mut);letter-spacing:.06em;margin-top:7px;text-transform:lowercase}
+.tc-stat .n{display:block;font-family:var(--sans);font-size:1.5rem;font-weight:600;color:var(--ink);line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.tc-stat .n .u{font-size:.62em;color:var(--mut);font-weight:500;letter-spacing:0}
+.tc-stat .l{display:block;font-family:var(--mono);font-size:.74rem;color:var(--read);letter-spacing:.02em;margin-top:8px;text-transform:lowercase}
 .tc-go{font-family:var(--mono);font-size:.72rem;color:var(--accent);margin-top:26px;display:inline-flex;align-items:center;gap:6px;transition:gap .2s}
 .tcard:hover .tc-go{gap:10px}
 @media(max-width:740px){
@@ -222,9 +224,10 @@ a.pcard:hover{border-color:color-mix(in srgb,var(--accent) 38%,transparent);tran
 .foot-social{display:flex;align-items:center;gap:8px}
 .foot-social a{display:grid;place-items:center;width:38px;height:38px;border-radius:10px;border:1px solid var(--line2);color:var(--read);transition:color .2s,border-color .2s,background .2s,transform .2s}
 .foot-social a:hover{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 42%,transparent);background:color-mix(in srgb,var(--accent) 7%,transparent);transform:translateY(-2px)}
-.foot-bot{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin-top:22px;padding-top:18px;border-top:1px solid var(--line)}
-.foot-sig a{color:var(--read);text-decoration:none}.foot-sig a:hover{color:var(--accent)}
-.foot .fr{cursor:pointer;transition:color .15s}.foot .fr:hover{color:var(--read)}
+.foot-bot{display:flex;justify-content:center;margin-top:24px;padding-top:18px;border-top:1px solid var(--line)}
+.foot-sig{font-size:.7rem;color:var(--mut);opacity:.85}
+.foot-sig a{color:var(--mut);text-decoration:none;border-bottom:1px solid transparent;transition:color .18s,border-color .18s}
+.foot-sig a:hover{color:var(--accent);border-bottom-color:color-mix(in srgb,var(--accent) 40%,transparent)}
 
 /* copy-email toast */
 .toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,16px);display:flex;align-items:center;gap:9px;background:var(--elev);border:1px solid var(--line2);color:var(--ink);font-family:var(--mono);font-size:.8rem;padding:11px 16px;border-radius:11px;box-shadow:0 16px 44px rgba(0,0,0,.5);opacity:0;transition:opacity .25s,transform .3s var(--eout);z-index:300;pointer-events:none;max-width:90vw}
@@ -317,7 +320,7 @@ kbd{font-family:var(--mono);background:var(--elev);border:1px solid var(--line2)
   /* footer */
   .foot{margin-top:44px}
   .foot-top{flex-direction:column;align-items:flex-start;gap:18px}
-  .foot-bot{flex-direction:column;align-items:flex-start;gap:10px}
+  .foot-bot{justify-content:center;text-align:center}
 
   /* command palette: bigger touch targets, no zoom on focus */
   .cmdk{padding-top:7vh}
