@@ -47,6 +47,7 @@
     {l:'home',h:'↗',k:'home index',run:function(){location.href='index.html';}},
     {l:'work, the long version',h:'↗',k:'work career story',run:function(){location.href='work.html';}},
     {l:'writing',h:'↗',k:'writing essays notes',run:function(){location.href='writing.html';}},
+    {l:'the shelf',h:'🃏',k:'shelf deck books board games lego coffee cards collectibles stuff off the clock',run:function(){location.href='shelf.html';}},
     {l:'the coffee crawl',h:'☕',k:'coffee cafe bengaluru crawl filter',run:function(){location.href='coffee.html';}},
     {l:'open Sniff',h:'↗ sniff.fyi',k:'sniff pet food product',run:function(){window.open('https://sniff.fyi','_blank');}},
     {l:'open KnowYourPay',h:'↗ knowyourpay',k:'knowyourpay pay salary underpaid product',run:function(){window.open('https://knowyourpay.vercel.app','_blank');}},

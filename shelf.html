@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>the shelf — Rinkesh Gorasia</title>
+<meta name="description" content="The books, board games, lego and coffee that explain me, dealt out as a deck of collectible cards." />
+<meta property="og:title" content="the shelf — Rinkesh Gorasia" />
+<meta property="og:description" content="The stuff that explains me, as a deck of collectible cards." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231f1e1b'/%3E%3Ctext x='16' y='23' font-family='Inter,system-ui,sans-serif' font-size='19' font-weight='600' fill='%23fbfaf7' text-anchor='middle'%3Er%3C/text%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/v3.css">
+<style>
+:root{--sans:'Space Grotesk',system-ui,sans-serif;--mono:'JetBrains Mono',monospace;--lime:#9fe14b;
+  --spring:cubic-bezier(.34,1.4,.5,1)}
+*{margin:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden}
+body{background:radial-gradient(130% 110% at 50% -8%,#1a1a24,#08080b 72%);font-family:var(--sans);color:#e8e6df}
+
+.dbar{position:fixed;top:0;left:0;right:0;z-index:91;display:flex;justify-content:space-between;align-items:center;padding:20px 34px;font-family:var(--mono);font-size:.76rem}
+.dnav a{color:#807d75;text-decoration:none;margin-left:18px;transition:color .15s}
+.dnav a:first-child{margin-left:0}
+.dnav a:hover{color:#e8e6df}.dnav a.on{color:var(--lime)}
+.dbar .clock{color:#807d75}.dbar .clock .gl{color:var(--lime)}
+.kbd{color:#56544e;cursor:pointer;transition:color .15s;letter-spacing:.04em}
+.kbd:hover{color:var(--lime)}
+.lede{position:fixed;top:62px;left:34px;z-index:90}
+.lede h1{font-size:1.6rem;font-weight:600;letter-spacing:-.02em;cursor:pointer;display:inline-block;transition:transform .2s}
+.lede h1:hover{transform:translateY(-1px)}
+.lede h1::after{content:" ✦";color:var(--lime);opacity:0;transition:opacity .25s;font-size:.8rem;vertical-align:super}
+.lede h1:hover::after{opacity:.9}
+.lede .sub{font-family:var(--mono);font-size:.72rem;color:#807d75;margin-top:6px}
+.ctrls{display:flex;gap:9px;align-items:center}
+.cbtn{font-family:var(--mono);font-size:.74rem;color:#c9c6bc;background:#16161d;border:1px solid #2a2a35;border-radius:9px;padding:9px 14px;cursor:pointer;transition:.16s}
+.cbtn:hover{border-color:var(--lime);color:var(--lime)}
+.close{opacity:0;pointer-events:none;transition:opacity .3s;width:0;padding:0;border:0;overflow:hidden}
+.close.show{opacity:1;pointer-events:auto;width:auto;padding:9px 14px;border:1px solid #2a2a35}
+
+.stage{position:fixed;inset:0;perspective:1500px}
+.spot{position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(540px circle at var(--mx,50%) var(--my,42%),rgba(180,190,230,.10),transparent 62%);transition:opacity .4s}
+.ambient{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0;transition:opacity .7s;background:radial-gradient(75% 60% at 50% 82%,var(--amb,transparent),transparent 72%)}
+.ambient.on{opacity:1}
+/* ---- table of decks ---- */
+.table{position:absolute;inset:0;display:grid;place-items:center;transition:opacity .45s,transform .45s;z-index:2}
+.table.hide{opacity:0;transform:scale(.94);pointer-events:none}
+.deckrow{display:flex;align-items:center;justify-content:center;gap:46px;transform-style:preserve-3d;transition:transform .25s ease-out}
+.deck{position:relative;width:188px;cursor:pointer;text-align:center;transition:transform .4s var(--spring)}
+.deck:hover{transform:translateY(-16px)}
+.deck:focus-visible{outline:none;transform:translateY(-16px)}
+.deck:focus-visible .bk:last-child{box-shadow:0 0 0 2px var(--lime),0 26px 50px rgba(0,0,0,.6)}
+.cbtn:focus-visible,h1:focus-visible{outline:2px solid var(--lime);outline-offset:3px;border-radius:8px}
+.deck .pool{position:absolute;left:50%;bottom:50px;width:160px;height:60px;margin-left:-80px;border-radius:50%;
+  background:radial-gradient(ellipse,var(--ac),transparent 70%);filter:blur(26px);opacity:.32;transition:opacity .4s,transform .4s;z-index:-1}
+.deck:hover .pool{opacity:.6;transform:scale(1.15)}
+.stack{position:relative;height:262px;perspective:900px;animation:bob 5s ease-in-out infinite}
+/* hover peek: the stack fans like it's about to deal */
+.deck .l1,.deck .l2,.deck .bk:last-child{transition:transform .45s var(--spring),box-shadow .4s}
+.deck:hover .l1{transform:translate(20px,1px) rotate(7deg)}
+.deck:hover .l2{transform:translate(-19px,-1px) rotate(-6deg)}
+.deck:hover .bk:last-child{transform:translateY(-7px);box-shadow:0 26px 50px rgba(0,0,0,.6)}
+.bk .sheen{position:absolute;inset:0;border-radius:16px;opacity:0;transition:opacity .4s;pointer-events:none;mix-blend-mode:overlay;
+  background:linear-gradient(115deg,transparent 38%,rgba(255,255,255,.5),transparent 62%);background-size:280% 280%;background-position:120% 0}
+.deck:hover .bk:last-child .sheen{opacity:.9;animation:sweep 1.1s ease-out}
+@keyframes sweep{from{background-position:120% 0}to{background-position:-40% 0}}
+.deck:nth-child(2) .stack{animation-delay:.7s}.deck:nth-child(3) .stack{animation-delay:1.4s}.deck:nth-child(4) .stack{animation-delay:2.1s}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@media(prefers-reduced-motion:reduce){.stack{animation:none}}
+.bk{position:absolute;inset:0;border-radius:16px;background:linear-gradient(160deg,var(--d1),var(--d2));
+  box-shadow:0 18px 38px rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.bk::before{content:"";position:absolute;inset:8px;border-radius:11px;border:1px solid rgba(255,255,255,.16)}
+.bk::after{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.07) 1px,transparent 1px);background-size:13px 13px;opacity:.6}
+.bk .sym{display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.92)}
+.ico{display:inline-block;vertical-align:middle}
+.ico-big{width:60px;height:60px}
+.ico-sm{width:13px;height:13px;flex:0 0 auto}
+.ico-wm{width:200px;height:200px}
+.hsuit{display:inline-flex;align-items:center;gap:5px}
+.stack .l1{transform:translate(7px,7px) rotate(2.6deg)}
+.stack .l2{transform:translate(-6px,4px) rotate(-2deg)}
+.deck .meta{margin-top:16px}
+.deck .nm{font-size:1.05rem;font-weight:600}
+.deck .ct{font-family:var(--mono);font-size:.68rem;color:#85827a;margin-top:4px}
+
+/* ---- the hand ---- */
+.felt{position:absolute;inset:0;opacity:0;pointer-events:none;transition:opacity .4s}
+.felt.live{opacity:1;pointer-events:auto}
+.card{position:absolute;left:50%;top:50%;width:180px;height:252px;margin-left:-90px;margin-top:-126px;transform-origin:50% 118%;
+  transition:transform .55s var(--spring),opacity .4s;cursor:pointer;border-radius:14px}
+.card .face{position:absolute;inset:0;border-radius:14px;overflow:hidden;box-shadow:0 22px 44px rgba(0,0,0,.5)}
+.card .face::before{content:"";position:absolute;inset:0;border-radius:14px;padding:1.4px;z-index:6;pointer-events:none;
+  background:conic-gradient(from 0deg,#7af0d0,#9fe14b,#f5c451,#e26a8a,#8a7af0,#5ad1e0,#7af0d0);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.7}
+.front{background:linear-gradient(165deg,#1a1a24,#0e0e13);padding:11px;display:flex;flex-direction:column}
+.hd{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:.54rem;letter-spacing:.1em;text-transform:uppercase;color:#cfcabd}
+.hd .gem{color:#0e0e13;background:linear-gradient(90deg,#f5c451,#9fe14b);padding:2px 7px;border-radius:4px;white-space:nowrap}
+.win{margin-top:9px;border-radius:8px;overflow:hidden;flex:1;position:relative;box-shadow:inset 0 0 0 1px rgba(255,255,255,.07)}
+.win img{width:100%;height:100%;object-fit:cover;display:block}
+.win.plate{background:radial-gradient(120% 100% at 50% 18%,#f6f2ea,#d9d2c4)}
+.win img.contain{object-fit:contain;padding:9px;mix-blend-mode:multiply}
+.holo{position:absolute;inset:0;mix-blend-mode:color-dodge;opacity:0;transition:opacity .3s;pointer-events:none;
+  background:linear-gradient(115deg,transparent 32%,rgba(122,240,208,.55),rgba(245,196,81,.55),rgba(226,106,138,.55),transparent 68%);background-size:240% 240%}
+.nm{font-size:.9rem;font-weight:600;margin-top:9px;line-height:1.1;color:#f3f1ea}
+/* coffee label face */
+.cf{width:100%;height:100%;display:flex;flex-direction:column;padding:14px;color:#fff;position:relative;justify-content:space-between;background:linear-gradient(170deg,#5a3a1e,#241811)}
+/* joker / wildcard face */
+.jk{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;position:relative;
+  background:linear-gradient(125deg,#7af0d0,#9fe14b,#f5c451,#e26a8a,#8a7af0,#5ad1e0,#7af0d0);background-size:320% 320%;animation:jkflow 5.5s linear infinite}
+@keyframes jkflow{0%{background-position:0% 50%}100%{background-position:320% 50%}}
+.jk-sym{font-size:4.4rem;filter:drop-shadow(0 4px 10px rgba(0,0,0,.25))}
+.jk-nm{font-size:1.35rem;font-weight:700;color:#12100a;letter-spacing:-.02em}
+/* rotating footer under an open fan */
+.deckfoot{position:fixed;left:0;right:0;bottom:84px;z-index:4;text-align:center;font-family:var(--mono);font-size:.82rem;color:#8a877e;opacity:0;transition:opacity .45s;pointer-events:none}
+.deckfoot.show{opacity:1}
+.dfin{display:inline-block;transition:opacity .35s,transform .35s}
+.dfin.fade{opacity:0;transform:translateY(4px)}
+.dfin .dfa{color:var(--lime);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--lime) 40%,transparent);pointer-events:auto;margin-left:4px}
+.dfin .dfa:hover{border-bottom-color:var(--lime)}
+.cf .lbl{background:#efe7d8;border-radius:5px;padding:10px;margin-top:auto}
+.cf .ro{font-family:var(--mono);font-size:.52rem;letter-spacing:.1em;color:#9a6a3a;text-transform:uppercase}
+.cf .rn{font-size:1.05rem;font-weight:700;color:#231a10;line-height:1.05}
+
+/* focus overlay */
+.scrim{position:fixed;inset:0;z-index:120;background:rgba(6,6,9,.74);backdrop-filter:blur(3px);display:grid;place-items:center;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .5s,visibility .5s}
+.scrim.on{opacity:1;visibility:visible;pointer-events:auto}
+.fscene{perspective:1400px}
+.fwrap{transition:transform .5s cubic-bezier(.2,.85,.25,1),opacity .42s;transform:scale(.46) translateY(150px) rotate(-2deg);opacity:0}
+.scrim.on .fwrap{transform:none;opacity:1}
+.ftilt{transition:transform .12s ease-out}
+.fcard{position:relative;width:316px;height:444px;transform-style:preserve-3d;transition:transform .7s var(--spring);cursor:pointer}
+.fcard.flipped{transform:rotateY(180deg)}
+.fface{position:absolute;inset:0;backface-visibility:hidden;border-radius:20px;overflow:hidden;box-shadow:0 50px 90px rgba(0,0,0,.6)}
+.fface::before{content:"";position:absolute;inset:0;border-radius:20px;padding:1.6px;z-index:6;pointer-events:none;
+  background:conic-gradient(from 0deg,#7af0d0,#9fe14b,#f5c451,#e26a8a,#8a7af0,#5ad1e0,#7af0d0);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.85}
+.ffront{background:linear-gradient(165deg,#1a1a24,#0e0e13);padding:16px;display:flex;flex-direction:column}
+.ffront .win{margin-top:13px;border-radius:11px}.ffront .hd{font-size:.62rem}.ffront .nm{font-size:1.4rem;margin-top:13px}
+.ffront .ln{font-size:.82rem;color:#a3a094;margin-top:5px;line-height:1.4}
+.fback{transform:rotateY(180deg);background:linear-gradient(165deg,#15151f,#0c0c11);padding:24px 22px;display:flex;flex-direction:column;overflow:hidden}
+.fwm{position:absolute;right:-22px;bottom:30px;font-size:13rem;line-height:.8;color:#fff;opacity:.07;pointer-events:none;user-select:none}
+.fwm .ico-wm{stroke-width:1.1}
+.fback .cap{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--lime)}
+.fback .vd{font-size:1.1rem;font-weight:500;color:#f3f1ea;line-height:1.4;margin:14px 0 16px}
+.fstats{margin-top:auto;font-family:var(--mono);font-size:.78rem}
+.fstat{display:flex;justify-content:space-between;gap:14px;padding:10px 0;border-top:1px solid #262531;color:#8b8a80}
+.fstat b{color:#f3f1ea;font-weight:500;text-align:right}
+.fsig{font-family:var(--mono);font-size:.58rem;color:#56544e;margin-top:16px}
+.fhint{position:fixed;bottom:28px;left:0;right:0;text-align:center;font-family:var(--mono);font-size:.72rem;color:#6a685f}
+.fhint b{color:var(--lime)}
+</style></head>
+<body>
+  <div class="ambient" id="ambient"></div>
+  <div class="spot" id="spot"></div>
+  <header class="dbar">
+    <nav class="dnav"><a href="index.html">home</a><a href="work.html">work</a><a href="writing.html">writing</a><a href="shelf.html" class="on">shelf</a></nav>
+    <span class="ctrls"><span class="clock" id="clock">Bengaluru</span><button class="cbtn close" id="close">← all decks</button><button class="cbtn" id="sound">🔊 sound on</button><span class="kbd" id="openk" title="quick actions">⌘K</span></span>
+  </header>
+  <div class="lede"><h1 id="title" title="">the shelf.</h1><p class="sub" id="sub">pick a deck. it's the stuff that explains me.</p></div>
+
+  <div class="stage" id="stage">
+    <div class="table" id="table"><div class="deckrow" id="deckrow"></div></div>
+    <div class="felt" id="felt"></div>
+    <div class="deckfoot" id="deckfoot"><span class="dfin" id="dfin"></span></div>
+  </div>
+
+  <div class="scrim" id="scrim">
+    <div class="fscene"><div class="fwrap" id="fwrap"><div class="ftilt" id="ftilt"><div class="fcard" id="fcard">
+      <div class="fface ffront"><div class="hd"><span id="ftype"></span><span class="gem" id="frar"></span></div>
+        <div class="win" id="fwin"></div><div class="nm" id="fnm"></div><div class="ln" id="fln"></div></div>
+      <div class="fface fback"><div class="fwm" id="fwm" aria-hidden="true"></div><span class="cap" id="fcap">the verdict</span><p class="vd" id="fvd"></p>
+        <div class="fstats" id="fstats"></div><span class="fsig">// rinkesh's deck</span></div>
+    </div></div></div></div>
+    <p class="fhint">tilt it · <b>click to flip</b> · click outside to put it back</p>
+  </div>
+
+<script>
+(function(){
+  var SUITS=[
+    {key:'read',sym:'✸',nm:'read',d1:'#2a3a52',d2:'#141d2b',ac:'#4f74b8'},
+    {key:'play',sym:'♟',nm:'play',d1:'#4a2f5c',d2:'#241632',ac:'#9a5fc4'},
+    {key:'build',sym:'🧱',nm:'build',d1:'#5c3a1e',d2:'#2e1d10',ac:'#cf7a32'},
+    {key:'brew',sym:'☕',nm:'brew',d1:'#3a2a18',d2:'#1c140c',ac:'#b58a50'}
+  ];
+  var JOKER={type:'joker',nm:'The Joker',rar:'wildcard',ln:'the card that lives in no deck. you found it anyway.',vd:'2x founder, one exit, one graveyard, a thousand tabs open. still shipping, still here.',st:[['belongs to','every deck'],['drawn by','the curious']]};
+
+  /* one solid icon per suit, used everywhere for consistency */
+  var ICONS={
+    read:'<path d="M11.4 7.5C9.3 6.2 6.8 5.7 4.3 6 3.8 6.1 3.4 6.5 3.4 7v9.7c0 .6.5 1 1.1.9 2-.2 4 .3 5.7 1.4.3.2.7.2 1 0V8c0-.2-.1-.4-.3-.5z"/><path d="M12.6 7.5c2.1-1.3 4.6-1.8 7.1-1.5.5.1.9.5.9 1v9.7c0 .6-.5 1-1.1.9-2-.2-4 .3-5.7 1.4-.3.2-.7.2-1 0V8c0-.2.1-.4.3-.5z"/><g fill="none" stroke="rgba(0,0,0,.3)" stroke-width="1" stroke-linecap="round"><path d="M5.7 9.6h3.5M5.7 11.8h3.5M14.8 9.6h3.5M14.8 11.8h3.5"/></g>',
+    play:'<rect x="2.7" y="10" width="9.6" height="9.6" rx="2.5"/><rect x="12.5" y="2.9" width="8.8" height="8.8" rx="2.4"/><g fill="rgba(0,0,0,.52)"><circle cx="5.3" cy="12.7" r="1.05"/><circle cx="9.7" cy="12.7" r="1.05"/><circle cx="7.5" cy="14.8" r="1.05"/><circle cx="5.3" cy="16.9" r="1.05"/><circle cx="9.7" cy="16.9" r="1.05"/><circle cx="15" cy="5.3" r=".98"/><circle cx="16.9" cy="7.2" r=".98"/><circle cx="18.8" cy="9.1" r=".98"/></g>',
+    build:'<path d="M12 4 20 8.5 12 13 4 8.5Z"/><path d="M4 8.5 12 13 12 19 4 14.5Z"/><path d="M20 8.5 12 13 12 19 20 14.5Z"/><path fill="rgba(0,0,0,.13)" d="M4 8.5 12 13 12 19 4 14.5Z"/><path fill="rgba(0,0,0,.32)" d="M20 8.5 12 13 12 19 20 14.5Z"/><g fill="currentColor" stroke="rgba(0,0,0,.4)" stroke-width=".55"><path d="M10 4.85V6.25a2 1.1 0 0 0 4 0V4.85"/><ellipse cx="12" cy="4.85" rx="2" ry="1.1"/><path d="M6 7.1V8.5a2 1.1 0 0 0 4 0V7.1"/><ellipse cx="8" cy="7.1" rx="2" ry="1.1"/><path d="M14 7.1V8.5a2 1.1 0 0 0 4 0V7.1"/><ellipse cx="16" cy="7.1" rx="2" ry="1.1"/><path d="M10 9.35V10.75a2 1.1 0 0 0 4 0V9.35"/><ellipse cx="12" cy="9.35" rx="2" ry="1.1"/></g>',
+    brew:'<path d="M4.5 8.6H15.5V13a4.2 4.2 0 0 1-4.2 4.2H8.7A4.2 4.2 0 0 1 4.5 13z"/><path fill="none" stroke="currentColor" stroke-width="1.9" d="M15.6 10.1h1.4a2.5 2.5 0 0 1 0 5h-1.1"/><rect x="3.6" y="18.5" width="13.8" height="1.9" rx=".95"/><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M8 3.2c-.7 1 .7 1.6 0 2.6"/><path d="M11.4 3.2c-.7 1 .7 1.6 0 2.6"/></g>'
+  };
+  function ico(key,cls){ var p=ICONS[key]; if(!p) return ''; return '<svg class="ico '+(cls||'')+'" viewBox="0 0 24 24" fill="currentColor" stroke-linejoin="round" aria-hidden="true">'+p+'</svg>'; }
+  function suitMark(s,cls){ return ICONS[s.key] ? ico(s.key,cls) : (s.sym||'🃏'); }
+
+  /* rotating notes under an open fan: some informative, some an invite */
+  var TW='https://x.com/rinks__g', MAIL='mailto:rinkeshgorasia@gmail.com';
+  var FOOT={
+    read:[{t:'five books that quietly rewired how i think.'},{t:'what should i read next?',a:'tell me →',href:TW},{t:'currently re-reading shoe dog. again.'}],
+    play:[{t:'fair warning: i do not let people win.'},{t:'in bengaluru and want a game night?',a:'dm me →',href:TW},{t:'loser refills the coffee.'}],
+    build:[{t:'2,079 pieces in the typewriter alone.'},{t:'yes, the keys actually move.'},{t:'which set should i build next?',a:'send one →',href:TW}],
+    brew:[{t:'ranked, deeply subjective, occasionally unfair.'},{t:'know a better cafe in blr?',a:'put me on →',href:MAIL},{t:'currently: blue tokai vienna, v60, 1:16.'}]
+  };
+  var CARDS={
+    read:[
+      {type:'book',im:'shoedog.jpg',nm:'Shoe Dog',rar:'top 5',ln:'phil knight. i re-read it before i start something.',vd:'the most honest founder memoir there is. it shows you the cost, not the dream.',st:[['re-reads','3'],['shelf rank','top 5']]},
+      {type:'book',im:'hardthing.jpg',nm:'The Hard Thing About Hard Things',rar:'scar tissue',ln:'ben horowitz. read after i shut Career Leap.',vd:'i wish i had read this before, not after.',st:[['read','too late'],['underlined','heavily']]},
+      {type:'book',im:'zerotoone.jpg',nm:'Zero to One',rar:'spicy',ln:'peter thiel. half of it i agree with, loudly.',vd:'great questions, occasionally insufferable answers.',st:[['agreement','~60%']]},
+      {type:'book',im:'thinking.jpg',nm:'Thinking, Fast and Slow',rar:'core',ln:'kahneman. how people actually decide.',vd:'the closest thing to a manual for the humans i build for.',st:[['models','+12']]},
+      {type:'book',im:'showyourwork.jpg',nm:'Show Your Work',rar:'why i\'m here',ln:'austin kleon. basically why this site exists.',vd:'the permission slip to build in the open.',st:[['re-gifted','twice']]}
+    ],
+    play:[
+      {type:'game',im:'game-catan.jpg',nm:'Catan',rar:'ruthless',ln:'i do not let people win. allegedly.',vd:'friendships have been tested over the longest road.',st:[['win rate','suspiciously high'],['trades honoured','negotiable']]},
+      {type:'game',im:'game-wingspan.png',nm:'Wingspan',rar:'serene',ln:'prettier than it has any right to be.',vd:'the only game that calms me down while i quietly crush you.',st:[['birds collected','all of them']]},
+      {type:'game',im:'game-codenames.jpg',nm:'Codenames',rar:'chaos',ln:'where i learn how my friends actually think.',vd:'one bad clue and the whole table turns on you. perfect.',st:[['clues regretted','many']]},
+      {type:'game',im:'game-azul.jpg',nm:'Azul',rar:'zen',ln:'tile-laying that looks like meditation, plays like a knife fight.',vd:'i pick tiles like i pick fights: politely, then decisively.',st:[['patterns ruined','yours']]}
+    ],
+    build:[
+      {type:'lego',im:'lego-batmobile.jpg',fit:'plate',nm:'Batmobile Tumbler',rar:'gateway',ln:'swore it was my last set. it was not.',vd:'the one that restarted the whole expensive habit.',st:[['pieces','2,049'],['regret','0']]},
+      {type:'lego',im:'lego-bonsai.jpg',fit:'plate',nm:'Bonsai Tree',rar:'calm',ln:'a plant that will never die because it was never alive.',vd:'the most low-maintenance green thing i own.',st:[['pieces','878'],['watered','never']]},
+      {type:'lego',im:'lego-typewriter.jpg',fit:'plate',nm:'Typewriter',rar:'show-off',ln:'the keys actually move. yes i made everyone press them.',vd:'peak \'i have too much desk and time\' energy.',st:[['pieces','2,079'],['demos given','too many']]}
+    ],
+    brew:[
+      {type:'coffee',im:'coffee-bluetokai.jpg',fit:'plate',ro:'vienna roast',nm:'Blue Tokai',rar:'daily',ln:'current home bag. heavy, like my schedule.',vd:'the dependable one. not exciting, never lets me down.',st:[['method','v60 · 1:16']]},
+      {type:'coffee',im:'coffee-maverick.jpg',ro:'single origin',nm:'Maverick & Farmer',rar:'the bar',ln:'the one everything else gets measured against.',vd:'nerds who actually know their farms. i trust them.',st:[['ranking','#1']]},
+      {type:'coffee',ro:'dark roast',nm:'a ₹15 filter',rar:'sleeper',ln:'beats half the third-wave for the price of nothing.',vd:'don\'t tell the specialty crowd. it humbles them.',st:[['cost','almost free']]}
+    ]
+  };
+
+  /* sound, paper foley */
+  var actx,soundOn=true;
+  function au(){ if(!actx){try{actx=new (window.AudioContext||window.webkitAudioContext)();}catch(e){}} if(actx&&actx.state==='suspended')actx.resume(); return actx; }
+  function noise(dur,f,q,vol){ var a=au(); if(!a)return; var n=Math.floor(a.sampleRate*dur),buf=a.createBuffer(1,n,a.sampleRate),d=buf.getChannelData(0); for(var i=0;i<n;i++)d[i]=(Math.random()*2-1); var s=a.createBufferSource(); s.buffer=buf; var bp=a.createBiquadFilter(); bp.type='bandpass'; bp.frequency.value=f; bp.Q.value=q; var g=a.createGain(); var t=a.currentTime; g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(vol,t+dur*.2); g.gain.exponentialRampToValueAtTime(.0001,t+dur); s.connect(bp); bp.connect(g); g.connect(a.destination); s.start(); s.stop(t+dur+.02); }
+  function tone(dur,f,vol,type){ var a=au(); if(!a)return; var o=a.createOscillator(); o.type=type||'sine'; o.frequency.value=f; var g=a.createGain(); var t=a.currentTime; g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(vol,t+.012); g.gain.exponentialRampToValueAtTime(.0001,t+dur); o.connect(g); g.connect(a.destination); o.start(); o.stop(t+dur+.02); }
+  function tick(){ if(soundOn) noise(.045,2400,1.4,.09); }
+  function flip(){ if(soundOn){ noise(.14,820,.5,.13); tone(.12,180,.05,'sine'); } }
+  function riffle(n){ if(!soundOn)return; var i=0,m=n||16; (function step(){ if(i++>m)return; noise(.026,1000+Math.random()*2000,1,.08); setTimeout(step,15+Math.random()*13); })(); }
+  function swoosh(up){ if(!soundOn)return; var a=au(); if(!a)return; var dur=.34,n=Math.floor(a.sampleRate*dur),buf=a.createBuffer(1,n,a.sampleRate),d=buf.getChannelData(0); for(var i=0;i<n;i++)d[i]=(Math.random()*2-1)*(1-i/n); var s=a.createBufferSource(); s.buffer=buf; var bp=a.createBiquadFilter(); bp.type='bandpass'; bp.Q.value=.8; var t=a.currentTime; bp.frequency.setValueAtTime(up?320:760,t); bp.frequency.exponentialRampToValueAtTime(up?900:340,t+dur); var g=a.createGain(); g.gain.setValueAtTime(.001,t); g.gain.linearRampToValueAtTime(.07,t+.08); g.gain.exponentialRampToValueAtTime(.0001,t+dur); s.connect(bp); bp.connect(g); g.connect(a.destination); s.start(); s.stop(t+dur+.02); }
+
+  /* ---- build deck table ---- */
+  var table=document.getElementById('table'), felt=document.getElementById('felt'), deckrow=document.getElementById('deckrow');
+  SUITS.forEach(function(s){
+    var d=document.createElement('div'); d.className='deck'; d.style.setProperty('--d1',s.d1); d.style.setProperty('--d2',s.d2); d.style.setProperty('--ac',s.ac);
+    d.innerHTML='<div class="pool"></div><div class="stack"><div class="bk l2"></div><div class="bk l1"></div><div class="bk"><span class="sym">'+ico(s.key,'ico-big')+'</span><span class="sheen"></span></div></div>'
+      +'<div class="meta"><div class="nm">'+s.nm+'</div><div class="ct">'+CARDS[s.key].length+' cards</div></div>';
+    d.tabIndex=0; d.setAttribute('role','button'); d.setAttribute('aria-label','open the '+s.nm+' deck, '+CARDS[s.key].length+' cards');
+    d.addEventListener('click',function(){ openDeck(s); });
+    d.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openDeck(s); } });
+    d.addEventListener('mouseenter',function(){ if(!table.classList.contains('hide')) tick(); });
+    deckrow.appendChild(d);
+  });
+
+  function faceHTML(c){
+    if(c.type==='joker'){ return '<div class="win" style="padding:0"><div class="jk"><span class="jk-sym">🃏</span><span class="jk-nm">The Joker</span><div class="holo"></div></div></div>'; }
+    if(!c.im){ return '<div class="win" style="padding:0"><div class="cf"><span class="lbl"><span class="ro">'+c.ro+'</span><span class="rn">'+c.nm+'</span></span><div class="holo"></div></div></div>'; }
+    var plate=c.fit==='plate', cls=plate?'win plate':'win', icls=plate?' class="contain"':'';
+    return '<div class="'+cls+'"><img src="assets/img/shelf/'+c.im+'"'+icls+' alt=""><div class="holo"></div></div>';
+  }
+  var nameOf=function(c){ return c.type==='coffee'?(c.nm+' · '+c.ro):c.nm; };
+
+  /* ---- open a deck into a hand ---- */
+  var cards=[], curSuit=null;
+  function cOf(i,n){ return i-(n-1)/2; }
+  function fanT(i,n){ var c=cOf(i,n); return 'translateX('+(c*92)+'px) translateY('+(c*c*3.4)+'px) rotate('+(c*5)+'deg)'; }
+  function hoverT(i,n){ var c=cOf(i,n); return 'translateX('+(c*92)+'px) translateY(-150px) rotate(0deg) scale(1.14)'; }
+  function zOf(i,n){ return Math.round(30-Math.abs(cOf(i,n))); }
+
+  var ambient=document.getElementById('ambient');
+  function openDeck(s){
+    curSuit=s; var list=CARDS[s.key]; au(); swoosh(true); riffle(list.length*3);
+    ambient.style.setProperty('--amb',s.ac+'30'); ambient.classList.add('on');
+    document.getElementById('sub').textContent=s.nm+' deck · '+list.length+' cards · hover to lift, click to read';
+    table.classList.add('hide'); document.getElementById('close').classList.add('show');
+    felt.innerHTML=''; cards=[];
+    list.forEach(function(c,i){
+      var el=document.createElement('div'); el.className='card';
+      el.innerHTML='<div class="face front"><div class="hd"><span class="hsuit">'+ico(s.key,'ico-sm')+s.nm+'</span><span class="gem">'+c.rar+'</span></div>'
+        +faceHTML(c)+'<div class="nm">'+c.nm+'</div></div>';
+      felt.appendChild(el);
+      var holo=el.querySelector('.holo');
+      el.addEventListener('mouseenter',function(){ lift(i,true); tick(); if(holo)holo.style.opacity='.6'; });
+      el.addEventListener('mouseleave',function(){ lift(i,false); if(holo)holo.style.opacity='0'; });
+      if(holo) el.addEventListener('mousemove',function(e){ var r=el.getBoundingClientRect(); holo.style.backgroundPosition=((e.clientX-r.left)/r.width*100)+'% '+((e.clientY-r.top)/r.height*100)+'%'; });
+      el.addEventListener('click',function(){ openCard(c,s); });
+      cards.push(el);
+    });
+    setTimeout(function(){ felt.classList.add('live'); deal(); startFoot(s.key); },120);
+  }
+
+  /* rotating footer */
+  var dfoot=document.getElementById('deckfoot'), dfin=document.getElementById('dfin'), footTimer=null, footIdx=0;
+  function renderFoot(items){ var it=items[footIdx%items.length]; dfin.innerHTML=it.t+(it.a?('<a class="dfa" href="'+it.href+'" target="_blank" rel="noopener">'+it.a+'</a>'):''); }
+  function startFoot(key){ var items=FOOT[key]||[]; if(!items.length){ return; } footIdx=0; renderFoot(items); dfoot.classList.add('show');
+    clearInterval(footTimer); footTimer=setInterval(function(){ dfin.classList.add('fade'); setTimeout(function(){ footIdx++; renderFoot(items); dfin.classList.remove('fade'); },360); }, 4200); }
+  function stopFoot(){ clearInterval(footTimer); footTimer=null; dfoot.classList.remove('show'); }
+  function deal(){
+    var n=cards.length;
+    cards.forEach(function(el,i){ el.style.transition='none'; el.style.transform='translateX(0px) translateY(-6px) rotate('+(cOf(i,n)*1.6)+'deg) scale(1.01)'; el.style.opacity='0'; el.style.zIndex=zOf(i,n); });
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){
+      cards.forEach(function(el,i){ var d=i*0.072; el.style.transition='transform .74s var(--spring) '+d+'s, opacity .26s '+d+'s'; el.style.transform=fanT(i,n); el.style.opacity='1'; });
+    }); });
+  }
+  function lift(i,up){ var el=cards[i]; if(up){ el.style.zIndex=90; el.style.transform=hoverT(i,cards.length); } else { el.style.zIndex=zOf(i,cards.length); el.style.transform=fanT(i,cards.length); } }
+  var closing=false;
+  function closeDeck(){ if(closing||!felt.classList.contains('live'))return; closing=true; swoosh(false); riffle(cards.length*2); stopFoot(); ambient.classList.remove('on');
+    var n=cards.length;
+    document.getElementById('close').classList.remove('show');
+    /* gather: cards fall back onto the table one by one, the layer stays visible */
+    cards.forEach(function(el,i){ var dl=(n-1-i)*0.05; el.style.transition='transform .52s cubic-bezier(.5,0,.78,.2) '+dl+'s,opacity .42s '+(dl+.1)+'s'; el.style.transform='translateX(0px) translateY(140px) rotate('+(cOf(i,n)*2.6)+'deg) scale(.72)'; el.style.opacity='0'; });
+    var dur=520+(n-1)*50+140;
+    setTimeout(function(){ felt.classList.remove('live'); table.classList.remove('hide'); document.getElementById('sub').textContent='pick a deck. it\'s the stuff that explains me.'; closing=false; },dur);
+  }
+  document.getElementById('close').addEventListener('click',closeDeck);
+
+  /* ---- focus card ---- */
+  var scrim=document.getElementById('scrim'), fcard=document.getElementById('fcard'), ftilt=document.getElementById('ftilt');
+  function openCard(c,s){
+    document.getElementById('ftype').innerHTML='<span class="hsuit">'+suitMark(s,'ico-sm')+s.nm+'</span>'; document.getElementById('frar').textContent=c.rar;
+    document.getElementById('fwin').outerHTML='<div class="win" id="fwin" style="padding:0">'+faceHTML(c).replace(/^<div class="win"[^>]*>/,'').replace(/<\/div>$/,'')+'</div>';
+    document.getElementById('fnm').textContent=c.nm; document.getElementById('fln').textContent=c.ln;
+    document.getElementById('fcap').textContent='the verdict · '+s.nm; document.getElementById('fwm').innerHTML=ICONS[s.key]?ico(s.key,'ico-wm'):(s.sym||'🃏');
+    document.getElementById('fvd').textContent=c.vd;
+    document.getElementById('fstats').innerHTML=(c.st||[]).map(function(x){return '<div class="fstat"><span>'+x[0]+'</span><b>'+x[1]+'</b></div>';}).join('');
+    fcard.classList.remove('flipped'); scrim.classList.add('on'); flip();
+  }
+  fcard.addEventListener('click',function(e){ e.stopPropagation(); fcard.classList.toggle('flipped'); flip(); });
+  function closeFocus(){ if(!scrim.classList.contains('on'))return; scrim.classList.remove('on'); if(soundOn) noise(.1,640,.6,.08); }
+  scrim.addEventListener('click',closeFocus);
+  document.querySelector('.fscene').addEventListener('pointermove',function(e){
+    var r=fcard.getBoundingClientRect(), px=Math.max(-1,Math.min(1,(e.clientX-(r.left+r.width/2))/(r.width/2))), py=Math.max(-1,Math.min(1,(e.clientY-(r.top+r.height/2))/(r.height/2)));
+    ftilt.style.transform='rotateY('+px*11+'deg) rotateX('+(-py)*11+'deg)';
+    var h=document.querySelector('#fwin .holo'); if(h){h.style.opacity='.7';h.style.backgroundPosition=(50+px*50)+'% '+(50+py*50)+'%';}
+  });
+
+  document.getElementById('sound').addEventListener('click',function(){ soundOn=!soundOn; this.textContent=soundOn?'🔊 sound on':'🔇 sound off'; if(soundOn){au();riffle();} });
+
+  /* ---- click empty felt to close the open deck ---- */
+  felt.addEventListener('click',function(e){ if(e.target===felt && felt.classList.contains('live')) closeDeck(); });
+
+  /* ---- depth: cursor spotlight + deck-row parallax (rAF-throttled, motion-aware) ---- */
+  var REDUCE=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var spot=document.getElementById('spot'), pmx=0,pmy=0,pframe=0;
+  window.addEventListener('pointermove',function(e){ pmx=e.clientX; pmy=e.clientY;
+    if(pframe) return;
+    pframe=requestAnimationFrame(function(){ pframe=0;
+      spot.style.setProperty('--mx',pmx+'px'); spot.style.setProperty('--my',pmy+'px');
+      if(!REDUCE && !table.classList.contains('hide')){
+        var px=(pmx/window.innerWidth-.5), py=(pmy/window.innerHeight-.5);
+        deckrow.style.transform='rotateX('+(-py*6)+'deg) rotateY('+(px*9)+'deg)';
+      }
+    });
+  });
+  window.addEventListener('pointerleave',function(){ deckrow.style.transform=''; });
+
+  /* ---- easter egg: the universe deals you one (rare joker) ---- */
+  function dealRandom(forceJoker){
+    if(scrim.classList.contains('on')) return;
+    au(); swoosh(true); riffle(forceJoker?14:7);
+    var c,s;
+    if(forceJoker || Math.random()<0.13){ c=JOKER; s={sym:'🃏',nm:'wild'}; }
+    else { var k=SUITS[Math.floor(Math.random()*SUITS.length)], list=CARDS[k.key]; c=list[Math.floor(Math.random()*list.length)]; s=k; }
+    openCard(c,s);
+  }
+  document.getElementById('title').addEventListener('click',function(){ dealRandom(false); });
+
+  /* ---- keyboard: Esc closes whatever's open; konami guarantees the joker ---- */
+  var KON=[38,38,40,40,37,39,37,39,66,65], kpos=0;
+  window.addEventListener('keydown',function(e){
+    var ck=document.getElementById('cmdk'); if(ck&&ck.classList.contains('open')) return; /* let the ⌘K palette own keys while open */
+    if(e.key==='Escape'){ if(scrim.classList.contains('on')) closeFocus(); else if(felt.classList.contains('live')) closeDeck(); return; }
+    if(e.keyCode===KON[kpos]){ kpos++; if(kpos===KON.length){ kpos=0; scrim.classList.remove('on'); dealRandom(true); } }
+    else { kpos=(e.keyCode===KON[0])?1:0; }
+  });
+
+  window.addEventListener('pointerdown',function once(){ au(); window.removeEventListener('pointerdown',once); });
+})();
+</script>
+<script src="assets/v3.js"></script>
+</body></html>

@@ -10,6 +10,7 @@ Rinkesh is a 0-to-1 product person who has both built (two companies) and evalua
 - [Work](https://rinkeshgorasia.com/work.html): The longer version, companies founded, two years at Accel, side projects, and the ones that didn't make it
 - [Writing](https://rinkeshgorasia.com/writing.html): Notes on building, knowing when to stop, and working with AI
 - [How I build with Claude](https://rinkeshgorasia.com/claude.html): A playable Claude Code session showing how he actually uses AI to build
+- [The Shelf](https://rinkeshgorasia.com/shelf.html): The books, board games, lego and coffee that explain him, presented as a deck of collectible cards
 - [Coffee](https://rinkeshgorasia.com/coffee.html): His favourite coffee places in Bengaluru
 
 ## Experience
