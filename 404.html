@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>404, page not found — Rinkesh Gorasia</title>
+<meta name="description" content="This page got knocked off the shelf." />
+<meta name="robots" content="noindex" />
+<meta name="theme-color" content="#0d0d0c" />
+<link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg" />
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/v3.css">
+<style>
+/* the incident: three shelf cards, one knocked over. the spring is the page's one flourish. */
+.scene{padding:48px 0 0}
+.shelfline{position:relative;display:flex;align-items:flex-end;gap:24px;padding:0 8px 0;border-bottom:1px solid var(--line2);width:min(620px,100%);height:208px}
+.fcard{position:relative;width:112px;height:150px;border-radius:var(--r2);background:linear-gradient(165deg,#1a1812,#0e0d0a);border:1px solid var(--line2);display:grid;place-items:center;user-select:none;transform-origin:100% 100%;transition:transform .65s cubic-bezier(.34,1.56,.5,1)}
+.fcard::before{content:"";position:absolute;inset:7px;border-radius:8px;border:1px solid rgba(255,255,255,.09);pointer-events:none}
+.fcard::after{content:"";position:absolute;inset:0;border-radius:var(--r2);background-image:radial-gradient(rgba(255,255,255,.05) 1px,transparent 1px);background-size:12px 12px;pointer-events:none}
+.fcard .n4{font-family:var(--mono);font-size:3.25rem;font-weight:600;color:var(--ink);line-height:1;font-variant-numeric:tabular-nums}
+.fcard .pip{position:absolute;top:9px;left:11px;font-family:var(--mono);font-size:.6875rem;color:var(--mut);letter-spacing:.08em}
+#kcard{cursor:pointer}
+#kcard.knocked{transform:rotate(86deg) translate(2px,0)}
+#kcard:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.paw404{position:absolute;right:-44px;bottom:14px;font-size:1.05rem;opacity:0;transition:opacity .35s .45s;pointer-events:none}
+.shelfline:has(#kcard.knocked) .paw404{opacity:.7}
+.mrrp{position:absolute;right:-58px;bottom:120px;font-family:var(--mono);font-size:.6875rem;color:var(--ink);background:var(--surface-1);border:1px solid var(--line2);border-radius:var(--r1);padding:7px 11px;opacity:0;transform:translateY(5px);transition:opacity .25s var(--eout),transform .25s var(--eout);pointer-events:none;white-space:nowrap}
+.mrrp.show{opacity:1;transform:none}
+.err-head p.aside404{font-family:var(--mono);font-size:.6875rem;color:var(--mut);margin-top:14px}
+.err-head{margin-top:48px}
+.err-head h1{font-size:clamp(1.8rem,4.4vw,2.1rem);font-weight:600;color:var(--ink);letter-spacing:-.02em;line-height:1.06;max-width:22ch}
+.err-head p{margin-top:16px;font-size:1.0625rem;line-height:1.65;color:var(--read);max-width:52ch}
+.err-actions{display:flex;align-items:center;gap:24px;flex-wrap:wrap;margin-top:8px}
+.err-actions .morelink{margin-top:24px}
+@media(max-width:640px){
+  .scene{padding:32px 0 0}
+  .shelfline{gap:16px;height:164px}
+  .fcard{width:84px;height:114px}
+  .fcard .n4{font-size:2.4rem}
+  .paw404{right:-34px}
+  .mrrp{right:-40px;bottom:92px}
+}
+@media(prefers-reduced-motion:reduce){
+  .fcard{transition:none}
+  .paw404{transition:none}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="bar rv">
+    <nav><a href="index.html">home</a><a href="work.html">work</a><a href="writing.html">writing</a></nav>
+    <span class="right"><span class="clock" id="clock">Bengaluru</span><span class="status"><span class="pulse"></span>open to 0→1 roles</span></span>
+  </header>
+
+  <section class="scene rv">
+    <p class="cap" style="margin-top:48px">// <b>error</b> · page not found</p>
+    <div class="shelfline" aria-hidden="true">
+      <div class="fcard"><span class="pip">err</span><span class="n4">4</span></div>
+      <div class="fcard"><span class="pip">err</span><span class="n4">0</span></div>
+      <div class="fcard knocked" id="kcard" tabindex="0" role="button" aria-label="stand the fallen card back up"><span class="pip">err</span><span class="n4">4</span></div>
+      <span class="paw404">🐾</span>
+      <span class="mrrp" id="mrrp">mrrp.</span>
+    </div>
+  </section>
+
+  <section class="err-head rv" style="animation-delay:.1s">
+    <h1>this page got knocked off the shelf.</h1>
+    <p>whatever lived at this address has moved, or never existed. i'd take full responsibility, but we both know who did this.</p>
+    <p class="aside404">(you can stand the card back up. it won't last.)</p>
+    <div class="err-actions">
+      <a class="cta" href="index.html">→ back home</a>
+      <a class="morelink" href="work.html">the work →</a>
+      <a class="morelink" href="writing.html">writing →</a>
+    </div>
+  </section>
+
+  <footer class="foot reveal"></footer>
+
+</div>
+<script src="assets/v3.js"></script>
+<script>
+(function(){
+  var k=document.getElementById('kcard'), mrrp=document.getElementById('mrrp');
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var busy=false;
+
+  /* entrance: the card starts standing, then gets knocked — once. */
+  if(!reduce){
+    k.classList.remove('knocked');
+    setTimeout(function(){ k.classList.add('knocked'); },1100);
+  }
+
+  /* the flourish: stand it back up. it won't last. */
+  function standUp(){
+    if(busy||!k.classList.contains('knocked'))return;
+    busy=true;
+    k.classList.remove('knocked');
+    setTimeout(function(){
+      k.classList.add('knocked');
+      mrrp.classList.add('show');
+      setTimeout(function(){ mrrp.classList.remove('show'); busy=false; },1700);
+    },1400);
+  }
+  k.addEventListener('click',standUp);
+  k.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); standUp(); } });
+})();
+</script>
+</body></html>

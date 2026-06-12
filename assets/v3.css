@@ -17,6 +17,12 @@ html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--read);font-family:var(--sans);line-height:1.65;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 ::selection{background:var(--accent);color:#111}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+/* scrollbar — part of the room, not the browser's */
+::-webkit-scrollbar{width:11px;height:11px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--line2);border-radius:6px;border:3px solid var(--bg)}
+::-webkit-scrollbar-thumb:hover{background:#4a4840}
+html{scrollbar-color:var(--line2) var(--bg);scrollbar-width:thin}
 .page{max-width:1000px;margin:0 auto;padding:32px 44px 64px}
 a{color:inherit}
 
