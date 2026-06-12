@@ -157,7 +157,40 @@ a{color:inherit}
 .pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(218px,1fr));gap:14px;margin-top:18px}
 .pcard{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:12px;background:var(--elev);padding:18px 19px 15px;text-decoration:none;transition:border-color .2s,transform .25s var(--eout)}
 a.pcard:hover{border-color:color-mix(in srgb,var(--accent) 38%,transparent);transform:translateY(-3px)}
-.pc-head{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:22px}
+.pc-head{display:flex;align-items:center;gap:10px;min-height:28px}
+.pc-head .tag{margin-left:auto}
+
+/* logo mark (matches the work-page case mark) */
+.lmark{width:40px;height:40px;border-radius:10px;flex:0 0 auto;display:grid;place-items:center;overflow:hidden;border:1px solid var(--line2);background:#16140f;font-weight:600;color:var(--mut);font-size:1rem;font-family:var(--sans)}
+.lmark img{width:100%;height:100%;object-fit:cover}
+.lmark.sm{width:30px;height:30px;border-radius:8px;font-size:.84rem}
+
+/* track record — full-width depth cards (logo + highlights + stat rail) */
+.tlist{display:flex;flex-direction:column;gap:14px;margin-top:18px}
+.tcard{display:grid;grid-template-columns:1fr 224px;gap:30px;border:1px solid var(--line);border-radius:14px;background:var(--elev);padding:22px 24px;align-items:start;text-decoration:none;transition:border-color .2s,transform .25s var(--eout)}
+.tcard:hover{border-color:color-mix(in srgb,var(--accent) 30%,transparent);transform:translateY(-2px)}
+.tc-head{display:flex;align-items:center;gap:13px}
+.tc-name{font-size:1.22rem;font-weight:600;color:var(--ink);letter-spacing:-.01em}
+.tc-date{font-family:var(--mono);font-size:.7rem;color:var(--mut);margin-left:auto;white-space:nowrap}
+.tc-date .ex{color:var(--accent)}
+.tc-desc{font-size:.96rem;color:var(--read);line-height:1.55;margin-top:14px;max-width:56ch}
+.tc-points{list-style:none;margin-top:14px;display:flex;flex-direction:column;gap:9px}
+.tc-points li{font-size:.9rem;color:var(--read);line-height:1.5;padding-left:18px;position:relative;max-width:60ch}
+.tc-points li::before{content:"›";position:absolute;left:0;color:var(--accent);font-weight:600}
+.tc-side{border-left:1px solid var(--line);padding-left:26px;align-self:stretch;display:flex;flex-direction:column;min-height:100%}
+.tc-stats{display:flex;flex-direction:column;gap:14px}
+.tc-stat{display:flex;flex-direction:column;align-items:flex-start}
+.tc-stat .n{font-family:var(--sans);font-size:1.16rem;font-weight:600;color:var(--ink);line-height:1;letter-spacing:-.01em}
+.tc-stat .n .u{color:var(--accent);font-size:.66em;font-weight:500}
+.tc-stat .l{font-family:var(--mono);font-size:.62rem;color:var(--mut);margin-top:4px;letter-spacing:.04em}
+.tc-go{font-family:var(--mono);font-size:.72rem;color:var(--accent);margin-top:auto;padding-top:18px;display:inline-flex;align-items:center;gap:6px;transition:gap .2s}
+.tcard:hover .tc-go{gap:10px}
+@media(max-width:740px){
+  .tcard{grid-template-columns:1fr;gap:16px;padding:20px 20px 18px}
+  .tc-side{border-left:0;border-top:1px solid var(--line);padding-left:0;padding-top:16px}
+  .tc-stats{flex-direction:row;flex-wrap:wrap;gap:22px}
+  .tc-go{margin-top:16px}
+}
 .pc-name{font-size:1.06rem;font-weight:600;color:var(--ink);letter-spacing:-.01em}
 .pc-date{font-family:var(--mono);font-size:.68rem;color:var(--mut);white-space:nowrap}
 .pc-date .ex{color:var(--accent)}
