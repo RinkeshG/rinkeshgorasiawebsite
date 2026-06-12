@@ -85,7 +85,7 @@
     var I_IN='<svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M6.94 5a2 2 0 1 1-4-.002 2 2 0 0 1 4 .002ZM7 8.48H3V21h4V8.48Zm6.32 0H9.34V21h3.94v-6.57c0-3.66 4.77-4 4.77 0V21H22v-7.93c0-6.17-7.06-5.94-8.72-2.91l.04-1.68Z"/></svg>';
     foot.innerHTML=''
       +'<div class="foot-top">'
-      +  '<a class="foot-shelf" href="shelf.html"><span class="fs-t">the shelf <span class="fs-ar">↗</span></span><span class="fs-n">books, board games, lego &amp; coffee — me, off the clock</span></a>'
+      +  '<span class="foot-off"><a class="foot-shelf" href="shelf.html">the shelf <span class="ar">↗</span></a><span class="foot-off-sub">books, board games, lego &amp; coffee — off the clock</span></span>'
       +  '<div class="foot-social">'
       +    '<a href="mailto:rinkeshgorasia@gmail.com" aria-label="Email">'+I_MAIL+'</a>'
       +    '<a href="https://x.com/rinks__g" target="_blank" rel="noopener" aria-label="Twitter / X">'+I_X+'</a>'
@@ -98,6 +98,24 @@
       +'</div>';
     var ob=foot.querySelector('#openk');if(ob)ob.addEventListener('click',openK);
   }
+
+  /* email CTAs copy the address + toast instead of a jarring mailto handoff.
+     opt a link out with data-mailto to keep native behaviour. */
+  var toastEl,toastT;
+  function toast(msg){
+    if(!toastEl){ toastEl=document.createElement('div'); toastEl.className='toast'; document.body.appendChild(toastEl); }
+    toastEl.innerHTML='<svg class="tk" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>'+msg+'</span>';
+    clearTimeout(toastT); requestAnimationFrame(function(){ toastEl.classList.add('in'); });
+    toastT=setTimeout(function(){ toastEl.classList.remove('in'); },2600);
+  }
+  function legacyCopy(txt){ return new Promise(function(res,rej){ try{ var t=document.createElement('textarea'); t.value=txt; t.style.position='fixed'; t.style.opacity='0'; document.body.appendChild(t); t.select(); var done=document.execCommand('copy'); document.body.removeChild(t); done?res():rej(); }catch(err){ rej(err); } }); }
+  function copyText(txt){ return (navigator.clipboard&&navigator.clipboard.writeText) ? navigator.clipboard.writeText(txt).catch(function(){ return legacyCopy(txt); }) : legacyCopy(txt); }
+  document.addEventListener('click',function(e){
+    var a=e.target.closest&&e.target.closest('a[href^="mailto:"]'); if(!a||a.hasAttribute('data-mailto')) return;
+    e.preventDefault();
+    var email=a.getAttribute('href').replace(/^mailto:/i,'').split('?')[0];
+    copyText(email).then(function(){ toast('copied '+email); }, function(){ toast(email); });
+  });
 
   /* reading progress (article pages only) */
   if(document.querySelector('.artwrap')){

@@ -286,6 +286,7 @@ body{background:radial-gradient(130% 110% at 50% -8%,#1a1a24,#08080b 72%);font-f
   function noise(dur,f,q,vol){ var a=au(); if(!a)return; var n=Math.floor(a.sampleRate*dur),buf=a.createBuffer(1,n,a.sampleRate),d=buf.getChannelData(0); for(var i=0;i<n;i++)d[i]=(Math.random()*2-1); var s=a.createBufferSource(); s.buffer=buf; var bp=a.createBiquadFilter(); bp.type='bandpass'; bp.frequency.value=f; bp.Q.value=q; var g=a.createGain(); var t=a.currentTime; g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(vol,t+dur*.2); g.gain.exponentialRampToValueAtTime(.0001,t+dur); s.connect(bp); bp.connect(g); g.connect(a.destination); s.start(); s.stop(t+dur+.02); }
   function tone(dur,f,vol,type){ var a=au(); if(!a)return; var o=a.createOscillator(); o.type=type||'sine'; o.frequency.value=f; var g=a.createGain(); var t=a.currentTime; g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(vol,t+.012); g.gain.exponentialRampToValueAtTime(.0001,t+dur); o.connect(g); g.connect(a.destination); o.start(); o.stop(t+dur+.02); }
   function tick(){ if(soundOn) noise(.045,2400,1.4,.09); }
+  var _lastTick=0; function tickT(){ var t=(window.performance&&performance.now)?performance.now():Date.now(); if(t-_lastTick<70)return; _lastTick=t; tick(); }
   function flip(){ if(soundOn){ noise(.14,820,.5,.13); tone(.12,180,.05,'sine'); } }
   function riffle(n){ if(!soundOn)return; var i=0,m=n||16; (function step(){ if(i++>m)return; noise(.026,1000+Math.random()*2000,1,.08); setTimeout(step,15+Math.random()*13); })(); }
   function swoosh(up){ if(!soundOn)return; var a=au(); if(!a)return; var dur=.34,n=Math.floor(a.sampleRate*dur),buf=a.createBuffer(1,n,a.sampleRate),d=buf.getChannelData(0); for(var i=0;i<n;i++)d[i]=(Math.random()*2-1)*(1-i/n); var s=a.createBufferSource(); s.buffer=buf; var bp=a.createBiquadFilter(); bp.type='bandpass'; bp.Q.value=.8; var t=a.currentTime; bp.frequency.setValueAtTime(up?320:760,t); bp.frequency.exponentialRampToValueAtTime(up?900:340,t+dur); var g=a.createGain(); g.gain.setValueAtTime(.001,t); g.gain.linearRampToValueAtTime(.07,t+.08); g.gain.exponentialRampToValueAtTime(.0001,t+dur); s.connect(bp); bp.connect(g); g.connect(a.destination); s.start(); s.stop(t+dur+.02); }
@@ -299,7 +300,7 @@ body{background:radial-gradient(130% 110% at 50% -8%,#1a1a24,#08080b 72%);font-f
     d.tabIndex=0; d.setAttribute('role','button'); d.setAttribute('aria-label','open the '+s.nm+' deck, '+CARDS[s.key].length+' cards');
     d.addEventListener('click',function(){ openDeck(s); });
     d.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openDeck(s); } });
-    d.addEventListener('mouseenter',function(){ if(!table.classList.contains('hide')) tick(); });
+    d.addEventListener('mouseenter',function(){ if(!table.classList.contains('hide')) tickT(); });
     deckrow.appendChild(d);
   });
 
@@ -312,7 +313,7 @@ body{background:radial-gradient(130% 110% at 50% -8%,#1a1a24,#08080b 72%);font-f
   var nameOf=function(c){ return c.type==='coffee'?(c.nm+' · '+c.ro):c.nm; };
 
   /* ---- open a deck into a hand ---- */
-  var cards=[], curSuit=null;
+  var cards=[], cardObjs=[], curSuit=null, activeCard=-1;
   function isMobile(){ return window.matchMedia('(max-width:640px)').matches; }
   function cOf(i,n){ return i-(n-1)/2; }
   function fanT(i,n){ var c=cOf(i,n); return 'translateX('+(c*92)+'px) translateY('+(c*c*3.4)+'px) rotate('+(c*5)+'deg)'; }
@@ -325,18 +326,14 @@ body{background:radial-gradient(130% 110% at 50% -8%,#1a1a24,#08080b 72%);font-f
     ambient.style.setProperty('--amb',s.ac+'30'); ambient.classList.add('on');
     document.getElementById('sub').textContent=s.nm+' deck · '+list.length+' cards · '+(isMobile()?'swipe · tap to read':'hover to lift, click to read');
     table.classList.add('hide'); document.getElementById('close').classList.add('show');
-    felt.innerHTML=''; cards=[];
+    felt.innerHTML=''; cards=[]; cardObjs=[]; activeCard=-1;
     list.forEach(function(c,i){
       var el=document.createElement('div'); el.className='card';
       el.innerHTML='<div class="face front"><div class="hd"><span class="hsuit">'+ico(s.key,'ico-sm')+s.nm+'</span><span class="gem">'+c.rar+'</span></div>'
         +faceHTML(c)+'<div class="nm">'+c.nm+'</div></div>';
       felt.appendChild(el);
-      var holo=el.querySelector('.holo');
-      el.addEventListener('mouseenter',function(){ lift(i,true); tick(); if(holo)holo.style.opacity='.6'; });
-      el.addEventListener('mouseleave',function(){ lift(i,false); if(holo)holo.style.opacity='0'; });
-      if(holo) el.addEventListener('mousemove',function(e){ var r=el.getBoundingClientRect(); holo.style.backgroundPosition=((e.clientX-r.left)/r.width*100)+'% '+((e.clientY-r.top)/r.height*100)+'%'; });
-      el.addEventListener('click',function(){ openCard(c,s); });
-      cards.push(el);
+      el.addEventListener('click',function(e){ e.stopPropagation(); openCard(c,s); });
+      cards.push(el); cardObjs.push(c);
     });
     if(isMobile()){
       /* mobile: just lay the cards out, no motion. scroll + tap. */
@@ -362,9 +359,27 @@ body{background:radial-gradient(130% 110% at 50% -8%,#1a1a24,#08080b 72%);font-f
       cards.forEach(function(el,i){ var d=i*0.072; el.style.transition='transform .74s var(--spring) '+d+'s, opacity .26s '+d+'s'; el.style.transform=fanT(i,n); el.style.opacity='1'; });
     }); });
   }
-  function lift(i,up){ var el=cards[i]; if(up){ el.style.zIndex=90; el.style.transform=hoverT(i,cards.length); } else { el.style.zIndex=zOf(i,cards.length); el.style.transform=fanT(i,cards.length); } }
+  function lift(i,up){ var el=cards[i]; if(!el)return; var h=el.querySelector('.holo');
+    if(up){ el.style.zIndex=90; el.style.transform=hoverT(i,cards.length); if(h)h.style.opacity='.55'; }
+    else { el.style.zIndex=zOf(i,cards.length); el.style.transform=fanT(i,cards.length); if(h)h.style.opacity='0'; } }
+  /* hover by hit-testing the fixed fan geometry — never driven by the card's own (moving) box,
+     so holding the cursor still can't trigger a lift/drop flicker loop. */
+  function feltHover(){
+    if(!felt.classList.contains('live')) return;
+    var n=cards.length; if(!n) return;
+    var cy=window.innerHeight/2, idx=-1;
+    if(Math.abs(pmy-cy)<232){ idx=Math.round((pmx-window.innerWidth/2)/92+(n-1)/2); if(idx<0||idx>n-1) idx=-1; }
+    if(idx!==activeCard){
+      if(activeCard>=0) lift(activeCard,false);
+      activeCard=idx;
+      if(idx>=0){ lift(idx,true); tickT(); }
+    }
+    if(activeCard>=0){ var ah=cards[activeCard].querySelector('.holo'); if(ah){ var r=cards[activeCard].getBoundingClientRect();
+      ah.style.backgroundPosition=Math.max(0,Math.min(100,(pmx-r.left)/r.width*100))+'% '+Math.max(0,Math.min(100,(pmy-r.top)/r.height*100))+'%'; } }
+  }
+  function clearActive(){ if(activeCard>=0){ lift(activeCard,false); activeCard=-1; } }
   var closing=false;
-  function closeDeck(){ if(closing||!felt.classList.contains('live'))return; closing=true; stopFoot(); ambient.classList.remove('on');
+  function closeDeck(){ if(closing||!felt.classList.contains('live'))return; closing=true; activeCard=-1; stopFoot(); ambient.classList.remove('on');
     document.getElementById('close').classList.remove('show');
     if(isMobile()){
       /* instant, no motion */
@@ -404,7 +419,8 @@ body{background:radial-gradient(130% 110% at 50% -8%,#1a1a24,#08080b 72%);font-f
   document.getElementById('sound').addEventListener('click',function(){ soundOn=!soundOn; this.textContent=soundOn?'🔊 sound on':'🔇 sound off'; if(soundOn){au();riffle();} });
 
   /* ---- click empty felt to close the open deck (desktop only; mobile uses the button, and tap-outside here mis-fires on touch) ---- */
-  felt.addEventListener('click',function(e){ if(!isMobile() && e.target===felt && felt.classList.contains('live')) closeDeck(); });
+  felt.addEventListener('click',function(e){ if(isMobile()||!felt.classList.contains('live')||e.target!==felt) return;
+    if(activeCard>=0) openCard(cardObjs[activeCard],curSuit); else closeDeck(); });
 
   /* ---- depth: cursor spotlight + deck-row parallax (rAF-throttled, motion-aware) ---- */
   var REDUCE=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -413,13 +429,14 @@ body{background:radial-gradient(130% 110% at 50% -8%,#1a1a24,#08080b 72%);font-f
     if(pframe) return;
     pframe=requestAnimationFrame(function(){ pframe=0;
       spot.style.setProperty('--mx',pmx+'px'); spot.style.setProperty('--my',pmy+'px');
-      if(!REDUCE && !isMobile() && !table.classList.contains('hide')){
+      if(REDUCE||isMobile()) return;
+      if(!table.classList.contains('hide')){
         var px=(pmx/window.innerWidth-.5), py=(pmy/window.innerHeight-.5);
-        deckrow.style.transform='rotateX('+(-py*6)+'deg) rotateY('+(px*9)+'deg)';
-      }
+        deckrow.style.transform='rotateX('+(-py*3.5)+'deg) rotateY('+(px*5.5)+'deg)';
+      } else { feltHover(); }
     });
   });
-  window.addEventListener('pointerleave',function(){ deckrow.style.transform=''; });
+  window.addEventListener('pointerleave',function(){ deckrow.style.transform=''; clearActive(); });
 
   /* ---- easter egg: the universe deals you one (rare joker) ---- */
   function dealRandom(forceJoker){
