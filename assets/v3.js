@@ -3,7 +3,9 @@
 
   /* live clock */
   var el=document.getElementById('clock');
-  function tick(){if(!el)return;try{var now=new Date();var t=now.toLocaleTimeString('en-US',{timeZone:'Asia/Kolkata',hour:'numeric',minute:'2-digit'});var h=parseInt(now.toLocaleString('en-US',{timeZone:'Asia/Kolkata',hour:'numeric',hour12:false}),10);var gl=(h>=6&&h<18)?'☀':'☾';el.innerHTML='Bengaluru · '+t+' <span class="gl">'+gl+'</span>';}catch(e){el.textContent='Bengaluru';}}
+  var SUN='<svg class="gl" width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="8" cy="8" r="3"/><path d="M8 1.4v1.6M8 13v1.6M1.4 8h1.6M13 8h1.6M3.3 3.3l1.1 1.1M11.6 11.6l1.1 1.1M12.7 3.3l-1.1 1.1M4.4 11.6l-1.1 1.1"/></svg>';
+  var MOON='<svg class="gl" width="11" height="11" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M13.4 10.4A5.6 5.6 0 0 1 5.6 2.6 5.6 5.6 0 1 0 13.4 10.4z"/></svg>';
+  function tick(){if(!el)return;try{var now=new Date();var t=now.toLocaleTimeString('en-US',{timeZone:'Asia/Kolkata',hour:'numeric',minute:'2-digit'});var h=parseInt(now.toLocaleString('en-US',{timeZone:'Asia/Kolkata',hour:'numeric',hour12:false}),10);el.innerHTML='Bengaluru · '+t+' '+((h>=6&&h<18)?SUN:MOON);}catch(e){el.textContent='Bengaluru';}}
   tick();setInterval(tick,15000);
 
   /* disclosure (works wherever .rec exists) */
@@ -74,12 +76,27 @@
   var openBtn=document.getElementById('openk');if(openBtn)openBtn.addEventListener('click',openK);
   render();
 
-  /* footer credit, injected once */
+  /* footer — rebuilt once: shelf note, social icons, credit, ⌘K */
   var foot=document.querySelector('.foot');
-  if(foot && !foot.querySelector('.sig')){
-    var sig=document.createElement('span');sig.className='sig';
-    sig.innerHTML='built by rinkesh, fuelled by <a href="coffee.html">coffee</a> ☕';
-    var fr=foot.querySelector('.fr');foot.insertBefore(sig, fr||null);
+  if(foot && !foot.dataset.built){
+    foot.dataset.built='1';
+    var I_MAIL='<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7.5 8 5 8-5"/></svg>';
+    var I_X='<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M18.24 2.25h3.31l-7.23 8.26 8.5 11.24h-6.66l-5.21-6.82-5.97 6.82H1.66l7.73-8.84L1.25 2.25h6.83l4.71 6.23 5.45-6.23Zm-1.16 17.52h1.83L7.01 4.13H5.04l12.04 15.64Z"/></svg>';
+    var I_IN='<svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M6.94 5a2 2 0 1 1-4-.002 2 2 0 0 1 4 .002ZM7 8.48H3V21h4V8.48Zm6.32 0H9.34V21h3.94v-6.57c0-3.66 4.77-4 4.77 0V21H22v-7.93c0-6.17-7.06-5.94-8.72-2.91l.04-1.68Z"/></svg>';
+    foot.innerHTML=''
+      +'<div class="foot-top">'
+      +  '<a class="foot-shelf" href="shelf.html"><span class="fs-t">the shelf <span class="fs-ar">↗</span></span><span class="fs-n">books, board games, lego &amp; coffee — me, off the clock</span></a>'
+      +  '<div class="foot-social">'
+      +    '<a href="mailto:rinkeshgorasia@gmail.com" aria-label="Email">'+I_MAIL+'</a>'
+      +    '<a href="https://x.com/rinks__g" target="_blank" rel="noopener" aria-label="Twitter / X">'+I_X+'</a>'
+      +    '<a href="https://www.linkedin.com/in/rinksg/" target="_blank" rel="noopener" aria-label="LinkedIn">'+I_IN+'</a>'
+      +  '</div>'
+      +'</div>'
+      +'<div class="foot-bot">'
+      +  '<span class="foot-sig">built by rinkesh, fuelled by <a href="coffee.html">coffee</a></span>'
+      +  '<span class="fr" id="openk">⌘K for quick actions</span>'
+      +'</div>';
+    var ob=foot.querySelector('#openk');if(ob)ob.addEventListener('click',openK);
   }
 
   /* reading progress (article pages only) */
