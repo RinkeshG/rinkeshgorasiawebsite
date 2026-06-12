@@ -167,31 +167,31 @@ body{background:radial-gradient(130% 110% at 50% -8%,#1a1a24,#08080b 72%);font-f
   .dbar .clock{display:none}
   .cbtn{padding:8px 12px}
   .close.show{padding:8px 12px}
-  .lede{top:88px;left:18px;right:18px}
-  .lede h1{font-size:1.5rem}.lede .sub{font-size:.7rem}
+  .lede{top:102px;left:20px;right:20px}
+  .lede h1{font-size:1.55rem}.lede .sub{font-size:.72rem;margin-top:9px;line-height:1.5}
 
   .stage{perspective:none}
-  .ambient{background:radial-gradient(90% 50% at 50% 70%,var(--amb,transparent),transparent 72%)}
-  .table{place-items:start center;padding-top:150px}
-  .deckrow{display:grid;grid-template-columns:1fr 1fr;gap:18px 16px;width:100%;max-width:340px;padding:0 4px;transform:none!important}
+  .ambient{background:radial-gradient(90% 50% at 50% 66%,var(--amb,transparent),transparent 72%)}
+  /* landing: 2x2 grid, calm and roomy, no idle motion */
+  .table{place-items:start center;padding-top:172px}
+  .deckrow{display:grid;grid-template-columns:1fr 1fr;gap:24px 18px;width:100%;max-width:340px;padding:0 4px;transform:none!important}
   .deck{width:auto}.deck:hover{transform:none}
   .deck .pool{display:none}
-  .stack{height:180px;animation:none}
+  .stack{height:176px;animation:none}
   .bk .sym .ico-big{width:44px;height:44px}
-  .deck .meta{margin-top:11px}.deck .nm{font-size:.96rem}
-  /* hover-peek off on touch */
+  .deck .meta{margin-top:13px}.deck .nm{font-size:.98rem}.deck .ct{margin-top:5px}
   .deck:hover .l1,.deck:hover .l2,.deck:hover .bk:last-child{transform:none}
 
-  /* open deck = horizontal swipe carousel */
-  .felt.mob{display:flex;overflow-x:auto;overflow-y:hidden;align-items:center;gap:14px;padding:0 13vw;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+  /* open deck = horizontal swipe carousel in its own band, clear of header + footer */
+  .felt.mob{position:absolute;top:188px;bottom:98px;left:0;right:0;height:auto;display:flex;overflow-x:auto;overflow-y:hidden;align-items:center;gap:16px;padding:0 14vw;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
   .felt.mob::-webkit-scrollbar{display:none}
-  .felt.mob .card{position:relative;left:auto;top:auto;bottom:auto;margin:0;width:74vw;max-width:300px;height:auto;aspect-ratio:178/250;scroll-snap-align:center;flex:0 0 auto;transform-origin:center}
-  .felt.mob .card .face{box-shadow:0 16px 34px rgba(0,0,0,.5)}
+  .felt.mob .card{position:relative;left:auto;top:auto;bottom:auto;margin:0;height:100%;max-height:430px;width:auto;aspect-ratio:178/250;max-width:78vw;scroll-snap-align:center;flex:0 0 auto;transform-origin:center}
+  .felt.mob .card .face{box-shadow:0 16px 36px rgba(0,0,0,.55)}
 
   .fcard{width:84vw;max-width:340px;height:auto;aspect-ratio:316/444}
   .fwm{font-size:9rem;right:-14px;bottom:24px}
-  .deckfoot{bottom:52px;font-size:.76rem;padding:0 18px;line-height:1.5}
-  .fhint{bottom:22px;font-size:.68rem;padding:0 18px}
+  .deckfoot{bottom:42px;font-size:.76rem;padding:0 20px;line-height:1.55}
+  .fhint{bottom:20px;font-size:.68rem;padding:0 20px}
   .hint-d{display:none}.hint-m{display:inline}
 }
 .hint-m{display:none}
