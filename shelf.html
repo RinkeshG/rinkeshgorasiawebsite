@@ -183,7 +183,7 @@ body{background:radial-gradient(130% 110% at 50% -8%,#1a1a24,#08080b 72%);font-f
   .deck:hover .l1,.deck:hover .l2,.deck:hover .bk:last-child{transform:none}
 
   /* open deck = horizontal swipe carousel in its own band, clear of header + footer */
-  .felt.mob{position:absolute;top:188px;bottom:98px;left:0;right:0;height:auto;display:flex;overflow-x:auto;overflow-y:hidden;align-items:center;gap:16px;padding:0 14vw;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+  .felt.mob{position:absolute;top:188px;bottom:98px;left:0;right:0;height:auto;display:flex;overflow-x:auto;overflow-y:hidden;align-items:center;gap:16px;padding:0 14vw;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch}
   .felt.mob::-webkit-scrollbar{display:none}
   .felt.mob .card{position:relative;left:auto;top:auto;bottom:auto;margin:0;height:100%;max-height:430px;width:auto;aspect-ratio:178/250;max-width:78vw;scroll-snap-align:center;flex:0 0 auto;transform-origin:center}
   .felt.mob .card .face{box-shadow:0 16px 36px rgba(0,0,0,.55)}
@@ -403,8 +403,8 @@ body{background:radial-gradient(130% 110% at 50% -8%,#1a1a24,#08080b 72%);font-f
 
   document.getElementById('sound').addEventListener('click',function(){ soundOn=!soundOn; this.textContent=soundOn?'🔊 sound on':'🔇 sound off'; if(soundOn){au();riffle();} });
 
-  /* ---- click empty felt to close the open deck ---- */
-  felt.addEventListener('click',function(e){ if(e.target===felt && felt.classList.contains('live')) closeDeck(); });
+  /* ---- click empty felt to close the open deck (desktop only; mobile uses the button, and tap-outside here mis-fires on touch) ---- */
+  felt.addEventListener('click',function(e){ if(!isMobile() && e.target===felt && felt.classList.contains('live')) closeDeck(); });
 
   /* ---- depth: cursor spotlight + deck-row parallax (rAF-throttled, motion-aware) ---- */
   var REDUCE=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
