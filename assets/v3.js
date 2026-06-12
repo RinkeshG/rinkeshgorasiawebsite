@@ -33,11 +33,7 @@
   function sayHi(persist){if(bubble){bubble.textContent=hellos[hi%hellos.length];hi++;}doWave();if(persist&&bubble){bubble.classList.add('show');clearTimeout(bt);bt=setTimeout(function(){bubble.classList.remove('show');},2200);}}
   if(photo){photo.addEventListener('mouseenter',function(){sayHi(false);});}
 
-  /* toast */
-  var toastEl=document.createElement('div');toastEl.className='toast';document.body.appendChild(toastEl);
-  var tt;function toast(msg){toastEl.textContent=msg;toastEl.classList.add('show');clearTimeout(tt);tt=setTimeout(function(){toastEl.classList.remove('show');},1600);}
-
-  /* command palette (injected on every page) */
+  /* command palette (injected on every page) — uses the shared toast defined below */
   var overlay=document.createElement('div');overlay.className='cmdk';overlay.id='cmdk';overlay.setAttribute('aria-hidden','true');
   overlay.innerHTML='<div class="cmdk-box" role="dialog" aria-label="Quick actions"><input class="cmdk-input" id="cmdk-input" placeholder="type a command... try \'sniff\', \'email\', or \'resume\'" autocomplete="off" spellcheck="false" /><ul class="cmdk-list" id="cmdk-list"></ul><div class="cmdk-foot"><span>↑ ↓ navigate</span><span>↵ select</span><span>esc close</span></div></div>';
   document.body.appendChild(overlay);
