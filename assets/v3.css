@@ -153,6 +153,22 @@ a{color:inherit}
 .post-tag.draft{color:var(--mut)}
 .post-ex{margin-top:8px;font-size:.96rem;color:var(--mut);line-height:1.55;max-width:64ch}
 
+/* home cards — projects & ventures, always-open, low cognitive load */
+.pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(218px,1fr));gap:14px;margin-top:18px}
+.pcard{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:12px;background:var(--elev);padding:18px 19px 15px;text-decoration:none;transition:border-color .2s,transform .25s var(--eout)}
+a.pcard:hover{border-color:color-mix(in srgb,var(--accent) 38%,transparent);transform:translateY(-3px)}
+.pc-head{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:22px}
+.pc-name{font-size:1.06rem;font-weight:600;color:var(--ink);letter-spacing:-.01em}
+.pc-date{font-family:var(--mono);font-size:.68rem;color:var(--mut);white-space:nowrap}
+.pc-date .ex{color:var(--accent)}
+.pc-desc{font-size:.9rem;color:var(--read);line-height:1.5;margin-top:10px;flex:1}
+.pc-stats{font-family:var(--mono);font-size:.7rem;color:var(--mut);margin-top:14px;line-height:1.65}
+.pc-stats b{color:var(--ink);font-weight:500}
+.pc-go{font-family:var(--mono);font-size:.72rem;color:var(--accent);margin-top:13px;display:inline-flex;align-items:center;gap:6px;transition:gap .2s}
+.pcard:hover .pc-go{gap:10px}
+.pcard.soon{opacity:.62}
+@media(max-width:640px){.pgrid{grid-template-columns:1fr;gap:12px}.pcard{padding:16px 17px 14px}}
+
 /* legacy writing rows (home) */
 .wr{display:grid;grid-template-columns:1fr auto;gap:18px;align-items:baseline;padding:14px 0;border-top:1px solid var(--line);text-decoration:none;transition:background .2s}
 .rows .wr:last-child{border-bottom:1px solid var(--line)}
