@@ -109,6 +109,20 @@
     copyText(email).then(function(){ toast('copied '+email); }, function(){ toast(email); });
   });
 
+  /* page-aware work close: book + CV light up once their links exist.
+     drop the two URLs in and the buttons appear; until then, email leads. */
+  var CAL_URL='';            /* e.g. 'https://cal.com/rinkesh/15min' */
+  var CV_URL='';             /* e.g. 'resume.html' */
+  (function(){
+    var book=document.querySelector('[data-book]');
+    if(book){
+      if(CAL_URL){ book.href=CAL_URL; book.removeAttribute('hidden'); }
+      else { var em=document.querySelector('.email-act'); if(em){ em.classList.remove('btn-ghost'); em.classList.add('btn-primary'); } }
+    }
+    var cv=document.querySelector('[data-cv]');
+    if(cv&&CV_URL){ cv.href=CV_URL; cv.removeAttribute('hidden'); }
+  })();
+
   /* reading progress (article pages only) */
   if(document.querySelector('.artwrap')){
     var bar=document.createElement('div');bar.className='progress';document.body.appendChild(bar);

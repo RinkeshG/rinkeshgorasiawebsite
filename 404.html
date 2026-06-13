@@ -46,11 +46,19 @@
 .lost .hint.on{opacity:1}
 .lost .cta{margin-top:18px}
 @media(max-width:640px){
+  /* mobile gets its own contained composition: the fallen card lies flat,
+     centered on its own slot, so it can never reach past the row. */
   .lost{min-height:calc(100vh - 150px)}
-  .deck404{gap:14px;height:150px}
-  .c404{width:88px;height:120px}
-  .c404 .d{font-size:2.6rem}
-  .paws{right:-72px}
+  .deck404{gap:12px;height:150px}
+  .c404{width:62px;height:86px;border-radius:var(--r2)}
+  .c404::before{inset:6px;border-radius:7px}
+  .c404 .d{font-size:2rem}
+  .c404 .pip{top:7px;left:8px;font-size:.625rem}
+  #fallcard{transform-origin:50% 50%}
+  #fallcard.down{transform:rotate(90deg) translateY(20px)}
+  .paws{right:-2px;bottom:-4px;gap:10px}
+  .paws svg{width:15px;height:15px}
+  .mrrp404{right:-6px;top:-4px}
 }
 @media(prefers-reduced-motion:reduce){
   .c404,.c404.d1,.c404.d2,#fallcard.dealing{animation:none;opacity:1}
