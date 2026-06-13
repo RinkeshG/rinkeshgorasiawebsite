@@ -1,0 +1,68 @@
+/* ════════════════════════════════════════════════════════════════
+   LIGHT THEME — the same system, in daylight.
+
+   This is NOT a second design language. Type, spacing, radius and
+   motion are inherited untouched from v3.css — those are the brand.
+   Light mode only re-skins three things: palette, elevation, and how
+   the lime *expresses* itself.
+
+   Continuity trick: dark mode's ink (a warm cream) becomes light
+   mode's paper; dark mode's paper (a warm near-black) becomes light
+   mode's ink. The same two warm tones, with their roles swapped — so
+   the two modes read as one brand seen under different light, not two
+   designs.
+
+   The lime can't survive a naive invert (#c4e86b is invisible on
+   cream), so it splits by job:
+     · --accent       = the lime taken DEEP, for anything that must
+                        read: links, captions, the pulse, borders.
+     · --accent-bright = the original lime, kept for the places it
+                        still sings on paper: selection, fills, and
+                        the highlighter.
+   Activate with <html data-theme="light">.
+   ════════════════════════════════════════════════════════════════ */
+
+[data-theme="light"]{
+  --bg:#f4f1e8;             /* warm paper — was the dark mode's ink */
+  --surface-1:#fbf9f3;      /* raised card — a hair toward white */
+  --surface-2:#ece8db;      /* inset well (logo marks) — a hair deeper than paper */
+  --ink:#1c1913;            /* warm near-black — was the dark mode's paper */
+  --read:#45413a;           /* warm dark grey — long-read body */
+  --mut:#736e61;            /* warm grey — labels & metadata, kept dark enough to read */
+  --line:#e6e1d3;           /* quiet divider */
+  --line2:#d4cebd;          /* touchable edge */
+  --accent:#55731c;         /* the lime, taken deep so it reads as text/border/dot on paper */
+  --accentdim:#71912f;
+  --accent-bright:#c4e86b;  /* the original lime — for selection, fills, the highlighter */
+  --danger:#bd4f37;
+  color-scheme:light;
+}
+[data-theme="light"] body{background:var(--bg);color:var(--read)}
+
+/* selection — the lime the way it can only look on paper */
+[data-theme="light"] ::selection{background:var(--accent-bright);color:#1c1913}
+[data-theme="light"] :focus-visible{outline-color:var(--accent)}
+
+/* ── ELEVATION ──
+   on paper, shadows are soft and warm — never the dark-mode slab.
+   structure is carried by the hairline borders; shadow is for the few
+   things that genuinely float. */
+[data-theme="light"] .pf{box-shadow:0 18px 40px rgba(70,58,28,.14),0 2px 6px rgba(70,58,28,.07)}
+[data-theme="light"] .pf:hover{box-shadow:0 26px 54px rgba(70,58,28,.17),0 4px 10px rgba(70,58,28,.09)}
+[data-theme="light"] .bubble,[data-theme="light"] .bubble::after{box-shadow:none}
+[data-theme="light"] .bubble{box-shadow:0 10px 24px rgba(70,58,28,.15)}
+[data-theme="light"] .toast{box-shadow:0 16px 40px rgba(70,58,28,.17)}
+[data-theme="light"] .cmdk{background:rgba(40,34,18,.32)}
+[data-theme="light"] .cmdk-box{box-shadow:0 26px 60px rgba(70,58,28,.2)}
+
+/* emphasis (.hl) keeps the dark system's clean underline — no highlighter.
+   on paper the accentdim underline reads as a deep-green rule under the word. */
+
+/* the dotted launch texture was tuned for dark — lift it onto paper */
+[data-theme="light"] .launch{background:radial-gradient(130% 130% at 28% 0,var(--surface-2),var(--bg))}
+[data-theme="light"] .launch span{background:var(--surface-1)}
+
+/* theme-toggle chip (prototype only) */
+.tmode{position:fixed;bottom:18px;right:18px;z-index:120;font-family:var(--mono);font-size:.72rem;color:var(--mut);background:var(--surface-1);border:1px solid var(--line2);border-radius:var(--r1);padding:9px 13px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:color .18s,border-color .18s}
+.tmode:hover{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 40%,transparent)}
+.tmode .dot{width:9px;height:9px;border-radius:50%;background:var(--accent)}

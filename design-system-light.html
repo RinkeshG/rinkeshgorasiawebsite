@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Light theme — Design System — Rinkesh Gorasia</title>
+<meta name="robots" content="noindex" />
+<meta name="theme-color" content="#f4f1e8" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/v3.css">
+<link rel="stylesheet" href="assets/light.css">
+<style>
+.dpage{max-width:880px;margin:0 auto;padding:40px 32px 100px}
+.dhead{padding:24px 0 8px;border-bottom:1px solid var(--line);margin-bottom:8px}
+.dhead .eyebrow{font-family:var(--mono);font-size:.75rem;font-weight:500;color:var(--accent);letter-spacing:.04em}
+.dhead h1{font-size:clamp(1.8rem,4vw,2.2rem);font-weight:600;color:var(--ink);letter-spacing:-.02em;line-height:1.05;margin-top:14px}
+.dhead p{font-size:1.0625rem;color:var(--read);line-height:1.6;margin-top:14px;max-width:60ch}
+.dhead .modes{margin-top:18px;display:flex;gap:8px;font-family:var(--mono);font-size:.72rem}
+.dhead .modes a{text-decoration:none;border:1px solid var(--line2);border-radius:var(--r1);padding:7px 13px;color:var(--mut)}
+.dhead .modes a.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.dhead .modes a:not(.on):hover{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 40%,transparent)}
+
+section{padding-top:56px}
+.cap2{font-family:var(--mono);font-size:.75rem;font-weight:500;color:var(--mut);letter-spacing:.04em}
+.cap2 .n{color:var(--accent)}
+.h2{font-size:1.3rem;font-weight:600;color:var(--ink);letter-spacing:-.01em;margin:10px 0 8px}
+.lead{font-size:1rem;color:var(--read);line-height:1.65;max-width:64ch}
+.lead b{color:var(--ink);font-weight:500}
+.note{font-size:.9375rem;color:var(--mut);line-height:1.6;max-width:64ch;margin-top:12px}
+.note b{color:var(--read);font-weight:500}
+
+/* palette mapping */
+.map{margin-top:22px;border:1px solid var(--line2);border-radius:var(--r2);overflow:hidden}
+.map-row{display:grid;grid-template-columns:150px 1fr 1fr;align-items:center;gap:16px;padding:13px 18px;border-top:1px solid var(--line)}
+.map-row:first-child{border-top:0}
+.map-role{font-family:var(--mono);font-size:.78rem;color:var(--ink)}
+.map-role small{display:block;color:var(--mut);font-size:.92em;margin-top:3px}
+.sw{display:flex;align-items:center;gap:11px;font-family:var(--mono);font-size:.72rem;color:var(--mut)}
+.sw i{width:30px;height:30px;border-radius:8px;border:1px solid rgba(120,110,80,.18);flex:0 0 auto}
+.maphd{display:grid;grid-template-columns:150px 1fr 1fr;gap:16px;padding:11px 18px;background:var(--surface-2);font-family:var(--mono);font-size:.68rem;color:var(--mut);letter-spacing:.06em;text-transform:uppercase}
+
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px}
+@media(max-width:680px){.row2{grid-template-columns:1fr}.map-row,.maphd{grid-template-columns:110px 1fr 1fr;gap:10px;font-size:.9em}}
+.panel{border:1px solid var(--line2);border-radius:var(--r2);background:var(--surface-1);padding:20px}
+.panel h3{font-family:var(--mono);font-size:.72rem;color:var(--accent);letter-spacing:.04em;margin-bottom:12px}
+.specimen{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:18px}
+.tile{border:1px solid var(--line2);border-radius:var(--r2);background:var(--bg);padding:22px;margin-top:14px}
+.tile .lbl{font-family:var(--mono);font-size:.68rem;color:var(--mut);display:block;margin-bottom:14px;letter-spacing:.04em}
+
+/* live mini-components reusing the brand tokens */
+.x-pulse{width:8px;height:8px;border-radius:50%;background:var(--accent);display:inline-block;vertical-align:middle;margin-right:8px}
+.x-status{font-family:var(--mono);font-size:.78rem;color:var(--accent)}
+.x-cta{font-family:var(--mono);font-size:.78rem;font-weight:500;display:inline-flex;align-items:center;gap:8px;color:var(--accent);text-decoration:none;border:1px solid color-mix(in srgb,var(--accent) 38%,transparent);border-radius:var(--r1);padding:11px 16px;transition:.2s}
+.x-cta:hover{background:color-mix(in srgb,var(--accent) 10%,transparent);border-color:var(--accent)}
+.x-ghost{font-family:var(--mono);font-size:.78rem;color:var(--read);border:1px solid var(--line2);border-radius:var(--r1);padding:11px 16px}
+.x-tag{font-family:var(--mono);font-size:.6875rem;border-radius:var(--r1);padding:3px 9px}
+.x-tag.live{color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 50%,transparent)}
+.x-tag.soon{color:var(--mut);border:1px solid var(--line2)}
+.x-mark{width:38px;height:38px;border-radius:var(--r2);display:grid;place-items:center;border:1px solid var(--line2);background:var(--surface-2);font-weight:600;color:var(--mut);font-family:var(--sans)}
+.x-stat .n{display:block;font-family:var(--mono);font-size:1.25rem;font-weight:600;color:var(--ink);line-height:1.05;font-variant-numeric:tabular-nums}
+.x-stat .l{display:block;font-family:var(--mono);font-size:.75rem;color:var(--read);margin-top:7px}
+.x-card{border:1px solid var(--line2);border-radius:var(--r2);background:var(--surface-1);padding:20px;max-width:300px}
+.x-card .t{display:flex;align-items:center;gap:10px;font-weight:600;color:var(--ink)}
+.x-card .d{font-size:.9375rem;color:var(--read);line-height:1.6;margin-top:12px}
+.x-card .s{font-family:var(--mono);font-size:.6875rem;color:var(--mut);margin-top:14px}
+.x-card .s b{color:var(--ink);font-weight:500}
+.x-link{font-family:var(--mono);font-size:.78rem;color:var(--accent);text-decoration:none}
+.x-hl{color:var(--ink);font-weight:500;border-bottom:1.5px solid var(--accentdim);padding-bottom:1px}
+.x-type .d1{font-size:2rem;font-weight:600;color:var(--ink);letter-spacing:-.02em}
+.x-type .d2{font-size:1.2rem;color:var(--read);margin-top:8px}
+.x-type .d3{font-family:var(--mono);font-size:.75rem;color:var(--mut);margin-top:8px;letter-spacing:.04em}
+.x-elev{display:flex;gap:18px;flex-wrap:wrap;margin-top:14px}
+.x-elev .e{width:130px;height:90px;border-radius:var(--r2);background:var(--surface-1);border:1px solid var(--line2);display:grid;place-items:center;font-family:var(--mono);font-size:.68rem;color:var(--mut)}
+.x-elev .e.float{box-shadow:0 16px 40px rgba(70,58,28,.16);border-color:var(--line)}
+</style>
+</head>
+<body>
+<div class="dpage">
+
+  <div class="dhead">
+    <p class="eyebrow">// visual language</p>
+    <h1>The light theme.</h1>
+    <p>Not a second system — the same one, in daylight. Type, spacing, radius and motion are inherited from the dark theme untouched. Only the <b>palette</b>, the <b>elevation</b>, and the way the lime <b>expresses itself</b> change.</p>
+    <div class="modes">
+      <a href="design-system.html">◐ dark</a>
+      <a href="design-system-light.html" class="on">○ light</a>
+      <a href="light.html">↗ home in light</a>
+    </div>
+  </div>
+
+  <!-- 01 PRINCIPLE -->
+  <section>
+    <p class="cap2"><span class="n">01</span> / the continuity move</p>
+    <h2 class="h2">Swap the two warm tones, don't invert.</h2>
+    <p class="lead">The brand already owns two warm tones: a near-black and a cream. Dark mode uses the cream as <b>ink</b> on the near-black <b>paper</b>. Light mode simply swaps their roles — the cream becomes the paper, the near-black becomes the ink. Same pigments, reversed. That is what makes the two modes read as one brand under different light, instead of two designs.</p>
+    <p class="note"><b>Why cream, not white.</b> A pure-white light mode would feel clinical and cold — a different brand. The warmth (<code>#f4f1e8</code>, a soft bone) is the through-line that ties it to the dark theme's warmth.</p>
+  </section>
+
+  <!-- 02 PALETTE -->
+  <section>
+    <p class="cap2"><span class="n">02</span> / palette — dark → light</p>
+    <h2 class="h2">Every token, mapped.</h2>
+    <p class="lead">The same semantic roles, re-valued for paper. The ink ramp (ink → read → mut) reverses direction; the hairlines flip from light-on-dark to dark-on-cream; the lime is the one role that needs real rethinking (next section).</p>
+    <div class="map">
+      <div class="maphd"><span>role</span><span>dark</span><span>light</span></div>
+      <div class="map-row"><span class="map-role">bg<small>the page</small></span><span class="sw"><i style="background:#0d0d0c"></i>#0d0d0c</span><span class="sw"><i style="background:#f4f1e8"></i>#f4f1e8</span></div>
+      <div class="map-row"><span class="map-role">surface-1<small>raised card</small></span><span class="sw"><i style="background:#131310"></i>#131310</span><span class="sw"><i style="background:#fbf9f3"></i>#fbf9f3</span></div>
+      <div class="map-row"><span class="map-role">surface-2<small>inset well</small></span><span class="sw"><i style="background:#16140f"></i>#16140f</span><span class="sw"><i style="background:#ece8db"></i>#ece8db</span></div>
+      <div class="map-row"><span class="map-role">ink<small>said clearly</small></span><span class="sw"><i style="background:#f1efe7"></i>#f1efe7</span><span class="sw"><i style="background:#1c1913"></i>#1c1913</span></div>
+      <div class="map-row"><span class="map-role">read<small>long-read body</small></span><span class="sw"><i style="background:#cbc8bd"></i>#cbc8bd</span><span class="sw"><i style="background:#45413a"></i>#45413a</span></div>
+      <div class="map-row"><span class="map-role">mut<small>context</small></span><span class="sw"><i style="background:#8f8c81"></i>#8f8c81</span><span class="sw"><i style="background:#736e61"></i>#736e61</span></div>
+      <div class="map-row"><span class="map-role">line<small>divider</small></span><span class="sw"><i style="background:#262520"></i>#262520</span><span class="sw"><i style="background:#e6e1d3"></i>#e6e1d3</span></div>
+      <div class="map-row"><span class="map-role">line2<small>edge</small></span><span class="sw"><i style="background:#34332b"></i>#34332b</span><span class="sw"><i style="background:#d4cebd"></i>#d4cebd</span></div>
+      <div class="map-row"><span class="map-role">danger<small>broke</small></span><span class="sw"><i style="background:#d9694e"></i>#d9694e</span><span class="sw"><i style="background:#bd4f37"></i>#bd4f37</span></div>
+    </div>
+  </section>
+
+  <!-- 03 THE LIME -->
+  <section>
+    <p class="cap2"><span class="n">03</span> / the lime, split by job</p>
+    <h2 class="h2">One accent can't do both jobs on paper.</h2>
+    <p class="lead">On near-black, <code>#c4e86b</code> works as both text and fill. On cream it's invisible as text. So in light it splits: a <b>deep</b> lime for anything that must read, and the <b>bright</b> original kept only where it still sings — selection and small fills.</p>
+    <div class="row2">
+      <div class="panel">
+        <h3>--accent · the deep lime</h3>
+        <div class="sw" style="margin-bottom:14px"><i style="background:#55731c;width:46px;height:46px"></i>#55731c</div>
+        <p class="note" style="margin-top:0">Links, the <code>//</code> captions, the live pulse, "full story →", borders, the active state. Reads cleanly on cream (≈5:1).</p>
+        <div class="specimen">
+          <span class="x-status"><span class="x-pulse"></span>open to 0→1 roles</span>
+        </div>
+        <div class="specimen">
+          <a class="x-cta" href="#">→ book 15 min</a>
+          <a class="x-link" href="#">full story →</a>
+        </div>
+        <p style="font-family:var(--mono);font-size:.78rem;color:var(--accent);margin-top:16px">// track record</p>
+      </div>
+      <div class="panel">
+        <h3>--accent-bright · the original lime</h3>
+        <div class="sw" style="margin-bottom:14px"><i style="background:#c4e86b;width:46px;height:46px"></i>#c4e86b</div>
+        <p class="note" style="margin-top:0">Kept for the two places it still works on cream: <b>text selection</b> and small object fills. Try selecting this sentence to see it.</p>
+        <p class="note"><b>Emphasis stays an underline</b> in both modes — the same clean rule, no highlighter: <span class="x-hl">85+ hospitals before Zocdoc</span>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 ELEVATION -->
+  <section>
+    <p class="cap2"><span class="n">04</span> / elevation</p>
+    <h2 class="h2">Soft, warm shadows — never the dark-mode slab.</h2>
+    <p class="lead">Structure is carried by the hairline borders in both modes. Shadow is only for things that genuinely float, and on paper it's soft and warm-tinted (<code>rgba(70,58,28,.14)</code>) — a hard black shadow on cream looks cheap.</p>
+    <div class="x-elev">
+      <div class="e">border only<br>(resting)</div>
+      <div class="e float">+ soft shadow<br>(floating)</div>
+    </div>
+  </section>
+
+  <!-- 05 TYPE -->
+  <section>
+    <p class="cap2"><span class="n">05</span> / type — unchanged</p>
+    <h2 class="h2">Same voice, both modes.</h2>
+    <p class="lead">Space Grotesk + JetBrains Mono, identical sizes, weights and leading. Fonts are the brand's voice; they don't change with the lighting — changing them would make it two brands.</p>
+    <div class="tile x-type">
+      <span class="lbl">// the scale, on paper</span>
+      <div class="d1">display · Space Grotesk 600</div>
+      <div class="d2">lead · the calm, confident first read</div>
+      <div class="d3">mono · labels · data · 0→1</div>
+    </div>
+    <p class="note"><b>One honest caveat:</b> dark text on light optically reads heavier than light-on-dark, so the 600 weights feel a touch bolder here. It's within tolerance; if it ever reads heavy, drop display weight to ~550 in light only.</p>
+  </section>
+
+  <!-- 06 COMPONENTS -->
+  <section>
+    <p class="cap2"><span class="n">06</span> / components, in daylight</p>
+    <h2 class="h2">The same kit, re-lit.</h2>
+    <p class="lead">Every component is the dark-theme component reading the light tokens — nothing is rebuilt.</p>
+
+    <div class="tile">
+      <span class="lbl">// tags & status</span>
+      <div class="specimen">
+        <span class="x-tag live">● live</span>
+        <span class="x-tag soon">soon</span>
+        <span class="x-status"><span class="x-pulse"></span>open to 0→1 roles</span>
+      </div>
+    </div>
+
+    <div class="tile">
+      <span class="lbl">// stat — the receipt (mono, one colour)</span>
+      <div class="specimen" style="gap:40px">
+        <span class="x-stat"><span class="n">85+</span><span class="l">hospitals</span></span>
+        <span class="x-stat"><span class="n">~$1M</span><span class="l">arr</span></span>
+        <span class="x-stat"><span class="n">40%</span><span class="l">completion</span></span>
+      </div>
+    </div>
+
+    <div class="tile">
+      <span class="lbl">// card — surface-1 on paper, hairline edge</span>
+      <div class="x-card">
+        <span class="t"><span class="x-mark">S</span>Sniff</span>
+        <p class="d">your cat's food, decoded — no scores, no sponsors, just the math.</p>
+        <p class="s"><b>5K</b> scans · <b>1.2K</b> foods rated · free</p>
+      </div>
+    </div>
+  </section>
+
+</div>
+</body></html>
