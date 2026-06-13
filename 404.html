@@ -96,28 +96,64 @@
   var card=document.getElementById('fallcard'), paws=document.querySelector('.paws'),
       mrrp=document.getElementById('mrrp404'), hint=document.getElementById('hint');
   var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var busy=false;
+  var down=false, busy=false;
+  function R(a,b){ return a+Math.random()*(b-a); }
+  function mobile(){ return window.matchMedia('(max-width:640px)').matches; }
+  function settle(a){ try{ a.commitStyles(); a.cancel(); }catch(e){} }
 
-  if(reduce){ card.classList.add('down'); paws.classList.add('go'); hint.classList.add('on'); return; }
+  /* a real walk isn't a neat row — scatter the paws a touch each visit */
+  [].forEach.call(paws.querySelectorAll('svg'), function(p){
+    p.style.transform='rotate('+(22+R(-9,13)).toFixed(0)+'deg) translateY('+R(-3,4).toFixed(0)+'px)';
+  });
 
-  /* the deal lands (~0.96s), then the last card topples once. */
+  /* a knocked card doesn't fall the same way twice: gravity accelerates it over,
+     it overshoots when it lands, bounces once, then settles at a random-ish angle. */
+  function fall(){
+    var m=mobile();
+    card.style.transformOrigin = m ? '50% 50%' : '100% 100%';
+    var ang = (m?87:84) + R(-5,9);
+    var tx  = (m?0:3) + R(-5,6), ty = (m?20:2) + R(-3,6);
+    var b   = R(5,12);                                  /* how hard it bounces */
+    var base= 'translate('+tx.toFixed(1)+'px,'+ty.toFixed(1)+'px) ';
+    var kf=[
+      {transform:base+'rotate(0deg)',                  offset:0,   easing:'cubic-bezier(.55,.06,.95,.5)'}, /* gravity */
+      {transform:base+'rotate('+(ang+b).toFixed(1)+'deg)',     offset:.58, easing:'cubic-bezier(.3,.5,.4,1)'}, /* impact, overshoot */
+      {transform:base+'rotate('+(ang-b*0.4).toFixed(1)+'deg)', offset:.74, easing:'ease-in-out'},              /* bounce up */
+      {transform:base+'rotate('+(ang+b*0.13).toFixed(1)+'deg)',offset:.89, easing:'ease-out'},                 /* micro-settle */
+      {transform:base+'rotate('+ang.toFixed(1)+'deg)',         offset:1}
+    ];
+    var a=card.animate(kf, {duration:660+R(0,280), fill:'forwards'});
+    a.onfinish=function(){ settle(a); down=true; };
+  }
+
+  if(reduce){
+    card.style.transform = mobile() ? 'rotate(89deg) translateY(20px)' : 'rotate(85deg) translate(3px,0)';
+    paws.classList.add('go'); hint.classList.add('on'); return;
+  }
+
+  /* deal lands, then it topples (once) */
   setTimeout(function(){
     card.classList.remove('dealing');
-    card.classList.add('fall-trans','down');
+    /* the two standing cards never sit perfectly straight either */
+    [].forEach.call(document.querySelectorAll('.c404.d1,.c404.d2'), function(c){ c.style.transform='rotate('+R(-1.4,1.4).toFixed(2)+'deg)'; });
+    fall();
     paws.classList.add('go');
     setTimeout(function(){ hint.classList.add('on'); }, 700);
   }, 1100);
 
-  /* the flourish: stand it up — it won't last. */
+  /* the flourish: stand it up — it falls again, differently, every time */
   function standUp(){
-    if(busy||!card.classList.contains('down')) return;
-    busy=true; hint.classList.remove('on');
-    card.classList.remove('down');
-    setTimeout(function(){
-      card.classList.add('down');
-      mrrp.classList.add('show');
-      setTimeout(function(){ mrrp.classList.remove('show'); busy=false; },1600);
-    },1500);
+    if(busy||!down) return;
+    busy=true; if(hint) hint.classList.remove('on');
+    var a=card.animate([{transform:getComputedStyle(card).transform},{transform:'rotate(0deg) translate(0,0)'}],
+      {duration:430, easing:'cubic-bezier(.34,1.5,.5,1)', fill:'forwards'});
+    a.onfinish=function(){ settle(a); down=false;
+      setTimeout(function(){
+        fall();
+        mrrp.classList.add('show');
+        setTimeout(function(){ mrrp.classList.remove('show'); busy=false; }, 1500);
+      }, R(450,820));   /* a varied beat of "standing" before it goes again */
+    };
   }
   card.addEventListener('click',standUp);
   card.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); standUp(); } });
