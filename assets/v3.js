@@ -57,12 +57,14 @@
   function render(){list.innerHTML='';view.forEach(function(a,i){var li=document.createElement('li');li.className=i===sel?'sel':'';li.innerHTML='<span>'+a.l+'</span><span class="h">'+a.h+'</span>';li.addEventListener('mousemove',function(){if(sel!==i){sel=i;render();}});li.addEventListener('click',function(){run(i);});list.appendChild(li);});}
   function filter(){var q=input.value.trim().toLowerCase();view=q?actions.filter(function(a){return (a.l+' '+a.k).toLowerCase().indexOf(q)>=0;}):actions.slice();sel=0;render();}
   function run(i){var a=view[i];if(a){closeK();a.run();}}
-  function openK(){cmdk.classList.add('open');cmdk.setAttribute('aria-hidden','false');input.value='';filter();setTimeout(function(){input.focus();},20);}
-  function closeK(){cmdk.classList.remove('open');cmdk.setAttribute('aria-hidden','true');}
+  var lastFocus=null;
+  function openK(){lastFocus=document.activeElement;cmdk.classList.add('open');cmdk.setAttribute('aria-hidden','false');input.value='';filter();setTimeout(function(){input.focus();},20);}
+  function closeK(){cmdk.classList.remove('open');cmdk.setAttribute('aria-hidden','true');if(lastFocus&&lastFocus.focus){try{lastFocus.focus();}catch(e){}}lastFocus=null;}
   document.addEventListener('keydown',function(e){
     if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){e.preventDefault();cmdk.classList.contains('open')?closeK():openK();return;}
     if(!cmdk.classList.contains('open'))return;
     if(e.key==='Escape'){closeK();}
+    else if(e.key==='Tab'){e.preventDefault();input.focus();} /* trap: input is the only focusable; arrows drive the list */
     else if(e.key==='ArrowDown'){e.preventDefault();sel=Math.min(sel+1,view.length-1);render();}
     else if(e.key==='ArrowUp'){e.preventDefault();sel=Math.max(sel-1,0);render();}
     else if(e.key==='Enter'){e.preventDefault();run(sel);}
@@ -123,11 +125,17 @@
     if(cv&&CV_URL){ cv.href=CV_URL; cv.removeAttribute('hidden'); }
   })();
 
-  /* reading progress (article pages only) */
+  /* reading progress (article pages only) — rAF-batched; layout read cached, only
+     recomputed on resize, never on the scroll hot path. */
   if(document.querySelector('.artwrap')){
     var bar=document.createElement('div');bar.className='progress';document.body.appendChild(bar);
-    function prog(){var h=document.documentElement.scrollHeight-window.innerHeight;bar.style.width=(h>0?Math.min(100,(window.scrollY/h)*100):0)+'%';}
-    window.addEventListener('scroll',prog,{passive:true});window.addEventListener('resize',prog);prog();
+    var maxScroll=0,pframe=0;
+    function measure(){maxScroll=document.documentElement.scrollHeight-window.innerHeight;}
+    function paint(){pframe=0;bar.style.width=(maxScroll>0?Math.min(100,(window.scrollY/maxScroll)*100):0)+'%';}
+    function prog(){if(!pframe)pframe=requestAnimationFrame(paint);}
+    measure();paint();
+    window.addEventListener('scroll',prog,{passive:true});
+    window.addEventListener('resize',function(){measure();prog();});
   }
 
   /* ── Simba crosses ──────────────────────────────────────────────
@@ -138,7 +146,7 @@
   (function(){
     if(reduce) return;
     var PAW='<svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><circle cx="6" cy="9" r="2"/><circle cx="11" cy="6.5" r="2"/><circle cx="16.5" cy="8" r="2"/><path d="M11.5 11c-3 0-5.5 2-5.5 4.6 0 1.8 1.7 2.7 2.8 2 .9-.6 1-1 2.7-1s1.8.4 2.7 1c1.1.7 2.8-.2 2.8-2 0-2.6-2.5-4.6-5.5-4.6z"/></svg>';
-    var done=false, idle;
+    var done=false, idle, evs=['mousemove','scroll','keydown','touchstart','pointerdown'];
     function step(x,y,rot,delay){
       var s=document.createElement('span');
       s.innerHTML=PAW;
@@ -149,15 +157,16 @@
         setTimeout(function(){ s.style.opacity='0'; setTimeout(function(){ s.remove(); },450); },1400);
       },delay);
     }
+    function disarm(){ clearTimeout(idle); evs.forEach(function(ev){ window.removeEventListener(ev, arm); }); }
     function walk(){
-      if(done||document.hidden) return; done=true;
+      if(done) return;
+      if(document.hidden){ idle=setTimeout(walk, 32000); return; }  /* wait for a visible tab; keep listening */
+      done=true; disarm();                                          /* one-shot easter egg → one-shot listeners */
       var w=innerWidth, h=innerHeight, n=8, x0=-26, y0=h*0.82, dx=(w+52)/n, dy=-(h*0.16)/n;
       for(var i=0;i<n;i++) step(x0+dx*i, y0+dy*i+(i%2?13:-13), 30, i*170);
     }
-    function arm(){ clearTimeout(idle); if(!done) idle=setTimeout(walk, 32000); }
-    ['mousemove','scroll','keydown','touchstart','pointerdown'].forEach(function(ev){
-      window.addEventListener(ev, arm, {passive:true});
-    });
+    function arm(){ if(done) return; clearTimeout(idle); idle=setTimeout(walk, 32000); }
+    evs.forEach(function(ev){ window.addEventListener(ev, arm, {passive:true}); });
     arm();
   })();
 })();

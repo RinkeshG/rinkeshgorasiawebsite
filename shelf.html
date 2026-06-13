@@ -20,7 +20,8 @@
 <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
 <link rel="stylesheet" href="assets/v3.css">
 <style>
 :root{--sans:'Space Grotesk',system-ui,sans-serif;--mono:'JetBrains Mono',monospace;--lime:#c4e86b;
@@ -220,8 +221,8 @@ body{background:radial-gradient(125% 105% at 50% -8%,#15140f,#0b0b0a 70%);font-f
     <div class="deckfoot" id="deckfoot"><span class="dfin" id="dfin"></span></div>
   </div>
 
-  <div class="scrim" id="scrim">
-    <div class="fscene"><div class="fwrap" id="fwrap"><div class="ftilt" id="ftilt"><div class="fcard" id="fcard">
+  <div class="scrim" id="scrim" role="dialog" aria-modal="true" aria-label="card detail">
+    <div class="fscene"><div class="fwrap" id="fwrap"><div class="ftilt" id="ftilt"><div class="fcard" id="fcard" tabindex="-1" role="button" aria-label="card — press Enter to flip">
       <div class="fface ffront"><div class="hd"><span id="ftype"></span><span class="gem" id="frar"></span></div>
         <div class="win" id="fwin"></div><div class="nm" id="fnm"></div><div class="ln" id="fln"></div></div>
       <div class="fface fback"><div class="fwm" id="fwm" aria-hidden="true"></div><span class="cap" id="fcap">the verdict</span><p class="vd" id="fvd"></p>
@@ -308,16 +309,19 @@ body{background:radial-gradient(125% 105% at 50% -8%,#15140f,#0b0b0a 70%);font-f
     deckrow.appendChild(d);
   });
 
+  /* escape any interpolated value — data is trusted today, but these innerHTML
+     sinks must be injection-safe by construction the day any of it goes dynamic. */
+  function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(ch){ return ch==='&'?'&amp;':ch==='<'?'&lt;':ch==='>'?'&gt;':'&quot;'; }); }
   function faceHTML(c){
     if(c.type==='joker'){ return '<div class="win" style="padding:0"><div class="jk"><span class="jk-sym">🃏</span><span class="jk-nm">The Joker</span><div class="holo"></div></div></div>'; }
-    if(!c.im){ return '<div class="win" style="padding:0"><div class="cf"><span class="lbl"><span class="ro">'+c.ro+'</span><span class="rn">'+c.nm+'</span></span><div class="holo"></div></div></div>'; }
+    if(!c.im){ return '<div class="win" style="padding:0"><div class="cf"><span class="lbl"><span class="ro">'+esc(c.ro)+'</span><span class="rn">'+esc(c.nm)+'</span></span><div class="holo"></div></div></div>'; }
     var plate=c.fit==='plate', cls=plate?'win plate':'win', icls=plate?' class="contain"':'';
-    return '<div class="'+cls+'"><img src="assets/img/shelf/'+c.im+'"'+icls+' alt=""><div class="holo"></div></div>';
+    return '<div class="'+cls+'"><img src="assets/img/shelf/'+esc(c.im)+'"'+icls+' alt=""><div class="holo"></div></div>';
   }
   var nameOf=function(c){ return c.type==='coffee'?(c.nm+' · '+c.ro):c.nm; };
 
   /* ---- open a deck into a hand ---- */
-  var cards=[], cardObjs=[], curSuit=null, activeCard=-1;
+  var cards=[], cardObjs=[], curSuit=null, activeCard=-1, activeRect=null;
   function isMobile(){ return window.matchMedia('(max-width:640px)').matches; }
   function cOf(i,n){ return i-(n-1)/2; }
   function fanT(i,n){ var c=cOf(i,n); return 'translateX('+(c*92)+'px) translateY('+(c*c*3.4)+'px) rotate('+(c*5)+'deg)'; }
@@ -333,8 +337,8 @@ body{background:radial-gradient(125% 105% at 50% -8%,#15140f,#0b0b0a 70%);font-f
     felt.innerHTML=''; cards=[]; cardObjs=[]; activeCard=-1;
     list.forEach(function(c,i){
       var el=document.createElement('div'); el.className='card';
-      el.innerHTML='<div class="face front"><div class="hd"><span class="hsuit">'+ico(s.key,'ico-sm')+s.nm+'</span><span class="gem">'+c.rar+'</span></div>'
-        +faceHTML(c)+'<div class="nm">'+c.nm+'</div></div>';
+      el.innerHTML='<div class="face front"><div class="hd"><span class="hsuit">'+ico(s.key,'ico-sm')+esc(s.nm)+'</span><span class="gem">'+esc(c.rar)+'</span></div>'
+        +faceHTML(c)+'<div class="nm">'+esc(c.nm)+'</div></div>';
       felt.appendChild(el);
       el.addEventListener('click',function(e){ e.stopPropagation(); openCard(c,s); });
       cards.push(el); cardObjs.push(c);
@@ -351,7 +355,7 @@ body{background:radial-gradient(125% 105% at 50% -8%,#15140f,#0b0b0a 70%);font-f
 
   /* rotating footer */
   var dfoot=document.getElementById('deckfoot'), dfin=document.getElementById('dfin'), footTimer=null, footIdx=0;
-  function renderFoot(items){ var it=items[footIdx%items.length]; dfin.innerHTML=it.t+(it.a?('<a class="dfa" href="'+it.href+'" target="_blank" rel="noopener">'+it.a+'</a>'):''); }
+  function renderFoot(items){ var it=items[footIdx%items.length]; dfin.innerHTML=esc(it.t)+(it.a?('<a class="dfa" href="'+esc(it.href)+'" target="_blank" rel="noopener">'+esc(it.a)+'</a>'):''); }
   function startFoot(key){ var items=FOOT[key]||[]; if(!items.length){ return; } footIdx=0; renderFoot(items); dfoot.classList.add('show');
     clearInterval(footTimer); if(isMobile())return; /* static on touch, no rotation */
     footTimer=setInterval(function(){ dfin.classList.add('fade'); setTimeout(function(){ footIdx++; renderFoot(items); dfin.classList.remove('fade'); },360); }, 4200); }
@@ -376,12 +380,19 @@ body{background:radial-gradient(125% 105% at 50% -8%,#15140f,#0b0b0a 70%);font-f
     if(idx!==activeCard){
       if(activeCard>=0) lift(activeCard,false);
       activeCard=idx;
-      if(idx>=0){ lift(idx,true); tickT(); }
+      if(idx>=0){
+        lift(idx,true); tickT();
+        /* cache the card's box ONCE per activation (cheap), then refresh after the
+           lift transition settles — instead of a getBoundingClientRect read+write
+           every pointer frame, which forced a synchronous reflow each move. */
+        activeRect=cards[idx].getBoundingClientRect();
+        setTimeout(function(){ if(activeCard===idx && cards[idx]) activeRect=cards[idx].getBoundingClientRect(); }, 480);
+      } else { activeRect=null; }
     }
-    if(activeCard>=0){ var ah=cards[activeCard].querySelector('.holo'); if(ah){ var r=cards[activeCard].getBoundingClientRect();
+    if(activeCard>=0 && activeRect){ var ah=cards[activeCard].querySelector('.holo'); if(ah){ var r=activeRect;
       ah.style.backgroundPosition=Math.max(0,Math.min(100,(pmx-r.left)/r.width*100))+'% '+Math.max(0,Math.min(100,(pmy-r.top)/r.height*100))+'%'; } }
   }
-  function clearActive(){ if(activeCard>=0){ lift(activeCard,false); activeCard=-1; } }
+  function clearActive(){ if(activeCard>=0){ lift(activeCard,false); activeCard=-1; activeRect=null; } }
   var closing=false;
   function closeDeck(){ if(closing||!felt.classList.contains('live'))return; closing=true; activeCard=-1; stopFoot(); ambient.classList.remove('on');
     document.getElementById('close').classList.remove('show');
@@ -401,18 +412,24 @@ body{background:radial-gradient(125% 105% at 50% -8%,#15140f,#0b0b0a 70%);font-f
   document.getElementById('close').addEventListener('click',closeDeck);
 
   /* ---- focus card ---- */
-  var scrim=document.getElementById('scrim'), fcard=document.getElementById('fcard'), ftilt=document.getElementById('ftilt');
+  var scrim=document.getElementById('scrim'), fcard=document.getElementById('fcard'), ftilt=document.getElementById('ftilt'), lastShelfFocus=null;
   function openCard(c,s){
-    document.getElementById('ftype').innerHTML='<span class="hsuit">'+suitMark(s,'ico-sm')+s.nm+'</span>'; document.getElementById('frar').textContent=c.rar;
+    lastShelfFocus=document.activeElement;                 /* remember where to send focus back */
+    document.getElementById('ftype').innerHTML='<span class="hsuit">'+suitMark(s,'ico-sm')+esc(s.nm)+'</span>'; document.getElementById('frar').textContent=c.rar;
     document.getElementById('fwin').outerHTML='<div class="win" id="fwin" style="padding:0">'+faceHTML(c).replace(/^<div class="win"[^>]*>/,'').replace(/<\/div>$/,'')+'</div>';
     document.getElementById('fnm').textContent=c.nm; document.getElementById('fln').textContent=c.ln;
     document.getElementById('fcap').textContent='the verdict · '+s.nm; document.getElementById('fwm').innerHTML=ICONS[s.key]?ico(s.key,'ico-wm'):(s.sym||'🃏');
     document.getElementById('fvd').textContent=c.vd;
-    document.getElementById('fstats').innerHTML=(c.st||[]).map(function(x){return '<div class="fstat"><span>'+x[0]+'</span><b>'+x[1]+'</b></div>';}).join('');
+    document.getElementById('fstats').innerHTML=(c.st||[]).map(function(x){return '<div class="fstat"><span>'+esc(x[0])+'</span><b>'+esc(x[1])+'</b></div>';}).join('');
     fcard.classList.remove('flipped'); scrim.classList.add('on'); flip();
+    setTimeout(function(){ try{ fcard.focus(); }catch(e){} },30);  /* move focus into the dialog */
   }
-  fcard.addEventListener('click',function(e){ e.stopPropagation(); fcard.classList.toggle('flipped'); flip(); });
-  function closeFocus(){ if(!scrim.classList.contains('on'))return; scrim.classList.remove('on'); if(soundOn) noise(.1,640,.6,.08); }
+  function flipCard(){ fcard.classList.toggle('flipped'); flip(); }
+  fcard.addEventListener('click',function(e){ e.stopPropagation(); flipCard(); });
+  fcard.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); e.stopPropagation(); flipCard(); } });
+  function closeFocus(){ if(!scrim.classList.contains('on'))return; scrim.classList.remove('on'); if(soundOn) noise(.1,640,.6,.08);
+    if(felt.classList.contains('live')) clearActive();      /* re-sync the fan's hover state */
+    if(lastShelfFocus&&lastShelfFocus.focus){ try{ lastShelfFocus.focus(); }catch(e){} } lastShelfFocus=null; }
   scrim.addEventListener('click',closeFocus);
   document.querySelector('.fscene').addEventListener('pointermove',function(e){
     var r=fcard.getBoundingClientRect(), px=Math.max(-1,Math.min(1,(e.clientX-(r.left+r.width/2))/(r.width/2))), py=Math.max(-1,Math.min(1,(e.clientY-(r.top+r.height/2))/(r.height/2)));
@@ -429,18 +446,23 @@ body{background:radial-gradient(125% 105% at 50% -8%,#15140f,#0b0b0a 70%);font-f
   /* ---- depth: cursor spotlight + deck-row parallax (rAF-throttled, motion-aware) ---- */
   var REDUCE=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var spot=document.getElementById('spot'), pmx=0,pmy=0,pframe=0;
-  window.addEventListener('pointermove',function(e){ pmx=e.clientX; pmy=e.clientY;
-    if(pframe) return;
-    pframe=requestAnimationFrame(function(){ pframe=0;
-      spot.style.setProperty('--mx',pmx+'px'); spot.style.setProperty('--my',pmy+'px');
-      if(REDUCE||isMobile()) return;
-      if(!table.classList.contains('hide')){
-        var px=(pmx/window.innerWidth-.5), py=(pmy/window.innerHeight-.5);
-        deckrow.style.transform='rotateX('+(-py*3.5)+'deg) rotateY('+(px*5.5)+'deg)';
-      } else { feltHover(); }
+  /* pointer-driven depth (spotlight, deck parallax, fan hover) is a hover-device
+     concern only — never install it on touch, where it would just burn frames
+     repainting a 540px blur with no cursor to follow. */
+  if(window.matchMedia && window.matchMedia('(hover:hover)').matches){
+    window.addEventListener('pointermove',function(e){ pmx=e.clientX; pmy=e.clientY;
+      if(pframe) return;
+      pframe=requestAnimationFrame(function(){ pframe=0;
+        spot.style.setProperty('--mx',pmx+'px'); spot.style.setProperty('--my',pmy+'px');
+        if(REDUCE) return;
+        if(!table.classList.contains('hide')){
+          var px=(pmx/window.innerWidth-.5), py=(pmy/window.innerHeight-.5);
+          deckrow.style.transform='rotateX('+(-py*3.5)+'deg) rotateY('+(px*5.5)+'deg)';
+        } else { feltHover(); }
+      });
     });
-  });
-  window.addEventListener('pointerleave',function(){ deckrow.style.transform=''; clearActive(); });
+    window.addEventListener('pointerleave',function(){ deckrow.style.transform=''; clearActive(); });
+  }
 
   /* ---- easter egg: the universe deals you one (rare joker) ---- */
   function dealRandom(forceJoker){
@@ -458,6 +480,7 @@ body{background:radial-gradient(125% 105% at 50% -8%,#15140f,#0b0b0a 70%);font-f
   window.addEventListener('keydown',function(e){
     var ck=document.getElementById('cmdk'); if(ck&&ck.classList.contains('open')) return; /* let the ⌘K palette own keys while open */
     if(e.key==='Escape'){ if(scrim.classList.contains('on')) closeFocus(); else if(felt.classList.contains('live')) closeDeck(); return; }
+    if(scrim.classList.contains('on') && e.key==='Tab'){ e.preventDefault(); try{ fcard.focus(); }catch(_){} return; }  /* trap focus inside the card dialog */
     if(e.keyCode===KON[kpos]){ kpos++; if(kpos===KON.length){ kpos=0; scrim.classList.remove('on'); dealRandom(true); } }
     else { kpos=(e.keyCode===KON[0])?1:0; }
   });

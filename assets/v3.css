@@ -318,8 +318,11 @@ kbd{font-family:var(--mono);background:var(--surface-1);border:1px solid var(--l
 @media(max-width:640px){
   .page{padding:20px 20px 48px}
 
-  /* top bar: sticky, nav row + status row below */
-  .bar{position:sticky;top:0;z-index:60;flex-wrap:wrap;row-gap:10px;padding:12px 0;margin-bottom:4px;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:saturate(140%) blur(10px);-webkit-backdrop-filter:saturate(140%) blur(10px)}
+  /* top bar: sticky, nav row + status row below.
+     solid background instead of a live backdrop-blur — an always-on blur over
+     scrolling content is one of the most GPU-expensive effects on mobile, for a
+     difference no one sees while scrolling. */
+  .bar{position:sticky;top:0;z-index:60;flex-wrap:wrap;row-gap:10px;padding:12px 0;margin-bottom:4px;background:var(--bg)}
   .bar nav{order:1;width:100%;display:flex;justify-content:space-between;gap:8px}
   .bar nav a{margin-left:0;font-size:.8125rem}
   .bar nav a.on{color:var(--accent)}
