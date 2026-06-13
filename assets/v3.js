@@ -115,4 +115,35 @@
     function prog(){var h=document.documentElement.scrollHeight-window.innerHeight;bar.style.width=(h>0?Math.min(100,(window.scrollY/h)*100):0)+'%';}
     window.addEventListener('scroll',prog,{passive:true});window.addEventListener('resize',prog);prog();
   }
+
+  /* ── Simba crosses ──────────────────────────────────────────────
+     the cat already lives on this site (the portrait, the mrrp, the 404
+     blames him). so once, after you've gone still for a while, he pads
+     across the screen — the 3am-with-a-cat tax every builder knows.
+     once per visit, idle-triggered, never on a tap. */
+  (function(){
+    if(reduce) return;
+    var PAW='<svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><circle cx="6" cy="9" r="2"/><circle cx="11" cy="6.5" r="2"/><circle cx="16.5" cy="8" r="2"/><path d="M11.5 11c-3 0-5.5 2-5.5 4.6 0 1.8 1.7 2.7 2.8 2 .9-.6 1-1 2.7-1s1.8.4 2.7 1c1.1.7 2.8-.2 2.8-2 0-2.6-2.5-4.6-5.5-4.6z"/></svg>';
+    var done=false, idle;
+    function step(x,y,rot,delay){
+      var s=document.createElement('span');
+      s.innerHTML=PAW;
+      s.style.cssText='position:fixed;left:'+x+'px;top:'+y+'px;z-index:120;pointer-events:none;color:var(--accentdim);opacity:0;transform:rotate('+rot+'deg) scale(.6);transition:opacity .3s ease,transform .35s cubic-bezier(.2,.7,.2,1)';
+      document.body.appendChild(s);
+      setTimeout(function(){
+        s.style.opacity='.55'; s.style.transform='rotate('+rot+'deg) scale(1)';
+        setTimeout(function(){ s.style.opacity='0'; setTimeout(function(){ s.remove(); },450); },1400);
+      },delay);
+    }
+    function walk(){
+      if(done||document.hidden) return; done=true;
+      var w=innerWidth, h=innerHeight, n=8, x0=-26, y0=h*0.82, dx=(w+52)/n, dy=-(h*0.16)/n;
+      for(var i=0;i<n;i++) step(x0+dx*i, y0+dy*i+(i%2?13:-13), 30, i*170);
+    }
+    function arm(){ clearTimeout(idle); if(!done) idle=setTimeout(walk, 32000); }
+    ['mousemove','scroll','keydown','touchstart','pointerdown'].forEach(function(ev){
+      window.addEventListener(ev, arm, {passive:true});
+    });
+    arm();
+  })();
 })();

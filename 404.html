@@ -2,48 +2,60 @@
 <html lang="en"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>404, page not found — Rinkesh Gorasia</title>
-<meta name="description" content="This page got knocked off the shelf." />
+<meta name="description" content="This page fell off the shelf." />
 <meta name="robots" content="noindex" />
 <meta name="theme-color" content="#0d0d0c" />
-<link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg" />
+<link rel="icon" type="image/svg+xml" href="assets/icons/favicon-shelf.svg" />
 <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/v3.css">
 <style>
-/* the incident: three shelf cards, one knocked over. the spring is the page's one flourish. */
-.scene{padding:48px 0 0}
-.shelfline{position:relative;display:flex;align-items:flex-end;gap:24px;padding:0 8px 0;border-bottom:1px solid var(--line2);width:min(620px,100%);height:208px}
-.fcard{position:relative;width:112px;height:150px;border-radius:var(--r2);background:linear-gradient(165deg,#1a1812,#0e0d0a);border:1px solid var(--line2);display:grid;place-items:center;user-select:none;transform-origin:100% 100%;transition:transform .65s cubic-bezier(.34,1.56,.5,1)}
-.fcard::before{content:"";position:absolute;inset:7px;border-radius:8px;border:1px solid rgba(255,255,255,.09);pointer-events:none}
-.fcard::after{content:"";position:absolute;inset:0;border-radius:var(--r2);background-image:radial-gradient(rgba(255,255,255,.05) 1px,transparent 1px);background-size:12px 12px;pointer-events:none}
-.fcard .n4{font-family:var(--mono);font-size:3.25rem;font-weight:600;color:var(--ink);line-height:1;font-variant-numeric:tabular-nums}
-.fcard .pip{position:absolute;top:9px;left:11px;font-family:var(--mono);font-size:.6875rem;color:var(--mut);letter-spacing:.08em}
-#kcard{cursor:pointer}
-#kcard.knocked{transform:rotate(86deg) translate(2px,0)}
-#kcard:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-.paw404{position:absolute;right:-44px;bottom:14px;font-size:1.05rem;opacity:0;transition:opacity .35s .45s;pointer-events:none}
-.shelfline:has(#kcard.knocked) .paw404{opacity:.7}
-.mrrp{position:absolute;right:-58px;bottom:120px;font-family:var(--mono);font-size:.6875rem;color:var(--ink);background:var(--surface-1);border:1px solid var(--line2);border-radius:var(--r1);padding:7px 11px;opacity:0;transform:translateY(5px);transition:opacity .25s var(--eout),transform .25s var(--eout);pointer-events:none;white-space:nowrap}
-.mrrp.show{opacity:1;transform:none}
-.err-head p.aside404{font-family:var(--mono);font-size:.6875rem;color:var(--mut);margin-top:14px}
-.err-head{margin-top:48px}
-.err-head h1{font-size:clamp(1.8rem,4.4vw,2.1rem);font-weight:600;color:var(--ink);letter-spacing:-.02em;line-height:1.06;max-width:22ch}
-.err-head p{margin-top:16px;font-size:1.0625rem;line-height:1.65;color:var(--read);max-width:52ch}
-.err-actions{display:flex;align-items:center;gap:24px;flex-wrap:wrap;margin-top:8px}
-.err-actions .morelink{margin-top:24px}
+.lost{min-height:calc(100vh - 130px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:8px;padding-bottom:40px}
+/* the scene: three shelf cards, 4·0·4, on a shelf. the last one falls. */
+.deck404{position:relative;display:flex;align-items:flex-end;gap:22px;height:200px}
+.deck404::after{content:"";position:absolute;left:-28px;right:-28px;bottom:0;border-bottom:1px solid var(--line2)}
+.c404{position:relative;width:120px;height:164px;border-radius:var(--r3);background:linear-gradient(165deg,#1a1812,#0e0d0a);border:1px solid var(--line2);display:grid;place-items:center;box-shadow:0 18px 40px rgba(0,0,0,.5)}
+.c404::before{content:"";position:absolute;inset:8px;border-radius:10px;border:1px solid rgba(255,255,255,.08)}
+.c404::after{content:"";position:absolute;inset:0;border-radius:var(--r3);background-image:radial-gradient(rgba(255,255,255,.05) 1px,transparent 1px);background-size:13px 13px;pointer-events:none}
+.c404 .d{font-family:var(--mono);font-size:3.6rem;font-weight:600;color:var(--ink);line-height:1;font-variant-numeric:tabular-nums}
+.c404 .pip{position:absolute;top:10px;left:12px;font-family:var(--mono);font-size:.6875rem;color:var(--mut)}
+/* deal-in (backwards fill hides each card through its delay, then settles to base) */
+@keyframes deal404{from{opacity:0;transform:translateY(-26px) rotate(-4deg)}to{opacity:1;transform:none}}
+.c404.d1{animation:deal404 .55s var(--eout) .15s backwards}
+.c404.d2{animation:deal404 .55s var(--eout) .28s backwards}
+/* the fall — origin bottom-right, springs over */
+#fallcard{cursor:pointer;transform-origin:100% 100%}
+#fallcard.down{transform:rotate(84deg) translate(3px,0)}
+#fallcard.dealing{animation:deal404 .55s var(--eout) .41s backwards}
+#fallcard:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+.fall-trans{transition:transform .7s cubic-bezier(.34,1.5,.5,1)}
+/* paw prints trailing off */
+.paws{position:absolute;right:-96px;bottom:6px;display:flex;gap:13px;align-items:flex-end}
+.paws svg{width:18px;height:18px;color:var(--accentdim);opacity:0;transform:rotate(26deg)}
+.paws.go svg{animation:pawin .4s var(--eout) forwards}
+.paws.go svg:nth-child(2){animation-delay:.12s}
+.paws.go svg:nth-child(3){animation-delay:.24s}
+@keyframes pawin{from{opacity:0;transform:rotate(26deg) translateY(4px) scale(.7)}to{opacity:.6;transform:rotate(26deg)}}
+.mrrp404{position:absolute;right:-58px;top:8px;font-family:var(--mono);font-size:.6875rem;color:var(--ink);background:var(--surface-1);border:1px solid var(--line2);border-radius:var(--r1);padding:6px 10px;opacity:0;transform:translateY(5px);transition:opacity .22s,transform .22s var(--eout);pointer-events:none;white-space:nowrap}
+.mrrp404.show{opacity:1;transform:none}
+
+.lost h1{font-size:clamp(1.5rem,4.4vw,1.875rem);font-weight:600;color:var(--ink);letter-spacing:-.02em;margin-top:46px;line-height:1.1}
+.lost .hint{font-family:var(--mono);font-size:.6875rem;color:var(--mut);opacity:0;transition:opacity .4s;height:1em}
+.lost .hint.on{opacity:1}
+.lost .cta{margin-top:18px}
 @media(max-width:640px){
-  .scene{padding:32px 0 0}
-  .shelfline{gap:16px;height:164px}
-  .fcard{width:84px;height:114px}
-  .fcard .n4{font-size:2.4rem}
-  .paw404{right:-34px}
-  .mrrp{right:-40px;bottom:92px}
+  .lost{min-height:calc(100vh - 150px)}
+  .deck404{gap:14px;height:150px}
+  .c404{width:88px;height:120px}
+  .c404 .d{font-size:2.6rem}
+  .paws{right:-72px}
 }
 @media(prefers-reduced-motion:reduce){
-  .fcard{transition:none}
-  .paw404{transition:none}
+  .c404,.c404.d1,.c404.d2,#fallcard.dealing{animation:none;opacity:1}
+  .fall-trans{transition:none}
+  .paws svg{opacity:.6}
 }
 </style>
 </head>
@@ -55,57 +67,52 @@
     <span class="right"><span class="clock" id="clock">Bengaluru</span><span class="status"><span class="pulse"></span>open to 0→1 roles</span></span>
   </header>
 
-  <section class="scene rv">
-    <p class="cap" style="margin-top:48px">// <b>error</b> · page not found</p>
-    <div class="shelfline" aria-hidden="true">
-      <div class="fcard"><span class="pip">err</span><span class="n4">4</span></div>
-      <div class="fcard"><span class="pip">err</span><span class="n4">0</span></div>
-      <div class="fcard knocked" id="kcard" tabindex="0" role="button" aria-label="stand the fallen card back up"><span class="pip">err</span><span class="n4">4</span></div>
-      <span class="paw404">🐾</span>
-      <span class="mrrp" id="mrrp">mrrp.</span>
+  <main class="lost">
+    <div class="deck404" aria-hidden="true">
+      <div class="c404 d1"><span class="pip">404</span><span class="d">4</span></div>
+      <div class="c404 d2"><span class="pip">404</span><span class="d">0</span></div>
+      <div class="c404 dealing" id="fallcard" tabindex="0" role="button" aria-label="stand the fallen card back up"><span class="pip">404</span><span class="d">4</span></div>
+      <span class="paws"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="6" cy="9" r="2"/><circle cx="11" cy="6.5" r="2"/><circle cx="16.5" cy="8" r="2"/><path d="M11.5 11c-3 0-5.5 2-5.5 4.6 0 1.8 1.7 2.7 2.8 2 .9-.6 1-1 2.7-1s1.8.4 2.7 1c1.1.7 2.8-.2 2.8-2 0-2.6-2.5-4.6-5.5-4.6z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="6" cy="9" r="2"/><circle cx="11" cy="6.5" r="2"/><circle cx="16.5" cy="8" r="2"/><path d="M11.5 11c-3 0-5.5 2-5.5 4.6 0 1.8 1.7 2.7 2.8 2 .9-.6 1-1 2.7-1s1.8.4 2.7 1c1.1.7 2.8-.2 2.8-2 0-2.6-2.5-4.6-5.5-4.6z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="6" cy="9" r="2"/><circle cx="11" cy="6.5" r="2"/><circle cx="16.5" cy="8" r="2"/><path d="M11.5 11c-3 0-5.5 2-5.5 4.6 0 1.8 1.7 2.7 2.8 2 .9-.6 1-1 2.7-1s1.8.4 2.7 1c1.1.7 2.8-.2 2.8-2 0-2.6-2.5-4.6-5.5-4.6z"/></svg></span>
+      <span class="mrrp404" id="mrrp404">mrrp.</span>
     </div>
-  </section>
 
-  <section class="err-head rv" style="animation-delay:.1s">
-    <h1>this page got knocked off the shelf.</h1>
-    <p>whatever lived at this address has moved, or never existed. i'd take full responsibility, but we both know who did this.</p>
-    <p class="aside404">(you can stand the card back up. it won't last.)</p>
-    <div class="err-actions">
-      <a class="cta" href="index.html">→ back home</a>
-      <a class="morelink" href="work.html">the work →</a>
-      <a class="morelink" href="writing.html">writing →</a>
-    </div>
-  </section>
-
-  <footer class="foot reveal"></footer>
+    <h1>this page fell off the shelf.</h1>
+    <p class="hint" id="hint">tap the fallen card</p>
+    <a class="cta" href="index.html">→ back home</a>
+  </main>
 
 </div>
 <script src="assets/v3.js"></script>
 <script>
 (function(){
-  var k=document.getElementById('kcard'), mrrp=document.getElementById('mrrp');
+  var card=document.getElementById('fallcard'), paws=document.querySelector('.paws'),
+      mrrp=document.getElementById('mrrp404'), hint=document.getElementById('hint');
   var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var busy=false;
 
-  /* entrance: the card starts standing, then gets knocked — once. */
-  if(!reduce){
-    k.classList.remove('knocked');
-    setTimeout(function(){ k.classList.add('knocked'); },1100);
-  }
+  if(reduce){ card.classList.add('down'); paws.classList.add('go'); hint.classList.add('on'); return; }
 
-  /* the flourish: stand it back up. it won't last. */
+  /* the deal lands (~0.96s), then the last card topples once. */
+  setTimeout(function(){
+    card.classList.remove('dealing');
+    card.classList.add('fall-trans','down');
+    paws.classList.add('go');
+    setTimeout(function(){ hint.classList.add('on'); }, 700);
+  }, 1100);
+
+  /* the flourish: stand it up — it won't last. */
   function standUp(){
-    if(busy||!k.classList.contains('knocked'))return;
-    busy=true;
-    k.classList.remove('knocked');
+    if(busy||!card.classList.contains('down')) return;
+    busy=true; hint.classList.remove('on');
+    card.classList.remove('down');
     setTimeout(function(){
-      k.classList.add('knocked');
+      card.classList.add('down');
       mrrp.classList.add('show');
-      setTimeout(function(){ mrrp.classList.remove('show'); busy=false; },1700);
-    },1400);
+      setTimeout(function(){ mrrp.classList.remove('show'); busy=false; },1600);
+    },1500);
   }
-  k.addEventListener('click',standUp);
-  k.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); standUp(); } });
+  card.addEventListener('click',standUp);
+  card.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); standUp(); } });
 })();
 </script>
 </body></html>
