@@ -37,9 +37,14 @@
 .cof-count{font-family:var(--mono);font-size:.75rem;color:var(--mut)}.cof-count b{color:var(--accent)}
 
 /* MAP VIEW */
-.mapview{display:grid;grid-template-columns:1.45fr 1fr;gap:22px;align-items:start}
+.mapview{display:grid;grid-template-columns:1.45fr 1fr;gap:22px;align-items:stretch}
 .mapview[hidden]{display:none}
-#map{height:478px;border-radius:16px;border:1px solid var(--line2);overflow:hidden;background:#0c0b09;z-index:0}
+#map{height:540px;border-radius:16px;border:1px solid var(--line2);overflow:hidden;background:#0c0b09;z-index:0}
+/* map view: the detail card matches the map's height as a balanced pair;
+   the photo fills the space above a fixed-height text body */
+.mapview .ccard{height:540px;display:flex;flex-direction:column}
+.mapview .cc-photo{flex:1 1 auto;aspect-ratio:auto;min-height:150px}
+.mapview .cc-body{flex:0 0 auto}
 .leaflet-container{background:#0c0b09;font-family:var(--mono)}
 .leaflet-control-attribution{background:rgba(13,13,12,.7)!important;color:#6b665b!important;font-size:9px!important}
 .leaflet-control-attribution a{color:#8a8478!important}
@@ -63,9 +68,10 @@
 .cc-name{font-family:var(--sans);font-size:1.5rem;font-weight:600;color:var(--ink);letter-spacing:-.015em;line-height:1.1}
 .cc-area{font-family:var(--mono);font-size:.6875rem;color:var(--mut);margin-top:8px;display:flex;align-items:center;gap:6px}
 .cc-vd{font-size:1.0625rem;color:var(--read);line-height:1.6;margin-top:14px}
-.cc-order{margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}
-.cc-k{font-family:var(--mono);font-size:.6875rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);display:block}
-.cc-v{font-size:.9375rem;color:var(--ink);margin-top:8px;font-weight:500;line-height:1.5}
+.cc-order{margin-top:18px;padding-top:14px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:9px}
+.cc-ord{display:grid;grid-template-columns:38px 1fr;gap:12px;align-items:baseline}
+.cc-k{font-family:var(--mono);font-size:.625rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
+.cc-v{font-size:.9375rem;color:var(--ink);font-weight:500;line-height:1.45}
 .cc-maps{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:.75rem;font-weight:500;color:var(--accent);text-decoration:none;margin-top:20px;border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:8px;padding:9px 14px;transition:.18s}
 .cc-maps:hover{background:color-mix(in srgb,var(--accent) 10%,transparent);border-color:var(--accent)}
 .swap{animation:swap .42s var(--eout)}
@@ -74,8 +80,10 @@
 /* GALLERY */
 .gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:22px;perspective:1200px}
 .gallery[hidden]{display:none}
-.gcard{transform-style:preserve-3d;transition:transform .3s var(--eout),box-shadow .3s;cursor:default}
-.gcard .ccard{transition:box-shadow .3s}
+.gcard{display:flex;transform-style:preserve-3d;transition:transform .3s var(--eout),box-shadow .3s;cursor:default}
+.gcard .ccard{flex:1;display:flex;flex-direction:column;transition:box-shadow .3s}
+.gallery .cc-body{flex:1;display:flex;flex-direction:column}
+.gallery .cc-maps{margin-top:auto;align-self:flex-start}
 .gcard:hover{box-shadow:0 34px 60px rgba(0,0,0,.55)}
 .gcard:hover .ccard{box-shadow:0 34px 60px rgba(0,0,0,.55),0 0 0 1px color-mix(in srgb,var(--accent) 30%,transparent)}
 .gcard.in{animation:rise2 .55s var(--eout) backwards}
@@ -85,6 +93,8 @@
 @media(max-width:820px){
   .mapview{grid-template-columns:1fr;gap:18px}
   #map{height:300px}
+  .mapview .ccard{height:auto}
+  .mapview .cc-photo{flex:none;aspect-ratio:16/10}
 }
 @media(max-width:640px){
   .cof-head{padding:28px 0 2px}.cof-bar{margin:20px 0 18px}
@@ -135,13 +145,15 @@
 (function(){
   var DATA=[
     {nm:'Maverick & Farmer',area:'Koramangala',lat:12.9345,lng:77.6270,img:'',
-     order:'Maverick Mazegran, or the tender coconut cold brew. the bird\'s eye chilli spaghetti is a must.',
+     drink:'Maverick Mazegran, or the tender coconut cold brew',
+     food:'bird\'s eye chilli spaghetti',
      vd:'my go-to place to work from. probably the best coffee, food and vibe in town.'},
     {nm:'Anama Coffee',area:'Indiranagar',lat:12.9783,lng:77.6395,img:'',
-     order:'raspberry cold brew and a lemon cloud cookie.',
+     drink:'raspberry cold brew',
+     food:'lemon cloud cookie',
      vd:'my daily hangout, where i go to chill with friends.'},
     {nm:'Kahale',area:'Jayanagar',lat:12.9285,lng:77.5835,img:'',
-     order:'cranberry foam cold brew, or a hazelnut iced latte.',
+     drink:'cranberry foam cold brew, or a hazelnut iced latte',
      vd:'a late-night favourite, open till 1am with a great vibe. some of the best coffee in town.'}
   ];
   var rank=function(i){return (i+1<10?'0':'')+(i+1);};
@@ -154,12 +166,15 @@
     var head=d.img
       ? '<div class="cc-photo"><img src="assets/img/coffee/'+esc(d.img)+'" alt="'+esc(d.nm)+', '+esc(d.area)+'" loading="lazy"><span class="cc-rank">'+rank(i)+'</span></div>'
       : '<div class="cc-photo cc-photo-empty"><span class="cc-rank">'+rank(i)+'</span>'+CUP+'</div>';
+    var order='<div class="cc-order"><div class="cc-ord"><span class="cc-k">drink</span><span class="cc-v">'+esc(d.drink)+'</span></div>';
+    if(d.food){ order+='<div class="cc-ord"><span class="cc-k">eat</span><span class="cc-v">'+esc(d.food)+'</span></div>'; }
+    order+='</div>';
     return head
       +'<div class="cc-body">'
       +'<h3 class="cc-name">'+esc(d.nm)+'</h3>'
       +'<div class="cc-area">'+PIN+' '+esc(d.area)+'</div>'
       +'<p class="cc-vd">'+esc(d.vd)+'</p>'
-      +'<div class="cc-order"><span class="cc-k">my order</span><span class="cc-v">'+esc(d.order)+'</span></div>'
+      +order
       +'<a class="cc-maps" href="'+mapsUrl(d)+'" target="_blank" rel="noopener">open in maps ↗</a>'
       +'</div>';
   }
