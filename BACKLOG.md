@@ -47,22 +47,30 @@ what's intentionally deferred so it isn't lost.
   vars pulled + pushed via CLI, GitHub auto-deploy connected, deployed, and the brand
   domains re-pointed — `knowyourpay.in` and `productsenselab.com` both serving (200).
   Site links updated to the real domains.
+- [x] **Real copy — home + work (Savior, Career Leap, Accel, products).** Written from
+  real details in a plain founder voice (no em dashes, no rule-of-three, no AI tells):
+  hero intro, the track-record cards (clear one-liner + substance highlights), and the
+  deeper work-page case studies. Fixed old inaccuracies (Career Leap was soft-skills for
+  tech people, not "career switchers"; Savior team was 85; dropped unverified ~$1M ARR).
+- [x] **Coffee page — real places + card redesign.** Replaced placeholders with the real
+  three (Maverick & Farmer, Anama Coffee, Kahale), correct spelling, looked-up map coords.
+  "my order" split into clean DRINK / EAT rows; location line is the maps link (dropped the
+  redundant "open in maps" button); cards are photo-ready (header renders only when a real
+  image exists — no empty placeholder). **Photos still to add.**
 
 ---
 
 ## Still open
 
-### Content & copy (all placeholder, nothing real yet)
+### Content & copy
 
-- [ ] **Home page** — real intro paragraph (first-person, not generic), stat rail numbers
-  verified and current, credibility line reflects the actual current role/status.
-- [ ] **Work page** — case study descriptions rewritten with real outcomes, metrics, and
-  story arc (not bullet dumps). Each card needs: the problem, what you did, and the number
-  that proves it worked.
+- [x] **Home page** — real intro + track-record cards (Savior, Career Leap, Accel) +
+  building-now product one-liners, in voice. *(stat-rail numbers for the building-now
+  products — scans/users/etc — are still rough; verify when you have them.)*
+- [x] **Work page** — real case studies for Savior, Career Leap, Accel; "now" section live.
+- [x] **Coffee page** — real cafés + personal notes done. **Photos still to add.**
 - [ ] **Writing page** — real essay titles and excerpts instead of placeholder text. Dates
   accurate. Index numbers match actual post count.
-- [ ] **Coffee page** — map pins represent places actually visited; descriptions are
-  personal notes, not generic filler.
 - [ ] **Shelf page** — card backs have real descriptions/stories for each item (books,
   games, lego sets etc), not placeholder copy.
 - [ ] **404 page** — the card labels that appear are placeholder; replace with real
