@@ -42,6 +42,11 @@ what's intentionally deferred so it isn't lost.
 - [x] **Work-page "now" section redesigned** — the neglected one-liner became three
   compact logo cards linking to the live products; lighter than the home cards so it
   complements rather than repeats.
+- [x] **KnowYourPay & Product Sense Lab live again (was P1).** Migrated both off the
+  suspended Vercel account onto "Rinks' projects" (Pro): re-imported from GitHub, env
+  vars pulled + pushed via CLI, GitHub auto-deploy connected, deployed, and the brand
+  domains re-pointed — `knowyourpay.in` and `productsenselab.com` both serving (200).
+  Site links updated to the real domains.
 
 ---
 
@@ -62,14 +67,6 @@ what's intentionally deferred so it isn't lost.
   games, lego sets etc), not placeholder copy.
 - [ ] **404 page** — the card labels that appear are placeholder; replace with real
   project/page names that match the actual site structure.
-
-### UX / design
-
-**P1**
-- [ ] **Make KnowYourPay and PSL live again.** The two projects are linked from the home
-  cards but the pages/apps are currently down or returning errors. Fix: either redeploy
-  the apps and verify the links work, or update the cards to point to a case study page
-  instead of a live product URL until the apps are back up.
 
 ---
 
