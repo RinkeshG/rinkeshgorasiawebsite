@@ -98,6 +98,10 @@
     else if(mode==='leanL'){ o.origin='12% 100%'; o.rot=-R(46,66); o.tx=-R(0,4); }
     else if(mode==='tumbleR'){ o.origin='50% 50%'; o.rot=90;  o.spin=360+R(20,80); o.tx=R(-4,6); o.ty=(m?12:22)+R(-2,5); }
     else if(mode==='tumbleL'){ o.origin='50% 50%'; o.rot=-90; o.spin=-(360+R(20,80)); o.tx=R(-6,4); o.ty=(m?12:22)+R(-2,5); }
+    /* narrow viewports: the cards sit close, so a full lean swings one digit behind
+       another. tighten tip/lean angle + sideways drift so 4·0·4 stays readable.
+       (tumbles spin about their own centre and stay within footprint — left alone.) */
+    if(m && !o.spin){ o.rot*=.66; o.tx*=.5; o.ty*=.7; }
     return o;
   }
   /* contained modes per slot: edge cards only fall inward */

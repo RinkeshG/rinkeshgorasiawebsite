@@ -2,3 +2,5 @@
 _*.png
 # os cruft
 .DS_Store
+# local Claude tooling (preview launch config, etc.)
+.claude/

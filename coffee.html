@@ -104,8 +104,8 @@
 
   <div class="cof-bar rv">
     <div class="seg" role="tablist">
-      <button class="on" data-view="map" role="tab"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 2L2 4v10l4-2 4 2 4-2V2l-4 2-4-2z"/><path d="M6 2v10M10 4v10"/></svg> map</button>
-      <button data-view="gallery" role="tab"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="2" width="5" height="5" rx="1"/><rect x="9" y="2" width="5" height="5" rx="1"/><rect x="2" y="9" width="5" height="5" rx="1"/><rect x="9" y="9" width="5" height="5" rx="1"/></svg> cards</button>
+      <button class="on" data-view="map" role="tab" aria-selected="true"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 2L2 4v10l4-2 4 2 4-2V2l-4 2-4-2z"/><path d="M6 2v10M10 4v10"/></svg> map</button>
+      <button data-view="gallery" role="tab" aria-selected="false"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="2" width="5" height="5" rx="1"/><rect x="9" y="2" width="5" height="5" rx="1"/><rect x="2" y="9" width="5" height="5" rx="1"/><rect x="9" y="9" width="5" height="5" rx="1"/></svg> cards</button>
     </div>
     <span class="cof-count"><b id="cofN">6</b> places · sorted by how often i go back</span>
   </div>
@@ -172,9 +172,12 @@
       subdomains:'abcd',maxZoom:19,attribution:'© OpenStreetMap © CARTO'}).addTo(map);
     DATA.forEach(function(d,i){
       var icon=L.divIcon({className:'',html:'<div class="cpin" style="animation-delay:'+(i*0.06)+'s">'+rank(i)+'</div>',iconSize:[30,30]});
-      var m=L.marker([d.lat,d.lng],{icon:icon}).addTo(map);
+      /* keyboard:true + a title makes each pin focusable and named; the cards view is
+         the fuller accessible path (real buttons, links), but the map is operable too. */
+      var m=L.marker([d.lat,d.lng],{icon:icon,keyboard:true,title:d.nm,alt:d.nm+', '+d.area}).addTo(map);
       m.bindTooltip(d.nm,{direction:'top',offset:[0,-14],className:'ctt'});
       m.on('click',function(){select(i);});
+      m.on('keypress',function(e){ if(e.originalEvent&&(e.originalEvent.key==='Enter'||e.originalEvent.key===' ')){ e.originalEvent.preventDefault(); select(i); } });
       markers.push(m);
     });
     var bounds=DATA.map(function(d){return [d.lat,d.lng];});
@@ -201,7 +204,7 @@
   /* ---- toggle ---- */
   var segs=document.querySelectorAll('.seg button'), mv=document.getElementById('mapview');
   segs.forEach(function(b){ b.addEventListener('click',function(){
-    segs.forEach(function(x){x.classList.toggle('on',x===b);});
+    segs.forEach(function(x){x.classList.toggle('on',x===b);x.setAttribute('aria-selected',x===b?'true':'false');});
     var g=b.dataset.view==='gallery';
     if(g){ buildGallery(); gal.hidden=false; mv.hidden=true; }
     else { mv.hidden=false; gal.hidden=true; if(map){ setTimeout(function(){ map.invalidateSize(); },30); } }

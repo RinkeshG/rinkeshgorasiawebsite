@@ -1,8 +1,10 @@
 :root{
   /* surfaces: bg = the room · surface-1 = raised · surface-2 = inset well */
   --bg:#0d0d0c; --surface-1:#131310; --surface-2:#16140f; --elev:var(--surface-1);
-  /* ink: ink = said clearly · read = long-read body · mut = context, not content */
-  --ink:#f1efe7; --read:#cbc8bd; --mut:#8f8c81;
+  /* ink: ink = said clearly · read = long-read body · mut = context, not content
+     · faint = purely decorative (watermarks, ghosts) — never load-bearing text.
+     --mut lifted to ~7:1 on bg so secondary labels clear AA; faint holds the old dim. */
+  --ink:#f1efe7; --read:#cbc8bd; --mut:#9e9b90; --faint:#8f8c81;
   /* structure: line = quiet separation · line2 = touchable edge */
   --line:#262520; --line2:#34332b;
   /* signal: accent = alive/actionable/verified · danger = something actually broke */
@@ -51,6 +53,11 @@ a{color:inherit}
 .bar nav a:hover,.bar nav a.on{color:var(--ink)}
 .bar .right{display:flex;align-items:center;gap:16px}
 .clock{color:var(--mut)}.clock .gl{color:var(--accent);vertical-align:-1px;margin-left:1px}
+/* persistent quick-actions affordance — makes ⌘K discoverable on every page.
+   keyboard-only by nature, so it's a hover-device concern; hidden on touch. */
+.kbar{font-family:var(--mono);font-size:.6875rem;line-height:1;letter-spacing:.04em;color:var(--mut);background:none;border:1px solid var(--line2);border-radius:6px;border-bottom-width:2px;padding:4px 7px;cursor:pointer;transition:color .15s,border-color .15s}
+.kbar:hover{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 42%,transparent)}
+@media(hover:none){.kbar{display:none}}
 .status{display:inline-flex;align-items:center;gap:8px;color:var(--accent)}
 .pulse{width:7px;height:7px;border-radius:50%;background:var(--accent);position:relative}
 .pulse::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--accent);animation:ping 2.6s cubic-bezier(0,0,.2,1) infinite}
@@ -185,11 +192,17 @@ a.pcard:hover{border-color:color-mix(in srgb,var(--accent) 38%,transparent);tran
 .pc-head{display:flex;align-items:center;gap:10px;min-height:28px}
 .pc-head .tag{margin-left:auto}
 
-/* logo mark — an inset well (matches the work-page case mark) */
+/* logo mark — an inset well (matches the work-page case mark).
+   two families share one silhouette so a row of mismatched brand marks still reads
+   as a system: bare glyphs (transparent — Savior, Career Leap, KYP) float in the well
+   with breathing room; tiles (app-icons with their own dark face — Sniff, PSL) fill it
+   edge-to-edge so the well border is the only frame, never a frame-inside-a-frame. */
 .lmark{position:relative;width:40px;height:40px;border-radius:var(--r2);flex:0 0 auto;display:grid;place-items:center;overflow:hidden;border:1px solid var(--line2);background:var(--surface-2);font-weight:600;color:var(--mut);font-size:1rem;font-family:var(--sans)}
-.lmark img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:5px;background:var(--surface-2)}
+.lmark img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:6px;background:var(--surface-2);image-rendering:auto}
+.lmark.tile img{padding:0;object-fit:cover;background:none}
 .lmark.sm{width:30px;height:30px;border-radius:var(--r1);font-size:.84rem}
-.lmark.sm img{padding:4px}
+.lmark.sm img{padding:5px}
+.lmark.sm.tile img{padding:0}
 
 /* track record — full-width depth cards (logo + highlights + stat rail) */
 .tlist{display:flex;flex-direction:column;gap:16px;margin-top:16px}
@@ -265,9 +278,11 @@ a.pcard:hover{border-color:color-mix(in srgb,var(--accent) 38%,transparent);tran
 .aclose-line{font-size:1.3rem;color:var(--ink);line-height:1.4;margin-top:14px;letter-spacing:-.015em;font-weight:600}
 .aclose-sub{font-size:1rem;color:var(--read);line-height:1.55;margin-top:10px;max-width:48ch}
 .aclose-row{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:22px}
-.btn-primary{font-family:var(--mono);font-size:.8rem;font-weight:500;display:inline-flex;align-items:center;gap:8px;color:var(--accent);background:none;border:1px solid color-mix(in srgb,var(--accent) 40%,transparent);border-radius:var(--r1);padding:12px 18px;cursor:pointer;text-decoration:none;transition:background .2s,border-color .2s,transform .2s var(--eout)}
-.btn-primary:hover{background:color-mix(in srgb,var(--accent) 10%,transparent);border-color:var(--accent);transform:translateY(-1px)}
-.btn-ghost{font-family:var(--mono);font-size:.8rem;color:var(--read);text-decoration:none;background:none;border:1px solid var(--line2);border-radius:var(--r1);padding:12px 16px;cursor:pointer;transition:.18s;display:inline-flex;align-items:center;gap:7px}
+/* the page's one conversion action — filled, so it reads as primary by emphasis,
+   not by width. equal real estate to the ghost beside it; neither stretches. */
+.btn-primary{font-family:var(--mono);font-size:.8rem;font-weight:600;display:inline-flex;align-items:center;justify-content:center;gap:8px;color:#10130a;background:var(--accent);border:1px solid var(--accent);border-radius:var(--r1);padding:12px 18px;cursor:pointer;text-decoration:none;transition:background .2s,border-color .2s,transform .2s var(--eout)}
+.btn-primary:hover{background:color-mix(in srgb,var(--accent) 86%,#fff);border-color:color-mix(in srgb,var(--accent) 86%,#fff);transform:translateY(-1px)}
+.btn-ghost{font-family:var(--mono);font-size:.8rem;color:var(--read);text-decoration:none;background:none;border:1px solid var(--line2);border-radius:var(--r1);padding:12px 16px;cursor:pointer;transition:.18s;display:inline-flex;align-items:center;justify-content:center;gap:7px}
 .btn-ghost:hover{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 42%,transparent)}
 .aclose-cv{display:inline-flex;align-items:center;gap:6px;margin-top:16px;font-family:var(--mono);font-size:.78rem;color:var(--mut);text-decoration:none;transition:color .18s}
 .aclose-cv:hover{color:var(--accent)}
@@ -441,7 +456,11 @@ kbd{font-family:var(--mono);background:var(--surface-1);border:1px solid var(--l
 .art-title{font-size:clamp(1.8rem,4.6vw,2.1rem);font-weight:600;color:var(--ink);letter-spacing:-.02em;line-height:1.06}
 .art-dek{font-size:1.2rem;color:var(--read);line-height:1.6;margin-top:16px}
 .art-meta{font-family:var(--mono);font-size:.6875rem;color:var(--mut);margin-top:20px;padding-bottom:24px;border-bottom:1px solid var(--line)}
-.prose{padding:32px 0 8px}
+/* the one page built for reading — hold the body to a comfortable measure (~64 chars
+   at the 1.125rem body size) even though the article shell is wider, so lines don't
+   run tiringly long. rem not ch: Space Grotesk's wide "0" makes ch overshoot the real
+   line length. */
+.prose{padding:32px 0 8px;max-width:39rem}
 .prose p{font-size:1.125rem;line-height:1.8;color:var(--read);margin-bottom:24px}
 .prose p .hl{color:var(--ink);font-weight:500}
 .prose h2{font-size:1.25rem;font-weight:600;color:var(--ink);letter-spacing:-.01em;line-height:1.15;margin:40px 0 16px}
@@ -450,8 +469,11 @@ kbd{font-family:var(--mono);background:var(--surface-1);border:1px solid var(--l
 .art-end{margin-top:48px;padding-top:24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;font-family:var(--mono);font-size:.75rem;color:var(--mut)}
 .art-end a{color:var(--read);text-decoration:none}.art-end a:hover{color:var(--accent)}
 
-/* coffee page — sanctioned off-the-clock sub-theme: the one accent swap (amber = coffee) */
+/* coffee page — sanctioned off-the-clock sub-theme: the one accent swap (amber = coffee).
+   scoped to the page's own content; the top bar keeps the site's lime so the persistent
+   chrome (nav, live pulse, ⌘K) signals "same site", not a different one. */
 body.coffee{--accent:#d99a4e;--accentdim:#a8702e}
+body.coffee .bar{--accent:#c4e86b;--accentdim:#8aa84a}
 .cups{display:flex;border:1px solid var(--line2);border-radius:var(--r2);background:var(--surface-1);overflow:hidden;margin-top:24px}
 .cups .cup{padding:16px 20px;border-right:1px solid var(--line);flex:1}
 .cups .cup:last-child{border-right:none}

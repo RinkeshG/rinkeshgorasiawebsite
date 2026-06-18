@@ -1,6 +1,14 @@
 (function(){
   var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* logo fallback — a broken/missing mark hides itself so the letter monogram behind
+     it shows. delegated (capture, since 'error' doesn't bubble) instead of inline
+     onerror, so it survives a strict CSP and lives in one place. */
+  document.addEventListener('error',function(e){
+    var t=e.target;
+    if(t&&t.tagName==='IMG'&&t.closest&&(t.closest('.lmark')||t.closest('.case-id .mark'))){ t.style.display='none'; }
+  },true);
+
   /* live clock */
   var el=document.getElementById('clock');
   var SUN='<svg class="gl" width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="8" cy="8" r="3"/><path d="M8 1.4v1.6M8 13v1.6M1.4 8h1.6M13 8h1.6M3.3 3.3l1.1 1.1M11.6 11.6l1.1 1.1M12.7 3.3l-1.1 1.1M4.4 11.6l-1.1 1.1"/></svg>';
@@ -72,6 +80,17 @@
   input.addEventListener('input',filter);
   cmdk.addEventListener('click',function(e){if(e.target===cmdk)closeK();});
   var openBtn=document.getElementById('openk');if(openBtn)openBtn.addEventListener('click',openK);
+  /* make ⌘K discoverable on every page: a small affordance in the top bar.
+     desktop/hover only (it's a keyboard shortcut); hidden on touch via CSS.
+     injected once, so it works wherever the standard .bar shell exists. */
+  Array.prototype.forEach.call(document.querySelectorAll('.bar .right'),function(right){
+    if(right.querySelector('.kbar'))return;
+    var kb=document.createElement('button');
+    kb.type='button';kb.className='kbar';kb.textContent='⌘K';
+    kb.title='quick actions';kb.setAttribute('aria-label','open quick actions (Command K)');
+    kb.addEventListener('click',openK);
+    right.appendChild(kb);
+  });
   render();
 
   /* footer — rebuilt once: shelf note, social icons, credit, ⌘K */

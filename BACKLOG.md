@@ -1,59 +1,111 @@
 # Backlog — design & future work
 
-Captured after the fresh-eyes UI/UX + code audits. **All code P0/P1 are already fixed
-and shipped** (commit 9849eb0). This file tracks what's intentionally deferred so it
-isn't lost. Content/copy is placeholder and out of scope everywhere below.
+Captured after the fresh-eyes UI/UX + code audits. This file tracks what's done and
+what's intentionally deferred so it isn't lost.
 
 ---
 
-## UX / design — to do (from the design audit, nothing here done yet)
+## ✅ Shipped this pass (branch `claude/affectionate-allen-b46ea5`)
 
-### P0
-- [ ] **Mixed real logos vs letter fallbacks** on the home cards. Sniff / Career Leap /
-  PSL fall back to plain initials because `assets/img/career-leap.png` and
-  `assets/img/psl.png` are missing, sitting next to real marks (KYP, Savior) → half the
-  cards look unfinished. Fix: supply the two marks, **or** commit to one uniform monogram
-  style for all so the fallback reads as deliberate.
-
-### P1
-- [ ] **Mobile home buries the pitch.** The portrait fills the whole first viewport
-  (~812px); name + credibility line start ~1130px, below the fold. Fix: on mobile lead
-  with name + one-line positioning, cap the photo to ~50–60vh (or move it below the intro).
-- [ ] **Work-close button widths inverted (desktop).** Secondary "DM on X" stretches
-  ~700px while the primary "copy my email" is ~175px → eye lands on the wrong action.
-  (Mobile is fine.) Fix: equal widths, or make the primary the larger/filled one.
-- [ ] **Dim grey secondary text fails ~AA contrast** site-wide (`--mut` on `--bg`):
-  inactive nav, "or a DM on X →", "all writing →", the writing index numbers 01–04, stat
-  labels, shelf deck labels. Writing numbers are nearly invisible. Fix: lift the secondary
-  grey one step (clear 4.5:1); reserve the dimmest tone for purely decorative text.
-  *(Note: this is the same `--mut` token in both themes — fixing it helps light mode too.)*
-
-### P2
-- [ ] **Coffee swaps the whole accent lime→amber** — can read as a different site. Fix:
-  keep lime on the persistent chrome (nav, pulse), theme only the page's own content amber.
-- [ ] **Essay line length ~85ch** on desktop — tiring for the one page built for reading.
-  Fix: constrain `.prose` to ~62–68ch.
-- [ ] **404 digits can overlap into illegibility on mobile** on some random collapses.
-  Fix: tighten the random offsets on narrow viewports so 4·0·4 stays readable.
-- [ ] **⌘K is undiscoverable** from home/work/essay, and the hint still shows on touch
-  where it's inert. Fix: small persistent `⌘K` affordance in the top bar on desktop only.
+- [x] **Mobile home buries the pitch** — merged from `claude/busy-jackson-66ef0e`: name
+  leads, square photo capped, one column with intentional spacing + touch hygiene.
+- [x] **Real logos on the home cards (was P0).** Career Leap, Product Sense Lab and Sniff
+  added (processed to crisp 120px assets); Career Leap also wired into the work page. One
+  well silhouette holds two honest families — **bare glyphs** (Savior, Career Leap, KYP)
+  float with padding; **app-icon tiles** (Sniff, PSL) fill edge-to-edge (`.lmark.tile`).
+  Reads as an intentional product grid, not a sticker sheet. Accel + Vouch stay monograms.
+- [x] **Work-close button hierarchy (was P1).** Primary "copy my email" is now a filled
+  lime button vs the ghost "DM on X" — emphasis, not width, carries the hierarchy; both
+  content-width, neither stretches.
+- [x] **`--mut` secondary-text contrast (was P1).** Lifted `#8f8c81` → `#9e9b90`
+  (~5.8:1 → ~7:1 on bg), still clearly under `--read`. Added a `--faint` token reserved
+  for purely decorative text.
+- [x] **Coffee accent scoped (was P2).** Amber now themes only page content; the top bar
+  (nav, live pulse, ⌘K) keeps the site lime so it reads as the same site.
+- [x] **Essay line length (was P2).** `.prose` constrained to `39rem` (~64 chars).
+- [x] **404 digit overlap on mobile (was P2).** Tip/lean angle + drift tightened on narrow
+  viewports so 4·0·4 stays readable; tumbles left alone (stay in footprint).
+- [x] **⌘K discoverability (was P2).** Persistent `⌘K` affordance injected into the top bar
+  on every page; hidden on touch via `@media(hover:none)`.
+- [x] **Code P2 — shelf a11y:** dealt cards now `role="button"` + `tabindex` + keydown;
+  `main` landmark added; coffee map pins keyboard-operable + tab `aria-selected`.
+- [x] **Code P2 — duplicate `.stack`:** shelf card-stack renamed to `.deck-stack`.
+- [x] **Code P2 — shelf konami:** now ignores keydown while typing in inputs.
+- [x] **Code P2 — inline `onerror`:** replaced with one delegated (capture) handler in
+  `v3.js`, CSP-safe.
 
 ---
 
-## Code — P2 (deferred; P0/P1 already shipped)
+## Still open
 
-- [ ] **Shelf a11y depth:** dealt cards are click-only `div`s (keyboard/SR-invisible); no
-  `<main>` landmark; coffee map pins are mouse-only. Give dealt cards `role="button"` +
-  `tabindex` + keydown, or expose the gallery/cards view as the accessible path.
-- [ ] **Duplicate `.stack` class** with conflicting meaning (colophon chip-row in v3.css vs
-  the shelf card-stack inline) — namespace one (`.deck-stack`) before a shared component
-  named `.stack` silently breaks one.
-- [ ] **Shelf konami keydown** doesn't ignore typing in inputs — harmless today (no input
-  on the page), would double-fire if a search/filter is ever added.
-- [ ] **Inline `onerror` on logo imgs** → move to a delegated JS handler **if** a strict
-  CSP is ever added (inline handlers are CSP-blocked). No CSP today, so deferred.
+### Content & copy (all placeholder, nothing real yet)
+
+- [ ] **Home page** — real intro paragraph (first-person, not generic), stat rail numbers
+  verified and current, credibility line reflects the actual current role/status.
+- [ ] **Work page** — case study descriptions rewritten with real outcomes, metrics, and
+  story arc (not bullet dumps). Each card needs: the problem, what you did, and the number
+  that proves it worked.
+- [ ] **Writing page** — real essay titles and excerpts instead of placeholder text. Dates
+  accurate. Index numbers match actual post count.
+- [ ] **Coffee page** — map pins represent places actually visited; descriptions are
+  personal notes, not generic filler.
+- [ ] **Shelf page** — card backs have real descriptions/stories for each item (books,
+  games, lego sets etc), not placeholder copy.
+- [ ] **404 page** — the card labels that appear are placeholder; replace with real
+  project/page names that match the actual site structure.
+
+### UX / design
+
+**P0**
+- [ ] **Remove sun/moon glyph from clock and pulse dot from nav.** The clock in `v3.js`
+  injects a SUN svg (daytime) or MOON svg (night) next to "Bengaluru · time"; the status
+  span has a `.pulse` dot before "open to 0→1 roles". Both feel busy and should be stripped.
+  Fix: in `v3.js` `tick()`, output plain text time only (no svg injection). In HTML/CSS,
+  remove `<span class="pulse"></span>` and the `.pulse` / `.pulse::after` styles.
+- [ ] **Remove underlines from `.hl` and everywhere they appear.** The `.hl` class in the
+  intro and case bodies uses `border-bottom: 1.5px solid var(--accentdim)` as an underline.
+  Remove the border-bottom from `.intro .hl` and any other selectors that add a decorative
+  underline (check `border-bottom` across v3.css). Keep font-weight emphasis, drop the line.
+
+**P1**
+- [ ] **Make KnowYourPay and PSL live again.** The two projects are linked from the home
+  cards but the pages/apps are currently down or returning errors. Fix: either redeploy
+  the apps and verify the links work, or update the cards to point to a case study page
+  instead of a live product URL until the apps are back up.
+
+---
+
+## Deliverables
+
+- [ ] **1-page resume / PDF.** Build a clean single-page resume that matches the site's
+  engineered/mono aesthetic. Should be exportable as PDF (print stylesheet or pre-generated
+  PDF in `assets/`). Content: current role, top 3–4 work highlights with outcomes, skills,
+  education. Link it from the home page and/or the ⌘K palette as "download resume".
+
+---
+
+## Code — still deferred
+
 - [ ] **No `theme-color` light variant** (`<meta ... media="(prefers-color-scheme: light)">`)
-  — defer until/if light ships.
+  — intentionally not done: there's no light theme in production, so it would point at a
+  background that never renders. Defer until/if light ships.
+
+---
+
+## Future / good-to-have
+
+- [ ] **Move to Astro.** Replace the hand-rolled HTML/CSS/JS with an Astro project.
+  Benefits: component reuse (nav, footer, cards are copy-pasted today), content collections
+  for writing/work, easy MDX for essays, built-in image optimization, and a cleaner deploy
+  story. Rough migration path: port the design system tokens + v3.css as global styles, port
+  each page as an `.astro` component, migrate writing posts to MDX. Not urgent while the
+  site is small; revisit when adding the 3rd essay or the 2nd project page.
+
+### Logo polish (minor, optional)
+- [ ] `assets/img/savior.png` is a low-res 56px source — renders OK at 40px but won't scale
+  up. Swap for a higher-res mark if one exists.
+- [ ] KYP is a wide wordmark that reads small in a square well — a square "K" mark would sit
+  better beside the others.
 
 ---
 
