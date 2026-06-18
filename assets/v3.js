@@ -9,11 +9,9 @@
     if(t&&t.tagName==='IMG'&&t.closest&&(t.closest('.lmark')||t.closest('.case-id .mark'))){ t.style.display='none'; }
   },true);
 
-  /* live clock */
+  /* live clock — plain text, no day/night glyph */
   var el=document.getElementById('clock');
-  var SUN='<svg class="gl" width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="8" cy="8" r="3"/><path d="M8 1.4v1.6M8 13v1.6M1.4 8h1.6M13 8h1.6M3.3 3.3l1.1 1.1M11.6 11.6l1.1 1.1M12.7 3.3l-1.1 1.1M4.4 11.6l-1.1 1.1"/></svg>';
-  var MOON='<svg class="gl" width="11" height="11" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M13.4 10.4A5.6 5.6 0 0 1 5.6 2.6 5.6 5.6 0 1 0 13.4 10.4z"/></svg>';
-  function tick(){if(!el)return;try{var now=new Date();var t=now.toLocaleTimeString('en-US',{timeZone:'Asia/Kolkata',hour:'numeric',minute:'2-digit'});var h=parseInt(now.toLocaleString('en-US',{timeZone:'Asia/Kolkata',hour:'numeric',hour12:false}),10);el.innerHTML='Bengaluru · '+t+' '+((h>=6&&h<18)?SUN:MOON);}catch(e){el.textContent='Bengaluru';}}
+  function tick(){if(!el)return;try{var t=new Date().toLocaleTimeString('en-US',{timeZone:'Asia/Kolkata',hour:'numeric',minute:'2-digit'});el.textContent='Bengaluru · '+t;}catch(e){el.textContent='Bengaluru';}}
   tick();setInterval(tick,15000);
 
   /* disclosure (works wherever .rec exists) */
@@ -80,17 +78,6 @@
   input.addEventListener('input',filter);
   cmdk.addEventListener('click',function(e){if(e.target===cmdk)closeK();});
   var openBtn=document.getElementById('openk');if(openBtn)openBtn.addEventListener('click',openK);
-  /* make ⌘K discoverable on every page: a small affordance in the top bar.
-     desktop/hover only (it's a keyboard shortcut); hidden on touch via CSS.
-     injected once, so it works wherever the standard .bar shell exists. */
-  Array.prototype.forEach.call(document.querySelectorAll('.bar .right'),function(right){
-    if(right.querySelector('.kbar'))return;
-    var kb=document.createElement('button');
-    kb.type='button';kb.className='kbar';kb.textContent='⌘K';
-    kb.title='quick actions';kb.setAttribute('aria-label','open quick actions (Command K)');
-    kb.addEventListener('click',openK);
-    right.appendChild(kb);
-  });
   render();
 
   /* footer — rebuilt once: shelf note, social icons, credit, ⌘K */
@@ -104,12 +91,16 @@
       +'<div class="foot-row">'
       +  '<a class="foot-shelf" href="shelf.html"><svg class="fs-ico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"/></svg>the shelf <span class="ar">↗</span></a>'
       +  '<span class="foot-sig">built by rinkesh, fuelled by <a href="coffee.html">coffee</a></span>'
-      +  '<div class="foot-social">'
-      +    '<a href="mailto:rinkeshgorasia@gmail.com" aria-label="Email">'+I_MAIL+'</a>'
-      +    '<a href="https://x.com/rinks__g" target="_blank" rel="noopener" aria-label="Twitter / X">'+I_X+'</a>'
-      +    '<a href="https://www.linkedin.com/in/rinksg/" target="_blank" rel="noopener" aria-label="LinkedIn">'+I_IN+'</a>'
+      +  '<div class="foot-right">'
+      +    '<button type="button" class="kbar" id="footk" title="quick actions" aria-label="open quick actions (Command K)">⌘K</button>'
+      +    '<div class="foot-social">'
+      +      '<a href="mailto:rinkeshgorasia@gmail.com" aria-label="Email">'+I_MAIL+'</a>'
+      +      '<a href="https://x.com/rinks__g" target="_blank" rel="noopener" aria-label="Twitter / X">'+I_X+'</a>'
+      +      '<a href="https://www.linkedin.com/in/rinksg/" target="_blank" rel="noopener" aria-label="LinkedIn">'+I_IN+'</a>'
+      +    '</div>'
       +  '</div>'
       +'</div>';
+    var fk=document.getElementById('footk');if(fk)fk.addEventListener('click',openK);
   }
 
   /* email CTAs copy the address + toast instead of a jarring mailto handoff.
