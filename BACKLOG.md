@@ -33,6 +33,15 @@ what's intentionally deferred so it isn't lost.
 - [x] **Code P2 — shelf konami:** now ignores keydown while typing in inputs.
 - [x] **Code P2 — inline `onerror`:** replaced with one delegated (capture) handler in
   `v3.js`, CSP-safe.
+- [x] **P0 — sun/moon glyph + nav pulse removed.** Clock is plain "Bengaluru · time";
+  the nav status pulse dot is gone on every page (the work-close live dot is kept).
+- [x] **P0 — `.hl` underline removed** from the intro (weight emphasis kept, line dropped).
+- [x] **⌘K moved to the footer** (out of the top bar); hover-only, hidden on touch.
+- [x] **Experience cards deep-link** to the matching work section
+  (`work.html#savior` / `#career-leap` / `#accel`), landing under the sticky bar.
+- [x] **Work-page "now" section redesigned** — the neglected one-liner became three
+  compact logo cards linking to the live products; lighter than the home cards so it
+  complements rather than repeats.
 
 ---
 
@@ -55,17 +64,6 @@ what's intentionally deferred so it isn't lost.
   project/page names that match the actual site structure.
 
 ### UX / design
-
-**P0**
-- [ ] **Remove sun/moon glyph from clock and pulse dot from nav.** The clock in `v3.js`
-  injects a SUN svg (daytime) or MOON svg (night) next to "Bengaluru · time"; the status
-  span has a `.pulse` dot before "open to 0→1 roles". Both feel busy and should be stripped.
-  Fix: in `v3.js` `tick()`, output plain text time only (no svg injection). In HTML/CSS,
-  remove `<span class="pulse"></span>` and the `.pulse` / `.pulse::after` styles.
-- [ ] **Remove underlines from `.hl` and everywhere they appear.** The `.hl` class in the
-  intro and case bodies uses `border-bottom: 1.5px solid var(--accentdim)` as an underline.
-  Remove the border-bottom from `.intro .hl` and any other selectors that add a decorative
-  underline (check `border-bottom` across v3.css). Keep font-weight emphasis, drop the line.
 
 **P1**
 - [ ] **Make KnowYourPay and PSL live again.** The two projects are linked from the home
