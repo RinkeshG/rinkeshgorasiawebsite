@@ -103,6 +103,50 @@
     var fk=document.getElementById('footk');if(fk)fk.addEventListener('click',openK);
   }
 
+  /* "open to work" — the pitch, revealed by clicking the nav status (or via ⌘K).
+     dark/engineered take on the classic "what i'm looking for" card. */
+  (function(){
+    var box=document.createElement('div');box.className='opps';box.id='opps';box.setAttribute('aria-hidden','true');
+    box.innerHTML='<div class="opps-box" role="dialog" aria-modal="true" aria-label="what i’m looking for">'
+      +'<button class="opps-x" id="opps-x" type="button" aria-label="close">✕</button>'
+      +'<div class="opps-head"><span class="opps-hi" aria-hidden="true">👋</span><div><span class="opps-k">// open to work</span><h2 class="opps-title">what i’m looking for</h2></div></div>'
+      +'<div class="opps-body">'
+      +'<p>the short version: i’m a product builder and <span class="hl">two-time founder</span>. i built Savior into software 85 hospitals ran on and <span class="hl">sold it to Zocdoc</span>, then spent two years at Accel backing pre-seed founders. now i’m building again, and looking for my next <span class="hl">0→1</span>.</p>'
+      +'<ol class="opps-list">'
+      +'<li><span class="n">1/</span><span>i’m strongest at the very start, before the answer is obvious. i like finding the real problem and getting the first version shipped fast, mostly with AI these days.</span></li>'
+      +'<li><span class="n">2/</span><span>the proof is in the work, not the pitch: an exit with Savior, a shutdown i called myself with Career Leap, two years backing founders at Accel, and three products i’m shipping right now.</span></li>'
+      +'<li><span class="n">3/</span><span>i’m in Bengaluru, building in the open, and open to the right <span class="hl">0→1 role</span>. if you’re early and onto something, i’d like to hear about it.</span></li>'
+      +'</ol></div>'
+      +'<div class="opps-foot">'
+      +'<a class="btn-primary" href="mailto:rinkeshgorasia@gmail.com">copy my email</a>'
+      +'<a class="btn-ghost" href="https://x.com/rinks__g" target="_blank" rel="noopener">DM on X</a>'
+      +'<a class="opps-link" href="work.html">see the work →</a>'
+      +'</div></div>';
+    document.body.appendChild(box);
+    var lastF=null;
+    function openOpps(){ try{closeK();}catch(e){} lastF=document.activeElement; box.classList.add('open'); box.setAttribute('aria-hidden','false'); setTimeout(function(){var x=document.getElementById('opps-x'); if(x)x.focus();},20); }
+    function closeOpps(){ box.classList.remove('open'); box.setAttribute('aria-hidden','true'); if(lastF&&lastF.focus){try{lastF.focus();}catch(e){}} lastF=null; }
+    document.getElementById('opps-x').addEventListener('click',closeOpps);
+    box.addEventListener('click',function(e){ if(e.target===box) closeOpps(); });
+    box.addEventListener('keydown',function(e){
+      if(e.key==='Escape'){ closeOpps(); return; }
+      if(e.key!=='Tab') return;
+      var f=box.querySelectorAll('button,a[href]'); if(!f.length) return;
+      var first=f[0], last=f[f.length-1];
+      if(e.shiftKey && document.activeElement===first){ e.preventDefault(); last.focus(); }
+      else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); }
+    });
+    /* trigger: the "open to ... roles" nav status becomes a button (skip the coffee status) */
+    Array.prototype.forEach.call(document.querySelectorAll('.bar .status'),function(s){
+      if(!/open to/i.test(s.textContent)) return;
+      s.setAttribute('role','button'); s.setAttribute('tabindex','0'); s.title='what i’m looking for';
+      s.addEventListener('click',openOpps);
+      s.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openOpps(); } });
+    });
+    /* and a ⌘K entry */
+    actions.push({l:'what i’m looking for',h:'open to work',k:'open to work opportunities hiring role looking for job 0→1 founder available',run:openOpps});
+  })();
+
   /* email CTAs copy the address + toast instead of a jarring mailto handoff.
      opt a link out with data-mailto to keep native behaviour. */
   var toastEl,toastT;
