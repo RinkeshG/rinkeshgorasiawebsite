@@ -17,6 +17,9 @@
    5. Mobile is recomposed, not shrunk.
    ============================================================ */
 
+:root[data-light="dawn"]{--paper:#FCFBF5}
+:root[data-light="dusk"]{--paper:#FBF8F0}
+:root[data-light="night"]{--paper:#F9F7F1}
 :root{
   /* -- color ------------------------------------------------ */
   --paper:#FCFCF9;      /* white with a breath of warm grey    */
@@ -89,6 +92,7 @@ header{padding-top:2.2rem}
   display:inline-flex;align-items:center;gap:.5rem;margin-bottom:1.3rem;
 }
 .status::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--red);animation:pulse 2.6s ease-in-out infinite}
+.status2{display:block;font-family:var(--mono);font-size:.68rem;color:var(--faint);letter-spacing:.08em;text-transform:uppercase;margin:-.8rem 0 1.3rem}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(190,62,38,.35)}50%{box-shadow:0 0 0 5px rgba(190,62,38,0)}}
 h1{font-weight:600;font-size:2.7rem;line-height:1.08;letter-spacing:-.035em;margin-bottom:1.4rem}
 h1 .dot{color:var(--red)}
@@ -263,6 +267,27 @@ footer{margin:1rem 0 4rem;border-top:2px solid var(--ink);padding-top:.8rem}
 /* plates — exhibits carry true, muted colour (tipped-in figures); they keep their own inks */
 .plate{vertical-align:middle;overflow:visible}
 .fig-sub{display:inline-flex;align-items:center;gap:.6rem;font-family:var(--mono);font-size:.68rem;color:var(--faint);letter-spacing:.06em}
+
+/* simba the inhabitant — walks across the screen when you go quiet */
+.walker{
+  position:fixed;bottom:0;left:-90px;z-index:40;width:64px;height:38px;
+  pointer-events:none;display:none;
+}
+.walker.go{display:block;animation:stroll 14s linear forwards}
+.walker svg{animation:pad .5s steps(2) infinite}
+.walker .body{fill:var(--ink)}
+.walker .tail{fill:none;stroke:var(--ink);stroke-width:3.2;stroke-linecap:round}
+@keyframes stroll{from{left:-90px}to{left:100vw}}
+@keyframes pad{from{transform:translateY(0)}to{transform:translateY(-1.5px)}}
+
+/* the die — somewhere on the board */
+.roll svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;vertical-align:-2px}
+.roll.rolling svg{animation:tumble .55s cubic-bezier(.3,.7,.4,1.2)}
+@keyframes tumble{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+
+/* lego physics — the page assembles as you read */
+.snap{opacity:0;transform:translateY(10px)}
+.snap.in{opacity:1;transform:none;transition:transform .38s cubic-bezier(.2,1.42,.4,1),opacity .28s ease}
 
 /* simba sits on the writing rule — cats sit on the work */
 .sec-head{position:relative}

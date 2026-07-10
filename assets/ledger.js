@@ -54,8 +54,8 @@
     });
   }
 
-  /* the footer clock knows the rhythm of the day (IST) */
-  var live = document.getElementById('f-live');
+  /* the hero clock knows the rhythm of the day (IST) */
+  var live = document.getElementById('live-line');
   if (live) {
     var ist = new Date(Date.now() + (330 + new Date().getTimezoneOffset()) * 60000);
     var hr = ist.getHours();
@@ -68,7 +68,64 @@
       hr < 22 ? 'GAME NIGHT \u2014 HOSTING, LOSING' :
                 'LEGO O\u2019CLOCK';
     var hh = String(hr).padStart(2, '0'), mm = String(ist.getMinutes()).padStart(2, '0');
-    live.textContent = 'BENGALURU \u00B7 ' + hh + ':' + mm + ' \u00B7 ' + mood;
+    live.textContent = hh + ':' + mm + ' IST \u00B7 ' + mood;
+  }
+
+  /* the site faces the light — paper follows Bengaluru's sun */
+  (function () {
+    var ist = new Date(Date.now() + (330 + new Date().getTimezoneOffset()) * 60000);
+    var hr = ist.getHours();
+    var part = hr < 6 ? 'night' : hr < 9 ? 'dawn' : hr < 17 ? 'day' : hr < 20 ? 'dusk' : 'night';
+    if (part !== 'day') document.documentElement.dataset.light = part;
+  })();
+
+  /* the die — somewhere on the board */
+  var roll = document.getElementById('roll');
+  if (roll) {
+    var board = ['work.html', 'writing-career-leap.html', 'writing-hospitals.html',
+                 'writing-ai.html', 'coffee.html', 'shelf.html'];
+    roll.addEventListener('click', function (e) {
+      e.preventDefault();
+      if (roll.classList.contains('rolling')) return;
+      roll.classList.add('rolling');
+      var to = board[Math.floor(Math.random() * board.length)];
+      setTimeout(function () { location.href = to; }, 560);
+    });
+  }
+
+  /* lego physics — the page assembles as you read */
+  if (!reduced && 'IntersectionObserver' in window) {
+    var parts = document.querySelectorAll('.row, .exp, .post, .next-entry');
+    var snapIO = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); snapIO.unobserve(e.target); }
+      });
+    }, { rootMargin: '0px 0px -8% 0px' });
+    parts.forEach(function (el) { el.classList.add('snap'); snapIO.observe(el); });
+    /* insurance: nothing stays invisible if observers misbehave */
+    setTimeout(function () {
+      parts.forEach(function (el) { el.classList.add('in'); });
+    }, 3500);
+  }
+
+  /* simba the inhabitant — walks across when you go quiet */
+  var walker = document.getElementById('walker');
+  if (walker && !reduced) {
+    var idleT = null, lastWalk = 0;
+    var arm = function () {
+      clearTimeout(idleT);
+      idleT = setTimeout(function () {
+        if (Date.now() - lastWalk < 240000) return;   /* naps between strolls */
+        if (document.hidden) return;
+        lastWalk = Date.now();
+        walker.classList.add('go');
+        setTimeout(function () { walker.classList.remove('go'); }, 14500);
+      }, 30000);
+    };
+    ['scroll', 'mousemove', 'keydown', 'touchstart'].forEach(function (ev) {
+      addEventListener(ev, arm, { passive: true });
+    });
+    arm();
   }
 
   /* the sunflower is heliotropic — its head follows the light (your cursor) */

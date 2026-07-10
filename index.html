@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="assets/ledger.css?v=7">
+<link rel="stylesheet" href="assets/ledger.css?v=8">
 </head>
 <body>
 <div class="wrap">
@@ -29,13 +29,14 @@
   <header id="top">
     <div class="h-row">
       <a class="h-name" href="index.html">Rinkesh Gorasia</a>
-      <nav><a class="on" href="index.html">Home</a><a href="work.html">Work</a><a href="writing.html">Writing</a><a href="shelf.html">Shelf<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 20h-5a1 1 0 0 1 -1 -1c0 -2 3.378 -4.907 4 -6c-1 0 -4 -.5 -4 -2c0 -2 4 -3.5 6 -4c0 -1.5 .5 -4 3 -4s3 2.5 3 4c2 .5 6 2 6 4c0 1.5 -3 2 -4 2c.622 1.093 4 4 4 6a1 1 0 0 1 -1 1h-5c-1 0 -2 -4 -3 -4s-2 4 -3 4"/></svg></a></nav>
+      <nav><a class="on" href="index.html">Home</a><a href="work.html">Work</a><a href="writing.html">Writing</a><a href="shelf.html">Shelf<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 20h-5a1 1 0 0 1 -1 -1c0 -2 3.378 -4.907 4 -6c-1 0 -4 -.5 -4 -2c0 -2 4 -3.5 6 -4c0 -1.5 .5 -4 3 -4s3 2.5 3 4c2 .5 6 2 6 4c0 1.5 -3 2 -4 2c.622 1.093 4 4 4 6a1 1 0 0 1 -1 1h-5c-1 0 -2 -4 -3 -4s-2 4 -3 4"/></svg></a><a href="#" class="roll" id="roll" title="roll the dice — somewhere on the board" aria-label="Take me somewhere random"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2.5"/><circle cx="8.5" cy="8.5" r=".7" fill="currentColor"/><circle cx="12" cy="12" r=".7" fill="currentColor"/><circle cx="15.5" cy="15.5" r=".7" fill="currentColor"/></svg></a></nav>
     </div>
   </header>
 
   <section class="hero">
     <div>
       <span class="status">Bengaluru · open to 0→1 roles</span>
+      <span class="status2" id="live-line" aria-hidden="true"></span>
       <h1>Hey, I'm Rinkesh<span class="dot">.</span></h1>
       <p>I'm a product builder and two-time founder. My first company, <a class="ln" href="work.html#savior">Savior</a>, ran daily operations for 85 hospitals before <strong>Zocdoc bought it in 2020</strong>. Then two years at <a class="ln" href="work.html#accel">Accel</a>, backing pre-seed founders. Now I'm building again — in the open, mostly with AI.</p>
       <p>The part I like most is the very beginning, when the problem is still messy and nobody knows yet if it'll work.</p>
@@ -181,7 +182,7 @@
   <footer>
     <div class="f-row">
       <span><a href="mailto:rinkeshgorasia@gmail.com">Email</a><a href="https://x.com/rinks__g" target="_blank" rel="noopener">Twitter</a><a href="https://www.linkedin.com/in/rinksg/" target="_blank" rel="noopener">LinkedIn</a></span>
-      <span class="f-loc" id="f-live">Bengaluru, India</span>
+      <span class="f-loc">Bengaluru, India</span>
     </div>
     <div class="colophon">
       <p>Runs on <a class="fmark" href="coffee.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 14c.83 .642 2.077 1.017 3.5 1c1.423 .017 2.67 -.358 3.5 -1c.83 -.642 2.077 -1.017 3.5 -1c1.423 -.017 2.67 .358 3.5 1"/><path class="steam s1" d="M8 3a2.4 2.4 0 0 0 -1 2a2.4 2.4 0 0 0 1 2"/><path class="steam s2" d="M12 3a2.4 2.4 0 0 0 -1 2a2.4 2.4 0 0 0 1 2"/><path d="M3 10h14v5a6 6 0 0 1 -6 6h-2a6 6 0 0 1 -6 -6v-5"/><path d="M16.746 16.726a3 3 0 1 0 .252 -5.555"/></svg>filter coffee</a>, <a class="fmark" href="shelf.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 20h-5a1 1 0 0 1 -1 -1c0 -2 3.378 -4.907 4 -6c-1 0 -4 -.5 -4 -2c0 -2 4 -3.5 6 -4c0 -1.5 .5 -4 3 -4s3 2.5 3 4c2 .5 6 2 6 4c0 1.5 -3 2 -4 2c.622 1.093 4 4 4 6a1 1 0 0 1 -1 1h-5c-1 0 -2 -4 -3 -4s-2 4 -3 4"/></svg>board games</a> and <a class="fmark" href="#fig-simba"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.7 13.5c-1.1 -2 -1.441 -2.5 -2.7 -2.5c-1.259 0 -1.736 .755 -2.836 2.747c-.942 1.703 -2.846 1.845 -3.321 3.291c-.097 .265 -.145 .677 -.143 .962c0 1.176 .787 2 1.8 2c1.259 0 3 -1 4.5 -1s3.241 1 4.5 1c1.013 0 1.8 -.823 1.8 -2c0 -.285 -.049 -.697 -.146 -.962c-.475 -1.451 -2.512 -1.835 -3.454 -3.538"/><path d="M20.188 8.082a1.039 1.039 0 0 0 -.406 -.082h-.015c-.735 .012 -1.56 .75 -1.993 1.866c-.519 1.335 -.28 2.7 .538 3.052c.129 .055 .267 .082 .406 .082c.739 0 1.575 -.742 2.011 -1.866c.516 -1.335 .273 -2.7 -.54 -3.052l-.001 0"/><path d="M9.474 9c.055 0 .109 0 .163 -.011c.944 -.128 1.533 -1.346 1.32 -2.722c-.203 -1.297 -1.047 -2.267 -1.932 -2.267c-.055 0 -.109 0 -.163 .011c-.944 .128 -1.533 1.346 -1.32 2.722c.204 1.293 1.048 2.267 1.933 2.267"/><path d="M16.456 6.733c.214 -1.376 -.375 -2.594 -1.32 -2.722a1.164 1.164 0 0 0 -.162 -.011c-.885 0 -1.728 .97 -1.93 2.267c-.214 1.376 .375 2.594 1.32 2.722c.054 .007 .108 .011 .162 .011c.885 0 1.73 -.974 1.93 -2.267"/><path d="M5.69 12.918c.816 -.352 1.054 -1.719 .536 -3.052c-.436 -1.124 -1.271 -1.866 -2.009 -1.866c-.14 0 -.277 .027 -.407 .082c-.816 .352 -1.054 1.719 -.536 3.052c.436 1.124 1.271 1.866 2.009 1.866c.14 0 .277 -.027 .407 -.082"/></svg>Simba's supervision</a>.</p>
@@ -220,5 +221,12 @@
 
 
 </div>
-<script src="assets/ledger.js?v=7"></script>
+<div class="walker" id="walker" aria-hidden="true">
+  <svg viewBox="0 0 72 40" width="64" height="38">
+    <path class="tail" d="M12 22 C6 19 4 13 8 7"/>
+    <path class="body" d="M10 24 C12 17 20 13 30 13 L46 13 C50 8 53 6 57 6 L52 12 L58 8 L61 10
+      C65 11 68 13 68 17 C68 21 64 23 60 23 L57 23 C55 26 51 28 47 28 L46 28 L48 37 L44 37 L41 29 L33 29 L34 37 L30 37 L28 29 L23 29 L21 37 L17 37 L18 27 C13 27 10 26 10 24 Z"/>
+  </svg>
+</div>
+<script src="assets/ledger.js?v=8"></script>
 </body></html>
