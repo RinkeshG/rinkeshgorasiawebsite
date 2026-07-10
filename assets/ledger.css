@@ -260,18 +260,18 @@ footer{margin:1rem 0 4rem;border-top:2px solid var(--ink);padding-top:.8rem}
 /* Patent-style line figures. Ink strokes, mono captions, numbered
    FIG. Every mark cites a story; none is decoration. */
 .figmark{stroke:var(--ink);fill:none;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;vertical-align:middle;opacity:.75}
+/* plates — exhibits carry true, muted colour (tipped-in figures); they keep their own inks */
+.plate{vertical-align:middle;overflow:visible}
 .fig-sub{display:inline-flex;align-items:center;gap:.6rem;font-family:var(--mono);font-size:.68rem;color:var(--faint);letter-spacing:.06em}
 
 /* the sunflower is heliotropic — its head turns toward your cursor */
 .sunflower .sf-head{transform-origin:22px 27px;will-change:transform}
 .sunflower.sway .sf-head{animation:sway 7s ease-in-out infinite alternate}
 @keyframes sway{from{transform:rotate(-4deg)}to{transform:rotate(4deg)}}
-.sunflower .disc{fill:var(--ink);fill-opacity:.08}
 
 /* the footer cup — steam rises; the door to the coffee log */
 .cup-link{display:inline-flex;align-items:center;gap:.6rem;text-decoration:none;font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;color:var(--faint)}
 .cup-link:hover{color:var(--red)}
-.cup-link:hover .figmark{stroke:var(--red);opacity:1}
 .steam{transform-box:fill-box;animation:steam 3.6s ease-in-out infinite;opacity:0}
 .steam.s2{animation-delay:1.7s}
 @keyframes steam{0%{opacity:0;transform:translateY(3px)}35%{opacity:.6}75%{opacity:0;transform:translateY(-3.5px)}100%{opacity:0;transform:translateY(-3.5px)}}
@@ -291,18 +291,12 @@ footer{margin:1rem 0 4rem;border-top:2px solid var(--ink);padding-top:.8rem}
 }
 .giraffe-top svg{transition:transform .25s ease}
 .giraffe-top:hover{color:var(--red)}
-.giraffe-top:hover svg{transform:translateY(-4px)}
-.giraffe-top:hover .figmark{stroke:var(--red);opacity:1}
+.giraffe-top:hover svg{transform:translateY(-5px)}
 
-/* a meeple waits behind the shelf door */
-.h-row nav a[href="shelf.html"]::after{
-  content:"";display:inline-block;width:11px;height:11px;margin-left:.4rem;
-  vertical-align:-1px;opacity:0;transform:scale(.6);transition:opacity .18s,transform .18s cubic-bezier(.34,1.56,.64,1);
-  background:currentColor;
-  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2.6c1.7 0 2.9 1.3 2.9 2.9 0 .9-.4 1.7-1 2.2 1 .5 2.3 1.4 3.7 2 1.6.7 3.3 1.2 3.3 2.5 0 .8-.6 1.3-1.5 1.3h-3.3c.3 1.9 1.3 3.4 2.3 4.7.6.8.1 1.9-.9 1.9h-4.2c-.5 0-.9-.3-1.1-.8l-1.2-3-1.2 3c-.2.5-.6.8-1.1.8H4.5c-1 0-1.5-1.1-.9-1.9 1-1.3 2-2.8 2.3-4.7H2.6c-.9 0-1.5-.5-1.5-1.3 0-1.3 1.7-1.8 3.3-2.5 1.4-.6 2.7-1.5 3.7-2-.6-.5-1-1.3-1-2.2 0-1.6 1.2-2.9 2.9-2.9z'/%3E%3C/svg%3E") center/contain no-repeat;
-          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2.6c1.7 0 2.9 1.3 2.9 2.9 0 .9-.4 1.7-1 2.2 1 .5 2.3 1.4 3.7 2 1.6.7 3.3 1.2 3.3 2.5 0 .8-.6 1.3-1.5 1.3h-3.3c.3 1.9 1.3 3.4 2.3 4.7.6.8.1 1.9-.9 1.9h-4.2c-.5 0-.9-.3-1.1-.8l-1.2-3-1.2 3c-.2.5-.6.8-1.1.8H4.5c-1 0-1.5-1.1-.9-1.9 1-1.3 2-2.8 2.3-4.7H2.6c-.9 0-1.5-.5-1.5-1.3 0-1.3 1.7-1.8 3.3-2.5 1.4-.6 2.7-1.5 3.7-2-.6-.5-1-1.3-1-2.2 0-1.6 1.2-2.9 2.9-2.9z'/%3E%3C/svg%3E") center/contain no-repeat;
-}
-.h-row nav a[href="shelf.html"]:hover::after{opacity:1;transform:scale(1)}
+/* the meeple stands beside the shelf door; it hops when you knock */
+.h-row nav a .plate{width:12px;height:12px;margin-left:.38rem;vertical-align:-1px;opacity:.85}
+.h-row nav a:hover .plate{animation:hop .4s ease}
+@keyframes hop{0%{transform:none}40%{transform:translateY(-3.5px) rotate(-9deg)}100%{transform:none}}
 
 @media(max-width:640px){
   .paws{right:3.5rem}
