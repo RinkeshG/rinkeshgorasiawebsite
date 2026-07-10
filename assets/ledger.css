@@ -79,7 +79,7 @@ header{padding-top:2.2rem}
   border-top:2px solid var(--ink); border-bottom:1px solid var(--ink);
 }
 .h-name{font-weight:700;font-size:1rem;letter-spacing:-.01em;text-decoration:none;color:var(--ink)}
-.h-right{display:flex;align-items:baseline;gap:1.5rem}
+.h-right{display:flex;align-items:baseline;gap:1.5rem;position:relative}
 .h-clock{font-family:var(--mono);font-size:.7rem;color:var(--faint);letter-spacing:.06em;white-space:nowrap}
 .h-row nav{display:flex;gap:1.6rem;align-items:baseline}
 .h-row nav a{color:var(--soft);text-decoration:none;font-size:.88rem}
@@ -227,6 +227,10 @@ footer{margin:1rem 0 0;border-top:2px solid var(--ink);padding-top:.85rem}
 .f-row a{color:var(--soft);text-decoration:none;margin-right:1.3rem}
 .f-row a:hover{color:var(--red)}
 .f-loc{font-family:var(--mono);font-size:.72rem;color:var(--faint);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.f-right{display:flex;flex-direction:column;align-items:flex-end;gap:.4rem;text-align:right}
+.coffee-foot{display:inline-flex;align-items:center;gap:.45rem;text-decoration:none;color:var(--soft);font-size:.85rem}
+.coffee-foot:hover{color:var(--red)}
+.coffee-foot svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
 
 /* ============ mobile — recomposed, not shrunk =============== */
 @media(max-width:860px){
@@ -287,6 +291,11 @@ footer{margin:1rem 0 0;border-top:2px solid var(--ink);padding-top:.85rem}
 .roll .face{fill:#C08A4E;stroke:#1C1C19;stroke-width:1.4;stroke-linejoin:round}
 .roll .pip{fill:#1C1C19}
 .roll:hover .face{fill:#D09A5B}
+.die-pop{position:absolute;top:130%;right:0;z-index:50;width:15.5rem;background:var(--card);border:1px solid var(--ink);padding:.75rem .9rem;opacity:0;transform:translateY(-5px);pointer-events:none;transition:opacity .16s ease,transform .16s cubic-bezier(.34,1.4,.6,1)}
+.die-pop.show{opacity:1;transform:none;pointer-events:auto}
+.die-pop .dp-top{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-bottom:.4rem}
+.die-pop .dp-die{font-size:1rem;color:var(--red);line-height:1}
+.die-pop p{font-size:.95rem;color:var(--ink);line-height:1.45}
 .roll.rolling svg{animation:tumble .55s cubic-bezier(.3,.7,.4,1.2)}
 @keyframes tumble{from{transform:rotate(0)}to{transform:rotate(360deg)}}
 
@@ -296,15 +305,14 @@ footer{margin:1rem 0 0;border-top:2px solid var(--ink);padding-top:.85rem}
 
 /* simba sits on the writing rule — cats sit on the work */
 .sec-head{position:relative}
-.cat{position:absolute;right:3.2rem;top:-45px;width:52px;height:48px;cursor:pointer}
-.cat .pose{display:none}
+.cat{position:absolute;right:3.4rem;top:-46px;width:64px;height:46px;cursor:pointer}
+.cat .pose{position:absolute;bottom:0;right:0;display:none}
 .cat.sit .pose-sit{display:block}
 .cat.loaf .pose-loaf{display:block}
 .cat.sleep .pose-sleep{display:block}
-.cat.sleep .tail{animation:none}
-.cat .body{fill:var(--ink)}
-.cat .tail{fill:none;stroke:var(--ink);stroke-width:3.4;stroke-linecap:round;transform-origin:39px 34px;animation:tailflick 7s ease-in-out infinite}
-@keyframes tailflick{0%,86%,100%{transform:rotate(0)}90%{transform:rotate(7deg)}95%{transform:rotate(-4deg)}}
+.cat .ink{fill:var(--paper);stroke:var(--ink);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.cat .eye{fill:var(--ink);stroke:none}
+.cat .whisk{stroke:var(--ink);stroke-width:.9;fill:none;opacity:.55}
 .cat-say{
   position:absolute;right:-0.4rem;top:-1.35rem;font-family:var(--mono);font-size:.64rem;color:var(--ink);
   opacity:0;transition:opacity .18s;pointer-events:none;white-space:nowrap;
@@ -318,7 +326,7 @@ footer{margin:1rem 0 0;border-top:2px solid var(--ink);padding-top:.85rem}
 
 /* the ground — the page ends in earth: a sunflower and a signpost */
 .ground{position:relative;margin:4.6rem 0 3.4rem;height:1px;background:var(--rule-dark)}
-.ground .sunflower{position:absolute;bottom:-2px;left:11%}
+.ground .patch{position:absolute;bottom:-3px;left:38%;width:210px}
 .signpost{
   position:absolute;right:2.5rem;top:50%;transform:translateY(-50%);
   background:var(--paper);padding:0 .9rem;
@@ -338,9 +346,10 @@ footer{margin:1rem 0 0;border-top:2px solid var(--ink);padding-top:.85rem}
 @keyframes hop{0%{transform:none}40%{transform:translateY(-3.5px) rotate(-9deg)}100%{transform:none}}
 
 @media(max-width:640px){
-  .ground .sunflower{left:1.8rem}
-  .signpost{right:1rem}
+  .ground .patch{left:1rem;width:180px;height:auto}
+  .signpost{right:1rem;font-size:.56rem}
   .h-clock{display:none}
+  .die-pop{width:13rem}
 }
 
 /* ============ motion discipline ============================= */

@@ -76,17 +76,55 @@
     if (part !== 'day') document.documentElement.dataset.light = part;
   })();
 
-  /* the die — somewhere on the board */
+  /* the die — six sides of me. roll to meet one; no teleporting. */
   var roll = document.getElementById('roll');
-  if (roll) {
-    var board = ['work.html', 'writing-career-leap.html', 'writing-hospitals.html',
-                 'writing-ai.html', 'coffee.html', 'shelf.html'];
+  var pop = document.getElementById('die-pop');
+  if (roll && pop) {
+    var sides = [
+      'Builds best when the problem is still messy.',
+      'Three filter coffees a day. Never espresso.',
+      'Hosts game night. Loses game night.',
+      'Once shut a company down while it still looked healthy.',
+      'Grows sunflowers on the balcony.',
+      'Simba supervises every line of this site.'
+    ];
+    var words = ['one', 'two', 'three', 'four', 'five', 'six'];
+    var faceGlyph = ['\u2680', '\u2681', '\u2682', '\u2683', '\u2684', '\u2685'];
+    var faces = {
+      1: [[12,12]], 2: [[7,7],[17,17]], 3: [[7,7],[12,12],[17,17]],
+      4: [[7,7],[17,7],[7,17],[17,17]], 5: [[7,7],[17,7],[12,12],[7,17],[17,17]],
+      6: [[7,7],[17,7],[7,12],[17,12],[7,17],[17,17]]
+    };
+    var pipsEl = roll.querySelector('.pips');
+    var NS = 'http://www.w3.org/2000/svg';
+    function drawPips(n) {
+      while (pipsEl.firstChild) pipsEl.removeChild(pipsEl.firstChild);
+      faces[n].forEach(function (p) {
+        var c = document.createElementNS(NS, 'circle');
+        c.setAttribute('cx', p[0]); c.setAttribute('cy', p[1]);
+        c.setAttribute('r', '1.7'); c.setAttribute('class', 'pip');
+        pipsEl.appendChild(c);
+      });
+    }
+    var last = 5;
     roll.addEventListener('click', function (e) {
       e.preventDefault();
       if (roll.classList.contains('rolling')) return;
       roll.classList.add('rolling');
-      var to = board[Math.floor(Math.random() * board.length)];
-      setTimeout(function () { location.href = to; }, 560);
+      pop.classList.remove('show');
+      var n; do { n = 1 + Math.floor(Math.random() * 6); } while (n === last);
+      last = n;
+      setTimeout(function () {
+        roll.classList.remove('rolling');
+        drawPips(n);
+        pop.querySelector('.dp-num').textContent = 'you rolled a ' + words[n - 1];
+        pop.querySelector('.dp-die').textContent = faceGlyph[n - 1];
+        pop.querySelector('p').textContent = sides[n - 1];
+        pop.classList.add('show');
+      }, 520);
+    });
+    document.addEventListener('click', function (e) {
+      if (!pop.contains(e.target) && !roll.contains(e.target)) pop.classList.remove('show');
     });
   }
 
