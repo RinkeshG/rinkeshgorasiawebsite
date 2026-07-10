@@ -52,7 +52,7 @@
 .cc-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}
 .cc-head-tx{min-width:0}
 .cc-thumb{flex:0 0 auto;width:94px;height:94px;border-radius:11px;overflow:hidden;border:1px solid var(--rule-dark);box-shadow:0 6px 16px rgba(28,28,25,.14);background:var(--paper)}
-.cc-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.cc-thumb img{width:100%;height:100%;object-fit:cover;display:block;image-orientation:from-image}
 .cc-thumb-mono{display:grid;place-items:center;background:radial-gradient(120% 100% at 50% 12%,#FBF3EA,#EFE4D3);box-shadow:0 6px 16px rgba(28,28,25,.1)}
 .cc-thumb-mono span{font-family:var(--sans);font-weight:600;font-size:2.35rem;color:var(--soft);letter-spacing:-.02em}
 .cc-body{padding:20px 22px}
@@ -68,6 +68,18 @@
 .cc-v{font-size:.94rem;color:var(--ink);font-weight:500;line-height:1.45}
 .swap{animation:swapa .42s var(--eout)}
 @keyframes swapa{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.map-side{display:flex;flex-direction:column;gap:16px}
+.cof-index{border-top:2px solid var(--ink)}
+.ci-head{display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);padding:.6rem .1rem .35rem}
+.ci-row{display:grid;grid-template-columns:2.2rem 1fr auto;gap:.8rem;align-items:baseline;text-align:left;background:none;border:0;border-top:1px solid var(--rule);padding:.72rem .1rem;cursor:pointer;width:100%;color:inherit;font-family:inherit;transition:padding-left .16s}
+.ci-no{font-family:var(--mono);font-size:.72rem;color:var(--faint)}
+.ci-nm{font-weight:600;font-size:.98rem;letter-spacing:-.01em;color:var(--soft)}
+.ci-area{font-family:var(--mono);font-size:.62rem;color:var(--faint);text-transform:uppercase;letter-spacing:.06em;white-space:nowrap}
+.ci-row:hover{padding-left:.4rem}
+.ci-row:hover .ci-nm{color:var(--red)}
+.ci-row.on .ci-no{color:var(--red)}
+.ci-row.on .ci-nm{color:var(--ink)}
+.ci-row:focus-visible{outline:2px solid var(--red);outline-offset:2px;border-radius:3px}
 .gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:22px;perspective:1200px}
 .gallery[hidden]{display:none}
 .gcard{display:flex;transform-style:preserve-3d;transition:transform .3s var(--eout),box-shadow .3s;cursor:default}
@@ -107,7 +119,10 @@
 
   <section class="mapview" id="mapview">
     <div id="map"></div>
-    <div class="ccard" id="detail"></div>
+    <div class="map-side">
+      <div class="ccard" id="detail"></div>
+      <nav class="cof-index" id="cofIndex" aria-label="all coffee places"></nav>
+    </div>
   </section>
 
   <section class="gallery" id="gallery" hidden></section>
@@ -136,11 +151,11 @@
      drink:'Maverick Mazegran, or the tender coconut cold brew',
      food:'bird\'s eye chilli spaghetti',
      vd:'my go-to place to work from. probably the best coffee, food and vibe in town.'},
-    {nm:'Anama Coffee',area:'Indiranagar',lat:12.9783,lng:77.6395,img:'',
+    {nm:'Anama Coffee',area:'Indiranagar',lat:12.9783,lng:77.6395,img:'anama.jpg',
      drink:'raspberry cold brew',
      food:'lemon cloud cookie',
      vd:'my daily hangout, where i go to chill with friends.'},
-    {nm:'Kahale',area:'Jayanagar',lat:12.9285,lng:77.5835,img:'',
+    {nm:'Kahale',area:'Jayanagar',lat:12.9285,lng:77.5835,img:'kahale.jpg',
      drink:'cranberry foam cold brew, or a hazelnut iced latte',
      vd:'a late-night favourite, open till 1am with a great vibe. some of the best coffee in town.'}
   ];
@@ -171,7 +186,7 @@
   /* ---- map ---- */
   var detail=document.getElementById('detail'), cur=-1, markers=[], map;
   function select(i,pan){
-    if(i===cur)return; cur=i; var d=DATA[i];
+    if(i===cur)return; cur=i; var d=DATA[i]; syncIndex(i);
     detail.innerHTML=cardHTML(d,i); detail.classList.remove('swap'); void detail.offsetWidth; detail.classList.add('swap');
     fillBars(detail);
     markers.forEach(function(m,j){ var el=m.getElement&&m.getElement(); if(el){var p=el.querySelector('.cpin');if(p)p.classList.toggle('sel',j===i);} });
@@ -196,6 +211,21 @@
     function fit(){ if(!map)return; map.invalidateSize(); map.fitBounds(bounds,{padding:[48,48]}); }
     fit(); setTimeout(fit,250); setTimeout(fit,800);
   }catch(e){ document.getElementById('map').innerHTML='<div style="padding:24px;font-family:var(--mono);font-size:.8rem;color:var(--faint)">map could not load — try the cards view.</div>'; }
+  /* the list — a ranked index beside the map; click a row to jump + pan */
+  var idxEl=document.getElementById('cofIndex');
+  function syncIndex(i){ if(!idxEl)return; idxEl.querySelectorAll('.ci-row').forEach(function(b,j){ b.classList.toggle('on',j===i); b.setAttribute('aria-current',j===i?'true':'false'); }); }
+  if(idxEl){
+    idxEl.innerHTML='<div class="ci-head"><span>the list</span><span>&#8593;&#8595; to browse</span></div>'
+      +DATA.map(function(d,i){ return '<button class="ci-row" type="button" data-i="'+i+'" aria-label="show '+esc(d.nm)+'"><span class="ci-no">'+rank(i)+'</span><span class="ci-nm">'+esc(d.nm)+'</span><span class="ci-area">'+esc(d.area)+'</span></button>'; }).join('');
+    idxEl.querySelectorAll('.ci-row').forEach(function(b){ b.addEventListener('click',function(){ select(+b.dataset.i); }); });
+  }
+  /* arrow keys step through the ranking while the map view is showing */
+  window.addEventListener('keydown',function(e){
+    if(document.getElementById('mapview').hidden) return;
+    var t=e.target; if(t&&(t.tagName==='INPUT'||t.tagName==='TEXTAREA'||t.isContentEditable))return;
+    if(e.key==='ArrowDown'||e.key==='ArrowRight'){ e.preventDefault(); select((cur+1)%DATA.length); }
+    else if(e.key==='ArrowUp'||e.key==='ArrowLeft'){ e.preventDefault(); select((cur-1+DATA.length)%DATA.length); }
+  });
   select(0,false);
 
   /* ---- gallery ---- */
