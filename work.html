@@ -4,7 +4,7 @@
 <title>work — Rinkesh Gorasia</title>
 <meta name="description" content="The long version: two companies, an exit, a shutdown I called myself, and two years backing pre-seed founders at Accel." />
 <link rel="canonical" href="https://rinkeshgorasia.com/work.html" />
-<meta name="theme-color" content="#0d0d0c" />
+<meta name="theme-color" content="#FCFCF9" />
 <link rel="manifest" href="manifest.json" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Rinkesh Gorasia" />
@@ -20,123 +20,165 @@
 <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap"></noscript>
-<link rel="stylesheet" href="assets/v3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/ledger.css?v=11">
+<style>
+  .phead{padding:var(--s8) 0 var(--s6)}
+  .phead .status{margin-bottom:1.2rem}
+  .phead p{color:var(--soft);max-width:34rem;font-size:1.05rem;margin-top:1rem}
+  .case{padding-top:.3rem;margin-bottom:1rem}
+  .case-head{display:flex;justify-content:space-between;align-items:flex-start;gap:1.2rem;margin:.3rem 0 1.3rem}
+  .case-id{display:flex;gap:.9rem;align-items:center}
+  .case-id .mark img{width:34px;height:34px;object-fit:contain;filter:grayscale(1) contrast(1.05);opacity:.9}
+  .case-id .mark.mono{width:34px;height:34px;border:1px solid var(--rule-dark);border-radius:3px;display:inline-flex;align-items:center;justify-content:center;font-weight:700;color:var(--soft)}
+  .case-id h2{font-size:1.5rem;font-weight:600;letter-spacing:-.025em;line-height:1}
+  .case-id .role{font-family:var(--mono);font-size:.68rem;color:var(--faint);text-transform:uppercase;letter-spacing:.06em;margin-top:.35rem}
+  .case-when{font-family:var(--mono);font-size:.78rem;color:var(--faint);white-space:nowrap;padding-top:.2rem}
+  .case-when .ex{color:var(--red)}
+  .figstrip{display:flex;gap:2.8rem;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:1rem 0;margin-bottom:1.6rem;flex-wrap:wrap}
+  .wfig b{font-family:var(--mono);font-feature-settings:'tnum';font-size:1.15rem;display:block;letter-spacing:-.02em;color:var(--ink);white-space:nowrap}
+  .wfig b .u{color:var(--faint);font-size:.72em}
+  .wfig span{font-size:.68rem;color:var(--faint);letter-spacing:.04em;text-transform:uppercase;margin-top:.25rem;display:block}
+  .case .prose{max-width:var(--prose)}
+  .case .prose p{margin-bottom:1.1rem}
+  .hl{color:var(--ink);font-weight:600}
+  .callout{border-left:2px solid var(--red);padding:.1rem 0 .1rem 1.3rem;margin-top:1.7rem;max-width:var(--prose)}
+  .callout .k{font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--red);display:block;margin-bottom:.45rem}
+  .callout p{color:var(--soft);font-size:1rem}
+  .nowrow{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:1.4rem}
+  .nowcard{padding:1.15rem 1.3rem 1.15rem 0;text-decoration:none;color:inherit;display:flex;flex-direction:column;gap:.2rem;border-right:1px solid var(--rule)}
+  .nowrow .nowcard:last-child{border-right:none;padding-right:0}
+  .now-nm{font-weight:600;font-size:1.05rem;display:inline-flex;align-items:baseline;gap:.5rem}
+  .now-nm .go{color:var(--red);opacity:0;transform:translateX(-4px);transition:opacity .18s,transform .18s}
+  .nowcard:hover .now-nm{color:var(--red)}
+  .nowcard:hover .now-nm .go{opacity:1;transform:none}
+  .now-ds{color:var(--soft);font-size:.92rem}
+  .close{padding-top:.4rem}
+  .close .status{margin-bottom:1.1rem}
+  .close-h{font-size:2rem;font-weight:600;letter-spacing:-.03em;margin-bottom:.7rem}
+  .close p{color:var(--soft);max-width:32rem;margin-bottom:1.6rem}
+  @media(max-width:760px){
+    .case-head{flex-direction:column;gap:.6rem}
+    .figstrip{gap:1.6rem}
+    .nowrow{grid-template-columns:1fr}
+    .nowcard{border-right:none;border-bottom:1px solid var(--rule);padding:1.05rem 0}
+    .now-nm .go{opacity:1;transform:none}
+  }
+</style>
 </head>
 <body>
-<div class="page">
+<div class="wrap">
 
-  <header class="bar rv">
-    <nav><a href="index.html">home</a><a href="work.html" class="on">work</a><a href="writing.html">writing</a></nav>
-    <span class="right"><span class="clock" id="clock">Bengaluru</span><span class="status">open to 0→1 roles</span></span>
+  <header id="top">
+    <div class="h-row">
+      <a class="h-name" href="index.html">Rinkesh Gorasia</a>
+      <span class="h-right"><nav><a href="index.html">Home</a><a class="on" href="work.html">Work</a><a href="writing.html">Writing</a><a href="shelf.html">Shelf<svg class="plate" viewBox="0 0 24 24" aria-hidden="true"><path fill="#C08A4E" stroke="#1C1C19" stroke-width="1.2" stroke-linejoin="round" d="M12 2.6c1.7 0 2.9 1.3 2.9 2.9 0 .9-.4 1.7-1 2.2 1 .5 2.3 1.4 3.7 2 1.6.7 3.3 1.2 3.3 2.5 0 .8-.6 1.3-1.5 1.3h-3.3c.3 1.9 1.3 3.4 2.3 4.7.6.8.1 1.9-.9 1.9h-4.2c-.5 0-.9-.3-1.1-.8l-1.2-3-1.2 3c-.2.5-.6.8-1.1.8H4.5c-1 0-1.5-1.1-.9-1.9 1-1.3 2-2.8 2.3-4.7H2.6c-.9 0-1.5-.5-1.5-1.3 0-1.3 1.7-1.8 3.3-2.5 1.4-.6 2.7-1.5 3.7-2-.6-.5-1-1.3-1-2.2 0-1.6 1.2-2.9 2.9-2.9z"/></svg></a></nav><a href="#" class="roll" id="roll" title="six sides of me — roll one" aria-label="Roll the die"><svg viewBox="0 0 24 24" aria-hidden="true"><rect class="face" x="2.5" y="2.5" width="19" height="19" rx="4"/><g class="pips"><circle class="pip" cx="7" cy="7" r="1.7"/><circle class="pip" cx="17" cy="7" r="1.7"/><circle class="pip" cx="12" cy="12" r="1.7"/><circle class="pip" cx="7" cy="17" r="1.7"/><circle class="pip" cx="17" cy="17" r="1.7"/></g></svg></a><div class="die-pop" id="die-pop"><div class="dp-top"><span class="dp-num">roll me</span><span class="dp-die">⚄</span></div><p>Six sides. Roll to meet one.</p></div><span class="h-clock" id="h-clock"></span></span>
+    </div>
   </header>
 
-  <section class="phead rv">
-    <p class="eyebrow">// work</p>
-    <h1>the long version.</h1>
-    <p>two companies, one exit, a shutdown i called myself while it was still working, and two years on the other side of the table backing pre-seed founders. here's how each of them actually went.</p>
+  <section class="phead">
+    <span class="status">Bengaluru · open to 0→1 roles</span>
+    <h1>The long version<span class="dot">.</span></h1>
+    <p>Two companies, one exit, a shutdown I called myself while it was still working, and two years on the other side of the table backing pre-seed founders. Here's how each of them actually went.</p>
   </section>
 
-  <section class="reveal" id="savior">
-    <p class="chapter">01 / <b>the one that sold</b></p>
-    <article class="case">
+  <section id="savior">
+    <div class="sec-head"><span class="sec-title">The one that sold</span><span class="sec-sub">Chapter 01</span></div>
+    <div class="case">
       <div class="case-head">
-        <div class="case-id"><span class="mark"><img width="40" height="40" src="assets/img/savior.png" alt="Savior" /></span><div><h2>Savior</h2><p class="role">founder &amp; ceo · healthcare</p></div></div>
-        <span class="case-when">2017-2020 · <span class="ex">acquired by Zocdoc</span></span>
+        <div class="case-id"><span class="mark"><img src="assets/img/savior.png" alt="Savior" width="34" height="34"></span><div><h2>Savior</h2><div class="role">founder &amp; ceo · healthcare</div></div></div>
+        <span class="case-when">2017–20 · <span class="ex">acquired by Zocdoc</span></span>
       </div>
-      <div class="statgrid">
-        <div class="st"><div class="n">85</div><div class="l">hospitals</div></div>
-        <div class="st"><div class="n">3<span class="u">mo</span></div><div class="l">to first pilots</div></div>
-        <div class="st"><div class="n"><span class="u">₹</span>0</div><div class="l">raised</div></div>
-        <div class="st"><div class="n">2020</div><div class="l">acquired by Zocdoc</div></div>
+      <div class="figstrip">
+        <span class="wfig"><b>85</b><span>hospitals</span></span>
+        <span class="wfig"><b>3<span class="u">mo</span></b><span>to first pilots</span></span>
+        <span class="wfig"><b><span class="u">₹</span>0</b><span>raised</span></span>
+        <span class="wfig"><b>2020</b><span>acquired by Zocdoc</span></span>
       </div>
-      <div class="case-body">
-        <p>i started Savior in college, building a simple appointment-booking app for hospitals. then i spent real time inside them, watching how the staff actually worked, and the booking was never the real problem. the data was. <span class="hl">patient records and schedules ran on paper and memory</span>, and it broke all the time. so i changed direction and built software to run the hospital's whole operation instead.</p>
-        <p>the first version took <span class="hl">three months and two pilot hospitals</span>. it worked because it solved a painful daily problem instead of adding a nice-to-have. it cut the time to process a patient and got rid of the manual errors. after that it mostly sold itself. i went after chains like Fortis and Cloudnine for multi-location rollouts and grew from 35 hospitals in the first year to <span class="hl">85 by year three, with no sales team</span>, all word of mouth. i built a team of 85 across engineering, operations and customer success, shipped a second version with analytics and decision support to push toward preventive care, and kept the company profitable without raising money. <span class="hl">Zocdoc acquired us in 2020</span>.</p>
+      <div class="prose">
+        <p>I started Savior in college, building a simple appointment-booking app for hospitals. Then I spent real time inside them, watching how the staff actually worked, and the booking was never the real problem. The data was. <span class="hl">Patient records and schedules ran on paper and memory</span>, and it broke all the time. So I changed direction and built software to run the hospital's whole operation instead.</p>
+        <p>The first version took <span class="hl">three months and two pilot hospitals</span>. It worked because it solved a painful daily problem instead of adding a nice-to-have — it cut the time to process a patient and got rid of the manual errors. After that it mostly sold itself. I went after chains like Fortis and Cloudnine for multi-location rollouts and grew from 35 hospitals in the first year to <span class="hl">85 by year three, with no sales team</span>, all word of mouth. I built a team of 85 across engineering, operations and customer success, shipped a second version with analytics and decision support, and kept the company profitable without raising money. <span class="hl">Zocdoc acquired us in 2020.</span></p>
       </div>
-      <div class="callout"><span class="k">the wedge</span><p>get inside the system before you build for it. i'd have shipped a booking tool nobody needed if i hadn't spent those weeks watching how a hospital actually runs.</p></div>
-    </article>
+      <div class="callout"><span class="k">the wedge</span><p>Get inside the system before you build for it. I'd have shipped a booking tool nobody needed if I hadn't spent those weeks watching how a hospital actually runs.</p></div>
+    </div>
   </section>
 
-  <section class="reveal" id="career-leap">
-    <p class="chapter">02 / <b>the one i killed</b></p>
-    <article class="case">
+  <section id="career-leap">
+    <div class="sec-head"><span class="sec-title">The one I killed</span><span class="sec-sub">Chapter 02</span></div>
+    <div class="case">
       <div class="case-head">
-        <div class="case-id"><span class="mark"><img width="40" height="40" src="assets/img/career-leap.png" alt="Career Leap" /></span><div><h2>Career Leap</h2><p class="role">founder &amp; ceo · learning &amp; community</p></div></div>
-        <span class="case-when">2020-2023 · shut down</span>
+        <div class="case-id"><span class="mark"><img src="assets/img/career-leap.png" alt="Career Leap" width="34" height="34"></span><div><h2>Career Leap</h2><div class="role">founder &amp; ceo · learning &amp; community</div></div></div>
+        <span class="case-when">2020–23 · shut down</span>
       </div>
-      <div class="statgrid">
-        <div class="st"><div class="n">10<span class="u">K</span></div><div class="l">users in 6 months</div></div>
-        <div class="st"><div class="n">100<span class="u">K</span></div><div class="l">watch hours</div></div>
-        <div class="st"><div class="n">40<span class="u">%</span></div><div class="l">completion (5–10% norm)</div></div>
-        <div class="st"><div class="n"><span class="u">₹</span>15L</div><div class="l">revenue, 2 cohorts</div></div>
+      <div class="figstrip">
+        <span class="wfig"><b>10<span class="u">K</span></b><span>users in 6 months</span></span>
+        <span class="wfig"><b>100<span class="u">K</span></b><span>watch hours</span></span>
+        <span class="wfig"><b>40<span class="u">%</span></b><span>completion (5–10% norm)</span></span>
+        <span class="wfig"><b><span class="u">₹</span>15L</b><span>revenue, 2 cohorts</span></span>
       </div>
-      <div class="case-body">
-        <p>Career Leap started as a whatsapp group for people in tech who wanted to get better at the soft skills the job actually needs, learned from people who had already done it. weekly sessions with industry leaders grew the community from 2,000 to 3,500, and it hit <span class="hl">10,000 users in six months</span>. then i built a learning app on top of it. it crossed <span class="hl">100k watch hours</span>, and the gamification i added pushed session times up 50% and doubled retention.</p>
-        <p>when i talked to users, the real opportunity wasn't the app. it was live cohorts. with a team of three i ran two of them, trained 60 people at ₹10 to 15k each, and got <span class="hl">40% completion when most courses see 5 to 10%</span>, because i built for the last lesson instead of the signup. i also tested a version for companies and ran it inside two of them. on every metric i cared about it was working. on the one that actually mattered it wasn't. the unit economics never held at scale, and no product was going to fix that, so i shut it down in 2023.</p>
+      <div class="prose">
+        <p>Career Leap started as a WhatsApp group for people in tech who wanted to get better at the soft skills the job actually needs, learned from people who had already done it. Weekly sessions with industry leaders grew the community from 2,000 to 3,500, and it hit <span class="hl">10,000 users in six months</span>. Then I built a learning app on top of it. It crossed <span class="hl">100k watch hours</span>, and the gamification I added pushed session times up 50% and doubled retention.</p>
+        <p>When I talked to users, the real opportunity wasn't the app — it was live cohorts. With a team of three I ran two of them, trained 60 people at ₹10–15k each, and got <span class="hl">40% completion when most courses see 5 to 10%</span>, because I built for the last lesson instead of the signup. On every metric I cared about it was working. On the one that actually mattered it wasn't. The unit economics never held at scale, and no product was going to fix that, so I shut it down in 2023.</p>
       </div>
-      <div class="callout"><span class="k">the call</span><p>killing something that looks alive is harder than killing something that's clearly dead. 10k users and 40% completion made it easy to keep going. the discipline was admitting the math, and stopping while i still respected the work.</p></div>
-    </article>
+      <div class="callout"><span class="k">the call</span><p>Killing something that looks alive is harder than killing something that's clearly dead. 10k users and 40% completion made it easy to keep going. The discipline was admitting the math, and stopping while I still respected the work.</p></div>
+    </div>
   </section>
 
-  <section class="reveal" id="accel">
-    <p class="chapter">03 / <b>the other side of the table</b></p>
-    <article class="case">
+  <section id="accel">
+    <div class="sec-head"><span class="sec-title">The other side of the table</span><span class="sec-sub">Chapter 03</span></div>
+    <div class="case">
       <div class="case-head">
-        <div class="case-id"><span class="mark">A</span><div><h2>Accel Atoms</h2><p class="role">led the program · pre-seed</p></div></div>
-        <span class="case-when">2023-2025</span>
+        <div class="case-id"><span class="mark mono">A</span><div><h2>Accel Atoms</h2><div class="role">led the program · pre-seed</div></div></div>
+        <span class="case-when">2023–25</span>
       </div>
-      <div class="statgrid">
-        <div class="st"><div class="n">4</div><div class="l">cohorts</div></div>
-        <div class="st"><div class="n">2</div><div class="l">tracks (AI, LeapTech)</div></div>
-        <div class="st"><div class="n">40<span class="u">+</span></div><div class="l">founders backed</div></div>
-        <div class="st"><div class="n">pre<span class="u">-</span>seed</div><div class="l">idea to first cheque</div></div>
+      <div class="figstrip">
+        <span class="wfig"><b>4</b><span>cohorts</span></span>
+        <span class="wfig"><b>2</b><span>tracks (AI, LeapTech)</span></span>
+        <span class="wfig"><b>40<span class="u">+</span></b><span>founders backed</span></span>
+        <span class="wfig"><b>pre-seed</b><span>idea to first cheque</span></span>
       </div>
-      <div class="case-body">
-        <p>after building, i spent two years at Accel running Atoms, their pre-seed program for 0→1 founders. i ran it end to end, from picking the founders to sitting with each team through the hardest part of going from zero to one. four cohorts, two tracks, idea to first cheque.</p>
-        <p>backing founders taught me to read the early signal faster than i ever could as a founder myself. the teams that worked weren't the ones with the cleanest decks. they were the ones who got inside their problem the way i'd once tried to get inside hospitals.</p>
+      <div class="prose">
+        <p>After building, I spent two years at Accel running Atoms, their pre-seed program for 0→1 founders. I ran it end to end, from picking the founders to sitting with each team through the hardest part of going from zero to one. Four cohorts, two tracks, idea to first cheque.</p>
+        <p>Backing founders taught me to read the early signal faster than I ever could as a founder myself. The teams that worked weren't the ones with the cleanest decks — they were the ones who got inside their problem the way I'd once tried to get inside hospitals.</p>
       </div>
-      <div class="callout"><span class="k">what i took from it</span><p>i've now sat on both sides of the table: the one pitching, and the one deciding. i know what the early signal of a real 0→1 team looks like, because i spent two years learning to spot it with other people's money.</p></div>
-    </article>
+      <div class="callout"><span class="k">what i took from it</span><p>I've now sat on both sides of the table: the one pitching, and the one deciding. I know what the early signal of a real 0→1 team looks like, because I spent two years learning to spot it with other people's money.</p></div>
+    </div>
   </section>
 
-  <section class="reveal" id="now">
-    <p class="chapter">now / <b>what i'm building</b></p>
-    <p class="now-lead">after two years on each side of the table, i'm back to building things myself. three are live right now:</p>
+  <section id="now">
+    <div class="sec-head"><span class="sec-title">Building now</span><span class="sec-sub">three live, one brewing</span></div>
     <div class="nowrow">
-      <a class="nowcard" href="https://sniff.fyi" target="_blank" rel="noopener">
-        <span class="lmark sm tile">S<img width="40" height="40" src="assets/img/sniff.png" alt="Sniff" /></span>
-        <span class="now-tx"><span class="now-nm">Sniff</span><span class="now-ds">how good is your cat's food?</span></span>
-        <span class="now-go" aria-hidden="true">↗</span>
-      </a>
-      <a class="nowcard" href="https://knowyourpay.in" target="_blank" rel="noopener">
-        <span class="lmark sm">K<img width="40" height="40" src="assets/img/knowyourpay.png" alt="KnowYourPay" /></span>
-        <span class="now-tx"><span class="now-nm">KnowYourPay</span><span class="now-ds">are you underpaid?</span></span>
-        <span class="now-go" aria-hidden="true">↗</span>
-      </a>
-      <a class="nowcard" href="https://www.productsenselab.com" target="_blank" rel="noopener">
-        <span class="lmark sm tile">P<img width="40" height="40" src="assets/img/psl.png" alt="Product Sense Lab" /></span>
-        <span class="now-tx"><span class="now-nm">Product Sense Lab</span><span class="now-ds">PM interview practice</span></span>
-        <span class="now-go" aria-hidden="true">↗</span>
-      </a>
+      <a class="nowcard" href="https://sniff.fyi" target="_blank" rel="noopener"><span class="now-nm">Sniff<span class="go">↗</span></span><span class="now-ds">How good is your cat's food?</span></a>
+      <a class="nowcard" href="https://knowyourpay.in" target="_blank" rel="noopener"><span class="now-nm">KnowYourPay<span class="go">↗</span></span><span class="now-ds">Are you underpaid?</span></a>
+      <a class="nowcard" href="https://www.productsenselab.com" target="_blank" rel="noopener"><span class="now-nm">Product Sense Lab<span class="go">↗</span></span><span class="now-ds">PM interview practice.</span></a>
     </div>
   </section>
 
-  <section class="aclose reveal">
-    <p class="aclose-eyebrow"><span class="pulse"></span>that's the whole track record</p>
-    <p class="aclose-line">let's skip the long version.</p>
-    <p class="aclose-sub">if you're hiring for a 0→1 role, the easiest start is a quick conversation.</p>
-    <div class="aclose-row">
-      <a class="btn-primary" data-book href="#" hidden>→ book 15 min</a>
-      <a class="btn-ghost email-act" href="mailto:rinkeshgorasia@gmail.com">copy my email</a>
-      <a class="btn-ghost" href="https://x.com/rinks__g" target="_blank" rel="noopener">DM on X</a>
+  <section class="close">
+    <div class="sec-head"><span class="sec-title">That's the whole track record</span></div>
+    <h2 class="close-h" style="margin-top:1.4rem">Let's skip the long version.</h2>
+    <p>If you're hiring for a 0→1 role, the easiest start is a quick conversation.</p>
+    <div class="cta">
+      <a class="btn" href="mailto:rinkeshgorasia@gmail.com">Write to me</a>
+      <a class="btn2" href="https://x.com/rinks__g" target="_blank" rel="noopener">or DM on X →</a>
     </div>
-    <a class="aclose-cv" data-cv href="#" hidden>↳ or read the CV (view and download)</a>
   </section>
 
-  <footer class="foot reveal"></footer>
+  <footer>
+    <div class="foot-in">
+      <div class="foot-id">
+        <span class="foot-name">Rinkesh Gorasia</span>
+        <span class="foot-tag">Product builder in Bengaluru · open to the next 0→1</span>
+      </div>
+      <nav class="foot-nav">
+        <span class="foot-links"><a href="mailto:rinkeshgorasia@gmail.com">Email</a><a href="https://x.com/rinks__g" target="_blank" rel="noopener">Twitter</a><a href="https://www.linkedin.com/in/rinksg/" target="_blank" rel="noopener">LinkedIn</a></span>
+        <a class="coffee-foot" href="coffee.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 14c.83 .642 2.077 1.017 3.5 1c1.423 .017 2.67 -.358 3.5 -1c.83 -.642 2.077 -1.017 3.5 -1c1.423 -.017 2.67 .358 3.5 1"/><path class="steam s1" d="M8 3a2.4 2.4 0 0 0 -1 2a2.4 2.4 0 0 0 1 2"/><path class="steam s2" d="M12 3a2.4 2.4 0 0 0 -1 2a2.4 2.4 0 0 0 1 2"/><path d="M3 10h14v5a6 6 0 0 1 -6 6h-2a6 6 0 0 1 -6 -6v-5"/><path d="M16.746 16.726a3 3 0 1 0 .252 -5.555"/></svg>the coffee log →</a>
+        <a class="foot-top" href="#top">↑ back to the top</a>
+      </nav>
+    </div>
+  </footer>
 
+  <div class="thread" aria-hidden="true"></div>
 </div>
-<script src="assets/v3.js"></script>
+<script src="assets/ledger.js?v=11"></script>
 </body></html>

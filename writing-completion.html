@@ -1,70 +1,96 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>building for completion, not conversion — Rinkesh Gorasia</title>
-<meta name="description" content="Most of edtech optimizes the wrong number. How designing for the last lesson instead of the first signup got us 8× the category norm." />
+<title>Building for completion, not conversion — Rinkesh Gorasia</title>
+<meta name="description" content="most of edtech optimizes the wrong number. how designing for the last lesson instead of the first signup got us 8× the category norm." />
 <link rel="canonical" href="https://rinkeshgorasia.com/writing-completion.html" />
-<meta name="theme-color" content="#0d0d0c" />
+<meta name="theme-color" content="#FCFCF9" />
 <link rel="manifest" href="manifest.json" />
-<meta property="og:type" content="article" />
+<meta property="og:type" content="website" />
 <meta property="og:site_name" content="Rinkesh Gorasia" />
 <meta property="og:url" content="https://rinkeshgorasia.com/writing-completion.html" />
-<meta property="og:title" content="building for completion, not conversion — Rinkesh Gorasia" />
-<meta property="og:description" content="Most of edtech optimizes the wrong number. How designing for the last lesson instead of the first signup got us 8× the category norm." />
+<meta property="og:title" content="Building for completion, not conversion — Rinkesh Gorasia" />
+<meta property="og:description" content="most of edtech optimizes the wrong number. how designing for the last lesson instead of the first signup got us 8× the category norm." />
 <meta property="og:image" content="https://rinkeshgorasia.com/assets/og.png" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="building for completion, not conversion — Rinkesh Gorasia" />
-<meta name="twitter:description" content="Most of edtech optimizes the wrong number. How designing for the last lesson instead of the first signup got us 8× the category norm." />
+<meta name="twitter:title" content="Building for completion, not conversion — Rinkesh Gorasia" />
+<meta name="twitter:description" content="most of edtech optimizes the wrong number. how designing for the last lesson instead of the first signup got us 8× the category norm." />
 <meta name="twitter:image" content="https://rinkeshgorasia.com/assets/og.png" />
 <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg" />
 <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap"></noscript>
-<link rel="stylesheet" href="assets/v3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/ledger.css?v=11">
+<style>
+  .artwrap{max-width:40rem;margin:0 auto;padding-top:var(--s7)}
+  .art-back{font-family:var(--mono);font-size:.72rem;color:var(--faint);text-decoration:none;letter-spacing:.04em}
+  .art-back:hover{color:var(--red)}
+  .art-kicker{font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--red);margin:2rem 0 .9rem}
+  .art-title{font-size:2.3rem;font-weight:600;letter-spacing:-.03em;line-height:1.1;margin-bottom:1rem}
+  .art-dek{font-size:1.2rem;color:var(--soft);line-height:1.5;max-width:34rem}
+  .art-meta{font-family:var(--mono);font-size:.7rem;color:var(--faint);letter-spacing:.04em;margin-top:1.1rem;padding-bottom:1.6rem;border-bottom:2px solid var(--ink)}
+  .prose{margin-top:2rem}
+  .nextread{margin-top:3rem;border-top:1px solid var(--rule);padding-top:1.4rem}
+  .nextread .lbl{font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:.9rem}
+  .nextcard{display:grid;grid-template-columns:2.6rem 1fr auto;gap:1.2rem;align-items:baseline;text-decoration:none;color:inherit}
+  .nextcard .no{font-family:var(--mono);font-size:.78rem;color:var(--faint)}
+  .nextcard .ti{font-weight:600;font-size:1.15rem;letter-spacing:-.015em;display:block}
+  .nextcard:hover .ti{color:var(--red)}
+  .nextcard .ex{color:var(--soft);font-size:.92rem;margin-top:.2rem;display:block}
+  .nextcard .ar{color:var(--red);opacity:0;transition:opacity .18s,transform .18s;transform:translateX(-4px)}
+  .nextcard:hover .ar{opacity:1;transform:none}
+  .art-end{display:flex;justify-content:space-between;gap:1.5rem;margin-top:3rem;padding-top:1.4rem;border-top:2px solid var(--ink);font-family:var(--mono);font-size:.78rem}
+  .art-end a{color:var(--soft);text-decoration:none}
+  .art-end a:hover{color:var(--red)}
+  @media(max-width:640px){ .art-title{font-size:1.85rem} .art-dek{font-size:1.08rem} .nextcard .ar{opacity:1;transform:none} }
+</style>
 </head>
 <body>
-<div class="page">
+<div class="wrap">
 
-  <header class="bar rv">
-    <nav><a href="index.html">home</a><a href="work.html">work</a><a href="writing.html" class="on">writing</a></nav>
-    <span class="right"><span class="clock" id="clock">Bengaluru</span><span class="status">open to 0→1 roles</span></span>
+  <header id="top">
+    <div class="h-row">
+      <a class="h-name" href="index.html">Rinkesh Gorasia</a>
+      <span class="h-right"><nav><a href="index.html">Home</a><a href="work.html">Work</a><a class="on" href="writing.html">Writing</a><a href="shelf.html">Shelf<svg class="plate" viewBox="0 0 24 24" aria-hidden="true"><path fill="#C08A4E" stroke="#1C1C19" stroke-width="1.2" stroke-linejoin="round" d="M12 2.6c1.7 0 2.9 1.3 2.9 2.9 0 .9-.4 1.7-1 2.2 1 .5 2.3 1.4 3.7 2 1.6.7 3.3 1.2 3.3 2.5 0 .8-.6 1.3-1.5 1.3h-3.3c.3 1.9 1.3 3.4 2.3 4.7.6.8.1 1.9-.9 1.9h-4.2c-.5 0-.9-.3-1.1-.8l-1.2-3-1.2 3c-.2.5-.6.8-1.1.8H4.5c-1 0-1.5-1.1-.9-1.9 1-1.3 2-2.8 2.3-4.7H2.6c-.9 0-1.5-.5-1.5-1.3 0-1.3 1.7-1.8 3.3-2.5 1.4-.6 2.7-1.5 3.7-2-.6-.5-1-1.3-1-2.2 0-1.6 1.2-2.9 2.9-2.9z"/></svg></a></nav><a href="#" class="roll" id="roll" title="six sides of me — roll one" aria-label="Roll the die"><svg viewBox="0 0 24 24" aria-hidden="true"><rect class="face" x="2.5" y="2.5" width="19" height="19" rx="4"/><g class="pips"><circle class="pip" cx="7" cy="7" r="1.7"/><circle class="pip" cx="17" cy="7" r="1.7"/><circle class="pip" cx="12" cy="12" r="1.7"/><circle class="pip" cx="7" cy="17" r="1.7"/><circle class="pip" cx="17" cy="17" r="1.7"/></g></svg></a><div class="die-pop" id="die-pop"><div class="dp-top"><span class="dp-num">roll me</span><span class="dp-die">⚄</span></div><p>Six sides. Roll to meet one.</p></div><span class="h-clock" id="h-clock"></span></span>
+    </div>
   </header>
 
   <article class="artwrap">
-    <a class="art-back" href="writing.html">← writing</a>
-    <p class="art-kicker">// essay</p>
-    <h1 class="art-title">building for completion, not conversion</h1>
+    <a class="art-back" href="writing.html">← all writing</a>
+    <p class="art-kicker">Field note · 03</p>
+    <h1 class="art-title">Building for completion, not conversion</h1>
     <p class="art-dek">most of edtech optimizes the wrong number. how designing for the last lesson instead of the first signup got us 8× the category norm.</p>
     <p class="art-meta">~2 min · a growth note</p>
-
-    <div class="prose">
-      <p>most edtech is optimised for the moment you sign up, and abandoned for every moment after. the funnel ends at 'enrolled'. the product's actual job, which is to get you to the end, is quietly treated as your problem.</p>
+    <div class="prose"><p>most edtech is optimised for the moment you sign up, and abandoned for every moment after. the funnel ends at 'enrolled'. the product's actual job, which is to get you to the end, is quietly treated as your problem.</p>
       <p>at Career Leap we changed the number we cared about. not signups. completion.</p>
       <blockquote>conversion is a promise. completion is whether you kept it.</blockquote>
       <p>once completion is the metric, everything downstream changes. you stop designing seductive landing pages and start designing for the tuesday night when someone is tired, three lessons behind, and about to quit. you make the next step smaller. you cut the lesson everyone drops on. you message the people who stalled, as a human, not a drip campaign.</p>
       <h2>the result</h2>
       <p>40% completion, in a category that lives at 5 to 10%. roughly 8× the norm, with worse marketing than everyone we were competing with, because the marketing was never the point.</p>
-      <p>it didn't save the company; the economics were the economics. but it taught me which number to be loyal to. anyone can buy conversion. completion you have to earn, lesson by lesson, and it's the only number that proves the product actually worked.</p>
+      <p>it didn't save the company; the economics were the economics. but it taught me which number to be loyal to. anyone can buy conversion. completion you have to earn, lesson by lesson, and it's the only number that proves the product actually worked.</p></div>
+    <div class="nextread">
+      <p class="lbl">keep reading</p>
+      <a class="nextcard" href="writing-career-leap.html"><span class="no">01</span><span><span class="ti">Why I shut down Career Leap</span><span class="ex">10k users, 40% completion, and i still turned it off.</span></span><span class="ar">→</span></a>
     </div>
-
-      <div class="nextread">
-        <p class="lbl">// keep reading</p>
-        <a class="nextcard" href="writing-career-leap.html">
-          <span class="no">01</span>
-          <span><span class="ti">why i shut down Career Leap</span><span class="ex">10k users, 40% completion, and i still turned it off.</span></span>
-          <span class="ar">→</span>
-        </a>
-      </div>
     <div class="art-end"><a href="writing.html">← all writing</a><a href="https://x.com/rinks__g" target="_blank" rel="noopener">talk to me about it →</a></div>
   </article>
 
-  <footer class="foot reveal">
-    <span class="fl"><a href="mailto:rinkeshgorasia@gmail.com">email</a><a href="https://x.com/rinks__g">twitter</a><a href="https://www.linkedin.com/in/rinksg/">linkedin</a></span>
-    <span class="fr" id="openk">press <kbd>⌘K</kbd> for quick actions</span>
+  <footer>
+    <div class="foot-in">
+      <div class="foot-id">
+        <span class="foot-name">Rinkesh Gorasia</span>
+        <span class="foot-tag">Product builder in Bengaluru · open to the next 0→1</span>
+      </div>
+      <nav class="foot-nav">
+        <span class="foot-links"><a href="mailto:rinkeshgorasia@gmail.com">Email</a><a href="https://x.com/rinks__g" target="_blank" rel="noopener">Twitter</a><a href="https://www.linkedin.com/in/rinksg/" target="_blank" rel="noopener">LinkedIn</a></span>
+        <a class="coffee-foot" href="coffee.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 14c.83 .642 2.077 1.017 3.5 1c1.423 .017 2.67 -.358 3.5 -1c.83 -.642 2.077 -1.017 3.5 -1c1.423 -.017 2.67 .358 3.5 1"/><path class="steam s1" d="M8 3a2.4 2.4 0 0 0 -1 2a2.4 2.4 0 0 0 1 2"/><path class="steam s2" d="M12 3a2.4 2.4 0 0 0 -1 2a2.4 2.4 0 0 0 1 2"/><path d="M3 10h14v5a6 6 0 0 1 -6 6h-2a6 6 0 0 1 -6 -6v-5"/><path d="M16.746 16.726a3 3 0 1 0 .252 -5.555"/></svg>the coffee log →</a>
+        <a class="foot-top" href="#top">↑ back to the top</a>
+      </nav>
+    </div>
   </footer>
 
+  <div class="thread" aria-hidden="true"></div>
 </div>
-<script src="assets/v3.js"></script>
+<script src="assets/ledger.js?v=11"></script>
 </body></html>
