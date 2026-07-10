@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Personality section — 3 variations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../assets/ledger.css?v=6">
+<style>
+  .var-label{
+    margin:4.5rem 0 1.4rem;padding:.5rem .9rem;background:var(--ink);color:var(--paper);
+    display:inline-block;font-family:var(--mono);font-size:.7rem;letter-spacing:.18em;
+  }
+  .var-note{color:var(--faint);font-size:.9rem;margin:-0.6rem 0 1.6rem;max-width:38rem}
+
+  /* shared icon style — tabler grammar */
+  .ic{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;vertical-align:-3px}
+
+  /* ============ VARIATION A — off the record ============ */
+  .otr-row{
+    display:grid;grid-template-columns:12.5rem 1fr 10rem;gap:2rem;align-items:baseline;
+    padding:1.05rem 0;border-bottom:1px solid var(--rule);
+    text-decoration:none;color:inherit;
+  }
+  .otr-name{font-weight:600;font-size:1.02rem;display:inline-flex;align-items:center;gap:.6rem}
+  .otr-row[href]:hover .otr-name{color:var(--red)}
+  .otr-what{color:var(--soft);font-size:.95rem}
+  .otr-fig{font-family:var(--mono);font-size:.8rem;color:var(--ink);text-align:right}
+  .otr-fig .u{color:var(--faint)}
+  .otr-fig .offr{color:var(--red);border:1px solid var(--red);border-radius:2px;padding:.1rem .4rem;font-size:.6rem;letter-spacing:.12em;display:inline-block;transform:rotate(-2deg)}
+
+  /* ============ VARIATION B — exhibits wall ============ */
+  .plates{display:grid;grid-template-columns:repeat(3,1fr);gap:1.3rem;margin-top:1.5rem}
+  .plate-c{border:1px solid var(--rule-dark);background:var(--card);text-decoration:none;color:inherit;display:flex;flex-direction:column}
+  .plate-c:hover{border-color:var(--ink)}
+  .plate-top{display:flex;justify-content:space-between;padding:.45rem .8rem;border-bottom:1px solid var(--rule);font-family:var(--mono);font-size:.62rem;color:var(--faint);letter-spacing:.08em}
+  .plate-art{display:flex;align-items:center;justify-content:center;height:96px}
+  .plate-art .ic{width:38px;height:38px;stroke-width:1.4;opacity:.85;transition:transform .2s}
+  .plate-c:hover .plate-art .ic{transform:translateY(-2px);color:var(--red)}
+  .plate-cap{padding:.7rem .9rem .8rem;font-size:.85rem;color:var(--soft);border-top:1px solid var(--rule)}
+  .plate-cap b{color:var(--ink);font-weight:600;display:block;font-size:.92rem;margin-bottom:.1rem}
+  .plate-c.empty{border-style:dashed;background:transparent}
+  .plate-c.empty .plate-art{color:var(--faint);font-family:var(--mono);font-size:.68rem;letter-spacing:.1em}
+
+  /* ============ VARIATION C — a tuesday, logged ============ */
+  .daylog{margin-top:1.6rem;position:relative;max-width:36rem}
+  .dl-row{display:grid;grid-template-columns:4.6rem 1fr;gap:1.6rem;padding:.62rem 0;align-items:baseline;position:relative}
+  .dl-time{font-family:var(--mono);font-size:.75rem;color:var(--faint);text-align:right}
+  .dl-what{color:var(--soft);font-size:.96rem;border-left:1px solid var(--rule);padding-left:1.6rem}
+  .dl-what a{color:var(--ink);font-weight:600;text-decoration:underline;text-decoration-color:var(--rule-dark);text-underline-offset:3px}
+  .dl-what a:hover{color:var(--red);text-decoration-color:var(--red)}
+  .dl-what .ic{width:15px;height:15px;margin-left:.35rem;opacity:.7}
+  .dl-row.now .dl-time{color:var(--red)}
+  .dl-row.now .dl-what{border-left:2px solid var(--red);padding-left:calc(1.6rem - 1px);color:var(--ink)}
+  .dl-now-tag{font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;color:var(--red);margin-left:.6rem;white-space:nowrap}
+  @media(max-width:700px){
+    .otr-row{grid-template-columns:1fr;gap:.25rem}
+    .otr-fig{text-align:left}
+    .plates{grid-template-columns:1fr 1fr}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header><div class="h-row">
+    <a class="h-name" href="../index.html">Rinkesh Gorasia</a>
+    <nav><a href="#">personality section — 3 variations</a></nav>
+  </div></header>
+
+  <!-- ================= ICON DEFS ================= -->
+  <svg style="display:none" aria-hidden="true">
+    <symbol id="i-coffee" viewBox="0 0 24 24"><path d="M3 14c.83 .642 2.077 1.017 3.5 1c1.423 .017 2.67 -.358 3.5 -1c.83 -.642 2.077 -1.017 3.5 -1c1.423 -.017 2.67 .358 3.5 1"/><path d="M8 3a2.4 2.4 0 0 0 -1 2a2.4 2.4 0 0 0 1 2"/><path d="M12 3a2.4 2.4 0 0 0 -1 2a2.4 2.4 0 0 0 1 2"/><path d="M3 10h14v5a6 6 0 0 1 -6 6h-2a6 6 0 0 1 -6 -6v-5"/><path d="M16.746 16.726a3 3 0 1 0 .252 -5.555"/></symbol>
+    <symbol id="i-meeple" viewBox="0 0 24 24"><path d="M9 20h-5a1 1 0 0 1 -1 -1c0 -2 3.378 -4.907 4 -6c-1 0 -4 -.5 -4 -2c0 -2 4 -3.5 6 -4c0 -1.5 .5 -4 3 -4s3 2.5 3 4c2 .5 6 2 6 4c0 1.5 -3 2 -4 2c.622 1.093 4 4 4 6a1 1 0 0 1 -1 1h-5c-1 0 -2 -4 -3 -4s-2 4 -3 4"/></symbol>
+    <symbol id="i-paw" viewBox="0 0 24 24"><path d="M14.7 13.5c-1.1 -2 -1.441 -2.5 -2.7 -2.5c-1.259 0 -1.736 .755 -2.836 2.747c-.942 1.703 -2.846 1.845 -3.321 3.291c-.097 .265 -.145 .677 -.143 .962c0 1.176 .787 2 1.8 2c1.259 0 3 -1 4.5 -1s3.241 1 4.5 1c1.013 0 1.8 -.823 1.8 -2c0 -.285 -.049 -.697 -.146 -.962c-.475 -1.451 -2.512 -1.835 -3.454 -3.538"/><path d="M20.188 8.082a1.039 1.039 0 0 0 -.406 -.082h-.015c-.735 .012 -1.56 .75 -1.993 1.866c-.519 1.335 -.28 2.7 .538 3.052c.129 .055 .267 .082 .406 .082c.739 0 1.575 -.742 2.011 -1.866c.516 -1.335 .273 -2.7 -.54 -3.052l-.001 0"/><path d="M9.474 9c.055 0 .109 0 .163 -.011c.944 -.128 1.533 -1.346 1.32 -2.722c-.203 -1.297 -1.047 -2.267 -1.932 -2.267c-.055 0 -.109 0 -.163 .011c-.944 .128 -1.533 1.346 -1.32 2.722c.204 1.293 1.048 2.267 1.933 2.267"/><path d="M16.456 6.733c.214 -1.376 -.375 -2.594 -1.32 -2.722a1.164 1.164 0 0 0 -.162 -.011c-.885 0 -1.728 .97 -1.93 2.267c-.214 1.376 .375 2.594 1.32 2.722c.054 .007 .108 .011 .162 .011c.885 0 1.73 -.974 1.93 -2.267"/><path d="M5.69 12.918c.816 -.352 1.054 -1.719 .536 -3.052c-.436 -1.124 -1.271 -1.866 -2.009 -1.866c-.14 0 -.277 .027 -.407 .082c-.816 .352 -1.054 1.719 -.536 3.052c.436 1.124 1.271 1.866 2.009 1.866c.14 0 .277 -.027 .407 -.082"/></symbol>
+    <symbol id="i-lego" viewBox="0 0 24 24"><path d="M5 10 h14 v8.5 a1.5 1.5 0 0 1 -1.5 1.5 h-11 a1.5 1.5 0 0 1 -1.5 -1.5 z"/><path d="M7.5 10 v-3 a.8 .8 0 0 1 .8 -.8 h2.4 a.8 .8 0 0 1 .8 .8 v3"/><path d="M12.5 10 v-3 a.8 .8 0 0 1 .8 -.8 h2.4 a.8 .8 0 0 1 .8 .8 v3"/><path d="M5 15.5 h14"/></symbol>
+    <symbol id="i-giraffe" viewBox="0 0 24 24"><path d="M9.5 21 C9.5 15.5 10.2 10.5 13 7.2"/><path d="M12.5 21 C12.5 16 13 12.5 15 9.5"/><path d="M13 7.2 a2.4 2.4 0 1 1 3.4 2.1 c-.8 .35 -1.2 .8 -1.4 1.9"/><path d="M14.2 4.9 l-.5 -1.9"/><path d="M16.4 4.7 l.6 -1.8"/><path d="M17.6 6.3 l1.9 -.5"/></symbol>
+    <symbol id="i-flower" viewBox="0 0 24 24"><path d="M9 12a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"/><path d="M12 2a3 3 0 0 1 3 3c0 .562 -.259 1.442 -.776 2.64l-.724 1.36l1.76 -1.893c.499 -.6 .922 -1 1.27 -1.205a2.968 2.968 0 0 1 4.07 1.099a3.011 3.011 0 0 1 -1.09 4.098c-.374 .217 -.99 .396 -1.846 .535l-2.664 .366l2.4 .326c1 .145 1.698 .337 2.11 .576a3.011 3.011 0 0 1 1.09 4.098a2.968 2.968 0 0 1 -4.07 1.098c-.348 -.202 -.771 -.604 -1.27 -1.205l-1.76 -1.893l.724 1.36c.516 1.199 .776 2.079 .776 2.64a3 3 0 0 1 -6 0c0 -.562 .259 -1.442 .776 -2.64l.724 -1.36l-1.76 1.893c-.499 .601 -.922 1 -1.27 1.205a2.968 2.968 0 0 1 -4.07 -1.098a3.011 3.011 0 0 1 1.09 -4.098c.374 -.218 .99 -.396 1.846 -.536l2.664 -.366l-2.4 -.325c-1 -.145 -1.698 -.337 -2.11 -.576a3.011 3.011 0 0 1 -1.09 -4.099a2.968 2.968 0 0 1 4.07 -1.099c.348 .203 .771 .604 1.27 1.205l1.76 1.894c-1 -2.292 -1.5 -3.625 -1.5 -4a3 3 0 0 1 3 -3"/></symbol>
+  </svg>
+
+  <!-- ================= VARIATION A ================= -->
+  <span class="var-label">VARIATION A — OFF THE RECORD</span>
+  <p class="var-note">The ledger keeps accounting — but for life. Deadpan figures, tallied like everything else on the site. The joke is that the whimsy is treated with full seriousness; one entry stays off the record even here.</p>
+
+  <section style="padding-bottom:2rem">
+    <div class="sec-head"><span class="sec-title">Off the record</span><span class="sec-sub">the accounts nobody audits</span></div>
+
+    <a class="otr-row" href="../coffee.html">
+      <span class="otr-name"><svg class="ic"><use href="#i-coffee"/></svg>Filter coffee</span>
+      <span class="otr-what">The fuel. Logged café by café across Bengaluru.</span>
+      <span class="otr-fig">3 <span class="u">/ day</span></span>
+    </a>
+    <a class="otr-row" href="../shelf.html">
+      <span class="otr-name"><svg class="ic"><use href="#i-meeple"/></svg>Board games</span>
+      <span class="otr-what">I host the game nights. I rarely win them.</span>
+      <span class="otr-fig">40<span class="u">+ boxed</span></span>
+    </a>
+    <a class="otr-row" href="../shelf.html">
+      <span class="otr-name"><svg class="ic"><use href="#i-lego"/></svg>Lego</span>
+      <span class="otr-what">Building where following the spec is the fun part.</span>
+      <span class="otr-fig">9,482 <span class="u">bricks*</span></span>
+    </a>
+    <a class="otr-row" href="#fig-simba">
+      <span class="otr-name"><svg class="ic"><use href="#i-paw"/></svg>Simba</span>
+      <span class="otr-what">Quality control. Sleeps on the ledger mid-audit.</span>
+      <span class="otr-fig">16 <span class="u">naps / day</span></span>
+    </a>
+    <div class="otr-row">
+      <span class="otr-name"><svg class="ic"><use href="#i-flower"/></svg>Sunflowers</span>
+      <span class="otr-what">The balcony experiment that actually worked.</span>
+      <span class="otr-fig">grown<span class="u">, not bought</span></span>
+    </div>
+    <div class="otr-row">
+      <span class="otr-name"><svg class="ic"><use href="#i-giraffe"/></svg>Giraffes</span>
+      <span class="otr-what">Long story. Ask me over coffee.</span>
+      <span class="otr-fig"><span class="offr">OFF RECORD</span></span>
+    </div>
+  </section>
+
+  <!-- ================= VARIATION B ================= -->
+  <span class="var-label">VARIATION B — THE EXHIBITS</span>
+  <p class="var-note">A naturalist's plate wall — each thing curated as a specimen with its figure number and a one-line story. The giraffe's frame is empty: the specimen didn't fit. Hover lifts each exhibit; the sunflower would keep following the cursor.</p>
+
+  <section style="padding-bottom:2rem">
+    <div class="sec-head"><span class="sec-title">Appendix A · Exhibits</span><span class="sec-sub">handle with care</span></div>
+    <div class="plates">
+      <a class="plate-c" href="../coffee.html">
+        <span class="plate-top"><span>FIG. 03</span><span>DAILY</span></span>
+        <span class="plate-art"><svg class="ic"><use href="#i-coffee"/></svg></span>
+        <span class="plate-cap"><b>Filter coffee</b>The reason this site exists before 7am. Logged café by café.</span>
+      </a>
+      <a class="plate-c" href="../shelf.html">
+        <span class="plate-top"><span>FIG. 04</span><span>HOSTED</span></span>
+        <span class="plate-art"><svg class="ic"><use href="#i-meeple"/></svg></span>
+        <span class="plate-cap"><b>Board games</b>Forty boxes. Home-ground advantage: none whatsoever.</span>
+      </a>
+      <a class="plate-c" href="../shelf.html">
+        <span class="plate-top"><span>FIG. 05</span><span>IN BRICKS</span></span>
+        <span class="plate-art"><svg class="ic"><use href="#i-lego"/></svg></span>
+        <span class="plate-cap"><b>Lego</b>The one kind of building where the spec never changes mid-way.</span>
+      </a>
+      <a class="plate-c" href="#fig-simba">
+        <span class="plate-top"><span>FIG. 06</span><span>SUPERVISOR</span></span>
+        <span class="plate-art"><svg class="ic"><use href="#i-paw"/></svg></span>
+        <span class="plate-cap"><b>Simba</b>Chief quality officer. Found sleeping on every important document.</span>
+      </a>
+      <div class="plate-c">
+        <span class="plate-top"><span>FIG. 07</span><span>BALCONY</span></span>
+        <span class="plate-art"><svg class="ic"><use href="#i-flower"/></svg></span>
+        <span class="plate-cap"><b>Sunflowers</b>Grown, not bought. They face the light; so does this site.</span>
+      </div>
+      <div class="plate-c empty">
+        <span class="plate-top"><span>FIG. 08</span><span>ESCAPED</span></span>
+        <span class="plate-art">SPECIMEN TOO TALL FOR THIS FRAME</span>
+        <span class="plate-cap"><b>Giraffe</b>Long story. Ask me over coffee.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= VARIATION C ================= -->
+  <span class="var-label">VARIATION C — A TUESDAY, LOGGED</span>
+  <p class="var-note">Personality as narrative: one ordinary day, timestamped like everything else in the ledger. The red marker is live — it moves through the day with IST, so a visitor sees where Rinkesh probably is right now.</p>
+
+  <section style="padding-bottom:4rem">
+    <div class="sec-head"><span class="sec-title">A Tuesday, logged</span><span class="sec-sub" id="ist-clock">IST</span></div>
+    <div class="daylog" id="daylog">
+      <div class="dl-row" data-h="6.6"><span class="dl-time">06:40</span><span class="dl-what">Alarm. Ignored exactly once.</span></div>
+      <div class="dl-row" data-h="7"><span class="dl-time">07:05</span><span class="dl-what">First filter coffee. Non-negotiable.<svg class="ic"><use href="#i-coffee"/></svg></span></div>
+      <div class="dl-row" data-h="7.5"><span class="dl-time">07:30</span><span class="dl-what">Simba claims the desk chair. I take the stool.<svg class="ic"><use href="#i-paw"/></svg></span></div>
+      <div class="dl-row" data-h="9"><span class="dl-time">09:00</span><span class="dl-what">Build. The messy-beginning kind.</span></div>
+      <div class="dl-row" data-h="13"><span class="dl-time">13:00</span><span class="dl-what">Lunch, and a chapter of whatever's on <a href="../shelf.html">the shelf</a>.</span></div>
+      <div class="dl-row" data-h="16"><span class="dl-time">16:00</span><span class="dl-what">Second coffee — the café kind, <a href="../coffee.html">logged</a>.</span></div>
+      <div class="dl-row" data-h="19.5"><span class="dl-time">19:30</span><span class="dl-what">Game night, if it's that kind of Tuesday. I host. I lose.<svg class="ic"><use href="#i-meeple"/></svg></span></div>
+      <div class="dl-row" data-h="22.5"><span class="dl-time">22:30</span><span class="dl-what">Lego until the brick bin goes quiet.<svg class="ic"><use href="#i-lego"/></svg></span></div>
+      <div class="dl-row" data-h="23.5"><span class="dl-time">23:30</span><span class="dl-what">Lights off. Simba disagrees.</span></div>
+    </div>
+  </section>
+
+</div>
+<script>
+(function(){
+  /* live "now" marker on the day log, in IST */
+  var now = new Date(Date.now() + (330 + new Date().getTimezoneOffset()) * 60000);
+  var h = now.getHours() + now.getMinutes()/60;
+  document.getElementById('ist-clock').textContent =
+    String(now.getHours()).padStart(2,'0') + ':' + String(now.getMinutes()).padStart(2,'0') + ' IST';
+  var rows = [].slice.call(document.querySelectorAll('.dl-row'));
+  var best = null, bestD = 99;
+  rows.forEach(function(r){
+    var d = h - parseFloat(r.dataset.h);
+    if (d >= 0 && d < bestD){ bestD = d; best = r; }
+  });
+  if (!best) best = rows[rows.length-1]; /* small hours: still "lights off" */
+  best.classList.add('now');
+  var tag = document.createElement('span');
+  tag.className = 'dl-now-tag';
+  tag.textContent = '← PROBABLY HERE NOW';
+  best.querySelector('.dl-what').appendChild(tag);
+})();
+</script>
+</body></html>

@@ -44,6 +44,33 @@
     });
   }
 
+  /* the cat on the writing rule answers when poked */
+  var cat = document.getElementById('cat');
+  if (cat) {
+    cat.addEventListener('click', function () {
+      cat.classList.add('mrrp');
+      clearTimeout(cat._t);
+      cat._t = setTimeout(function () { cat.classList.remove('mrrp'); }, 1500);
+    });
+  }
+
+  /* the footer clock knows the rhythm of the day (IST) */
+  var live = document.getElementById('f-live');
+  if (live) {
+    var ist = new Date(Date.now() + (330 + new Date().getTimezoneOffset()) * 60000);
+    var hr = ist.getHours();
+    var mood =
+      hr < 6  ? 'ASLEEP. SIMBA ISN\u2019T.' :
+      hr < 9  ? 'FIRST FILTER COFFEE' :
+      hr < 13 ? 'BUILDING' :
+      hr < 16 ? 'THIRD COFFEE, FIGHTING THE SLUMP' :
+      hr < 19 ? 'STILL BUILDING' :
+      hr < 22 ? 'GAME NIGHT \u2014 HOSTING, LOSING' :
+                'LEGO O\u2019CLOCK';
+    var hh = String(hr).padStart(2, '0'), mm = String(ist.getMinutes()).padStart(2, '0');
+    live.textContent = 'BENGALURU \u00B7 ' + hh + ':' + mm + ' \u00B7 ' + mood;
+  }
+
   /* the sunflower is heliotropic — its head follows the light (your cursor) */
   var sf = document.querySelector('.sunflower');
   if (sf) {

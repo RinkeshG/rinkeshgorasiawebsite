@@ -264,6 +264,22 @@ footer{margin:1rem 0 4rem;border-top:2px solid var(--ink);padding-top:.8rem}
 .plate{vertical-align:middle;overflow:visible}
 .fig-sub{display:inline-flex;align-items:center;gap:.6rem;font-family:var(--mono);font-size:.68rem;color:var(--faint);letter-spacing:.06em}
 
+/* simba sits on the writing rule — cats sit on the work */
+.sec-head{position:relative}
+.cat{position:absolute;right:3.2rem;top:-39px;width:46px;height:42px;cursor:pointer}
+.cat .body{fill:var(--ink)}
+.cat .tail{fill:none;stroke:var(--ink);stroke-width:3.4;stroke-linecap:round;transform-origin:39px 34px;animation:tailflick 7s ease-in-out infinite}
+@keyframes tailflick{0%,86%,100%{transform:rotate(0)}90%{transform:rotate(7deg)}95%{transform:rotate(-4deg)}}
+.cat-say{
+  position:absolute;right:-0.4rem;top:-1.35rem;font-family:var(--mono);font-size:.64rem;color:var(--ink);
+  opacity:0;transition:opacity .18s;pointer-events:none;white-space:nowrap;
+}
+.cat.mrrp .cat-say{opacity:1}
+
+/* the sunflower grows from the last line of the page — the ground */
+.garden{position:relative;border-bottom:1px solid var(--rule-dark);margin:3.2rem 0 3rem;height:1rem}
+.garden .sunflower{position:absolute;bottom:-3px;left:8rem}
+
 /* the sunflower is heliotropic — its head turns toward your cursor */
 .sunflower .sf-head{transform-origin:22px 27px;will-change:transform}
 .sunflower.sway .sf-head{animation:sway 7s ease-in-out infinite alternate}
