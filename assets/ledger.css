@@ -46,6 +46,7 @@
 
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
+html,body{overflow-x:clip} /* marks may bleed off the sheet; the sheet never scrolls sideways */
 body{
   background:var(--paper); color:var(--ink);
   font-family:var(--sans);
@@ -262,6 +263,48 @@ footer{margin:1rem 0 4rem;border-top:2px solid var(--ink);padding-top:.8rem}
   .hero p{font-size:1rem}
   .cta .btn{padding:.7rem 1.3rem} /* touch target */
   .f-row{flex-direction:column;gap:.8rem}
+}
+
+/* ============ exhibits — personality as document marks ====== */
+/* Patent-style line figures. Ink strokes, mono captions, numbered
+   FIG. Every mark cites a story; none is decoration. */
+.figmark{stroke:var(--ink);fill:none;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;vertical-align:middle;opacity:.75}
+.fig-sub{display:inline-flex;align-items:center;gap:.6rem;font-family:var(--mono);font-size:.68rem;color:var(--faint);letter-spacing:.06em}
+
+/* the coffee ring — set the cup down while balancing the books */
+.ring{position:absolute;right:-2.6rem;margin-top:-2.2rem;width:118px;height:118px;opacity:.14;pointer-events:none;transform:rotate(-18deg)}
+
+/* simba walked across the record */
+.paws{position:absolute;right:15rem;margin-top:-1.3rem;display:flex;gap:1.2rem;pointer-events:none}
+.paws svg{width:16px;height:15px;opacity:.38}
+.paws svg:nth-child(2){transform:rotate(16deg) translateY(-6px)}
+.paws .pw{fill:var(--ink);stroke:none}
+
+/* the giraffe takes you all the way up */
+.giraffe-top{
+  display:flex;flex-direction:column;align-items:center;gap:.5rem;
+  margin:0 auto 3.4rem;width:max-content;
+  text-decoration:none;color:var(--faint);
+  font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;
+}
+.giraffe-top svg{transition:transform .25s ease}
+.giraffe-top:hover{color:var(--red)}
+.giraffe-top:hover svg{transform:translateY(-4px)}
+.giraffe-top:hover .figmark{stroke:var(--red);opacity:1}
+
+/* a meeple waits behind the shelf door */
+.h-row nav a[href="shelf.html"]::after{
+  content:"";display:inline-block;width:11px;height:11px;margin-left:.4rem;
+  vertical-align:-1px;opacity:0;transform:scale(.6);transition:opacity .18s,transform .18s cubic-bezier(.34,1.56,.64,1);
+  background:currentColor;
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2.6c1.7 0 2.9 1.3 2.9 2.9 0 .9-.4 1.7-1 2.2 1 .5 2.3 1.4 3.7 2 1.6.7 3.3 1.2 3.3 2.5 0 .8-.6 1.3-1.5 1.3h-3.3c.3 1.9 1.3 3.4 2.3 4.7.6.8.1 1.9-.9 1.9h-4.2c-.5 0-.9-.3-1.1-.8l-1.2-3-1.2 3c-.2.5-.6.8-1.1.8H4.5c-1 0-1.5-1.1-.9-1.9 1-1.3 2-2.8 2.3-4.7H2.6c-.9 0-1.5-.5-1.5-1.3 0-1.3 1.7-1.8 3.3-2.5 1.4-.6 2.7-1.5 3.7-2-.6-.5-1-1.3-1-2.2 0-1.6 1.2-2.9 2.9-2.9z'/%3E%3C/svg%3E") center/contain no-repeat;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2.6c1.7 0 2.9 1.3 2.9 2.9 0 .9-.4 1.7-1 2.2 1 .5 2.3 1.4 3.7 2 1.6.7 3.3 1.2 3.3 2.5 0 .8-.6 1.3-1.5 1.3h-3.3c.3 1.9 1.3 3.4 2.3 4.7.6.8.1 1.9-.9 1.9h-4.2c-.5 0-.9-.3-1.1-.8l-1.2-3-1.2 3c-.2.5-.6.8-1.1.8H4.5c-1 0-1.5-1.1-.9-1.9 1-1.3 2-2.8 2.3-4.7H2.6c-.9 0-1.5-.5-1.5-1.3 0-1.3 1.7-1.8 3.3-2.5 1.4-.6 2.7-1.5 3.7-2-.6-.5-1-1.3-1-2.2 0-1.6 1.2-2.9 2.9-2.9z'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+.h-row nav a[href="shelf.html"]:hover::after{opacity:1;transform:scale(1)}
+
+@media(max-width:640px){
+  .ring{width:88px;height:88px;right:-.6rem}
+  .paws{right:3.5rem}
 }
 
 /* ============ motion discipline ============================= */
