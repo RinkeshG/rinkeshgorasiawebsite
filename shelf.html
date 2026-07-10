@@ -31,7 +31,7 @@
 }
 *{margin:0;box-sizing:border-box}
 html,body{height:100%;overflow:hidden}
-body{background:var(--paper);font-family:var(--sans);color:var(--ink);-webkit-font-smoothing:antialiased}
+body{background:linear-gradient(to bottom,transparent 52%,rgba(74,60,38,.05)),radial-gradient(128% 92% at 50% 16%,#FEFCF7 0%,#F5F0E4 54%,#EBE4D3 100%);background-attachment:fixed;font-family:var(--sans);color:var(--ink);-webkit-font-smoothing:antialiased}
 body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");opacity:.05;mix-blend-mode:multiply}
 
 .dbar{position:fixed;top:0;left:0;right:0;z-index:91;display:flex;justify-content:space-between;align-items:center;padding:16px 34px;font-family:var(--mono);font-size:.75rem;border-bottom:1px solid var(--rule);background:color-mix(in srgb,var(--paper) 85%,transparent);backdrop-filter:blur(6px)}
@@ -55,9 +55,9 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;ba
 .lede .sub{font-family:var(--mono);font-size:.72rem;color:var(--faint);margin-top:7px}
 
 .stage{position:fixed;inset:0;perspective:1500px}
-.spot{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:0}
+.spot{position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(460px circle at var(--mx,50%) var(--my,40%),rgba(255,253,246,.7),transparent 60%)}
 .ambient{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0;transition:opacity .7s;background:radial-gradient(70% 55% at 50% 84%,var(--amb,transparent),transparent 72%)}
-.ambient.on{opacity:.55}
+.ambient.on{opacity:.7}
 
 .table{position:absolute;inset:0;display:grid;place-items:center;transition:opacity .45s,transform .45s;z-index:2}
 .table.hide{opacity:0;transform:scale(.94);pointer-events:none}
