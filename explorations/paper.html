@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Direction 1 — Paper · Rinkesh Gorasia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&display=swap">
+<style>
+  :root{
+    --paper:#FBF6EE;
+    --ink:#221E19;
+    --soft:#6E6558;
+    --faint:#9C9184;
+    --rule:#E6DCCC;
+    --roast:#A6491F;      /* espresso terracotta — links, marks */
+    --roast-dim:#C08A6E;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Newsreader',georgia,serif;
+    font-size:18.5px; line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+    /* the faintest paper grain via layered gradients */
+    background-image:radial-gradient(circle at 15% 8%, rgba(166,73,31,.025), transparent 40%);
+  }
+  .wrap{max-width:41.5rem;margin:0 auto;padding:0 1.4rem}
+
+  /* ---------- header ---------- */
+  header{padding:2.4rem 0 0}
+  .topline{display:flex;justify-content:space-between;align-items:baseline;font-size:.82rem;color:var(--soft)}
+  .topline .name{font-family:'Fraunces',serif;font-weight:600;font-size:.95rem;color:var(--ink);letter-spacing:.01em;text-decoration:none}
+  nav{display:flex;gap:1.4rem}
+  nav a{color:var(--soft);text-decoration:none;font-style:italic}
+  nav a:hover{color:var(--roast)}
+  nav a.on{color:var(--ink)}
+
+  /* ---------- hero ---------- */
+  .hero{padding:4.6rem 0 3.4rem}
+  .photo{
+    float:right; width:132px; height:158px; object-fit:cover;
+    margin:0.4rem 0 0.8rem 1.6rem;
+    border-radius:3px;
+    box-shadow:0 1px 2px rgba(34,30,25,.18), 0 8px 24px -12px rgba(34,30,25,.3);
+    transform:rotate(1.6deg);
+    border:4px solid #fff;
+  }
+  h1{
+    font-family:'Fraunces',serif;font-optical-sizing:auto;
+    font-weight:500;font-size:2.55rem;line-height:1.12;letter-spacing:-.015em;
+    margin-bottom:1.5rem;
+  }
+  h1 em{font-style:italic;font-weight:400;color:var(--roast)}
+  .hero p{margin-bottom:1.05rem;color:var(--ink)}
+  .hero p b{font-weight:500}
+  a.ln{color:inherit;text-decoration:underline;text-decoration-color:var(--roast-dim);text-underline-offset:3px;text-decoration-thickness:1px;transition:all .15s}
+  a.ln:hover{color:var(--roast);text-decoration-color:var(--roast)}
+  .aside{color:var(--soft);font-style:italic}
+  .reach{margin-top:1.9rem;font-size:1rem;color:var(--soft);font-style:italic}
+  .reach a{color:var(--roast);font-style:normal;text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+
+  /* ---------- section label ---------- */
+  .label{
+    font-family:'Fraunces',serif;font-weight:500;font-size:.78rem;
+    letter-spacing:.22em;text-transform:uppercase;color:var(--faint);
+    display:flex;align-items:center;gap:.9rem;margin-bottom:1.9rem;
+  }
+  .label::after{content:"";flex:1;height:1px;background:var(--rule)}
+  section{padding:2.6rem 0}
+
+  /* ---------- track record: ruled entries ---------- */
+  .entry{padding:1.7rem 0;border-top:1px solid var(--rule);display:block;text-decoration:none;color:inherit}
+  .entry:last-of-type{border-bottom:1px solid var(--rule)}
+  .e-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.45rem}
+  .e-name{font-family:'Fraunces',serif;font-weight:600;font-size:1.35rem;letter-spacing:-.01em}
+  .entry:hover .e-name{color:var(--roast)}
+  .e-date{font-size:.85rem;color:var(--faint);font-style:italic}
+  .entry p{color:var(--soft);font-size:1.02rem;max-width:36rem}
+  .receipt{margin-top:.7rem;font-size:.85rem;color:var(--ink);font-family:'Fraunces',serif;font-weight:500}
+  .receipt span{color:var(--faint);font-weight:400;margin:0 .45rem}
+  .exit-mark{color:var(--roast);font-style:italic;font-family:'Newsreader',serif;font-size:.88rem;margin-left:.6rem}
+
+  /* ---------- building now: inline serif list ---------- */
+  .now{display:grid;grid-template-columns:1fr 1fr;gap:0 2.6rem}
+  .n-item{padding:1.15rem 0;border-top:1px solid var(--rule);text-decoration:none;color:inherit;display:block}
+  .n-name{font-family:'Fraunces',serif;font-weight:600;font-size:1.06rem}
+  .n-item:hover .n-name{color:var(--roast)}
+  .n-item p{font-size:.95rem;color:var(--soft);margin-top:.15rem}
+  .n-stat{font-size:.82rem;color:var(--faint);font-style:italic;margin-top:.3rem;display:block}
+
+  /* ---------- writing ---------- */
+  .post{display:flex;gap:1.1rem;align-items:baseline;padding:.85rem 0;text-decoration:none;color:inherit;border-top:1px solid var(--rule)}
+  .post:last-of-type{border-bottom:1px solid var(--rule)}
+  .p-title{font-family:'Fraunces',serif;font-weight:500;font-size:1.12rem;flex:1}
+  .post:hover .p-title{color:var(--roast)}
+  .p-ex{display:none}
+  .p-date{font-size:.82rem;color:var(--faint);font-style:italic;white-space:nowrap}
+
+  footer{padding:3rem 0 4rem;color:var(--faint);font-size:.9rem;font-style:italic;display:flex;justify-content:space-between}
+  footer a{color:var(--soft);text-decoration:none;margin-right:1.2rem}
+  footer a:hover{color:var(--roast)}
+
+  @media(max-width:640px){
+    h1{font-size:2rem}
+    .photo{width:96px;height:116px;margin-left:1.1rem}
+    .now{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="topline">
+      <a class="name" href="#">Rinkesh Gorasia</a>
+      <nav><a class="on" href="#">home</a><a href="#">work</a><a href="#">writing</a><a href="#">shelf</a></nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <img class="photo" src="../assets/img/portrait-web.jpg" alt="Rinkesh with his cat Simba">
+    <h1>Hey, I'm Rinkesh — I build things <em>from scratch.</em></h1>
+    <p>I'm a product builder and two-time founder in Bengaluru. My first company, <a class="ln" href="#">Savior</a>, was healthcare software that 85 hospitals ran on before Zocdoc bought it in 2020. After that I spent two years at <a class="ln" href="#">Accel</a>, backing pre-seed founders.</p>
+    <p>The part I like most is the very beginning — when the problem is still messy and nobody knows yet if it'll work. <span class="aside">(That's also the part where most people leave.)</span> Right now I'm building again, in the open, mostly with AI, and looking for my next 0→1.</p>
+    <p class="reach">Building something zero-to-one? I'd genuinely like to hear about it — <a href="mailto:rinkeshgorasia@gmail.com">write to me</a> or <a href="#">DM on X</a>.</p>
+  </section>
+
+  <section>
+    <p class="label">Track record</p>
+
+    <a class="entry" href="#">
+      <div class="e-head"><span class="e-name">Savior<span class="exit-mark">acquired by Zocdoc</span></span><span class="e-date">2017–20</span></div>
+      <p>Healthcare software that ran daily operations for 85 hospitals across India, including Fortis and Cloudnine. Grew on word of mouth, no sales team. Ran it profitably without raising a rupee.</p>
+      <p class="receipt">85 hospitals<span>·</span>₹0 raised<span>·</span>profitable, then acquired</p>
+    </a>
+
+    <a class="entry" href="#">
+      <div class="e-head"><span class="e-name">Career Leap</span><span class="e-date">2020–23</span></div>
+      <p>Live soft-skills learning for tech professionals. A WhatsApp group that became 10k users in six months. It looked healthy but never made money at scale, so I shut it down myself.</p>
+      <p class="receipt">10k users<span>·</span>100k watch hours<span>·</span>40% completion</p>
+    </a>
+
+    <a class="entry" href="#">
+      <div class="e-head"><span class="e-name">Accel Atoms</span><span class="e-date">2023–25</span></div>
+      <p>Ran Accel India's pre-seed program end to end — picked the founders, built the program, and sat with each team through the hardest part of going zero to one.</p>
+      <p class="receipt">4 cohorts<span>·</span>40+ founders backed</p>
+    </a>
+  </section>
+
+  <section>
+    <p class="label">Building now</p>
+    <div class="now">
+      <a class="n-item" href="#"><span class="n-name">Sniff</span><p>Scan any cat food and see how good it actually is.</p><span class="n-stat">5k scans · sniff.fyi</span></a>
+      <a class="n-item" href="#"><span class="n-name">KnowYourPay</span><p>Find out if you're underpaid for your exact role and city.</p><span class="n-stat">12k checks · knowyourpay.in</span></a>
+      <a class="n-item" href="#"><span class="n-name">Product Sense Lab</span><p>Practice PM interviews, get instant AI feedback.</p><span class="n-stat">800+ PMs · productsenselab.com</span></a>
+      <a class="n-item" href="#"><span class="n-name">Vouch</span><p>Save and share the places you actually love.</p><span class="n-stat">in progress</span></a>
+    </div>
+  </section>
+
+  <section>
+    <p class="label">Writing</p>
+    <a class="post" href="#"><span class="p-title">Why I shut down Career Leap</span><span class="p-date">on knowing alive from warm</span></a>
+    <a class="post" href="#"><span class="p-title">What 85 hospitals taught me</span><span class="p-date">research from inside the building</span></a>
+    <a class="post" href="#"><span class="p-title">Building with AI, honestly</span><span class="p-date">where it helps, where it eats your week</span></a>
+  </section>
+
+  <footer>
+    <span><a href="#">email</a><a href="#">twitter</a><a href="#">linkedin</a></span>
+    <span>Bengaluru, with Simba 🐾</span>
+  </footer>
+
+</div>
+</body></html>
