@@ -221,16 +221,19 @@ section{padding:0 0 var(--s7)}
 .prose a:hover{color:var(--red);text-decoration-color:var(--red)}
 .prose blockquote{border-left:2px solid var(--red);padding-left:1.2rem;color:var(--soft);margin:1.6rem 0}
 
-/* ============ footer ======================================== */
-footer{margin:1rem 0 0;border-top:2px solid var(--ink);padding-top:.85rem}
-.f-row{display:flex;justify-content:space-between;align-items:baseline;font-size:.85rem;gap:1rem}
-.f-row a{color:var(--soft);text-decoration:none;margin-right:1.3rem}
-.f-row a:hover{color:var(--red)}
-.f-loc{font-family:var(--mono);font-size:.72rem;color:var(--faint);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
-.f-right{display:flex;flex-direction:column;align-items:flex-end;gap:.4rem;text-align:right}
-.coffee-foot{display:inline-flex;align-items:center;gap:.45rem;text-decoration:none;color:var(--soft);font-size:.85rem}
+/* ============ footer — editorial sign-off, bookends the header === */
+footer{margin-top:var(--s7);border-top:2px solid var(--ink);padding:1.2rem 0 3.4rem}
+.foot-in{display:flex;justify-content:space-between;align-items:flex-start;gap:2rem}
+.foot-name{font-weight:700;font-size:1rem;letter-spacing:-.01em;display:block;margin-bottom:.45rem}
+.foot-tag{font-family:var(--mono);font-size:.7rem;color:var(--faint);letter-spacing:.04em}
+.foot-nav{display:flex;flex-direction:column;align-items:flex-end;gap:.55rem;text-align:right}
+.foot-links a{color:var(--soft);text-decoration:none;font-size:.88rem;margin-left:1.3rem}
+.foot-links a:hover{color:var(--red)}
+.coffee-foot{display:inline-flex;align-items:center;gap:.45rem;text-decoration:none;color:var(--soft);font-size:.88rem}
 .coffee-foot:hover{color:var(--red)}
 .coffee-foot svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+.foot-top{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;color:var(--faint);text-decoration:none}
+.foot-top:hover{color:var(--red)}
 
 /* ============ mobile — recomposed, not shrunk =============== */
 @media(max-width:860px){
@@ -285,6 +288,10 @@ footer{margin:1rem 0 0;border-top:2px solid var(--ink);padding-top:.85rem}
 @keyframes stroll{from{left:-90px}to{left:100vw}}
 @keyframes pad{from{transform:translateY(0)}to{transform:translateY(-1.5px)}}
 
+/* lego physics — page assembles on scroll */
+.snap{opacity:0;transform:translateY(10px)}
+.snap.in{opacity:1;transform:none;transition:transform .38s cubic-bezier(.2,1.42,.4,1),opacity .28s ease}
+
 /* the die — somewhere on the board */
 .roll{line-height:0}
 .roll svg{width:19px;height:19px;vertical-align:-4px}
@@ -299,41 +306,13 @@ footer{margin:1rem 0 0;border-top:2px solid var(--ink);padding-top:.85rem}
 .roll.rolling svg{animation:tumble .55s cubic-bezier(.3,.7,.4,1.2)}
 @keyframes tumble{from{transform:rotate(0)}to{transform:rotate(360deg)}}
 
-/* lego physics — the page assembles as you read */
-.snap{opacity:0;transform:translateY(10px)}
-.snap.in{opacity:1;transform:none;transition:transform .38s cubic-bezier(.2,1.42,.4,1),opacity .28s ease}
 
-/* simba sits on the writing rule — cats sit on the work */
-.sec-head{position:relative}
-.cat{position:absolute;right:3.4rem;top:-46px;width:64px;height:46px;cursor:pointer}
-.cat .pose{position:absolute;bottom:0;right:0;display:none}
-.cat.sit .pose-sit{display:block}
-.cat.loaf .pose-loaf{display:block}
-.cat.sleep .pose-sleep{display:block}
-.cat .ink{fill:var(--paper);stroke:var(--ink);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
-.cat .eye{fill:var(--ink);stroke:none}
-.cat .whisk{stroke:var(--ink);stroke-width:.9;fill:none;opacity:.55}
-.cat-say{
-  position:absolute;right:-0.4rem;top:-1.35rem;font-family:var(--mono);font-size:.64rem;color:var(--ink);
-  opacity:0;transition:opacity .18s;pointer-events:none;white-space:nowrap;
-}
-.cat.mrrp .cat-say{opacity:1}
 
 /* the sunflower is heliotropic — its head turns toward your cursor */
 .sunflower .sf-head{transform-origin:22px 27px;will-change:transform}
 .sunflower.sway .sf-head{animation:sway 7s ease-in-out infinite alternate}
 @keyframes sway{from{transform:rotate(-4deg)}to{transform:rotate(4deg)}}
 
-/* the ground — the page ends in earth: a sunflower and a signpost */
-.ground{position:relative;margin:4.6rem 0 3.4rem;height:1px;background:var(--rule-dark)}
-.ground .patch{position:absolute;bottom:-3px;left:38%;width:210px}
-.signpost{
-  position:absolute;right:2.5rem;top:50%;transform:translateY(-50%);
-  background:var(--paper);padding:0 .9rem;
-  font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;color:var(--faint);
-  text-decoration:none;white-space:nowrap;
-}
-.signpost:hover{color:var(--red)}
 .steam{transform-box:fill-box;animation:steam 3.6s ease-in-out infinite;opacity:0}
 .steam.s2{animation-delay:1.7s}
 @keyframes steam{0%{opacity:0;transform:translateY(3px)}35%{opacity:.6}75%{opacity:0;transform:translateY(-3.5px)}100%{opacity:0;transform:translateY(-3.5px)}}
@@ -346,10 +325,12 @@ footer{margin:1rem 0 0;border-top:2px solid var(--ink);padding-top:.85rem}
 @keyframes hop{0%{transform:none}40%{transform:translateY(-3.5px) rotate(-9deg)}100%{transform:none}}
 
 @media(max-width:640px){
-  .ground .patch{left:1rem;width:180px;height:auto}
-  .signpost{right:1rem;font-size:.56rem}
+    .signpost{right:1rem;font-size:.56rem}
   .h-clock{display:none}
   .die-pop{width:13rem}
+  .foot-in{flex-direction:column;gap:1.6rem}
+  .foot-nav{align-items:flex-start;text-align:left}
+  .foot-links a{margin:0 1.3rem 0 0}
 }
 
 /* ============ motion discipline ============================= */

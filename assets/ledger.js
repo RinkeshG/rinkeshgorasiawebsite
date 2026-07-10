@@ -44,17 +44,6 @@
     });
   }
 
-  /* the cat on the writing rule picks its own pose, answers when poked */
-  var cat = document.getElementById('cat');
-  if (cat) {
-    var poses = ['sit', 'loaf', 'sleep'];
-    cat.classList.add(poses[Math.floor(Math.random() * poses.length)]);
-    cat.addEventListener('click', function () {
-      cat.classList.add('mrrp');
-      clearTimeout(cat._t);
-      cat._t = setTimeout(function () { cat.classList.remove('mrrp'); }, 1500);
-    });
-  }
 
   /* the clock in the top bar keeps Bengaluru time */
   var clock = document.getElementById('h-clock');
@@ -143,52 +132,5 @@
     }, 3500);
   }
 
-  /* simba the inhabitant — walks across when you go quiet */
-  var walker = document.getElementById('walker');
-  if (walker && !reduced) {
-    var idleT = null, lastWalk = 0;
-    var arm = function () {
-      clearTimeout(idleT);
-      idleT = setTimeout(function () {
-        if (Date.now() - lastWalk < 240000) return;   /* naps between strolls */
-        if (document.hidden) return;
-        lastWalk = Date.now();
-        walker.classList.add('go');
-        setTimeout(function () { walker.classList.remove('go'); }, 14500);
-      }, 30000);
-    };
-    ['scroll', 'mousemove', 'keydown', 'touchstart'].forEach(function (ev) {
-      addEventListener(ev, arm, { passive: true });
-    });
-    arm();
-  }
 
-  /* the sunflower is heliotropic — its head follows the light (your cursor) */
-  var sf = document.querySelector('.sunflower');
-  if (sf) {
-    var head = sf.querySelector('.sf-head');
-    var fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
-    if (reduced || !fine || !head) {
-      if (!reduced) sf.classList.add('sway');   /* touch: it sways in the breeze instead */
-    } else {
-      var target = 0, cur = 0, raf = null;
-      var step = function () {
-        cur += (target - cur) * 0.09;
-        head.style.transform = 'rotate(' + cur.toFixed(2) + 'deg)';
-        if (Math.abs(target - cur) > 0.05) { raf = requestAnimationFrame(step); }
-        else { raf = null; }
-      };
-      addEventListener('mousemove', function (e) {
-        var r = sf.getBoundingClientRect();
-        if (r.bottom < 0 || r.top > innerHeight) return;   /* off-screen: don't bother */
-        var cx = r.left + r.width / 2, cy = r.top + r.height * 0.45;
-        var deg = Math.atan2(e.clientX - cx, cy - e.clientY) * 180 / Math.PI;
-        target = Math.max(-32, Math.min(32, deg));
-        if (!raf) raf = requestAnimationFrame(step);
-      }, { passive: true });
-      addEventListener('mouseout', function (e) {
-        if (!e.relatedTarget) { target = 0; if (!raf) raf = requestAnimationFrame(step); }
-      });
-    }
-  }
 })();
