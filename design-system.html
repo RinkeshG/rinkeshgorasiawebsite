@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="assets/ledger.css?v=9">
+<link rel="stylesheet" href="assets/ledger.css?v=11">
 <style>
   /* doc-only chrome */
   .ds-block{padding:1.6rem 0 2.4rem;border-bottom:1px solid var(--rule)}
@@ -154,26 +154,27 @@
   </section>
 
   <section>
-    <div class="sec-head"><span class="sec-title">Motion</span></div>
-    <div class="ds-block" style="border-bottom:none">
-      <div class="spec"><span class="lbl">Heliotropism</span><span>The sunflower's head turns toward the cursor (±32°, eased); on touch it sways in the breeze instead.</span></div>
-      <div class="spec"><span class="lbl">Tally</span><span>Figures count up over 700ms (cubic ease-out) when they enter view. Once.</span></div>
-      <div class="spec"><span class="lbl">Stamp press</span><span>350ms press on row hover — scale 1.14, rotate −3.5°, settle.</span></div>
-      <div class="spec"><span class="lbl">Arrow slide</span><span>Index arrow fades in and slides 4px on hover. Always visible on touch.</span></div>
-      <div class="spec"><span class="lbl">Simba</span><span>Portrait hover/tap pops a mono speech bubble; the line rotates. FIG. 01 stays deadpan.</span></div>
-      <div class="spec"><span class="lbl">Discipline</span><span>Durations ≤ 700ms. Nothing loops except the status pulse. <span class="mono">prefers-reduced-motion</span> kills everything.</span></div>
+    <div class="sec-head"><span class="sec-title">Personality</span></div>
+    <div class="ds-block">
+      <p class="ds-note" style="margin-top:.8rem">Personality lives in <b>behaviour and authenticity</b>, never as decorative doodles scattered in whitespace. The homepage stays a confident, clean record; the objects he loves (sunflowers, board games, lego, giraffe, coffee) get real, crafted room on their own pages — shelf, coffee — not clip-art in a corner.</p>
+      <div class="spec"><span class="lbl">Six sides of me</span><span>The wooden die in the nav rolls to reveal one of six true lines about him — lands on the rolled number, shows it in a popover, never navigates. His board-games love, made literal.</span></div>
+      <div class="spec"><span class="lbl">Faces the light</span><span>The paper warms and cools with Bengaluru's real sun (dawn / day / dusk / night, via <span class="mono">data-light</span>). The heliotropism idea expressed as the whole page, not a drawn flower.</span></div>
+      <div class="spec"><span class="lbl">The real cat</span><span>Simba is the actual photo in the hero, with a tap/hover speech bubble. No drawn cat competes with the real one.</span></div>
+      <div class="spec"><span class="lbl">Local time</span><span>The IST clock ticks in the top bar; the coffee log lives in the footer. Place and rhythm, quietly present.</span></div>
+      <div class="spec"><span class="lbl">Rule</span><span>If a personality element can't be a behaviour, a real photo, or honest copy, it doesn't go on the homepage. Rich object galleries belong on dedicated pages.</span></div>
     </div>
   </section>
 
   <section>
-    <div class="sec-head"><span class="sec-title">Exhibits</span></div>
-    <div class="ds-block">
-      <p class="ds-note" style="margin-top:.8rem">Personality enters the record the way it enters a real working document — as marks left by the person who keeps it. Never as image grids or icon rows.</p>
-      <div class="spec"><span class="lbl">Figures</span><span>Objects he loves are drawn as tipped-in colour plates — ink outlines with true, muted colour (the sunflower is golden, the giraffe tan, the meeple wood) — and numbered <span class="mono">FIG. n</span> with a mono caption that carries the story — the sunflower at Writing is <span class="mono">FIG. 02 · FACES THE LIGHT</span> — and it really does: the head follows your cursor.</span></div>
-      <div class="spec"><span class="lbl">Steam</span><span>The footer cup breathes on a 3.6s loop and is a working door — it opens the coffee log.</span></div>
-      <div class="spec"><span class="lbl">Traces</span><span>Simba's paw prints cross the footer rule; his bubble lives on the portrait. The cat interacts with the record, he isn't pictured beside it.</span></div>
-      <div class="spec"><span class="lbl">Working marks</span><span>A mark may hold a job: the giraffe is back-to-top ("all the way up"); the steaming cup opens the coffee log; the meeple appears on Shelf hover — the doorway to the games. Lego is reserved for the shelf and the 404.</span></div>
-      <div class="spec"><span class="lbl">Budget</span><span>At most one exhibit per section. If a new mark can't cite a story and a place, it stays out.</span></div>
+    <div class="sec-head"><span class="sec-title">Motion</span></div>
+    <div class="ds-block" style="border-bottom:none">
+      <div class="spec"><span class="lbl">Die roll</span><span>Tumbles ~520ms, pips redraw to the rolled face, popover springs in. Re-roll never repeats the last number.</span></div>
+      <div class="spec"><span class="lbl">Tally</span><span>Figures count up over 700ms (cubic ease-out) when they enter view. Once.</span></div>
+      <div class="spec"><span class="lbl">Assemble</span><span>Rows, frames and posts snap into place on scroll (spring ease); a 3.5s failsafe guarantees nothing stays hidden. The lego idea as the page's motion.</span></div>
+      <div class="spec"><span class="lbl">Stamp press</span><span>350ms press on row hover — scale 1.14, rotate −3.5°, settle.</span></div>
+      <div class="spec"><span class="lbl">Arrow slide</span><span>Index arrow fades in and slides 4px on hover. Always visible on touch.</span></div>
+      <div class="spec"><span class="lbl">Simba</span><span>Portrait hover/tap pops a mono speech bubble; the line rotates.</span></div>
+      <div class="spec"><span class="lbl">Discipline</span><span>Durations ≤ 700ms. Nothing loops but the status pulse and the coffee steam. <span class="mono">prefers-reduced-motion</span> kills everything.</span></div>
     </div>
   </section>
 
@@ -186,6 +187,7 @@
       <li>Meta text nobody acts on (counts, read times, "est." lines).</li>
       <li>Shadows on anything that isn't evidence from a live product.</li>
       <li>Shrinking the desktop grid to fit a phone.</li>
+      <li>Decorative doodles scattered in whitespace — personality is behaviour, photos, or copy.</li>
     </ul>
   </section>
 
@@ -197,5 +199,5 @@
   </footer>
 
 </div>
-<script src="assets/ledger.js?v=3"></script>
+<script src="assets/ledger.js?v=11"></script>
 </body></html>
