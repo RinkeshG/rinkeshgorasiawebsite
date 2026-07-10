@@ -4,53 +4,54 @@
 <title>404, page not found — Rinkesh Gorasia</title>
 <meta name="description" content="This page fell off the shelf." />
 <meta name="robots" content="noindex" />
-<meta name="theme-color" content="#0d0d0c" />
+<meta name="theme-color" content="#FCFCF9" />
 <link rel="icon" type="image/svg+xml" href="assets/icons/favicon-shelf.svg" />
 <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap"></noscript>
-<link rel="stylesheet" href="assets/v3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/ledger.css?v=11">
 <style>
-.lost{min-height:calc(100vh - 130px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:8px;padding-bottom:40px}
-/* three cards on a shelf spelling 4·0·4; a random subset collapses, with physics. */
+:root{--eout:cubic-bezier(.2,.85,.25,1)}
+.lost{min-height:calc(100vh - 150px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:8px;padding-bottom:40px}
 .deck404{position:relative;display:flex;align-items:flex-end;gap:22px;height:200px;cursor:pointer;border-radius:10px}
-.deck404:focus-visible{outline:2px solid var(--accent);outline-offset:12px}
-.deck404::after{content:"";position:absolute;left:-28px;right:-28px;bottom:0;border-bottom:1px solid var(--line2)}
-.c404{position:relative;width:120px;height:164px;border-radius:var(--r3);background:linear-gradient(165deg,#1a1812,#0e0d0a);border:1px solid var(--line2);display:grid;place-items:center;box-shadow:0 18px 40px rgba(0,0,0,.5)}
-.c404::before{content:"";position:absolute;inset:8px;border-radius:10px;border:1px solid rgba(255,255,255,.08)}
-.c404::after{content:"";position:absolute;inset:0;border-radius:var(--r3);background-image:radial-gradient(rgba(255,255,255,.05) 1px,transparent 1px);background-size:13px 13px;pointer-events:none}
-.c404 .d{font-family:var(--mono);font-size:3.6rem;font-weight:600;color:var(--ink);line-height:1;font-variant-numeric:tabular-nums}
+.deck404:focus-visible{outline:2px solid var(--red);outline-offset:12px}
+.deck404::after{content:"";position:absolute;left:-28px;right:-28px;bottom:0;border-bottom:1px solid var(--rule-dark)}
+.c404{position:relative;width:120px;height:164px;border-radius:12px;background:linear-gradient(160deg,#FFFDF8,#F1ECE1);border:1px solid var(--rule-dark);display:grid;place-items:center;box-shadow:0 16px 34px rgba(28,28,25,.18)}
+.c404::before{content:"";position:absolute;inset:8px;border-radius:8px;border:1px solid rgba(28,28,25,.12)}
+.c404::after{content:"";position:absolute;inset:0;border-radius:12px;background-image:radial-gradient(rgba(28,28,25,.07) 1px,transparent 1px);background-size:13px 13px;pointer-events:none}
+.c404 .d{font-family:var(--mono);font-size:3.6rem;font-weight:500;color:var(--ink);line-height:1;font-variant-numeric:tabular-nums}
 .paws{position:absolute;right:-96px;bottom:6px;display:flex;gap:13px;align-items:flex-end;opacity:0;transition:opacity .45s}
-.paws.go{opacity:.6}
-.paws svg{width:18px;height:18px;color:var(--accentdim)}
-.mrrp404{position:absolute;right:-58px;top:8px;font-family:var(--mono);font-size:.6875rem;color:var(--ink);background:var(--surface-1);border:1px solid var(--line2);border-radius:var(--r1);padding:6px 10px;opacity:0;transform:translateY(5px);transition:opacity .22s,transform .22s var(--eout);pointer-events:none;white-space:nowrap}
+.paws.go{opacity:.42}
+.paws svg{width:18px;height:18px;color:var(--faint)}
+.mrrp404{position:absolute;right:-58px;top:8px;font-family:var(--mono);font-size:.68rem;color:var(--ink);background:var(--card);border:1px solid var(--ink);padding:6px 10px;opacity:0;transform:translateY(5px);transition:opacity .22s,transform .22s var(--eout);pointer-events:none;white-space:nowrap}
 .mrrp404.show{opacity:1;transform:none}
-
-.lost h1{font-size:clamp(1.5rem,4.4vw,1.875rem);font-weight:600;color:var(--ink);letter-spacing:-.02em;margin-top:46px;line-height:1.1}
-.lost .hint{font-family:var(--mono);font-size:.6875rem;color:var(--mut);opacity:0;transition:opacity .4s}
+.lost h1{font-size:1.9rem;font-weight:600;color:var(--ink);letter-spacing:-.03em;margin-top:46px;line-height:1.1}
+.lost .hint{font-family:var(--mono);font-size:.68rem;color:var(--faint);opacity:0;transition:opacity .4s}
 .lost .hint.on{opacity:1}
-.lost .cta{margin-top:18px}
+.lost .cta{margin-top:20px;display:inline-flex;gap:1.2rem}
+.lost .cta a{font-family:var(--mono);font-size:.8rem;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--rule-dark);padding-bottom:2px}
+.lost .cta a:hover{color:var(--red);border-color:var(--red)}
 @media(max-width:640px){
   .lost{min-height:calc(100vh - 150px)}
   .deck404{gap:12px;height:150px}
-  .c404{width:62px;height:86px;border-radius:var(--r2)}
-  .c404::before{inset:6px;border-radius:7px}
+  .c404{width:62px;height:86px;border-radius:9px}
+  .c404::before{inset:6px;border-radius:6px}
   .c404 .d{font-size:2rem}
-  .paws{right:-2px;bottom:-4px;gap:10px}
-  .paws svg{width:15px;height:15px}
+  .paws{right:-2px;bottom:-4px;gap:10px}.paws svg{width:15px;height:15px}
   .mrrp404{right:-6px;top:-4px}
 }
-@media(prefers-reduced-motion:reduce){.paws{opacity:.6}}
+@media(prefers-reduced-motion:reduce){.paws{opacity:.5}}
 </style>
 </head>
 <body>
-<div class="page">
+<div class="wrap">
 
-  <header class="bar rv">
-    <nav><a href="index.html">home</a><a href="work.html">work</a><a href="writing.html">writing</a></nav>
-    <span class="right"><span class="clock" id="clock">Bengaluru</span><span class="status">open to 0→1 roles</span></span>
+  <header id="top">
+    <div class="h-row">
+      <a class="h-name" href="index.html">Rinkesh Gorasia</a>
+      <span class="h-right"><nav><a href="index.html">Home</a><a href="work.html">Work</a><a href="writing.html">Writing</a><a href="shelf.html">Shelf<svg class="plate" viewBox="0 0 24 24" aria-hidden="true"><path fill="#C08A4E" stroke="#1C1C19" stroke-width="1.2" stroke-linejoin="round" d="M12 2.6c1.7 0 2.9 1.3 2.9 2.9 0 .9-.4 1.7-1 2.2 1 .5 2.3 1.4 3.7 2 1.6.7 3.3 1.2 3.3 2.5 0 .8-.6 1.3-1.5 1.3h-3.3c.3 1.9 1.3 3.4 2.3 4.7.6.8.1 1.9-.9 1.9h-4.2c-.5 0-.9-.3-1.1-.8l-1.2-3-1.2 3c-.2.5-.6.8-1.1.8H4.5c-1 0-1.5-1.1-.9-1.9 1-1.3 2-2.8 2.3-4.7H2.6c-.9 0-1.5-.5-1.5-1.3 0-1.3 1.7-1.8 3.3-2.5 1.4-.6 2.7-1.5 3.7-2-.6-.5-1-1.3-1-2.2 0-1.6 1.2-2.9 2.9-2.9z"/></svg></a></nav><a href="#" class="roll" id="roll" title="six sides of me — roll one" aria-label="Roll the die"><svg viewBox="0 0 24 24" aria-hidden="true"><rect class="face" x="2.5" y="2.5" width="19" height="19" rx="4"/><g class="pips"><circle class="pip" cx="7" cy="7" r="1.7"/><circle class="pip" cx="17" cy="7" r="1.7"/><circle class="pip" cx="12" cy="12" r="1.7"/><circle class="pip" cx="7" cy="17" r="1.7"/><circle class="pip" cx="17" cy="17" r="1.7"/></g></svg></a><div class="die-pop" id="die-pop"><div class="dp-top"><span class="dp-num">roll me</span><span class="dp-die">⚄</span></div><p>Six sides. Roll to meet one.</p></div><span class="h-clock" id="h-clock"></span></span>
+    </div>
   </header>
 
   <main class="lost">
@@ -62,13 +63,13 @@
       <span class="mrrp404" id="mrrp404">mrrp.</span>
     </div>
 
-    <h1>this page fell off the shelf.</h1>
+    <h1>This page fell off the shelf.</h1>
     <p class="hint" id="hint">tap to knock it over again</p>
-    <a class="cta" href="index.html">→ back home</a>
+    <span class="cta"><a href="index.html">← back home</a><a href="shelf.html">browse the shelf →</a></span>
   </main>
 
 </div>
-<script src="assets/v3.js"></script>
+<script src="assets/ledger.js?v=11"></script>
 <script>
 (function(){
   var deck=document.getElementById('deck'), mrrp=document.getElementById('mrrp404'),
