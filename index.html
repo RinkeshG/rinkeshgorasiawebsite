@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="assets/ledger.css?v=8">
+<link rel="stylesheet" href="assets/ledger.css?v=9">
 </head>
 <body>
 <div class="wrap">
@@ -29,14 +29,13 @@
   <header id="top">
     <div class="h-row">
       <a class="h-name" href="index.html">Rinkesh Gorasia</a>
-      <nav><a class="on" href="index.html">Home</a><a href="work.html">Work</a><a href="writing.html">Writing</a><a href="shelf.html">Shelf<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 20h-5a1 1 0 0 1 -1 -1c0 -2 3.378 -4.907 4 -6c-1 0 -4 -.5 -4 -2c0 -2 4 -3.5 6 -4c0 -1.5 .5 -4 3 -4s3 2.5 3 4c2 .5 6 2 6 4c0 1.5 -3 2 -4 2c.622 1.093 4 4 4 6a1 1 0 0 1 -1 1h-5c-1 0 -2 -4 -3 -4s-2 4 -3 4"/></svg></a><a href="#" class="roll" id="roll" title="roll the dice — somewhere on the board" aria-label="Take me somewhere random"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2.5"/><circle cx="8.5" cy="8.5" r=".7" fill="currentColor"/><circle cx="12" cy="12" r=".7" fill="currentColor"/><circle cx="15.5" cy="15.5" r=".7" fill="currentColor"/></svg></a></nav>
+      <span class="h-right"><nav><a class="on" href="index.html">Home</a><a href="work.html">Work</a><a href="writing.html">Writing</a><a href="shelf.html">Shelf<svg class="plate" viewBox="0 0 24 24" aria-hidden="true"><path fill="#C08A4E" stroke="#1C1C19" stroke-width="1.2" stroke-linejoin="round" d="M12 2.6c1.7 0 2.9 1.3 2.9 2.9 0 .9-.4 1.7-1 2.2 1 .5 2.3 1.4 3.7 2 1.6.7 3.3 1.2 3.3 2.5 0 .8-.6 1.3-1.5 1.3h-3.3c.3 1.9 1.3 3.4 2.3 4.7.6.8.1 1.9-.9 1.9h-4.2c-.5 0-.9-.3-1.1-.8l-1.2-3-1.2 3c-.2.5-.6.8-1.1.8H4.5c-1 0-1.5-1.1-.9-1.9 1-1.3 2-2.8 2.3-4.7H2.6c-.9 0-1.5-.5-1.5-1.3 0-1.3 1.7-1.8 3.3-2.5 1.4-.6 2.7-1.5 3.7-2-.6-.5-1-1.3-1-2.2 0-1.6 1.2-2.9 2.9-2.9z"/></svg></a><a href="coffee.html">Coffee</a></nav><a href="#" class="roll" id="roll" title="roll the dice — somewhere on the board" aria-label="Take me somewhere random"><svg viewBox="0 0 24 24"><rect class="face" x="2.5" y="2.5" width="19" height="19" rx="4"/><circle class="pip" cx="7.6" cy="7.6" r="1.7"/><circle class="pip" cx="16.4" cy="7.6" r="1.7"/><circle class="pip" cx="12" cy="12" r="1.7"/><circle class="pip" cx="7.6" cy="16.4" r="1.7"/><circle class="pip" cx="16.4" cy="16.4" r="1.7"/></svg></a><span class="h-clock" id="h-clock"></span></span>
     </div>
   </header>
 
   <section class="hero">
     <div>
       <span class="status">Bengaluru · open to 0→1 roles</span>
-      <span class="status2" id="live-line" aria-hidden="true"></span>
       <h1>Hey, I'm Rinkesh<span class="dot">.</span></h1>
       <p>I'm a product builder and two-time founder. My first company, <a class="ln" href="work.html#savior">Savior</a>, ran daily operations for 85 hospitals before <strong>Zocdoc bought it in 2020</strong>. Then two years at <a class="ln" href="work.html#accel">Accel</a>, backing pre-seed founders. Now I'm building again — in the open, mostly with AI.</p>
       <p>The part I like most is the very beginning, when the problem is still messy and nobody knows yet if it'll work.</p>
@@ -148,10 +147,19 @@
   <section>
     <div class="sec-head"><span class="sec-title">Writing</span>
       <span class="cat" id="cat" title="Simba" aria-hidden="true">
-        <svg viewBox="0 0 64 56" width="46" height="42">
-          <path class="tail" d="M39 34 C48 40 50 48 44 55"/>
-          <path class="body" d="M22 6 L26 13 C28.5 12.2 31.5 12.2 34 13.2 L39 7 L40.5 16 C43.5 19.5 45 24 45 29 C45 36 42 40.5 38 42 L14 42 C11.5 39 10 34.5 10.5 29.5 C11 24 13.5 19 17.5 16.2 L18.5 7.5 Z
-                             M20.5 9.8 L20 15.2 L23.5 13.6 Z M37.5 10.2 L34.8 13.9 L38 15.5 Z"/>
+        <svg viewBox="0 0 60 58" width="52" height="48">
+          <g class="pose pose-sit">
+            <path class="tail" d="M36 52 C46 54 46 57.5 30 56.5"/>
+            <path class="body" d="M13 20 C10 30 10 44 13 56 L37 56 C39 44 39 30 33 21 C36 18 38 14 36 9 L30 13 C27 11.5 21 11.5 18 13 L12 9 C10 14 11 18 13 20 Z"/>
+          </g>
+          <g class="pose pose-loaf">
+            <path class="tail" d="M45 50 C54 56 56 62 50 68"/>
+            <path class="body" d="M28 20 L32 27 C34.5 26.2 37.5 26.2 40 27.2 L45 21 L46.5 30 C49.5 33.5 51 38 51 43 C51 50 48 54.5 44 56 L20 56 C17.5 53 16 48.5 16.5 43.5 C17 38 19.5 33 23.5 30.2 L24.5 21.5 Z"/>
+          </g>
+          <g class="pose pose-sleep">
+            <path class="tail" d="M50 52 C56 55 46 58.5 30 57.5"/>
+            <path class="body" d="M7 56 C8 45 18 37 30 37 C43 37 53 45 54 56 Z M10.5 42.5 L14 34 L19.5 40 Z M19.5 39.5 L24 33 L27 39.5 Z"/>
+          </g>
         </svg>
         <span class="cat-say">mrrp.</span>
       </span>
@@ -184,12 +192,10 @@
       <span><a href="mailto:rinkeshgorasia@gmail.com">Email</a><a href="https://x.com/rinks__g" target="_blank" rel="noopener">Twitter</a><a href="https://www.linkedin.com/in/rinksg/" target="_blank" rel="noopener">LinkedIn</a></span>
       <span class="f-loc">Bengaluru, India</span>
     </div>
-    <div class="colophon">
-      <p>Runs on <a class="fmark" href="coffee.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 14c.83 .642 2.077 1.017 3.5 1c1.423 .017 2.67 -.358 3.5 -1c.83 -.642 2.077 -1.017 3.5 -1c1.423 -.017 2.67 .358 3.5 1"/><path class="steam s1" d="M8 3a2.4 2.4 0 0 0 -1 2a2.4 2.4 0 0 0 1 2"/><path class="steam s2" d="M12 3a2.4 2.4 0 0 0 -1 2a2.4 2.4 0 0 0 1 2"/><path d="M3 10h14v5a6 6 0 0 1 -6 6h-2a6 6 0 0 1 -6 -6v-5"/><path d="M16.746 16.726a3 3 0 1 0 .252 -5.555"/></svg>filter coffee</a>, <a class="fmark" href="shelf.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 20h-5a1 1 0 0 1 -1 -1c0 -2 3.378 -4.907 4 -6c-1 0 -4 -.5 -4 -2c0 -2 4 -3.5 6 -4c0 -1.5 .5 -4 3 -4s3 2.5 3 4c2 .5 6 2 6 4c0 1.5 -3 2 -4 2c.622 1.093 4 4 4 6a1 1 0 0 1 -1 1h-5c-1 0 -2 -4 -3 -4s-2 4 -3 4"/></svg>board games</a> and <a class="fmark" href="#fig-simba"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.7 13.5c-1.1 -2 -1.441 -2.5 -2.7 -2.5c-1.259 0 -1.736 .755 -2.836 2.747c-.942 1.703 -2.846 1.845 -3.321 3.291c-.097 .265 -.145 .677 -.143 .962c0 1.176 .787 2 1.8 2c1.259 0 3 -1 4.5 -1s3.241 1 4.5 1c1.013 0 1.8 -.823 1.8 -2c0 -.285 -.049 -.697 -.146 -.962c-.475 -1.451 -2.512 -1.835 -3.454 -3.538"/><path d="M20.188 8.082a1.039 1.039 0 0 0 -.406 -.082h-.015c-.735 .012 -1.56 .75 -1.993 1.866c-.519 1.335 -.28 2.7 .538 3.052c.129 .055 .267 .082 .406 .082c.739 0 1.575 -.742 2.011 -1.866c.516 -1.335 .273 -2.7 -.54 -3.052l-.001 0"/><path d="M9.474 9c.055 0 .109 0 .163 -.011c.944 -.128 1.533 -1.346 1.32 -2.722c-.203 -1.297 -1.047 -2.267 -1.932 -2.267c-.055 0 -.109 0 -.163 .011c-.944 .128 -1.533 1.346 -1.32 2.722c.204 1.293 1.048 2.267 1.933 2.267"/><path d="M16.456 6.733c.214 -1.376 -.375 -2.594 -1.32 -2.722a1.164 1.164 0 0 0 -.162 -.011c-.885 0 -1.728 .97 -1.93 2.267c-.214 1.376 .375 2.594 1.32 2.722c.054 .007 .108 .011 .162 .011c.885 0 1.73 -.974 1.93 -2.267"/><path d="M5.69 12.918c.816 -.352 1.054 -1.719 .536 -3.052c-.436 -1.124 -1.271 -1.866 -2.009 -1.866c-.14 0 -.277 .027 -.407 .082c-.816 .352 -1.054 1.719 -.536 3.052c.436 1.124 1.271 1.866 2.009 1.866c.14 0 .277 -.027 .407 -.082"/></svg>Simba's supervision</a>.</p>
-      <a class="top-link" href="#top">ALL THE WAY UP ↑</a>
-    </div>
   </footer>
-  <div class="garden" aria-hidden="true"><svg class="plate sunflower" width="40" height="55" viewBox="0 0 44 60" aria-hidden="true">
+
+  <div class="ground" aria-hidden="false">
+  <svg class="plate sunflower" width="40" height="55" viewBox="0 0 44 60" aria-hidden="true">
         <g stroke="#1C1C19" stroke-width=".9" stroke-linecap="round" stroke-linejoin="round">
           <g class="sf-head">
             <g fill="#E9B63C">
@@ -217,7 +223,9 @@
           <path d="M22 40 C16.5 38 13.5 41 14 45 C18 45.5 20.8 43.2 22 41.5 Z" fill="#7A8B55" stroke="#5F6F44"/>
           <path d="M22 47 C26.8 45.6 29.6 48 29.2 51.4 C26 52 23.6 50.2 22 48.6 Z" fill="#7A8B55" stroke="#5F6F44"/>
         </g>
-      </svg></div>
+      </svg>
+    <a class="signpost" href="#top">ALL THE WAY UP ↑</a>
+  </div>
 
 
 </div>
@@ -228,5 +236,5 @@
       C65 11 68 13 68 17 C68 21 64 23 60 23 L57 23 C55 26 51 28 47 28 L46 28 L48 37 L44 37 L41 29 L33 29 L34 37 L30 37 L28 29 L23 29 L21 37 L17 37 L18 27 C13 27 10 26 10 24 Z"/>
   </svg>
 </div>
-<script src="assets/ledger.js?v=8"></script>
+<script src="assets/ledger.js?v=9"></script>
 </body></html>

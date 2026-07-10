@@ -79,7 +79,9 @@ header{padding-top:2.2rem}
   border-top:2px solid var(--ink); border-bottom:1px solid var(--ink);
 }
 .h-name{font-weight:700;font-size:1rem;letter-spacing:-.01em;text-decoration:none;color:var(--ink)}
-.h-row nav{display:flex;gap:1.6rem}
+.h-right{display:flex;align-items:baseline;gap:1.5rem}
+.h-clock{font-family:var(--mono);font-size:.7rem;color:var(--faint);letter-spacing:.06em;white-space:nowrap}
+.h-row nav{display:flex;gap:1.6rem;align-items:baseline}
 .h-row nav a{color:var(--soft);text-decoration:none;font-size:.88rem}
 .h-row nav a:hover{color:var(--red)}
 .h-row nav a.on{color:var(--ink);border-bottom:2px solid var(--red);padding-bottom:2px}
@@ -92,7 +94,6 @@ header{padding-top:2.2rem}
   display:inline-flex;align-items:center;gap:.5rem;margin-bottom:1.3rem;
 }
 .status::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--red);animation:pulse 2.6s ease-in-out infinite}
-.status2{display:block;font-family:var(--mono);font-size:.68rem;color:var(--faint);letter-spacing:.08em;text-transform:uppercase;margin:-.8rem 0 1.3rem}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(190,62,38,.35)}50%{box-shadow:0 0 0 5px rgba(190,62,38,0)}}
 h1{font-weight:600;font-size:2.7rem;line-height:1.08;letter-spacing:-.035em;margin-bottom:1.4rem}
 h1 .dot{color:var(--red)}
@@ -221,7 +222,7 @@ section{padding:0 0 var(--s7)}
 .prose blockquote{border-left:2px solid var(--red);padding-left:1.2rem;color:var(--soft);margin:1.6rem 0}
 
 /* ============ footer ======================================== */
-footer{margin:1rem 0 4rem;border-top:2px solid var(--ink);padding-top:.8rem}
+footer{margin:1rem 0 0;border-top:2px solid var(--ink);padding-top:.85rem}
 .f-row{display:flex;justify-content:space-between;align-items:baseline;font-size:.85rem;gap:1rem}
 .f-row a{color:var(--soft);text-decoration:none;margin-right:1.3rem}
 .f-row a:hover{color:var(--red)}
@@ -281,7 +282,11 @@ footer{margin:1rem 0 4rem;border-top:2px solid var(--ink);padding-top:.8rem}
 @keyframes pad{from{transform:translateY(0)}to{transform:translateY(-1.5px)}}
 
 /* the die — somewhere on the board */
-.roll svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;vertical-align:-2px}
+.roll{line-height:0}
+.roll svg{width:19px;height:19px;vertical-align:-4px}
+.roll .face{fill:#C08A4E;stroke:#1C1C19;stroke-width:1.4;stroke-linejoin:round}
+.roll .pip{fill:#1C1C19}
+.roll:hover .face{fill:#D09A5B}
 .roll.rolling svg{animation:tumble .55s cubic-bezier(.3,.7,.4,1.2)}
 @keyframes tumble{from{transform:rotate(0)}to{transform:rotate(360deg)}}
 
@@ -291,7 +296,12 @@ footer{margin:1rem 0 4rem;border-top:2px solid var(--ink);padding-top:.8rem}
 
 /* simba sits on the writing rule — cats sit on the work */
 .sec-head{position:relative}
-.cat{position:absolute;right:3.2rem;top:-39px;width:46px;height:42px;cursor:pointer}
+.cat{position:absolute;right:3.2rem;top:-45px;width:52px;height:48px;cursor:pointer}
+.cat .pose{display:none}
+.cat.sit .pose-sit{display:block}
+.cat.loaf .pose-loaf{display:block}
+.cat.sleep .pose-sleep{display:block}
+.cat.sleep .tail{animation:none}
 .cat .body{fill:var(--ink)}
 .cat .tail{fill:none;stroke:var(--ink);stroke-width:3.4;stroke-linecap:round;transform-origin:39px 34px;animation:tailflick 7s ease-in-out infinite}
 @keyframes tailflick{0%,86%,100%{transform:rotate(0)}90%{transform:rotate(7deg)}95%{transform:rotate(-4deg)}}
@@ -301,23 +311,21 @@ footer{margin:1rem 0 4rem;border-top:2px solid var(--ink);padding-top:.8rem}
 }
 .cat.mrrp .cat-say{opacity:1}
 
-/* the sunflower grows from the last line of the page — the ground */
-.garden{position:relative;border-bottom:1px solid var(--rule-dark);margin:3.2rem 0 3rem;height:1rem}
-.garden .sunflower{position:absolute;bottom:-3px;left:8rem}
-
 /* the sunflower is heliotropic — its head turns toward your cursor */
 .sunflower .sf-head{transform-origin:22px 27px;will-change:transform}
 .sunflower.sway .sf-head{animation:sway 7s ease-in-out infinite alternate}
 @keyframes sway{from{transform:rotate(-4deg)}to{transform:rotate(4deg)}}
 
-/* the colophon — the document signs off in a sentence, not a sticker row */
-.colophon{display:flex;justify-content:space-between;align-items:baseline;gap:2rem;border-top:1px solid var(--rule);margin-top:.85rem;padding-top:.95rem}
-.colophon p{color:var(--soft);font-size:.92rem}
-.fmark{color:var(--ink);font-weight:600;text-decoration:none;border-bottom:1px solid var(--rule-dark);padding-bottom:1px;white-space:nowrap}
-.fmark:hover{color:var(--red);border-color:var(--red)}
-.fmark svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;vertical-align:-2.5px;margin-right:.3rem}
-.top-link{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;color:var(--faint);text-decoration:none;white-space:nowrap}
-.top-link:hover{color:var(--red)}
+/* the ground — the page ends in earth: a sunflower and a signpost */
+.ground{position:relative;margin:4.6rem 0 3.4rem;height:1px;background:var(--rule-dark)}
+.ground .sunflower{position:absolute;bottom:-2px;left:11%}
+.signpost{
+  position:absolute;right:2.5rem;top:50%;transform:translateY(-50%);
+  background:var(--paper);padding:0 .9rem;
+  font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;color:var(--faint);
+  text-decoration:none;white-space:nowrap;
+}
+.signpost:hover{color:var(--red)}
 .steam{transform-box:fill-box;animation:steam 3.6s ease-in-out infinite;opacity:0}
 .steam.s2{animation-delay:1.7s}
 @keyframes steam{0%{opacity:0;transform:translateY(3px)}35%{opacity:.6}75%{opacity:0;transform:translateY(-3.5px)}100%{opacity:0;transform:translateY(-3.5px)}}
@@ -330,7 +338,9 @@ footer{margin:1rem 0 4rem;border-top:2px solid var(--ink);padding-top:.8rem}
 @keyframes hop{0%{transform:none}40%{transform:translateY(-3.5px) rotate(-9deg)}100%{transform:none}}
 
 @media(max-width:640px){
-  .colophon{flex-direction:column;gap:1rem}
+  .ground .sunflower{left:1.8rem}
+  .signpost{right:1rem}
+  .h-clock{display:none}
 }
 
 /* ============ motion discipline ============================= */

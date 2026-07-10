@@ -44,9 +44,11 @@
     });
   }
 
-  /* the cat on the writing rule answers when poked */
+  /* the cat on the writing rule picks its own pose, answers when poked */
   var cat = document.getElementById('cat');
   if (cat) {
+    var poses = ['sit', 'loaf', 'sleep'];
+    cat.classList.add(poses[Math.floor(Math.random() * poses.length)]);
     cat.addEventListener('click', function () {
       cat.classList.add('mrrp');
       clearTimeout(cat._t);
@@ -54,21 +56,16 @@
     });
   }
 
-  /* the hero clock knows the rhythm of the day (IST) */
-  var live = document.getElementById('live-line');
-  if (live) {
-    var ist = new Date(Date.now() + (330 + new Date().getTimezoneOffset()) * 60000);
-    var hr = ist.getHours();
-    var mood =
-      hr < 6  ? 'ASLEEP. SIMBA ISN\u2019T.' :
-      hr < 9  ? 'FIRST FILTER COFFEE' :
-      hr < 13 ? 'BUILDING' :
-      hr < 16 ? 'THIRD COFFEE, FIGHTING THE SLUMP' :
-      hr < 19 ? 'STILL BUILDING' :
-      hr < 22 ? 'GAME NIGHT \u2014 HOSTING, LOSING' :
-                'LEGO O\u2019CLOCK';
-    var hh = String(hr).padStart(2, '0'), mm = String(ist.getMinutes()).padStart(2, '0');
-    live.textContent = hh + ':' + mm + ' IST \u00B7 ' + mood;
+  /* the clock in the top bar keeps Bengaluru time */
+  var clock = document.getElementById('h-clock');
+  if (clock) {
+    var tick = function () {
+      var ist = new Date(Date.now() + (330 + new Date().getTimezoneOffset()) * 60000);
+      clock.textContent = String(ist.getHours()).padStart(2, '0') + ':' +
+                          String(ist.getMinutes()).padStart(2, '0') + ' IST';
+    };
+    tick();
+    setInterval(tick, 30000);
   }
 
   /* the site faces the light — paper follows Bengaluru's sun */
