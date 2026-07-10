@@ -269,37 +269,27 @@ footer{margin:1rem 0 4rem;border-top:2px solid var(--ink);padding-top:.8rem}
 .sunflower.sway .sf-head{animation:sway 7s ease-in-out infinite alternate}
 @keyframes sway{from{transform:rotate(-4deg)}to{transform:rotate(4deg)}}
 
-/* the footer cup — steam rises; the door to the coffee log */
-.cup-link{display:inline-flex;align-items:center;gap:.6rem;text-decoration:none;font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;color:var(--faint)}
-.cup-link:hover{color:var(--red)}
+/* the colophon — the document signs off in a sentence, not a sticker row */
+.colophon{display:flex;justify-content:space-between;align-items:baseline;gap:2rem;border-top:1px solid var(--rule);margin-top:.85rem;padding-top:.95rem}
+.colophon p{color:var(--soft);font-size:.92rem}
+.fmark{color:var(--ink);font-weight:600;text-decoration:none;border-bottom:1px solid var(--rule-dark);padding-bottom:1px;white-space:nowrap}
+.fmark:hover{color:var(--red);border-color:var(--red)}
+.fmark svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;vertical-align:-2.5px;margin-right:.3rem}
+.top-link{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;color:var(--faint);text-decoration:none;white-space:nowrap}
+.top-link:hover{color:var(--red)}
 .steam{transform-box:fill-box;animation:steam 3.6s ease-in-out infinite;opacity:0}
 .steam.s2{animation-delay:1.7s}
 @keyframes steam{0%{opacity:0;transform:translateY(3px)}35%{opacity:.6}75%{opacity:0;transform:translateY(-3.5px)}100%{opacity:0;transform:translateY(-3.5px)}}
 
-/* simba walked across the record */
-.paws{position:absolute;right:15rem;margin-top:-1.3rem;display:flex;gap:1.2rem;pointer-events:none}
-.paws svg{width:16px;height:15px;opacity:.38}
-.paws svg:nth-child(2){transform:rotate(16deg) translateY(-6px)}
-.paws .pw{fill:var(--ink);stroke:none}
 
-/* the giraffe takes you all the way up */
-.giraffe-top{
-  display:flex;flex-direction:column;align-items:center;gap:.5rem;
-  margin:0 auto 3.4rem;width:max-content;
-  text-decoration:none;color:var(--faint);
-  font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;
-}
-.giraffe-top svg{transition:transform .25s ease}
-.giraffe-top:hover{color:var(--red)}
-.giraffe-top:hover svg{transform:translateY(-5px)}
 
 /* the meeple stands beside the shelf door; it hops when you knock */
-.h-row nav a .plate{width:12px;height:12px;margin-left:.38rem;vertical-align:-1px;opacity:.85}
-.h-row nav a:hover .plate{animation:hop .4s ease}
+.h-row nav a svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;vertical-align:-1.5px;margin-left:.34rem}
+.h-row nav a:hover svg{animation:hop .4s ease}
 @keyframes hop{0%{transform:none}40%{transform:translateY(-3.5px) rotate(-9deg)}100%{transform:none}}
 
 @media(max-width:640px){
-  .paws{right:3.5rem}
+  .colophon{flex-direction:column;gap:1rem}
 }
 
 /* ============ motion discipline ============================= */
