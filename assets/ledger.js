@@ -2,20 +2,6 @@
 (function () {
   var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* the red thread — the margin line is inked in as far as you've read */
-  var thread = document.querySelector('.thread');
-  var wrap = document.querySelector('.wrap');
-  if (thread && wrap && !reduced) {
-    var ink = function () {
-      var doc = document.documentElement;
-      var p = (doc.scrollTop + window.innerHeight) / doc.scrollHeight;
-      thread.style.height = Math.min(1, p) * wrap.offsetHeight + 'px';
-    };
-    addEventListener('scroll', ink, { passive: true });
-    addEventListener('resize', ink, { passive: true });
-    ink();
-  }
-
   /* figures tally up like ledger entries when they enter view */
   if (!reduced && 'IntersectionObserver' in window) {
     var els = document.querySelectorAll('.fig b, .exp-fig b');
@@ -56,5 +42,34 @@
       clearTimeout(ph._t);
       ph._t = setTimeout(function () { ph.classList.remove('mrrp'); }, 1800);
     });
+  }
+
+  /* the sunflower is heliotropic — its head follows the light (your cursor) */
+  var sf = document.querySelector('.sunflower');
+  if (sf) {
+    var head = sf.querySelector('.sf-head');
+    var fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
+    if (reduced || !fine || !head) {
+      if (!reduced) sf.classList.add('sway');   /* touch: it sways in the breeze instead */
+    } else {
+      var target = 0, cur = 0, raf = null;
+      var step = function () {
+        cur += (target - cur) * 0.09;
+        head.style.transform = 'rotate(' + cur.toFixed(2) + 'deg)';
+        if (Math.abs(target - cur) > 0.05) { raf = requestAnimationFrame(step); }
+        else { raf = null; }
+      };
+      addEventListener('mousemove', function (e) {
+        var r = sf.getBoundingClientRect();
+        if (r.bottom < 0 || r.top > innerHeight) return;   /* off-screen: don't bother */
+        var cx = r.left + r.width / 2, cy = r.top + r.height * 0.45;
+        var deg = Math.atan2(e.clientX - cx, cy - e.clientY) * 180 / Math.PI;
+        target = Math.max(-32, Math.min(32, deg));
+        if (!raf) raf = requestAnimationFrame(step);
+      }, { passive: true });
+      addEventListener('mouseout', function (e) {
+        if (!e.relatedTarget) { target = 0; if (!raf) raf = requestAnimationFrame(step); }
+      });
+    }
   }
 })();
