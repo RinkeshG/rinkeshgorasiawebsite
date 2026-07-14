@@ -2,17 +2,17 @@
 <html lang="en"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>work — Rinkesh Gorasia</title>
-<meta name="description" content="Savior (acquired by Zocdoc), Career Leap (a shutdown I called myself), two years backing pre-seed founders at Accel, and what I'm building now." />
+<meta name="description" content="Savior (acquired by Zocdoc), Career Leap (a shutdown I called myself), two years backing pre-seed founders at Accel, and what I am building now." />
 <link rel="canonical" href="https://rinkeshgorasia.com/work.html" />
 <meta name="theme-color" content="#FCFCF9" /><link rel="manifest" href="manifest.json" />
 <meta property="og:type" content="website" /><meta property="og:site_name" content="Rinkesh Gorasia" />
 <meta property="og:url" content="https://rinkeshgorasia.com/work.html" />
 <meta property="og:title" content="work — Rinkesh Gorasia" />
-<meta property="og:description" content="Savior (acquired by Zocdoc), Career Leap (a shutdown I called myself), two years at Accel, and what I'm building now." />
+<meta property="og:description" content="Savior, Career Leap, two years at Accel, and what I am building now." />
 <meta property="og:image" content="https://rinkeshgorasia.com/assets/og.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="work — Rinkesh Gorasia" />
-<meta name="twitter:description" content="Savior, Career Leap, two years at Accel, and what I'm building now." />
+<meta name="twitter:description" content="Savior, Career Leap, two years at Accel, and what I am building now." />
 <meta name="twitter:image" content="https://rinkeshgorasia.com/assets/og.png" />
 <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg" />
 <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
@@ -23,46 +23,32 @@
   .phead{padding:var(--s8) 0 var(--s6)}
   .phead .status{margin-bottom:1.2rem}
   .phead p{color:var(--soft);max-width:35rem;font-size:1.05rem;margin-top:1rem}
-
-  /* one calm, consistent layout for every entry */
-  .case{border-top:1px solid var(--rule);padding:2.3rem 0}
+  .case{border-top:1px solid var(--rule);padding:2.4rem 0}
   .case.first{border-top:2px solid var(--ink)}
-  .ch{display:flex;justify-content:space-between;align-items:flex-start;gap:1.5rem;margin-bottom:1.4rem}
+  .ch{display:flex;justify-content:space-between;align-items:flex-start;gap:1.5rem;margin-bottom:1.3rem}
   .ch-l{display:flex;gap:.85rem;align-items:center}
   .ch-l .mk img{width:38px;height:38px;object-fit:contain;filter:grayscale(1) contrast(1.05);opacity:.9}
   .ch-l .mk.mono{width:38px;height:38px;border:1px solid var(--rule-dark);border-radius:3px;display:inline-flex;align-items:center;justify-content:center;font-weight:700;color:var(--soft)}
   .ch-l h2{font-size:1.5rem;font-weight:600;letter-spacing:-.02em;line-height:1}
   .ch-l .meta{font-family:var(--mono);font-size:.68rem;color:var(--faint);text-transform:uppercase;letter-spacing:.05em;margin-top:.42rem}
-  .ch-r{text-align:right;white-space:nowrap;padding-top:.15rem}
-  .ch-r .yrs{font-family:var(--mono);font-size:.74rem;color:var(--faint);display:block}
-  .ch-r .out{font-family:var(--mono);font-size:.7rem;color:var(--red);display:block;margin-top:.4rem;letter-spacing:.02em}
+  .ch-r{text-align:right;white-space:nowrap;padding-top:.15rem;display:flex;flex-direction:column;align-items:flex-end;gap:.4rem}
+  .ch-r .yrs{font-family:var(--mono);font-size:.74rem;color:var(--faint)}
+  .ch-r .out{font-family:var(--mono);font-size:.7rem;color:var(--red);letter-spacing:.02em}
   .ch-r .out.grey{color:var(--soft)}
-
-  .lead{font-size:1.2rem;line-height:1.5;color:var(--ink);max-width:42rem;margin-bottom:1.2rem;font-weight:400}
+  .pstore{display:inline-flex;align-items:center;gap:.35rem;font-family:var(--mono);font-size:.64rem;color:var(--soft);text-decoration:none;border:1px solid var(--rule-dark);border-radius:5px;padding:.26rem .5rem}
+  .pstore:hover{border-color:var(--red);color:var(--red)}
+  .pstore svg{width:11px;height:11px}
+  .lead{font-size:1.2rem;line-height:1.48;color:var(--ink);max-width:42rem;margin-bottom:1.3rem;font-weight:400}
   .lead b{font-weight:600}
-
-  .pts{list-style:none;max-width:41rem;display:flex;flex-direction:column;gap:.72rem;margin-bottom:1.35rem}
-  .pts li{position:relative;padding-left:1.3rem;font-size:1.02rem;line-height:1.6;color:var(--soft)}
-  .pts li::before{content:"—";position:absolute;left:0;color:var(--rule-dark)}
+  .pts{list-style:none;max-width:44rem;display:flex;flex-direction:column;gap:.75rem;margin-bottom:1.35rem}
+  .pts li{position:relative;padding-left:1.35rem;font-size:1.02rem;line-height:1.58;color:var(--soft)}
+  .pts li::before{content:"";position:absolute;left:.05rem;top:.62em;width:5px;height:5px;border-radius:50%;background:var(--red);opacity:.75}
   .pts b{color:var(--ink);font-weight:600}
-
   .facts{font-family:var(--mono);font-size:.74rem;color:var(--faint);letter-spacing:.02em}
   .facts b{color:var(--soft);font-weight:500}
-
-  /* store links under a live product */
-  .stores{display:flex;gap:.6rem;margin-top:.7rem}
-  .store{display:inline-flex;align-items:center;gap:.4rem;font-family:var(--mono);font-size:.66rem;color:var(--soft);text-decoration:none;border:1px solid var(--rule-dark);border-radius:5px;padding:.3rem .55rem}
-  .store:hover{border-color:var(--red);color:var(--red)}
-  .store svg{width:12px;height:12px}
-
   .close .close-h{font-size:1.9rem;font-weight:600;letter-spacing:-.03em;margin:1.4rem 0 .7rem}
   .close p{color:var(--soft);max-width:32rem;margin-bottom:1.6rem}
-
-  @media(max-width:640px){
-    .ch{flex-direction:column;gap:.5rem}
-    .ch-r{text-align:left}
-    .lab{grid-template-columns:1fr}
-  }
+  @media(max-width:640px){ .ch{flex-direction:column;gap:.5rem} .ch-r{text-align:left;align-items:flex-start} .lab{grid-template-columns:1fr} }
 </style>
 </head>
 <body>
@@ -78,36 +64,39 @@
   <section class="phead">
     <span class="status">Bengaluru · open to 0→1 roles</span>
     <h1>The work<span class="dot">.</span></h1>
-    <p>Two companies I founded, two years backing founders, and what I&#8217;m building now. One sold, one I shut down myself — here&#8217;s both, honestly.</p>
+    <p>Two companies I founded, two years backing founders, and what I&#8217;m building now. One sold, one I shut down myself &mdash; here&#8217;s both, honestly.</p>
   </section>
 
   <section class="case first" id="savior">
     <div class="ch">
-      <div class="ch-l"><span class="mk"><img src="assets/img/savior.png" alt="Savior" width="38" height="38"></span><div><h2>Savior</h2><div class="meta">Founder &amp; CEO · Healthcare</div></div></div>
+      <div class="ch-l"><span class="mk"><img src="assets/img/savior.png" alt="Savior" width="38" height="38"></span>
+        <div><h2>Savior</h2><div class="meta">Founder &amp; CEO · Healthcare</div></div></div>
       <div class="ch-r"><span class="yrs">2017–2020</span><span class="out">Acquired by Zocdoc</span></div>
     </div>
-    <p class="lead">Healthcare software that ran daily operations for <b>85 hospitals</b> across India — profitable on <b>₹0 raised</b>, and acquired by Zocdoc.</p>
-    <ul class="pts"><li>Started as a booking app. Weeks spent inside hospitals showed the real problem was the <b>data</b>, not booking — so I rebuilt it to run the whole operation, with first pilots in three months.</li><li>It solved painful daily work, so it grew word of mouth: <b>35 → 85 hospitals</b>, no sales team, chains like Fortis and Cloudnine. A team of 85, a second version with analytics, profitable the whole way.</li><li><b>Acquired by Zocdoc in 2020</b> — never having raised a rupee.</li></ul>
-    <p class="facts">2017–2020 &nbsp;·&nbsp; <b>85 hospitals</b> &nbsp;·&nbsp; <b>₹0 raised</b> &nbsp;·&nbsp; profitable &nbsp;·&nbsp; acquired</p>
+    <p class="lead">Built and bootstrapped a hospital-management platform for tier-1 hospitals in India &mdash; scaled it to <b>85 hospitals</b>, hit profitability, and got <b>acquired by Zocdoc in 2020</b>.</p>
+<ul class="pts"><li>Started out building an appointment-booking system. Spent time inside hospitals watching how the staff actually worked, and saw the real problem was messy offline data across the whole workflow &mdash; so I pivoted to software that ran the <b>entire hospital operation</b>.</li><li>Built the MVP in <b>3 months</b> and landed 2 hospital pilots. Designed workflows that cut patient-processing time and killed manual errors &mdash; the key was solving a painful daily problem, not a nice-to-have.</li><li>Scaled to <b>35 hospitals in year one</b> by going after chains like Fortis and Cloudnine for multi-location rollouts. <b>85 by year 3</b>. No sales team &mdash; all of it word of mouth and referrals.</li><li>Shipped <b>v2.0</b> with patient-history analytics and decision-support, so doctors could make treatment calls with real data behind them. Built a team of <b>85</b> across engineering, operations and customer success.</li><li>Hit profitability through subscriptions and premium tiers, bootstrapped the whole way. <b>Zocdoc acquired us in March 2020</b> for their US expansion.</li></ul>
+    <p class="facts">2017–2020 &nbsp;·&nbsp; <b>85 hospitals</b> &nbsp;·&nbsp; <b>&#8377;0 raised</b> &nbsp;·&nbsp; profitable &nbsp;·&nbsp; acquired by Zocdoc</p>
   </section>
 
   <section class="case" id="career-leap">
     <div class="ch">
-      <div class="ch-l"><span class="mk"><img src="assets/img/career-leap.png" alt="Career Leap" width="38" height="38"></span><div><h2>Career Leap</h2><div class="meta">Founder &amp; CEO · Learning</div></div></div>
-      <div class="ch-r"><span class="yrs">2020–2023</span><span class="out grey">Shut down, my call</span></div>
+      <div class="ch-l"><span class="mk"><img src="assets/img/career-leap.png" alt="Career Leap" width="38" height="38"></span>
+        <div><h2>Career Leap</h2><div class="meta">Founder &amp; CEO · Learning</div></div></div>
+      <div class="ch-r"><span class="yrs">2020–2023</span><span class="out grey">Shut down, my call</span><a class="pstore" href="#" title="Play Store — send me the real URL"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.6 2.3c-.2.2-.3.5-.3.9v17.6c0 .4.1.7.3.9l.1.1L13.4 12v-.1L3.7 2.2l-.1.1zM17 15.3l-3.3-3.3L4 21.7l12-6.4zM17 8.7L5 2.3l8.7 9.7L17 8.7zm3.4 2.2L18 9.5l-3.5 2.5 3.5 2.5 2.4-1.4c.7-.4.7-1.4 0-1.7z"/></svg>Play Store</a></div>
     </div>
-    <p class="lead">A WhatsApp group that became a learning company — it grew fast and looked healthy. <b>I shut it down myself.</b></p>
-    <ul class="pts"><li><b>10,000 users in six months</b>, then a learning app that crossed 100k watch hours and doubled retention.</li><li>Live cohorts hit <b>40% completion where the category sees 5–10%</b> — because I built for the last lesson, not the signup. ₹15L revenue across two cohorts.</li><li>Every engagement metric worked; the <b>unit economics never did</b>, and no feature was going to change that math. So I closed it while I still respected the work — and I&#8217;d make the same call again.</li></ul>
-    <p class="facts">2020–2023 &nbsp;·&nbsp; <b>10K users</b> &nbsp;·&nbsp; <b>40% completion</b> &nbsp;·&nbsp; ₹15L revenue &nbsp;·&nbsp; shut down</p>
+    <p class="lead">A community-first learning platform for tech professionals to build the soft skills that matter &mdash; from people who&#8217;d actually done it.</p>
+<ul class="pts"><li>Started as a WhatsApp community and grew to <b>10k users in 6 months</b>. Built a mobile learning app that hit <b>100k+ watch hours</b>. The community grew from 2k to 3,500+ through weekly sessions with industry leaders.</li><li>Pivoted from the app to live cohorts once I talked to users and saw where the real opportunity was. Ran 2 cohorts with a 3-person team &mdash; trained 60 professionals, made <b>&#8377;15L</b> at &#8377;10&ndash;15k. Got <b>40% completion</b>, way above the usual 5&ndash;10% for online courses.</li><li>Added gamification that pushed session times up 50% and doubled retention. Also tested a B2B model &mdash; ran training programs inside 2 companies.</li><li><b>Shut it down in 2023</b>, when the unit economics didn&#8217;t work at scale.</li></ul>
+    <p class="facts">2020–2023 &nbsp;·&nbsp; <b>10K users</b> &nbsp;·&nbsp; <b>100K watch hours</b> &nbsp;·&nbsp; <b>40% completion</b> &nbsp;·&nbsp; shut down</p>
   </section>
 
   <section class="case" id="accel">
     <div class="ch">
-      <div class="ch-l"><span class="mk mono">A</span><div><h2>Accel Atoms</h2><div class="meta">Led the program · Pre-seed</div></div></div>
+      <div class="ch-l"><span class="mk mono">A</span>
+        <div><h2>Accel Atoms</h2><div class="meta">Led the program · Pre-seed</div></div></div>
       <div class="ch-r"><span class="yrs">2023–2025</span></div>
     </div>
     <p class="lead">Two years on the <b>other side of the table</b>, running Accel&#8217;s pre-seed program for 0→1 founders.</p>
-    <ul class="pts"><li>Ran it end to end — picked the founders, built the program across <b>four cohorts and two tracks</b>, and sat with each team from rough idea to first cheque.</li><li>It taught me to read the early signal fast: the teams that worked weren&#8217;t the ones with the cleanest decks — they were the ones who <b>got inside their problem</b> the way I once tried to get inside hospitals.</li></ul>
+<ul class="pts"><li>Ran it end to end &mdash; picked the founders, built the program across <b>4 cohorts and 2 tracks</b>, and sat with each team from rough idea to first cheque.</li><li>It taught me to read the early signal fast: the teams that worked <b>got inside their problem</b> the way I once tried to get inside hospitals.</li></ul>
     <p class="facts">2023–2025 &nbsp;·&nbsp; <b>4 cohorts</b> &nbsp;·&nbsp; 2 tracks &nbsp;·&nbsp; <b>40+ founders backed</b></p>
   </section>
 
