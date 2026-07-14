@@ -23,6 +23,7 @@
   .phead{padding:var(--s8) 0 var(--s6)}
   .phead .status{margin-bottom:1.2rem}
   .phead p{color:var(--soft);max-width:35rem;font-size:1.05rem;margin-top:1rem}
+
   .case{border-top:1px solid var(--rule);padding:2.4rem 0}
   .case.first{border-top:2px solid var(--ink)}
   .ch{display:flex;justify-content:space-between;align-items:flex-start;gap:1.5rem;margin-bottom:1.3rem}
@@ -31,24 +32,52 @@
   .ch-l .mk.mono{width:38px;height:38px;border:1px solid var(--rule-dark);border-radius:3px;display:inline-flex;align-items:center;justify-content:center;font-weight:700;color:var(--soft)}
   .ch-l h2{font-size:1.5rem;font-weight:600;letter-spacing:-.02em;line-height:1}
   .ch-l .meta{font-family:var(--mono);font-size:.68rem;color:var(--faint);text-transform:uppercase;letter-spacing:.05em;margin-top:.42rem}
-  .ch-r{text-align:right;white-space:nowrap;padding-top:.15rem;display:flex;flex-direction:column;align-items:flex-end;gap:.4rem}
-  .ch-r .yrs{font-family:var(--mono);font-size:.74rem;color:var(--faint)}
-  .ch-r .out{font-family:var(--mono);font-size:.7rem;color:var(--red);letter-spacing:.02em}
+  .ch-r{text-align:right;white-space:nowrap;padding-top:.2rem}
+  .ch-r .yrs{font-family:var(--mono);font-size:.74rem;color:var(--faint);display:block}
+  .ch-r .out{font-family:var(--mono);font-size:.7rem;color:var(--red);letter-spacing:.02em;display:block;margin-top:.4rem}
   .ch-r .out.grey{color:var(--soft)}
-  .pstore{display:inline-flex;align-items:center;gap:.35rem;font-family:var(--mono);font-size:.64rem;color:var(--soft);text-decoration:none;border:1px solid var(--rule-dark);border-radius:5px;padding:.26rem .5rem}
-  .pstore:hover{border-color:var(--red);color:var(--red)}
-  .pstore svg{width:11px;height:11px}
+
   .lead{font-size:1.2rem;line-height:1.48;color:var(--ink);max-width:42rem;margin-bottom:1.3rem;font-weight:400}
   .lead b{font-weight:600}
-  .pts{list-style:none;max-width:44rem;display:flex;flex-direction:column;gap:.75rem;margin-bottom:1.35rem}
+  .pts{list-style:none;max-width:44rem;display:flex;flex-direction:column;gap:.75rem;margin-bottom:0}
   .pts li{position:relative;padding-left:1.35rem;font-size:1.02rem;line-height:1.58;color:var(--soft)}
   .pts li::before{content:"";position:absolute;left:.05rem;top:.62em;width:5px;height:5px;border-radius:50%;background:var(--red);opacity:.75}
   .pts b{color:var(--ink);font-weight:600}
-  .facts{font-family:var(--mono);font-size:.74rem;color:var(--faint);letter-spacing:.02em}
-  .facts b{color:var(--soft);font-weight:500}
+
+  /* the proof-and-evidence footer: an elevated stats band + a photo strip */
+  .receipts{margin-top:1.9rem}
+  .statband{display:flex;justify-content:space-between;align-items:center;gap:1.5rem;flex-wrap:wrap;
+    border-top:1px solid var(--ink);border-bottom:1px solid var(--rule);padding:1.05rem 0}
+  .stat-row{display:flex;gap:3rem;flex-wrap:wrap}
+  .stat b{font-family:var(--mono);font-feature-settings:'tnum';font-size:1.4rem;font-weight:500;letter-spacing:-.03em;color:var(--ink);line-height:1;display:block}
+  .stat b .u{font-size:.58em;color:var(--faint)}
+  .stat b.red{color:var(--red)}
+  .stat span{font-family:var(--mono);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin-top:.45rem;display:block}
+  .pstore{display:inline-flex;align-items:center;gap:.4rem;font-family:var(--mono);font-size:.68rem;color:var(--soft);text-decoration:none;border:1px solid var(--rule-dark);border-radius:6px;padding:.4rem .7rem;flex:0 0 auto}
+  .pstore:hover{border-color:var(--red);color:var(--red)}
+  .pstore svg{width:13px;height:13px}
+
+  .gallery{display:flex;gap:1.1rem;flex-wrap:wrap;margin-top:1.4rem}
+  .wframe{margin:0}
+  .wframe .fr{position:relative;width:184px;aspect-ratio:3/2;overflow:hidden;background:#EFE7D8;border:1px solid var(--rule-dark)}
+  .wframe .fr img{width:100%;height:100%;object-fit:cover;display:block}
+  .wframe .fr::before,.wframe .fr::after,.wframe .fr .cm::before,.wframe .fr .cm::after{content:"";position:absolute;width:10px;height:10px;pointer-events:none;z-index:2}
+  .wframe .fr::before{top:-5px;left:-5px;border-top:1.5px solid var(--red);border-left:1.5px solid var(--red)}
+  .wframe .fr::after{top:-5px;right:-5px;border-top:1.5px solid var(--red);border-right:1.5px solid var(--red)}
+  .wframe .fr .cm::before{bottom:-5px;left:-5px;border-bottom:1.5px solid var(--red);border-left:1.5px solid var(--red)}
+  .wframe .fr .cm::after{bottom:-5px;right:-5px;border-bottom:1.5px solid var(--red);border-right:1.5px solid var(--red)}
+  .wframe figcaption{font-family:var(--mono);font-size:.6rem;color:var(--faint);margin-top:.55rem;letter-spacing:.02em}
+
   .close .close-h{font-size:1.9rem;font-weight:600;letter-spacing:-.03em;margin:1.4rem 0 .7rem}
   .close p{color:var(--soft);max-width:32rem;margin-bottom:1.6rem}
-  @media(max-width:640px){ .ch{flex-direction:column;gap:.5rem} .ch-r{text-align:left;align-items:flex-start} .lab{grid-template-columns:1fr} }
+
+  @media(max-width:640px){
+    .ch{flex-direction:column;gap:.5rem} .ch-r{text-align:left}
+    .statband{flex-direction:column;align-items:flex-start;gap:1.1rem}
+    .stat-row{gap:1.8rem}
+    .wframe .fr{width:150px}
+    .lab{grid-template-columns:1fr}
+  }
 </style>
 </head>
 <body>
@@ -75,18 +104,22 @@
     </div>
     <p class="lead">Built and bootstrapped a hospital-management platform for tier-1 hospitals in India &mdash; scaled it to <b>85 hospitals</b>, hit profitability, and got <b>acquired by Zocdoc in 2020</b>.</p>
 <ul class="pts"><li>Started out building an appointment-booking system. Spent time inside hospitals watching how the staff actually worked, and saw the real problem was messy offline data across the whole workflow &mdash; so I pivoted to software that ran the <b>entire hospital operation</b>.</li><li>Built the MVP in <b>3 months</b> and landed 2 hospital pilots. Designed workflows that cut patient-processing time and killed manual errors &mdash; the key was solving a painful daily problem, not a nice-to-have.</li><li>Scaled to <b>35 hospitals in year one</b> by going after chains like Fortis and Cloudnine for multi-location rollouts. <b>85 by year 3</b>. No sales team &mdash; all of it word of mouth and referrals.</li><li>Shipped <b>v2.0</b> with patient-history analytics and decision-support, so doctors could make treatment calls with real data behind them. Built a team of <b>85</b> across engineering, operations and customer success.</li><li>Hit profitability through subscriptions and premium tiers, bootstrapped the whole way. <b>Zocdoc acquired us in March 2020</b> for their US expansion.</li></ul>
-    <p class="facts">2017–2020 &nbsp;·&nbsp; <b>85 hospitals</b> &nbsp;·&nbsp; <b>&#8377;0 raised</b> &nbsp;·&nbsp; profitable &nbsp;·&nbsp; acquired by Zocdoc</p>
+    <div class="receipts">
+<div class="statband"><div class="stat-row"><div class="stat"><b>85</b><span>hospitals</span></div><div class="stat"><b class="red"><span class="u">&#8377;</span>0</b><span>raised</span></div><div class="stat"><b>profitable</b><span>bootstrapped</span></div><div class="stat"><b>Zocdoc</b><span>acquired</span></div></div></div>
+<div class="gallery"><figure class="wframe"><div class="fr"><span class="cm"></span><img src="assets/img/work/placeholder-1.jpg" alt="Building Savior · 2018"></div><figcaption>Building Savior · 2018</figcaption></figure><figure class="wframe"><div class="fr"><span class="cm"></span><img src="assets/img/work/placeholder-2.jpg" alt="The team · Bengaluru"></div><figcaption>The team · Bengaluru</figcaption></figure><figure class="wframe"><div class="fr"><span class="cm"></span><img src="assets/img/work/placeholder-3.jpg" alt="On the road, hospital rollouts"></div><figcaption>On the road, hospital rollouts</figcaption></figure></div>    </div>
   </section>
 
   <section class="case" id="career-leap">
     <div class="ch">
       <div class="ch-l"><span class="mk"><img src="assets/img/career-leap.png" alt="Career Leap" width="38" height="38"></span>
         <div><h2>Career Leap</h2><div class="meta">Founder &amp; CEO · Learning</div></div></div>
-      <div class="ch-r"><span class="yrs">2020–2023</span><span class="out grey">Shut down, my call</span><a class="pstore" href="#" title="Play Store — send me the real URL"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.6 2.3c-.2.2-.3.5-.3.9v17.6c0 .4.1.7.3.9l.1.1L13.4 12v-.1L3.7 2.2l-.1.1zM17 15.3l-3.3-3.3L4 21.7l12-6.4zM17 8.7L5 2.3l8.7 9.7L17 8.7zm3.4 2.2L18 9.5l-3.5 2.5 3.5 2.5 2.4-1.4c.7-.4.7-1.4 0-1.7z"/></svg>Play Store</a></div>
+      <div class="ch-r"><span class="yrs">2020–2023</span><span class="out grey">Shut down, my call</span></div>
     </div>
     <p class="lead">A community-first learning platform for tech professionals to build the soft skills that matter &mdash; from people who&#8217;d actually done it.</p>
 <ul class="pts"><li>Started as a WhatsApp community and grew to <b>10k users in 6 months</b>. Built a mobile learning app that hit <b>100k+ watch hours</b>. The community grew from 2k to 3,500+ through weekly sessions with industry leaders.</li><li>Pivoted from the app to live cohorts once I talked to users and saw where the real opportunity was. Ran 2 cohorts with a 3-person team &mdash; trained 60 professionals, made <b>&#8377;15L</b> at &#8377;10&ndash;15k. Got <b>40% completion</b>, way above the usual 5&ndash;10% for online courses.</li><li>Added gamification that pushed session times up 50% and doubled retention. Also tested a B2B model &mdash; ran training programs inside 2 companies.</li><li><b>Shut it down in 2023</b>, when the unit economics didn&#8217;t work at scale.</li></ul>
-    <p class="facts">2020–2023 &nbsp;·&nbsp; <b>10K users</b> &nbsp;·&nbsp; <b>100K watch hours</b> &nbsp;·&nbsp; <b>40% completion</b> &nbsp;·&nbsp; shut down</p>
+    <div class="receipts">
+<div class="statband"><div class="stat-row"><div class="stat"><b>10<span class="u">K</span></b><span>users</span></div><div class="stat"><b>100<span class="u">K</span></b><span>watch hours</span></div><div class="stat"><b class="red">40<span class="u">%</span></b><span>completion</span></div><div class="stat"><b><span class="u">&#8377;</span>15L</b><span>revenue</span></div></div><a class="pstore" href="#" title="Play Store — send me the real URL"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.6 2.3c-.2.2-.3.5-.3.9v17.6c0 .4.1.7.3.9l.1.1L13.4 12v-.1L3.7 2.2l-.1.1zM17 15.3l-3.3-3.3L4 21.7l12-6.4zM17 8.7L5 2.3l8.7 9.7L17 8.7zm3.4 2.2L18 9.5l-3.5 2.5 3.5 2.5 2.4-1.4c.7-.4.7-1.4 0-1.7z"/></svg>Play Store</a></div>
+<div class="gallery"><figure class="wframe"><div class="fr"><span class="cm"></span><img src="assets/img/work/placeholder-2.jpg" alt="A Career Leap cohort · 2022"></div><figcaption>A Career Leap cohort · 2022</figcaption></figure><figure class="wframe"><div class="fr"><span class="cm"></span><img src="assets/img/work/placeholder-1.jpg" alt="The team of three"></div><figcaption>The team of three</figcaption></figure><figure class="wframe"><div class="fr"><span class="cm"></span><img src="assets/img/work/placeholder-3.jpg" alt="A live session"></div><figcaption>A live session</figcaption></figure></div>    </div>
   </section>
 
   <section class="case" id="accel">
@@ -97,7 +130,8 @@
     </div>
     <p class="lead">Two years on the <b>other side of the table</b>, running Accel&#8217;s pre-seed program for 0→1 founders.</p>
 <ul class="pts"><li>Ran it end to end &mdash; picked the founders, built the program across <b>4 cohorts and 2 tracks</b>, and sat with each team from rough idea to first cheque.</li><li>It taught me to read the early signal fast: the teams that worked <b>got inside their problem</b> the way I once tried to get inside hospitals.</li></ul>
-    <p class="facts">2023–2025 &nbsp;·&nbsp; <b>4 cohorts</b> &nbsp;·&nbsp; 2 tracks &nbsp;·&nbsp; <b>40+ founders backed</b></p>
+    <div class="receipts">
+<div class="statband"><div class="stat-row"><div class="stat"><b>4</b><span>cohorts</span></div><div class="stat"><b>40<span class="u">+</span></b><span>founders backed</span></div><div class="stat"><b>2</b><span>tracks</span></div></div></div>    </div>
   </section>
 
   <section id="now">
