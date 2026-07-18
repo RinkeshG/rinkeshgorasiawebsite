@@ -5,6 +5,30 @@ what's intentionally deferred so it isn't lost.
 
 ---
 
+## ✅ Shipped — round 7: motion audit + fixes (branch `claude/light-version-ux-audit-dfd5d4`)
+
+Ran the `improve-animations` and `find-animation-opportunities` skills (Emil Kowalski's bar).
+The site was already disciplined (no `ease-in`, no `transition:all`, no `scale(0)`, transforms/
+opacity only) — if anything, slightly over-motioned for "calm." Implemented all findings:
+
+- **Scroll-assemble was springy.** `.snap.in` used `cubic-bezier(.2,1.42,.4,1)` — a 1.42 overshoot
+  bounce on every row/card/post, the loudest motion on the site and at odds with "calm over
+  clever." → a calm fade-up (`translateY(8px)`→0, `var(--ease-out)` = `cubic-bezier(.23,1,.32,1)`,
+  .34s), no bounce.
+- **Reduced-motion nuked everything** (`*{transition:none!important}`). → now stops looping/
+  decorative keyframes and positional travel but **keeps** opacity/colour fades and comprehension
+  cues (chevron, shadow depth), per Emil's "fewer, not zero."
+- **Popovers didn't feel anchored** — `.avail-pop` / `.die-pop` slid `translateY`. → they now
+  scale from the corner nearest their trigger (`transform-origin: top left` / `top right`,
+  `scale(.96)`→1, `var(--pop)`).
+- **Copy-email confirmation was flat.** → the "copied ✓" beat pops in (`copypop .15s ease-out`).
+- **Consolidated curves** into `--ease-out` / `--pop` tokens in `ledger.css :root`; trimmed the
+  dead `.next-entry` from the assemble selector.
+
+Left intentionally: the shelf deck, coffee pins, 404 topple — deliberate playful set-pieces, all
+reduced-motion-gated. The find-opportunities sweep returned essentially one net-new item (the
+copy pop); the honest result is this UI needs *less* motion, not more.
+
 ## ✅ Shipped — round 6: nav + SEO audit (branch `claude/light-version-ux-audit-dfd5d4`)
 
 - **Coffee removed from the header nav** (Home · Work · Writing · Skills). The page stays live

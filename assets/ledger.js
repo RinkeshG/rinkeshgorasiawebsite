@@ -77,7 +77,7 @@
         var email = copyBtn.getAttribute('data-email') || '';
         var prev = copyBtn.innerHTML;
         var flash = function () {
-          copyBtn.innerHTML = '<span class="em">copied ✓</span>';
+          copyBtn.innerHTML = '<span class="ok">copied ✓</span>';
           setTimeout(function () { copyBtn.innerHTML = prev; }, 1600);
         };
         if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -167,7 +167,7 @@
 
   /* lego physics — the page assembles as you read */
   if (!reduced && 'IntersectionObserver' in window) {
-    var parts = document.querySelectorAll('.row, .exp, .post, .next-entry');
+    var parts = document.querySelectorAll('.row, .exp, .post');
     var snapIO = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
         if (e.isIntersecting) { e.target.classList.add('in'); snapIO.unobserve(e.target); }
