@@ -30,11 +30,14 @@
   /* skills read as an index of /commands — mono invocation is the hero, not a bullet list */
   .sk-sec{padding-bottom:var(--s6)}
   .sk-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0 3rem;margin-top:.4rem}
-  .skill{border-top:1px solid var(--rule);padding:1.05rem 0}
+  /* each skill is a real link out to its source — focusable, keyboard-operable */
+  .skill{display:block;border-top:1px solid var(--rule);padding:1.05rem 0;text-decoration:none;color:inherit}
   .sk-top{display:flex;align-items:center;justify-content:space-between;gap:1rem}
   .sk-name{font-family:var(--mono);font-size:.94rem;font-weight:500;color:var(--ink);letter-spacing:-.01em}
   .sk-name .sl{color:var(--red)}
+  .sk-name .sk-go{color:var(--red);opacity:0;margin-left:.35rem;font-size:.82em;transition:opacity .18s ease}
   .skill:hover .sk-name{color:var(--red)}
+  .skill:hover .sk-go,.skill:focus-visible .sk-go{opacity:1}
   .sk-src{font-family:var(--mono);font-size:.64rem;color:var(--faint);letter-spacing:.05em;white-space:nowrap}
   .sk-src.mine{color:var(--red)}
   .sk-desc{font-size:.92rem;color:var(--soft);line-height:1.5;margin-top:.45rem;max-width:30rem}
@@ -58,27 +61,37 @@
   </section>
 
   <section class="sk-sec">
-    <div class="sec-head"><span class="sec-title">Design &amp; craft</span><span class="sec-sub">3 skills</span></div>
+    <div class="sec-head"><span class="sec-title">Design &amp; craft</span><span class="sec-sub">2 skills</span></div>
     <div class="sk-grid">
-      <div class="skill"><div class="sk-top"><span class="sk-name"><span class="sl">/</span>design-craft</span><span class="sk-src mine"><span class="crop">Mine</span></span></div><p class="sk-desc">My design process harness — understand the user's moment, design, render, judge. Not "assemble components and ship."</p></div>
-      <div class="skill"><div class="sk-top"><span class="sk-name"><span class="sl">/</span>cliche-blacklist</span><span class="sk-src mine"><span class="crop">Mine</span></span></div><p class="sk-desc">The running list of AI design &amp; copy clichés I refuse to ship — swept against before anything user-facing goes out.</p></div>
-      <div class="skill"><div class="sk-top"><span class="sk-name"><span class="sl">/</span>emil-design-eng</span><span class="sk-src">Emil Kowalski</span></div><p class="sk-desc">Emil's philosophy on UI polish, animation, and the invisible details that make software feel great.</p></div>
+      <a class="skill" href="https://github.com/RinkeshG" target="_blank" rel="noopener"><div class="sk-top"><span class="sk-name"><span class="sl">/</span>design-craft<span class="sk-go" aria-hidden="true">↗</span></span><span class="sk-src mine"><span class="crop">Mine</span></span></div><p class="sk-desc">My design process harness — understand the user's moment, design, render, judge. Not "assemble components and ship."</p></a>
+      <a class="skill" href="https://github.com/RinkeshG" target="_blank" rel="noopener"><div class="sk-top"><span class="sk-name"><span class="sl">/</span>cliche-blacklist<span class="sk-go" aria-hidden="true">↗</span></span><span class="sk-src mine"><span class="crop">Mine</span></span></div><p class="sk-desc">The running list of AI design &amp; copy clichés I refuse to ship — swept against before anything user-facing goes out.</p></a>
+    </div>
+  </section>
+
+  <section class="sk-sec">
+    <div class="sec-head"><span class="sec-title">Motion &amp; interface</span><span class="sec-sub">5 skills · Emil Kowalski</span></div>
+    <div class="sk-grid">
+      <a class="skill" href="https://animations.dev" target="_blank" rel="noopener"><div class="sk-top"><span class="sk-name"><span class="sl">/</span>emil-design-eng<span class="sk-go" aria-hidden="true">↗</span></span><span class="sk-src">Emil Kowalski</span></div><p class="sk-desc">Emil's philosophy on UI polish, animation, and the invisible details that make software feel great.</p></a>
+      <a class="skill" href="https://animations.dev" target="_blank" rel="noopener"><div class="sk-top"><span class="sk-name"><span class="sl">/</span>apple-design<span class="sk-go" aria-hidden="true">↗</span></span><span class="sk-src">Emil Kowalski</span></div><p class="sk-desc">Apple's approach to fluid, physical interface motion — springs, gestures, materials, depth — translated for the web.</p></a>
+      <a class="skill" href="https://animations.dev" target="_blank" rel="noopener"><div class="sk-top"><span class="sk-name"><span class="sl">/</span>improve-animations<span class="sk-go" aria-hidden="true">↗</span></span><span class="sk-src">Emil Kowalski</span></div><p class="sk-desc">Audit a codebase's motion like a senior advisor and produce prioritized, self-contained fix plans — read-only.</p></a>
+      <a class="skill" href="https://animations.dev" target="_blank" rel="noopener"><div class="sk-top"><span class="sk-name"><span class="sl">/</span>find-animation-opportunities<span class="sk-go" aria-hidden="true">↗</span></span><span class="sk-src">Emil Kowalski</span></div><p class="sk-desc">Find the moments that should animate but don't — and ruthlessly reject the ones that shouldn't.</p></a>
+      <a class="skill" href="https://animations.dev" target="_blank" rel="noopener"><div class="sk-top"><span class="sk-name"><span class="sl">/</span>animation-vocabulary<span class="sk-go" aria-hidden="true">↗</span></span><span class="sk-src">Emil Kowalski</span></div><p class="sk-desc">Turn a vague description of a motion effect into its exact name — the word to prompt a designer or AI with.</p></a>
     </div>
   </section>
 
   <section class="sk-sec">
     <div class="sec-head"><span class="sec-title">Research &amp; web</span><span class="sec-sub">2 skills</span></div>
     <div class="sk-grid">
-      <div class="skill"><div class="sk-top"><span class="sk-name"><span class="sl">/</span>firecrawl-search</span><span class="sk-src">Firecrawl</span></div><p class="sk-desc">Real web search with full-page content extracted, not just snippets.</p></div>
-      <div class="skill"><div class="sk-top"><span class="sk-name"><span class="sl">/</span>firecrawl-scrape</span><span class="sk-src">Firecrawl</span></div><p class="sk-desc">Clean markdown from any URL — including JavaScript-rendered SPAs that break a plain fetch.</p></div>
+      <a class="skill" href="https://firecrawl.dev" target="_blank" rel="noopener"><div class="sk-top"><span class="sk-name"><span class="sl">/</span>firecrawl-search<span class="sk-go" aria-hidden="true">↗</span></span><span class="sk-src">Firecrawl</span></div><p class="sk-desc">Real web search with full-page content extracted, not just snippets.</p></a>
+      <a class="skill" href="https://firecrawl.dev" target="_blank" rel="noopener"><div class="sk-top"><span class="sk-name"><span class="sl">/</span>firecrawl-scrape<span class="sk-go" aria-hidden="true">↗</span></span><span class="sk-src">Firecrawl</span></div><p class="sk-desc">Clean markdown from any URL — including JavaScript-rendered SPAs that break a plain fetch.</p></a>
     </div>
   </section>
 
   <section class="sk-sec" style="padding-bottom:var(--s5)">
     <div class="sec-head"><span class="sec-title">Build &amp; ship</span><span class="sec-sub">2 skills</span></div>
     <div class="sk-grid">
-      <div class="skill"><div class="sk-top"><span class="sk-name"><span class="sl">/</span>vercel-react-best-practices</span><span class="sk-src">Vercel</span></div><p class="sk-desc">React and Next.js performance patterns straight from Vercel Engineering.</p></div>
-      <div class="skill"><div class="sk-top"><span class="sk-name"><span class="sl">/</span>vercel-optimize</span><span class="sk-src">Vercel</span></div><p class="sk-desc">Cut Vercel cost and fix slow routes with metric-backed, version-aware recommendations.</p></div>
+      <a class="skill" href="https://vercel.com" target="_blank" rel="noopener"><div class="sk-top"><span class="sk-name"><span class="sl">/</span>vercel-react-best-practices<span class="sk-go" aria-hidden="true">↗</span></span><span class="sk-src">Vercel</span></div><p class="sk-desc">React and Next.js performance patterns straight from Vercel Engineering.</p></a>
+      <a class="skill" href="https://vercel.com" target="_blank" rel="noopener"><div class="sk-top"><span class="sk-name"><span class="sl">/</span>vercel-optimize<span class="sk-go" aria-hidden="true">↗</span></span><span class="sk-src">Vercel</span></div><p class="sk-desc">Cut Vercel cost and fix slow routes with metric-backed, version-aware recommendations.</p></a>
     </div>
   </section>
   <footer>
