@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap"></noscript>
-<link rel="stylesheet" href="assets/ledger.css?v=21">
+<link rel="stylesheet" href="assets/ledger.css?v=22">
 <style>
   .phead{padding:var(--s8) 0 var(--s5)}
   .phead p{color:var(--soft);max-width:36rem;font-size:1.05rem;margin-top:1rem}
@@ -42,7 +42,9 @@
   .sk-src.mine{color:var(--red)}
   .sk-desc{font-size:.92rem;color:var(--soft);line-height:1.5;margin-top:.45rem;max-width:30rem}
 
-  @media(max-width:760px){ .sk-grid{grid-template-columns:1fr;gap:0} }
+  /* touch has no hover — the "opens externally" arrow is always shown so the linked
+     skills are visibly distinguishable from the two unlinked (mine, not-yet-public) ones */
+  @media(max-width:760px){ .sk-grid{grid-template-columns:1fr;gap:0} a.skill .sk-go{opacity:1} }
 </style>
 </head>
 <body>
@@ -92,5 +94,5 @@
   </footer>
 
 </div>
-<script src="assets/ledger.js?v=21"></script>
+<script src="assets/ledger.js?v=22"></script>
 </body></html>

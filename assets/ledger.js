@@ -85,10 +85,22 @@
         } else { legacyCopy(email); flash(); }
       });
     }
+    var availScrim = document.getElementById('avail-scrim');
     var availToggle = function (open) {
       var show = open == null ? !availPop.classList.contains('show') : open;
       availPop.classList.toggle('show', show);
+      if (availScrim) availScrim.classList.toggle('show', show);
+      document.body.classList.toggle('avail-open', show); /* scroll-lock behind the sheet (mobile only, via CSS) */
       availBtn.setAttribute('aria-expanded', String(show));
+      /* desktop: the note opens downward, and near the footer that can land below the
+         fold — nudge it fully into view so it's never something you have to scroll to find.
+         the popover is always in layout (absolute, opacity-toggled), so we can measure now.
+         (on mobile it's a fixed bottom sheet, already in view, so this is a no-op.) */
+      if (show && !matchMedia('(max-width:640px)').matches) {
+        var r = availPop.getBoundingClientRect();
+        var over = r.bottom - (window.innerHeight || document.documentElement.clientHeight);
+        if (over > 0) window.scrollBy({ top: over + 20, left: 0, behavior: reduced ? 'auto' : 'smooth' });
+      }
     };
     availBtn.addEventListener('click', function (e) { e.stopPropagation(); availToggle(); });
     document.addEventListener('click', function (e) {

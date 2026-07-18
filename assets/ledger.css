@@ -99,6 +99,7 @@ a.ln:hover{text-decoration-color:var(--red);color:var(--red)}
 /* lift the whole section so the popover floats above the next one, not under it */
 section:has(.avail){position:relative;z-index:5}
 .avail{position:relative;margin-top:1.7rem}
+.avail-scrim{display:none}
 .avail-trigger{display:inline-flex;align-items:center;gap:.55rem;font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);background:none;border:0;padding:0;cursor:pointer}
 .avail-trigger::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--red);flex:none}
 .avail-trigger .lbl{border-bottom:1px solid var(--rule-dark);padding-bottom:2px}
@@ -123,6 +124,7 @@ section:has(.avail){position:relative;z-index:5}
 /* the "copied ✓" beat pops in — a small reward for a rare, satisfying action */
 .avail-pop .ap-cta .ok{display:inline-flex;animation:copypop .15s var(--ease-out)}
 @keyframes copypop{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:none}}
+@keyframes sheetup{from{transform:translateY(100%)}to{transform:translateY(0)}}
 
 /* portrait — placed on the record with crop marks */
 .photo-cell{position:relative}
@@ -319,10 +321,15 @@ footer{margin-top:var(--s7);border-top:2px solid var(--ink);padding:1.2rem 0 3.4
 @media(max-width:640px){
   .h-clock{display:none}
   .die-pop{width:13rem}
-  /* on phones the availability note expands inline (pushes content down) instead of
-     floating — a fixed-width absolute card overflowed the screen and overlapped below */
-  .avail-pop{position:static;display:none;width:auto;max-width:100%;box-shadow:none;transform:none;opacity:1;pointer-events:auto;margin-top:.9rem}
-  .avail-pop.show{display:block}
+  /* on phones the availability note is a bottom sheet — it slides up INTO the viewport
+     so it's seen immediately, instead of opening off-screen below the trigger (which
+     forced the visitor to hunt for it by scrolling) */
+  .avail-scrim{display:block;position:fixed;inset:0;z-index:190;background:rgba(28,28,25,.5);opacity:0;pointer-events:none;transition:opacity .25s ease}
+  .avail-scrim.show{opacity:1;pointer-events:auto}
+  .avail-pop{position:fixed;left:0;right:0;bottom:0;top:auto;z-index:200;width:auto;max-width:none;margin:0;display:none;opacity:1;transform:none;pointer-events:auto;border:none;border-top:2px solid var(--ink);border-radius:16px 16px 0 0;box-shadow:0 -16px 44px -16px rgba(28,28,25,.45);padding:1.3rem 1.4rem calc(1.4rem + env(safe-area-inset-bottom,0px))}
+  .avail-pop.show{display:block;animation:sheetup .3s var(--ease-out)}
+  .avail-pop::before{content:"";display:block;width:38px;height:4px;border-radius:2px;background:var(--rule-dark);margin:-.15rem auto 1rem}
+  body.avail-open{overflow:hidden}
   /* touch: expand hit areas to a comfortable size without moving the visuals */
   .h-row nav a{position:relative}
   .h-row nav a::after{content:"";position:absolute;top:-.55rem;bottom:-.55rem;left:-.4rem;right:-.4rem}

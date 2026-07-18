@@ -5,6 +5,39 @@ what's intentionally deferred so it isn't lost.
 
 ---
 
+## ✅ Shipped — round 9: "bring it into view" — the reveal-in-place principle (branch `claude/light-version-ux-audit-dfd5d4`)
+
+Correction + deepening of round 8. The round-8 inline popover was still wrong: on a phone,
+tapping "Open to 0→1 roles" opened the note **below the fold**, so the visitor had to hunt
+for it by scrolling. The principle it violated, applied everywhere this pass: **activating a
+control must bring the thing it reveals into view — never leave it off-screen to be found.**
+
+- **Availability note on mobile → bottom sheet.** Was inline (pushed content down, opened
+  below the fold). → on phones (≤640px) it's now a fixed **bottom sheet**: a dimming scrim,
+  a drag-handle, slides up from the bottom (`sheetup`), background scroll-locked
+  (`body.avail-open`). The content lands *in the viewport* the instant you tap. Dismiss by
+  tapping the scrim or Esc. Desktop keeps the floating popover (there's room there).
+  — hide/show uses `display` + a keyframe (not a transform), so the reduced-motion
+  `transform:none!important` rule can't strand it open.
+- **Availability note on desktop, near the footer.** On `work.html` the trigger sits in the
+  close section just above the footer and the popover opens *downward* — so depending on
+  scroll it could open partly below the fold (same sin). → on desktop, after opening, if the
+  popover's bottom is past the viewport it `scrollBy`s exactly the overflow (+20px) into view.
+  Guarded to only fire when it actually overflows (no-op in the hero on `index.html`), and
+  respects reduced-motion (`behavior:auto`).
+- **Skills — external-link affordance on touch.** The `↗` on linked skills only appeared on
+  hover; touch has no hover, so on a phone the 5 real links looked identical to the 2 unlinked
+  "Mine" ones. → `↗` is always shown ≤760px, so tappable skills read as tappable.
+- **Coffee — selecting a café now scrolls its card into view.** On mobile the map and the
+  detail card stack; tapping a pin/row updated a card that was off-screen below. → `select()`
+  now `scrollIntoView({block:'nearest'})` on ≤820px, so the card you asked for is the card you
+  see.
+
+Verified in-browser at 375px and 1280px: bottom sheet slides in + scrim + scroll-lock +
+dismiss + copy-✓; desktop popover floats unaffected and nudges into view only when it would
+overflow; skills `↗` shown on touch; coffee card scrolls to the selection. No console errors,
+no horizontal overflow on any page. Cache bumped to `?v=22`.
+
 ## ✅ Shipped — round 8: mobile experience pass (branch `claude/light-version-ux-audit-dfd5d4`)
 
 Triggered by a real iPhone screenshot: the availability popover rendered badly on mobile.
