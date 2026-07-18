@@ -6,12 +6,15 @@
 <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="assets/ledger.css?v=11">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap"></noscript>
+<link rel="stylesheet" href="assets/ledger.css?v=18">
 <style>
   /* doc-only chrome */
+  .ds-kicker{font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--red);display:block;margin-bottom:1rem}
   .ds-block{padding:1.6rem 0 2.4rem;border-bottom:1px solid var(--rule)}
   .ds-note{color:var(--soft);font-size:.95rem;max-width:var(--prose);margin:.4rem 0 1.4rem}
+  .ds-note b{color:var(--ink)}
   .swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:1rem}
   .sw{border:1px solid var(--rule-dark)}
   .sw i{display:block;height:64px}
@@ -21,12 +24,17 @@
   .spec{display:grid;grid-template-columns:11rem 1fr;gap:1.2rem;padding:.8rem 0;border-bottom:1px solid var(--rule);align-items:baseline}
   .spec:last-child{border-bottom:none}
   .spec .lbl{font-family:var(--mono);font-size:.7rem;color:var(--faint);letter-spacing:.05em;text-transform:uppercase}
+  .demo{display:flex;align-items:center;gap:1.4rem;flex-wrap:wrap;margin:.2rem 0 1.6rem}
+  .demo-hd{display:flex;align-items:baseline;justify-content:space-between;border-top:2px solid var(--ink);border-bottom:1px solid var(--ink);padding:.85rem 0;margin:.2rem 0 1.6rem}
+  .demo-hd .r{font-family:var(--mono);font-size:.7rem;color:var(--faint)}
   .spaces{display:flex;align-items:flex-end;gap:1rem;flex-wrap:wrap}
   .sp{background:var(--red-soft);border:1px solid var(--red);border-style:dashed;display:flex;align-items:flex-end;justify-content:center}
   .sp small{font-family:var(--mono);font-size:.6rem;color:var(--red);transform:translateY(1.4rem)}
   .donts{max-width:var(--prose)}
   .donts li{margin:.5rem 0 .5rem 1.2rem;color:var(--soft);font-size:.95rem}
   .donts li::marker{content:"× ";color:var(--red)}
+  .ds-avail{position:static;margin:0}
+  .ds-avail .avail-pop{position:static;opacity:1;transform:none;pointer-events:auto;display:inline-block;vertical-align:top;margin-left:1rem}
   @media(max-width:640px){ .spec{grid-template-columns:1fr;gap:.3rem} }
 </style>
 </head>
@@ -41,26 +49,27 @@
   </header>
 
   <section class="hero" style="padding-bottom:2rem;display:block">
-    <span class="status">v1 · The Ledger</span>
+    <span class="ds-kicker">v2 · The Ledger</span>
     <h1>The Ledger<span class="dot">.</span></h1>
-    <p style="color:var(--soft);max-width:34rem">The site is a document, not a screen — an operator's record, warmly typeset. Everything below is the whole system; if a new element can't cite one of these rules, it doesn't ship.</p>
+    <p style="color:var(--soft);max-width:34rem">The site is a document, not a screen — an operator's record, warmly typeset and calm. Everything below is the whole system; if a new element can't cite one of these rules, it doesn't ship.</p>
   </section>
 
   <section>
     <div class="sec-head"><span class="sec-title">Principles</span></div>
     <div class="ds-block">
       <div class="spec"><span class="lbl">01 · Two voices</span><span>Hanken Grotesk is the words. Spline Sans Mono is the data — dates, figures, domains, labels of record. Nothing else, ever.</span></div>
-      <div class="spec"><span class="lbl">02 · Red is reserved</span><span>Red marks status, verdicts, stamps and focus. It is never decoration. One red idea per region of the page.</span></div>
-      <div class="spec"><span class="lbl">03 · Flat, except evidence</span><span>The record is flat. Only artifacts from outside the document — live product screenshots — get depth (shadow, lift).</span></div>
-      <div class="spec"><span class="lbl">04 · Rules draw structure</span><span>A 2px ink rule opens a section. A 1px hairline divides entries. No boxes, no cards, no fills to fake hierarchy.</span></div>
-      <div class="spec"><span class="lbl">05 · Recompose for mobile</span><span>Columns become stacked tallies; gutters become inline labels. Never shrink the desktop layout.</span></div>
-      <div class="spec"><span class="lbl">06 · Every word is audited</span><span>Meta text exists only if a visitor acts on it. No "est. 2017", no read times, no section counts.</span></div>
+      <div class="spec"><span class="lbl">02 · Red is reserved</span><span>Red marks status, verdicts, focus and the house bracket. It is never decoration. One red idea per region of the page.</span></div>
+      <div class="spec"><span class="lbl">03 · Flat, except real things</span><span>The record is flat. Depth is earned by things from outside the sheet — product screenshots, and overlays that float above it (the availability note, the die popover).</span></div>
+      <div class="spec"><span class="lbl">04 · Rules draw structure</span><span>A 2px ink rule opens a section. A 1px hairline divides entries. Fills and boxes are for evidence and overlays only, never to fake hierarchy.</span></div>
+      <div class="spec"><span class="lbl">05 · Recompose for mobile</span><span>Columns become stacked tallies; the 2×2 project grid becomes one column; gutters become inline labels. Never shrink the desktop layout.</span></div>
+      <div class="spec"><span class="lbl">06 · Every word is audited</span><span>Meta exists only if a visitor acts on it. No catalogue numbers, no read times, no section counts, no badges that only say the obvious.</span></div>
+      <div class="spec"><span class="lbl">07 · Calm over clever</span><span>No CTAs, no stamps, no pulsing badges. Availability is a quiet line; outcomes are quiet marks. The work carries the weight.</span></div>
     </div>
   </section>
 
   <section>
     <div class="sec-head"><span class="sec-title">Colour</span></div>
-    <p class="ds-note">White with a breath of warm grey, plus a 5% grain overlay (SVG noise, baked into <span class="mono">ledger.css</span>) — paper tooth, not paper colour.</p>
+    <p class="ds-note">Warm off-white with a 4% grain tile (SVG noise, baked into the body background in <span class="mono">ledger.css</span>) — paper tooth, not paper colour. One red does all the load-bearing accent work.</p>
     <div class="swatches">
       <div class="sw"><i style="background:#FCFCF9;border-bottom:1px solid var(--rule)"></i><div><b>--paper</b><span>#FCFCF9 · the sheet</span></div></div>
       <div class="sw"><i style="background:#1C1C19"></i><div><b>--ink</b><span>#1C1C19 · text, heavy rules</span></div></div>
@@ -70,22 +79,22 @@
       <div class="sw"><i style="background:#CFCDC2"></i><div><b>--rule-dark</b><span>#CFCDC2 · held shapes</span></div></div>
       <div class="sw"><i style="background:#BE3E26"></i><div><b>--red</b><span>#BE3E26 · bahi-khata red</span></div></div>
       <div class="sw"><i style="background:#F4E4DD"></i><div><b>--red-soft</b><span>#F4E4DD · selection, whisper</span></div></div>
-      <div class="sw"><i style="background:#3E6B33"></i><div><b>--live</b><span>#3E6B33 · running things only</span></div></div>
     </div>
   </section>
 
   <section>
     <div class="sec-head"><span class="sec-title">Type</span></div>
     <div class="ds-block">
-      <div class="spec"><span class="lbl">H1 · 2.7rem/600</span><h1 style="margin:0;font-size:2.7rem">Hey, I'm Rinkesh<span class="dot">.</span></h1></div>
+      <div class="spec"><span class="lbl">H1 · 2.7rem/600</span><div style="margin:0;font-size:2.7rem;font-weight:600;letter-spacing:-.035em;line-height:1.08">Hey, I'm Rinkesh<span class="dot">.</span></div></div>
       <div class="spec"><span class="lbl">Entry · 1.25rem/600</span><span style="font-weight:600;font-size:1.25rem;letter-spacing:-.02em">Savior</span></div>
       <div class="spec"><span class="lbl">Index title · 1.35rem/600</span><span style="font-weight:600;font-size:1.35rem;letter-spacing:-.02em">Why I shut down Career Leap</span></div>
       <div class="spec"><span class="lbl">Body · 1.05rem/400</span><span style="color:var(--soft);font-size:1.05rem">The part I like most is the very beginning, when the problem is still messy.</span></div>
       <div class="spec"><span class="lbl">Small · .9rem/400</span><span style="color:var(--soft);font-size:.9rem">Scan any cat food, see how good it actually is.</span></div>
       <div class="spec"><span class="lbl">Section · .78rem/700</span><span class="sec-title">Track record</span></div>
+      <div class="spec"><span class="lbl">Figure · mono 1.02rem</span><span class="mono" style="font-feature-settings:'tnum';color:var(--ink)">85</span></div>
       <div class="spec"><span class="lbl">Data · mono</span><span class="mono" style="font-size:.78rem;color:var(--faint)">2017–20 · ₹0 · sniff.fyi · FIG. 01</span></div>
     </div>
-    <p class="ds-note">Headline tracking −.035em, entries −.02em, body normal. Mono never exceeds .95rem and is never a sentence.</p>
+    <p class="ds-note">Headline tracking −.035em, entries −.02em, body normal. Figures of record (mono) sit a touch larger, ~1.02rem — the numbers are the proof. Mono is never a sentence.</p>
   </section>
 
   <section>
@@ -104,13 +113,22 @@
   </section>
 
   <section>
+    <div class="sec-head"><span class="sec-title">Header</span></div>
+    <p class="ds-note" style="margin-top:1.4rem">Name on the left, alone. On the right: the section nav, the die, and one mono clock that carries <b>place and time together</b> — <span class="mono">Bengaluru · 14:02 IST</span>. Location lives with the time, never as a subtitle to the name. The clock hides on phones.</p>
+    <div class="demo-hd">
+      <a class="h-name" href="#" onclick="return false">Rinkesh Gorasia</a>
+      <span style="display:flex;align-items:baseline;gap:1.5rem"><nav style="display:flex;gap:1.6rem"><a href="#" onclick="return false">Home</a><a href="#" onclick="return false">Work</a><a href="#" onclick="return false">Writing</a><a href="#" onclick="return false">Coffee</a></nav><span class="r mono">Bengaluru · 14:02 IST</span></span>
+    </div>
+  </section>
+
+  <section>
     <div class="sec-head"><span class="sec-title">Components</span></div>
 
-    <p class="ds-note" style="margin-top:1.4rem"><b>Ledger row</b> — year gutter · entry · figures column. The unit of proof.</p>
+    <p class="ds-note" style="margin-top:1.4rem"><b>Ledger row</b> — year gutter · entry · figures column. The unit of proof. The outcome is marked with the house bracket, not a stamp.</p>
     <a class="row" href="#" onclick="return false">
       <span class="r-year">2017–20</span>
       <div>
-        <span class="r-name"><img class="lmk" src="assets/img/savior.png" alt="" width="30" height="30"><span class="r-name-t">Savior</span> <span class="stamp">Acquired</span></span>
+        <span class="r-name"><img class="lmk" src="assets/img/savior.png" alt="" width="30" height="30"><span class="r-name-t">Savior</span> <span class="crop">Acquired</span></span>
         <p>Healthcare SaaS that ran daily operations for tier-1 hospitals across India.</p>
       </div>
       <div class="r-figs">
@@ -119,62 +137,87 @@
       </div>
     </a>
 
-    <p class="ds-note" style="margin-top:2.4rem"><b>Evidence frame</b> — the only element with depth. Bar carries the real domain; first dot turns red on hover.</p>
-    <div class="lab" style="grid-template-columns:minmax(0,20rem);margin-top:0">
+    <p class="ds-note" style="margin-top:2.4rem"><b>The house bracket</b> — a red square bracket, the site's one way to tag a small label (an outcome, a state). Red is reserved for the bracket; the word stays quiet. Whenever something needs marking, it wears these — never a generic pill or box.</p>
+    <div class="demo"><span class="crop">Acquired</span><span class="crop">Shipped</span><span class="crop">Live</span></div>
+
+    <p class="ds-note" style="margin-top:2.4rem"><b>Project card</b> — the one element with depth. Four live projects sit in a 2×2 grid; the bar carries the real domain, the first dot turns red on hover. A project without a screenshot yet gets a designed brand cover (see Vouch), never a grey placeholder.</p>
+    <div class="lab" style="grid-template-columns:repeat(2,minmax(0,1fr));margin-top:0">
       <a class="exp" href="#" onclick="return false">
         <div class="frame">
           <div class="frame-bar"><span class="dotrow"><i></i><i></i><i></i></span><span>sniff.fyi</span></div>
           <div class="shot"><img src="assets/img/lab/sniff.jpg" alt=""></div>
         </div>
         <div class="exp-body">
-          <div class="exp-head"><span class="exp-name">Sniff</span><span class="st">Live</span></div>
-          <span class="exp-fig"><b>5K</b> scans</span>
+          <div class="exp-head"><span class="exp-name">Sniff</span></div>
+          <p>Scan any cat food, see how good it actually is.</p>
+          <span class="exp-fig"><b>5K</b> scans · <b>1.2K</b> foods rated</span>
+        </div>
+      </a>
+      <a class="exp" href="#" onclick="return false">
+        <div class="frame">
+          <div class="frame-bar"><span class="dotrow"><i></i><i></i><i></i></span><span>vouchforit.club</span></div>
+          <div class="shot vcover"><span class="vq">vouch</span><span class="vtag">a guide to the places you <b>love</b></span></div>
+        </div>
+        <div class="exp-body">
+          <div class="exp-head"><span class="exp-name">Vouch</span></div>
+          <p>Save the places you actually love and share them as one link.</p>
+          <span class="exp-new">Just shipped</span>
         </div>
       </a>
     </div>
 
-    <p class="ds-note" style="margin-top:2.4rem"><b>Index row</b> — writing shares the ledger grid; the arrow is the only ornament and it earns its place by moving.</p>
+    <p class="ds-note" style="margin-top:2.4rem"><b>Index row</b> — writing is title-led, no catalogue numbers. The arrow is the only ornament and it earns its place by moving on hover.</p>
     <a class="post" href="#" onclick="return false" style="border-top:1px solid var(--rule)">
-      <span class="p-no">01</span>
       <span>
         <span class="p-title">Why I shut down Career Leap<span class="go">→</span></span>
         <p class="p-ex">10k users, 40% completion — and I still turned it off.</p>
       </span>
     </a>
 
-    <p class="ds-note" style="margin-top:2.4rem"><b>Actions & marks</b></p>
-    <div class="cta" style="margin:.2rem 0 1.6rem">
-      <a class="btn" href="#" onclick="return false">Write to me</a>
-      <a class="btn2" href="#" onclick="return false">or DM on X →</a>
-      <span class="stamp">Acquired</span>
-      <span class="st">Live</span>
-      <span class="n4 mono" style="border:1px dashed var(--rule-dark);padding:.3rem .6rem;font-size:.7rem;color:var(--faint);letter-spacing:.1em;text-transform:uppercase">brewing</span>
-      <span class="status" style="margin:0">open to 0→1 roles</span>
+    <p class="ds-note" style="margin-top:2.4rem"><b>Availability note</b> — the one place we invite contact. A quiet mono line opens a small note on what a 0→1 role means here, with a time-aware reply line read off Bengaluru's clock. Never a button, never a CTA.</p>
+    <div class="ds-avail avail">
+      <button type="button" class="avail-trigger"><span class="lbl">Open to 0→1 roles</span><span class="chev" aria-hidden="true">▾</span></button>
+      <span class="avail-pop show">
+        <span class="ap-head">What I'm looking for</span>
+        <p>The earliest stage — a rough problem, no product yet. Founder, founding PM, or a 0→1 lead.</p>
+        <a class="ap-cta" href="#" onclick="return false">write to me →</a>
+        <span class="ap-time">It's afternoon in Bengaluru right now — usually a reply within a day.</span>
+      </span>
+    </div>
+
+    <p class="ds-note" style="margin-top:1.4rem"><b>Social</b> — solid ink glyphs, one recognisable mark each. They live in the footer only.</p>
+    <div class="demo">
+      <span class="foot-social">
+        <a href="#" onclick="return false" aria-label="Email"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2Zm0 4-8 5-8-5V6l8 5 8-5v2Z"/></svg></a>
+        <a href="#" onclick="return false" aria-label="X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.66l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.45-6.231Zm-1.161 17.52h1.833L7.084 4.126H5.117l11.966 15.644Z"/></svg></a>
+        <a href="#" onclick="return false" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286ZM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065Zm1.782 13.019H3.555V9h3.564v11.452ZM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003Z"/></svg></a>
+      </span>
     </div>
   </section>
 
   <section>
     <div class="sec-head"><span class="sec-title">Personality</span></div>
     <div class="ds-block">
-      <p class="ds-note" style="margin-top:.8rem">Personality lives in <b>behaviour and authenticity</b>, never as decorative doodles scattered in whitespace. The homepage stays a confident, clean record; the objects he loves (sunflowers, board games, lego, giraffe, coffee) get real, crafted room on their own pages — shelf, coffee — not clip-art in a corner.</p>
-      <div class="spec"><span class="lbl">Six sides of me</span><span>The wooden die in the nav rolls to reveal one of six true lines about him — lands on the rolled number, shows it in a popover, never navigates. His board-games love, made literal.</span></div>
-      <div class="spec"><span class="lbl">Faces the light</span><span>The paper warms and cools with Bengaluru's real sun (dawn / day / dusk / night, via <span class="mono">data-light</span>). The heliotropism idea expressed as the whole page, not a drawn flower.</span></div>
+      <p class="ds-note" style="margin-top:.8rem">Personality lives in <b>behaviour, real photos and honest copy</b> — never decorative doodles. The homepage stays a calm record; the things he loves get real room on their own pages (coffee, shelf) and one warm line in the intro.</p>
+      <div class="spec"><span class="lbl">Six sides of me</span><span>The wooden die in the nav rolls to reveal one of six true lines about him. Hovering it before the first roll shows its own "roll me" invite; it never navigates. His board-games love, made literal.</span></div>
+      <div class="spec"><span class="lbl">One warm line</span><span>The intro closes on coffee, board games and Simba — linking the coffee log and the shelf — so it reads as a person, not a menu of things to click.</span></div>
       <div class="spec"><span class="lbl">The real cat</span><span>Simba is the actual photo in the hero, with a tap/hover speech bubble. No drawn cat competes with the real one.</span></div>
-      <div class="spec"><span class="lbl">Local time</span><span>The IST clock ticks in the top bar; the coffee log lives in the footer. Place and rhythm, quietly present.</span></div>
-      <div class="spec"><span class="lbl">Rule</span><span>If a personality element can't be a behaviour, a real photo, or honest copy, it doesn't go on the homepage. Rich object galleries belong on dedicated pages.</span></div>
+      <div class="spec"><span class="lbl">Place &amp; time</span><span>One mono clock carries <span class="mono">Bengaluru · time</span>; the availability note reads the same clock to set an honest reply expectation. Thoughtful, not a gimmick.</span></div>
+      <div class="spec"><span class="lbl">Faces the light</span><span>The paper warms and cools with Bengaluru's real sun (dawn / day / dusk / night, via <span class="mono">data-light</span>).</span></div>
+      <div class="spec"><span class="lbl">Rule</span><span>If a personality element can't be a behaviour, a real photo, or honest copy, it doesn't ship. Rich object galleries belong on dedicated pages.</span></div>
     </div>
   </section>
 
   <section>
     <div class="sec-head"><span class="sec-title">Motion</span></div>
     <div class="ds-block" style="border-bottom:none">
-      <div class="spec"><span class="lbl">Die roll</span><span>Tumbles ~520ms, pips redraw to the rolled face, popover springs in. Re-roll never repeats the last number.</span></div>
+      <div class="spec"><span class="lbl">Die roll</span><span>Tumbles ~520ms, pips redraw to the rolled face, popover springs in. Re-roll never repeats the last number; hovering before the first roll shows the invite.</span></div>
       <div class="spec"><span class="lbl">Tally</span><span>Figures count up over 700ms (cubic ease-out) when they enter view. Once.</span></div>
-      <div class="spec"><span class="lbl">Assemble</span><span>Rows, frames and posts snap into place on scroll (spring ease); a 3.5s failsafe guarantees nothing stays hidden. The lego idea as the page's motion.</span></div>
-      <div class="spec"><span class="lbl">Stamp press</span><span>350ms press on row hover — scale 1.14, rotate −3.5°, settle.</span></div>
+      <div class="spec"><span class="lbl">Assemble</span><span>Rows, cards and posts snap into place on scroll (spring ease); a 3.5s failsafe guarantees nothing stays hidden.</span></div>
+      <div class="spec"><span class="lbl">Popover</span><span>The availability note and the die popover fade + spring in (~160ms), close on outside-click or Esc.</span></div>
+      <div class="spec"><span class="lbl">Card lift</span><span>Project cards and work thumbnails lift a few px with a warmer shadow on hover — the only depth the record allows.</span></div>
       <div class="spec"><span class="lbl">Arrow slide</span><span>Index arrow fades in and slides 4px on hover. Always visible on touch.</span></div>
-      <div class="spec"><span class="lbl">Simba</span><span>Portrait hover/tap pops a mono speech bubble; the line rotates.</span></div>
-      <div class="spec"><span class="lbl">Discipline</span><span>Durations ≤ 700ms. Nothing loops but the status pulse and the coffee steam. <span class="mono">prefers-reduced-motion</span> kills everything.</span></div>
+      <div class="spec"><span class="lbl">Discipline</span><span>Durations ≤ 700ms. Nothing loops but the coffee steam. <span class="mono">prefers-reduced-motion</span> kills everything.</span></div>
     </div>
   </section>
 
@@ -183,21 +226,23 @@
     <ul class="donts" style="margin-top:1.2rem">
       <li>A third typeface, or mono set as prose.</li>
       <li>Red used decoratively, or two red ideas in one region.</li>
-      <li>Cards, pills, or filled boxes to group content — rules only.</li>
-      <li>Meta text nobody acts on (counts, read times, "est." lines).</li>
-      <li>Shadows on anything that isn't evidence from a live product.</li>
-      <li>Shrinking the desktop grid to fit a phone.</li>
-      <li>Decorative doodles scattered in whitespace — personality is behaviour, photos, or copy.</li>
+      <li>Buttons, CTAs, or pulsing status badges — availability is a quiet line.</li>
+      <li>A generic pill or box to tag something — the house bracket, or nothing.</li>
+      <li>Meta nobody acts on (catalogue numbers, read times, "est." lines, obvious badges).</li>
+      <li>Depth on anything that isn't a real screenshot or a floating overlay.</li>
+      <li>Shrinking the desktop grid to fit a phone; a grey placeholder where a real image should be.</li>
     </ul>
   </section>
 
   <footer>
-    <div class="f-row">
-      <span><a href="index.html">← Back to the site</a></span>
-      <span class="f-loc">The Ledger · v1</span>
+    <div class="foot-in">
+      <div class="foot-id"><span class="foot-name">The Ledger · v2</span></div>
+      <nav class="foot-nav">
+        <a class="foot-top" href="index.html">← back to the site</a>
+      </nav>
     </div>
   </footer>
 
 </div>
-<script src="assets/ledger.js?v=11"></script>
+<script src="assets/ledger.js?v=18"></script>
 </body></html>

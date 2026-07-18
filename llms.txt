@@ -1,6 +1,6 @@
 # Rinkesh Gorasia
 
-> Two-time founder based in Bengaluru, India. Built Savior (healthcare ops platform, acquired by Zocdoc) and Career Leap (EdTech, which he shut down himself). Spent two years at Accel India leading the Accel Atoms pre-seed program, backing early-stage founders. Now looking for an early-stage product or founding (0 to 1) role, and building heavily with AI.
+> Two-time founder based in Bengaluru, India. Built Savior (healthcare-operations platform, acquired by Zocdoc) and Career Leap (live soft-skills learning for tech professionals, which he shut down himself). Spent two years at Accel India leading the Accel Atoms pre-seed program, backing early-stage founders. Now looking for an early-stage product or founding (0 to 1) role, and building heavily with AI.
 
 Rinkesh is a 0-to-1 product person who has both built (two companies) and evaluated (hundreds of founders at Accel) early-stage products. He goes deep on the real problem, ships fast, and knows when to stop. He builds with Claude daily and treats AI as leverage on judgment, not a replacement for it.
 
@@ -14,19 +14,21 @@ Rinkesh is a 0-to-1 product person who has both built (two companies) and evalua
   - [Building for completion, not conversion](https://rinkeshgorasia.com/writing-completion.html)
   - [Building with AI, honestly](https://rinkeshgorasia.com/writing-ai.html)
 - [The Shelf](https://rinkeshgorasia.com/shelf.html): The books, board games, lego and coffee that explain him, presented as a deck of collectible cards
+- [Skills](https://rinkeshgorasia.com/skills.html): A public shelf of the AI skills he wrote and the ones he reaches for daily
 - [Coffee](https://rinkeshgorasia.com/coffee.html): His favourite coffee places in Bengaluru
 
 ## Experience
 
-- **Accel India** (2023-2025): Led Accel Atoms, Accel's pre-seed program for 0-to-1 founders. Ran it end to end across four cohorts and two tracks (AI and LeapTech), from choosing founders to taking them from a rough idea to their first cheque.
-- **Savior** (2017-2020): Healthcare operations and preventive-care software. Grew to 85+ hospitals and roughly $1M ARR. Sold it, onboarded the first 30 clients himself, ran a team of 8. Acquired by Zocdoc.
-- **Career Leap** (2020-2023): EdTech for career transitions. Reached 10K users in six months, hit 40% completion on live cohorts (industry average 5-10%), generated about Rs 15L in revenue. He shut it down when growth got too expensive to keep going.
+- **Accel India** (2023-2025): Led Accel Atoms, Accel's pre-seed program for 0-to-1 founders. Ran it end to end across four cohorts and two tracks (AI and LeapTech), backing 40+ founders from a rough idea to their first cheque.
+- **Savior** (2017-2020): Healthcare-operations software for tier-1 hospitals in India (Fortis, Cloudnine). Bootstrapped to 85 hospitals and profitability with no sales team — all word of mouth. Built a team of 85. Acquired by Zocdoc in 2020.
+- **Career Leap** (2020-2023): Live soft-skills learning for tech professionals. Grew from a WhatsApp group to 10K users in six months, 100K+ watch hours, 40% completion on live cohorts (industry average 5-10%), about Rs 15L in revenue. He shut it down when the unit economics didn't hold at scale.
 
 ## Currently Building (with AI)
 
-- **KnowYourPay** (Live): Salary-transparency tool for Indian tech. Filter by role, city, and experience. 10K+ visits, 850+ reports generated. https://knowyourpay.vercel.app
-- **Product Sense Lab** (In beta): Daily product-sense questions with AI feedback. https://www.productsenselab.com
-- **Sniff** and **Vouch**: smaller experiments in progress.
+- **Sniff** (Live): Scan any cat food and see how good it actually is — no sponsored rankings. https://sniff.fyi
+- **KnowYourPay** (Live): Find out if you're underpaid for your exact role and city. https://knowyourpay.in
+- **Product Sense Lab** (Live): Practice PM interviews under pressure, with instant AI feedback. https://www.productsenselab.com
+- **Vouch** (Just shipped): Save and share the places you actually love, in one link. https://vouchforit.club
 
 ## Contact
 

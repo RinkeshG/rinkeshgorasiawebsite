@@ -17,11 +17,11 @@
 <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg" />
 <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="assets/ledger.css?v=11">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap"></noscript>
+<link rel="stylesheet" href="assets/ledger.css?v=18">
 <style>
   .phead{padding:var(--s8) 0 var(--s6)}
-  .phead .status{margin-bottom:1.2rem}
   .phead p{color:var(--soft);max-width:35rem;font-size:1.05rem;margin-top:1rem}
 
   .case{border-top:1px solid var(--rule);padding:2.4rem 0}
@@ -44,34 +44,39 @@
   .pts li::before{content:"";position:absolute;left:.05rem;top:.62em;width:5px;height:5px;border-radius:50%;background:var(--red);opacity:.75}
   .pts b{color:var(--ink);font-weight:600}
 
-  /* evidence footer — quiet, compact, supporting (not a hero) */
+  /* evidence footer — the figures of record, one quiet line */
   .receipts{margin-top:1.7rem;padding-top:1.2rem;border-top:1px solid var(--rule)}
-  .rc-top{display:flex;align-items:baseline;gap:1.6rem;flex-wrap:wrap;margin-bottom:1.15rem}
   .metrics{display:flex;flex-wrap:wrap;gap:.35rem 1.5rem;font-size:.88rem;color:var(--soft);line-height:1.5}
   .metrics .m b{font-family:var(--mono);font-feature-settings:'tnum';color:var(--ink);font-weight:500}
   .metrics .m.red b{color:var(--red)}
-  .pstore{display:inline-flex;align-items:center;gap:.4rem;font-family:var(--mono);font-size:.66rem;color:var(--soft);text-decoration:none;border:1px solid var(--rule-dark);border-radius:6px;padding:.34rem .6rem;flex:0 0 auto}
-  .pstore:hover{border-color:var(--red);color:var(--red)}
-  .pstore svg{width:12px;height:12px}
-  .rc-photos{display:flex;gap:.85rem;flex-wrap:wrap}
-  .wframe{margin:0}
-  .wframe .fr{position:relative;width:150px;aspect-ratio:3/2;background:#EFE7D8;border:1px solid var(--rule-dark)}
-  .wframe .fr img{width:100%;height:100%;object-fit:cover;display:block}
-  .wframe .fr::before,.wframe .fr::after,.wframe .fr .cm::before,.wframe .fr .cm::after{content:"";position:absolute;width:8px;height:8px;pointer-events:none;z-index:2}
-  .wframe .fr::before{top:-4px;left:-4px;border-top:1.5px solid var(--red);border-left:1.5px solid var(--red)}
-  .wframe .fr::after{top:-4px;right:-4px;border-top:1.5px solid var(--red);border-right:1.5px solid var(--red)}
-  .wframe .fr .cm::before{bottom:-4px;left:-4px;border-bottom:1.5px solid var(--red);border-left:1.5px solid var(--red)}
-  .wframe .fr .cm::after{bottom:-4px;right:-4px;border-bottom:1.5px solid var(--red);border-right:1.5px solid var(--red)}
-  .wframe figcaption{font-family:var(--mono);font-size:.56rem;color:var(--faint);margin-top:.5rem;letter-spacing:.03em}
 
   .close .close-h{font-size:1.9rem;font-weight:600;letter-spacing:-.03em;margin:1.4rem 0 .7rem}
   .close p{color:var(--soft);max-width:32rem;margin-bottom:1.6rem}
 
+  /* building now — context-led rows; the shot is a small aside, not the hero */
+  .builds{margin-top:0}
+  .build{display:grid;grid-template-columns:1fr 128px;gap:1.7rem;align-items:center;padding:1.6rem 0;border-bottom:1px solid var(--rule);text-decoration:none;color:inherit}
+  .b-head{display:flex;align-items:baseline;gap:.7rem;flex-wrap:wrap}
+  .b-name{font-weight:600;font-size:1.2rem;letter-spacing:-.02em;color:var(--ink)}
+  .build:hover .b-name{color:var(--red)}
+  .b-dom{font-family:var(--mono);font-size:.68rem;color:var(--faint);letter-spacing:.02em}
+  .build:hover .b-dom{color:var(--red)}
+  .b-why{color:var(--soft);font-size:.99rem;line-height:1.52;margin:.5rem 0 .65rem;max-width:37rem}
+  .b-fig{font-family:var(--mono);font-size:.76rem;color:var(--faint)}
+  .b-fig b{font-feature-settings:'tnum';color:var(--ink);font-weight:500;font-size:.88rem}
+  /* the shot as a tipped-in print — warm elevation off the paper, a small lift on hover */
+  .b-thumb{position:relative;border:1px solid var(--rule-dark);aspect-ratio:4/3;overflow:hidden;background:var(--card);box-shadow:0 1px 2px rgba(28,28,25,.05),0 10px 22px -14px rgba(70,58,28,.5);transition:transform .2s ease,box-shadow .2s ease}
+  .build:hover .b-thumb{transform:translateY(-3px);box-shadow:0 2px 3px rgba(28,28,25,.07),0 16px 30px -15px rgba(70,58,28,.55)}
+  .b-thumb img{width:100%;height:100%;object-fit:cover;object-position:top left;display:block}
+  /* vouch has no shot yet — its own dark/gold brand tile, matching the home cover */
+  .b-vcover{background:#1b1a17;display:grid;place-items:center}
+  .b-vcover .vq{font-weight:700;font-size:1rem;color:#EFE9DD;display:inline-flex;align-items:center;gap:.22rem}
+  .b-vcover .vq::before{content:"\201D";color:#E3A94F;font-size:1.15rem;line-height:.5}
+
   @media(max-width:640px){
     .ch{flex-direction:column;gap:.5rem} .ch-r{text-align:left}
-    .rc-top{flex-direction:column;align-items:flex-start;gap:.9rem}
-    .wframe .fr{width:132px}
     .lab{grid-template-columns:1fr}
+    .build{grid-template-columns:1fr 84px;gap:1.1rem}
   }
 </style>
 </head>
@@ -81,12 +86,11 @@
   <header id="top">
     <div class="h-row">
       <a class="h-name" href="index.html">Rinkesh Gorasia</a>
-      <span class="h-right"><nav><a href="index.html">Home</a><a class="on" href="work.html">Work</a><a href="writing.html">Writing</a><a href="shelf.html">Shelf<svg class="plate" viewBox="0 0 24 24" aria-hidden="true"><path fill="#C08A4E" stroke="#1C1C19" stroke-width="1.2" stroke-linejoin="round" d="M12 2.6c1.7 0 2.9 1.3 2.9 2.9 0 .9-.4 1.7-1 2.2 1 .5 2.3 1.4 3.7 2 1.6.7 3.3 1.2 3.3 2.5 0 .8-.6 1.3-1.5 1.3h-3.3c.3 1.9 1.3 3.4 2.3 4.7.6.8.1 1.9-.9 1.9h-4.2c-.5 0-.9-.3-1.1-.8l-1.2-3-1.2 3c-.2.5-.6.8-1.1.8H4.5c-1 0-1.5-1.1-.9-1.9 1-1.3 2-2.8 2.3-4.7H2.6c-.9 0-1.5-.5-1.5-1.3 0-1.3 1.7-1.8 3.3-2.5 1.4-.6 2.7-1.5 3.7-2-.6-.5-1-1.3-1-2.2 0-1.6 1.2-2.9 2.9-2.9z"/></svg></a></nav><a href="#" class="roll" id="roll" title="six sides of me — roll one" aria-label="Roll the die"><svg viewBox="0 0 24 24" aria-hidden="true"><rect class="face" x="2.5" y="2.5" width="19" height="19" rx="4"/><g class="pips"><circle class="pip" cx="7" cy="7" r="1.7"/><circle class="pip" cx="17" cy="7" r="1.7"/><circle class="pip" cx="12" cy="12" r="1.7"/><circle class="pip" cx="7" cy="17" r="1.7"/><circle class="pip" cx="17" cy="17" r="1.7"/></g></svg></a><div class="die-pop" id="die-pop"><div class="dp-top"><span class="dp-num">roll me</span><span class="dp-die">⚄</span></div><p>Six sides. Roll to meet one.</p></div><span class="h-clock" id="h-clock"></span></span>
+      <span class="h-right"><nav><a href="index.html">Home</a><a class="on" href="work.html">Work</a><a href="writing.html">Writing</a><a href="skills.html">Skills</a></nav><button type="button" class="roll" id="roll" aria-label="Roll the die"><svg viewBox="0 0 24 24" aria-hidden="true"><rect class="face" x="2.5" y="2.5" width="19" height="19" rx="4"/><g class="pips"><circle class="pip" cx="7" cy="7" r="1.7"/><circle class="pip" cx="17" cy="7" r="1.7"/><circle class="pip" cx="12" cy="12" r="1.7"/><circle class="pip" cx="7" cy="17" r="1.7"/><circle class="pip" cx="17" cy="17" r="1.7"/></g></svg></button><div class="die-pop" id="die-pop" role="status"><div class="dp-top"><span class="dp-num">roll me</span><span class="dp-die">⚄</span></div><p>Six sides. Roll to meet one.</p></div><span class="h-clock" id="h-clock"></span></span>
     </div>
   </header>
 
   <section class="phead">
-    <span class="status">Bengaluru · open to 0→1 roles</span>
     <h1>The work<span class="dot">.</span></h1>
     <p>Two companies I founded, two years backing founders, and what I&#8217;m building now. One sold, one I shut down myself &mdash; here&#8217;s both, honestly.</p>
   </section>
@@ -100,8 +104,8 @@
     <p class="lead">Built and bootstrapped a hospital-management platform for tier-1 hospitals in India &mdash; scaled it to <b>85 hospitals</b>, hit profitability, and got <b>acquired by Zocdoc in 2020</b>.</p>
 <ul class="pts"><li>Started out building an appointment-booking system. Spent time inside hospitals watching how the staff actually worked, and saw the real problem was messy offline data across the whole workflow &mdash; so I pivoted to software that ran the <b>entire hospital operation</b>.</li><li>Built the MVP in <b>3 months</b> and landed 2 hospital pilots. Designed workflows that cut patient-processing time and killed manual errors &mdash; the key was solving a painful daily problem, not a nice-to-have.</li><li>Scaled to <b>35 hospitals in year one</b> by going after chains like Fortis and Cloudnine for multi-location rollouts. <b>85 by year 3</b>. No sales team &mdash; all of it word of mouth and referrals.</li><li>Shipped <b>v2.0</b> with patient-history analytics and decision-support, so doctors could make treatment calls with real data behind them. Built a team of <b>85</b> across engineering, operations and customer success.</li><li>Hit profitability through subscriptions and premium tiers, bootstrapped the whole way. <b>Zocdoc acquired us in March 2020</b> for their US expansion.</li></ul>
     <div class="receipts">
-<div class="rc-top"><div class="metrics"><span class="m"><b>85</b> hospitals</span><span class="m red"><b>&#8377;0</b> raised</span><span class="m"><b>Profitable</b>, bootstrapped</span><span class="m"><b>Acquired</b> by Zocdoc, 2020</span></div></div>
-<div class="rc-photos"><figure class="wframe"><div class="fr"><span class="cm"></span><img src="assets/img/work/placeholder-1.jpg" alt="Building Savior · 2018"></div><figcaption>Building Savior · 2018</figcaption></figure><figure class="wframe"><div class="fr"><span class="cm"></span><img src="assets/img/work/placeholder-2.jpg" alt="The team · Bengaluru"></div><figcaption>The team · Bengaluru</figcaption></figure><figure class="wframe"><div class="fr"><span class="cm"></span><img src="assets/img/work/placeholder-3.jpg" alt="On the road, hospital rollouts"></div><figcaption>On the road, hospital rollouts</figcaption></figure></div>    </div>
+<div class="metrics"><span class="m"><b>85</b> hospitals</span><span class="m red"><b>&#8377;0</b> raised</span><span class="m"><b>Profitable</b>, bootstrapped</span><span class="m"><b>Acquired</b> by Zocdoc, 2020</span></div>
+    </div>
   </section>
 
   <section class="case" id="career-leap">
@@ -113,8 +117,8 @@
     <p class="lead">A community-first learning platform for tech professionals to build the soft skills that matter &mdash; from people who&#8217;d actually done it.</p>
 <ul class="pts"><li>Started as a WhatsApp community and grew to <b>10k users in 6 months</b>. Built a mobile learning app that hit <b>100k+ watch hours</b>. The community grew from 2k to 3,500+ through weekly sessions with industry leaders.</li><li>Pivoted from the app to live cohorts once I talked to users and saw where the real opportunity was. Ran 2 cohorts with a 3-person team &mdash; trained 60 professionals, made <b>&#8377;15L</b> at &#8377;10&ndash;15k. Got <b>40% completion</b>, way above the usual 5&ndash;10% for online courses.</li><li>Added gamification that pushed session times up 50% and doubled retention. Also tested a B2B model &mdash; ran training programs inside 2 companies.</li><li><b>Shut it down in 2023</b>, when the unit economics didn&#8217;t work at scale.</li></ul>
     <div class="receipts">
-<div class="rc-top"><div class="metrics"><span class="m"><b>10K</b> users</span><span class="m"><b>100K</b> watch hours</span><span class="m red"><b>40%</b> completion</span><span class="m"><b>&#8377;15L</b> revenue</span></div><a class="pstore" href="#" title="Play Store — send me the real URL"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.6 2.3c-.2.2-.3.5-.3.9v17.6c0 .4.1.7.3.9l.1.1L13.4 12v-.1L3.7 2.2l-.1.1zM17 15.3l-3.3-3.3L4 21.7l12-6.4zM17 8.7L5 2.3l8.7 9.7L17 8.7zm3.4 2.2L18 9.5l-3.5 2.5 3.5 2.5 2.4-1.4c.7-.4.7-1.4 0-1.7z"/></svg>Play Store</a></div>
-<div class="rc-photos"><figure class="wframe"><div class="fr"><span class="cm"></span><img src="assets/img/work/placeholder-2.jpg" alt="A Career Leap cohort · 2022"></div><figcaption>A Career Leap cohort · 2022</figcaption></figure><figure class="wframe"><div class="fr"><span class="cm"></span><img src="assets/img/work/placeholder-1.jpg" alt="The team of three"></div><figcaption>The team of three</figcaption></figure><figure class="wframe"><div class="fr"><span class="cm"></span><img src="assets/img/work/placeholder-3.jpg" alt="A live session"></div><figcaption>A live session</figcaption></figure></div>    </div>
+<div class="metrics"><span class="m"><b>10K</b> users</span><span class="m"><b>100K</b> watch hours</span><span class="m red"><b>40%</b> completion</span><span class="m"><b>&#8377;15L</b> revenue</span></div>
+    </div>
   </section>
 
   <section class="case" id="accel">
@@ -126,29 +130,42 @@
     <p class="lead">Two years on the <b>other side of the table</b>, running Accel&#8217;s pre-seed program for 0→1 founders.</p>
 <ul class="pts"><li>Ran it end to end &mdash; picked the founders, built the program across <b>4 cohorts and 2 tracks</b>, and sat with each team from rough idea to first cheque.</li><li>It taught me to read the early signal fast: the teams that worked <b>got inside their problem</b> the way I once tried to get inside hospitals.</li></ul>
     <div class="receipts">
-<div class="rc-top"><div class="metrics"><span class="m"><b>4</b> cohorts</span><span class="m"><b>40+</b> founders backed</span><span class="m"><b>2</b> tracks (AI, LeapTech)</span></div></div>    </div>
+<div class="metrics"><span class="m"><b>4</b> cohorts</span><span class="m"><b>40+</b> founders backed</span><span class="m"><b>2</b> tracks (AI, LeapTech)</span></div>    </div>
   </section>
 
   <section id="now">
-    <div class="sec-head"><span class="sec-title">Building now</span><span class="sec-sub">back to shipping · in the open, mostly with AI</span></div>
-    <div class="lab">
-      <a class="exp" href="https://sniff.fyi" target="_blank" rel="noopener">
-        <div class="frame"><div class="frame-bar"><span class="dotrow"><i></i><i></i><i></i></span><span>sniff.fyi</span></div>
-          <div class="shot"><img src="assets/img/lab/sniff.jpg" alt="Sniff — scan any cat food" loading="lazy"></div></div>
-        <div class="exp-body"><div class="exp-head"><span class="exp-name">Sniff</span><span class="st">Live</span></div>
-          <p>Scan any cat food, see how good it actually is.</p><span class="exp-fig"><b>5K</b> scans · <b>1.2K</b> foods rated</span></div>
+    <div class="sec-head"><span class="sec-title">Building now</span><span class="sec-sub">in the open, mostly with AI</span></div>
+    <div class="builds">
+      <a class="build" href="https://sniff.fyi" target="_blank" rel="noopener">
+        <div class="b-main">
+          <div class="b-head"><span class="b-name">Sniff</span><span class="b-dom">sniff.fyi ↗</span></div>
+          <p class="b-why">Most cat-food rankings are paid placements. Sniff scores any label on what&#8217;s actually in it &mdash; nobody can buy their way up. Hard part isn&#8217;t the app, it&#8217;s trusting the data.</p>
+          <span class="b-fig"><b>5K</b> scans · <b>1.2K</b> foods rated</span>
+        </div>
+        <span class="b-thumb"><img src="assets/img/lab/sniff.jpg" alt="" loading="lazy"></span>
       </a>
-      <a class="exp" href="https://knowyourpay.in" target="_blank" rel="noopener">
-        <div class="frame"><div class="frame-bar"><span class="dotrow"><i></i><i></i><i></i></span><span>knowyourpay.in</span></div>
-          <div class="shot"><img src="assets/img/lab/kyp.jpg" alt="KnowYourPay — are you underpaid?" loading="lazy"></div></div>
-        <div class="exp-body"><div class="exp-head"><span class="exp-name">KnowYourPay</span><span class="st">Live</span></div>
-          <p>Find out if you&#8217;re underpaid for your exact role and city.</p><span class="exp-fig"><b>12K</b> checks · <b>50+</b> cities</span></div>
+      <a class="build" href="https://knowyourpay.in" target="_blank" rel="noopener">
+        <div class="b-main">
+          <div class="b-head"><span class="b-name">KnowYourPay</span><span class="b-dom">knowyourpay.in ↗</span></div>
+          <p class="b-why">Pay in Indian tech is a black box you only crack by asking around. Answer a few questions, see the real range for your exact role and city — no signup, no catch.</p>
+          <span class="b-fig"><b>12K</b> checks · <b>50+</b> cities</span>
+        </div>
+        <span class="b-thumb"><img src="assets/img/lab/kyp.jpg" alt="" loading="lazy"></span>
       </a>
-      <a class="exp" href="https://www.productsenselab.com" target="_blank" rel="noopener">
-        <div class="frame"><div class="frame-bar"><span class="dotrow"><i></i><i></i><i></i></span><span>productsenselab.com</span></div>
-          <div class="shot"><img src="assets/img/lab/psl.jpg" alt="Product Sense Lab" loading="lazy"></div></div>
-        <div class="exp-body"><div class="exp-head"><span class="exp-name">Product Sense Lab</span><span class="st">Live</span></div>
-          <p>Practice PM interviews under pressure, instant AI feedback.</p><span class="exp-fig"><b>800+</b> PMs · <b>3K</b> scored</span></div>
+      <a class="build" href="https://www.productsenselab.com" target="_blank" rel="noopener">
+        <div class="b-main">
+          <div class="b-head"><span class="b-name">Product Sense Lab</span><span class="b-dom">productsenselab.com ↗</span></div>
+          <p class="b-why">Reading frameworks doesn&#8217;t stop you freezing in the room. Practise PM interviews under real time pressure and get scored the moment you finish. The scoring is the whole product &mdash; and the hard bit to get right.</p>
+          <span class="b-fig"><b>800+</b> PMs · <b>3K</b> answers scored</span>
+        </div>
+        <span class="b-thumb"><img src="assets/img/lab/psl.jpg" alt="" loading="lazy"></span>
+      </a>
+      <a class="build" href="https://vouchforit.club" target="_blank" rel="noopener">
+        <div class="b-main">
+          <div class="b-head"><span class="b-name">Vouch</span><span class="b-dom">vouchforit.club ↗</span></div>
+          <p class="b-why">The places you love get buried in chat threads and screenshots. Vouch keeps them in one list you can actually share. The newest one &mdash; just shipped.</p>
+        </div>
+        <span class="b-thumb b-vcover"><span class="vq">vouch</span></span>
       </a>
     </div>
   </section>
@@ -156,10 +173,16 @@
   <section class="close">
     <div class="sec-head"><span class="sec-title">The short version</span></div>
     <h2 class="close-h">One exit, one shutdown I owned, and back to building.</h2>
-    <p>If you&#8217;re hiring for a 0→1 role, the easiest start is a quick conversation.</p>
-    <div class="cta">
-      <a class="btn" href="mailto:rinkeshgorasia@gmail.com">Write to me</a>
-      <a class="btn2" href="https://x.com/rinks__g" target="_blank" rel="noopener">or DM on X →</a>
+    <div class="avail">
+      <button type="button" class="avail-trigger" id="avail-btn" aria-expanded="false" aria-controls="avail-pop"><span class="lbl">Open to 0→1 roles</span><span class="chev" aria-hidden="true">▾</span></button>
+      <div class="avail-pop" id="avail-pop" role="region" aria-label="What I'm looking for">
+        <span class="ap-head">What I'm looking for</span>
+        <p>The earliest stage — a rough problem, no product yet, still figuring out if it's even real. I like being close to users, shipping fast, and being wrong quickly. Founder, founding PM, or a 0→1 lead.</p>
+        <div class="ap-contact">
+          <button type="button" class="ap-cta" id="ap-copy" data-email="rinkeshgorasia@gmail.com"><span class="em">rinkeshgorasia@gmail.com</span> <span class="cp">copy</span></button>
+          <a class="ap-x" href="https://x.com/rinks__g" target="_blank" rel="noopener">or DM me on X →</a>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -167,17 +190,15 @@
     <div class="foot-in">
       <div class="foot-id">
         <span class="foot-name">Rinkesh Gorasia</span>
-        <span class="foot-tag">Product builder in Bengaluru · open to the next 0→1</span>
       </div>
       <nav class="foot-nav">
-        <span class="foot-links"><a href="mailto:rinkeshgorasia@gmail.com">Email</a><a href="https://x.com/rinks__g" target="_blank" rel="noopener">Twitter</a><a href="https://www.linkedin.com/in/rinksg/" target="_blank" rel="noopener">LinkedIn</a></span>
+        <span class="foot-social"><a href="mailto:rinkeshgorasia@gmail.com" aria-label="Email" title="Email"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2Zm0 4-8 5-8-5V6l8 5 8-5v2Z"/></svg></a><a href="https://x.com/rinks__g" target="_blank" rel="noopener" aria-label="X" title="X (formerly Twitter)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.66l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.45-6.231Zm-1.161 17.52h1.833L7.084 4.126H5.117l11.966 15.644Z"/></svg></a><a href="https://www.linkedin.com/in/rinksg/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286ZM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065Zm1.782 13.019H3.555V9h3.564v11.452ZM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003Z"/></svg></a></span>
         <a class="coffee-foot" href="coffee.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 14c.83 .642 2.077 1.017 3.5 1c1.423 .017 2.67 -.358 3.5 -1c.83 -.642 2.077 -1.017 3.5 -1c1.423 -.017 2.67 .358 3.5 1"/><path class="steam s1" d="M8 3a2.4 2.4 0 0 0 -1 2a2.4 2.4 0 0 0 1 2"/><path class="steam s2" d="M12 3a2.4 2.4 0 0 0 -1 2a2.4 2.4 0 0 0 1 2"/><path d="M3 10h14v5a6 6 0 0 1 -6 6h-2a6 6 0 0 1 -6 -6v-5"/><path d="M16.746 16.726a3 3 0 1 0 .252 -5.555"/></svg>the coffee log →</a>
         <a class="foot-top" href="#top">↑ back to the top</a>
       </nav>
     </div>
   </footer>
 
-  <div class="thread" aria-hidden="true"></div>
 </div>
-<script src="assets/ledger.js?v=11"></script>
+<script src="assets/ledger.js?v=18"></script>
 </body></html>

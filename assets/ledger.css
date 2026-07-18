@@ -31,8 +31,6 @@
   --red:#BE3E26;        /* bahi-khata red — status & verdicts  */
   --red-soft:#F4E4DD;   /* red at whisper volume (fills)       */
   --card:#FFFFFF;       /* surfaces that sit on the paper      */
-  --live:#3E6B33;       /* one green: a thing that is running  */
-  --live-bd:#8FB183;
 
   /* -- type ------------------------------------------------- */
   --sans:'Hanken Grotesk',-apple-system,sans-serif;
@@ -51,20 +49,19 @@
 html{scroll-behavior:smooth}
 html,body{overflow-x:clip} /* marks may bleed off the sheet; the sheet never scrolls sideways */
 body{
-  background:var(--paper); color:var(--ink);
+  /* grain lives in the background tile itself (opacity baked into the SVG) —
+     a fixed blend-mode overlay here defeats composited scrolling */
+  background-color:var(--paper);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  color:var(--ink);
   font-family:var(--sans);
   font-size:16.5px; line-height:1.6;
   -webkit-font-smoothing:antialiased;
   position:relative;
 }
-/* grain — paper tooth, not paper colour */
-body::before{
-  content:"";position:fixed;inset:0;pointer-events:none;z-index:9;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
-  opacity:.05; mix-blend-mode:multiply;
-}
 ::selection{background:var(--red-soft)}
 img{max-width:100%}
+a:focus-visible,button:focus-visible{outline:2px solid var(--red);outline-offset:3px}
 
 .mono{font-family:var(--mono);font-feature-settings:'tnum'}
 
@@ -88,24 +85,36 @@ header{padding-top:2.2rem}
 
 /* ============ hero ========================================== */
 .hero{display:grid;grid-template-columns:1fr 230px;gap:3.4rem;padding:var(--s8) 0 var(--s7);align-items:start}
-.status{
-  font-family:var(--mono);font-size:.7rem;color:var(--soft);
-  letter-spacing:.08em;text-transform:uppercase;
-  display:inline-flex;align-items:center;gap:.5rem;margin-bottom:1.3rem;
-}
-.status::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--red);animation:pulse 2.6s ease-in-out infinite}
-@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(190,62,38,.35)}50%{box-shadow:0 0 0 5px rgba(190,62,38,0)}}
 h1{font-weight:600;font-size:2.7rem;line-height:1.08;letter-spacing:-.035em;margin-bottom:1.4rem}
 h1 .dot{color:var(--red)}
 .hero p{color:var(--soft);margin-bottom:1rem;max-width:33rem;font-size:1.05rem}
 .hero p strong{color:var(--ink);font-weight:600}
 a.ln{color:var(--ink);font-weight:600;text-decoration:underline;text-decoration-color:var(--rule-dark);text-underline-offset:3px}
 a.ln:hover{text-decoration-color:var(--red);color:var(--red)}
-.cta{margin-top:1.8rem;display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
-.btn{background:var(--ink);color:var(--paper);padding:.62rem 1.15rem;text-decoration:none;font-weight:600;font-size:.9rem;border:none;cursor:pointer}
-.btn:hover{background:var(--red)}
-.btn2{color:var(--soft);text-decoration:none;font-size:.9rem;border-bottom:1px solid var(--rule-dark);padding-bottom:1px}
-.btn2:hover{color:var(--red);border-color:var(--red)}
+/* availability — a quiet line that opens a small note on what I'm looking for */
+/* lift the whole section so the popover floats above the next one, not under it */
+section:has(.avail){position:relative;z-index:5}
+.avail{position:relative;margin-top:1.7rem}
+.avail-trigger{display:inline-flex;align-items:center;gap:.55rem;font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);background:none;border:0;padding:0;cursor:pointer}
+.avail-trigger::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--red);flex:none}
+.avail-trigger .lbl{border-bottom:1px solid var(--rule-dark);padding-bottom:2px}
+.avail-trigger .chev{font-size:.6rem;transition:transform .18s ease;opacity:.7}
+.avail-trigger:hover{color:var(--red)}
+.avail-trigger:hover .lbl{border-color:var(--red)}
+.avail-trigger[aria-expanded="true"] .lbl{border-color:var(--red)}
+.avail-trigger[aria-expanded="true"] .chev{transform:rotate(180deg)}
+.avail-pop{position:absolute;top:calc(100% + .75rem);left:0;z-index:50;width:21rem;max-width:88vw;background:var(--card);border:1px solid var(--ink);box-shadow:0 18px 40px -18px rgba(28,28,25,.4);padding:1rem 1.1rem;opacity:0;transform:translateY(-5px);pointer-events:none;transition:opacity .16s ease,transform .16s cubic-bezier(.34,1.4,.6,1)}
+.avail-pop.show{opacity:1;transform:none;pointer-events:auto}
+.avail-pop .ap-head{font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);display:block;margin-bottom:.5rem}
+.avail-pop p{font-size:.95rem;line-height:1.5;color:var(--ink);margin:0 0 .7rem}
+.avail-pop .ap-contact{display:flex;flex-direction:column;align-items:flex-start;gap:.55rem;padding-top:.85rem;margin-top:.2rem;border-top:1px solid var(--rule)}
+.avail-pop .ap-cta{font-family:var(--mono);font-size:.74rem;color:var(--red);background:none;border:0;padding:0;cursor:pointer;display:inline-flex;align-items:baseline;gap:.5rem;text-align:left}
+.avail-pop .ap-cta .em{border-bottom:1px solid var(--red-soft)}
+.avail-pop .ap-cta .cp{font-size:.58rem;color:var(--faint);letter-spacing:.08em;text-transform:uppercase}
+.avail-pop .ap-cta:hover .em{border-color:var(--red)}
+.avail-pop .ap-cta:hover .cp{color:var(--red)}
+.avail-pop .ap-x{font-family:var(--mono);font-size:.7rem;color:var(--soft);text-decoration:none}
+.avail-pop .ap-x:hover{color:var(--red)}
 
 /* portrait — placed on the record with crop marks */
 .photo-cell{position:relative}
@@ -141,6 +150,9 @@ section{padding:0 0 var(--s7)}
 .sec-head{border-top:2px solid var(--ink);padding-top:.6rem;margin-bottom:.2rem;display:flex;justify-content:space-between;align-items:baseline;gap:1rem}
 .sec-title{font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
 .sec-sub{font-size:.85rem;color:var(--faint);text-align:right}
+/* "more" — a quiet link at the foot of a list, in the ledger's mono voice */
+a.more{display:inline-block;margin-top:1.5rem;font-family:var(--mono);font-size:.74rem;letter-spacing:.04em;color:var(--soft);text-decoration:none}
+a.more:hover{color:var(--red)}
 
 /* ============ ledger rows (track record) ==================== */
 .row{
@@ -154,59 +166,65 @@ section{padding:0 0 var(--s7)}
 .lmk{width:30px;height:30px;object-fit:contain;filter:grayscale(1) contrast(1.05);opacity:.85;flex:none}
 .row:hover .lmk{filter:none;opacity:1}
 .lmk-m{width:30px;height:30px;flex:none;border:1px solid var(--rule-dark);border-radius:2px;display:inline-flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;color:var(--soft)}
-.stamp{
-  font-size:.6rem;font-weight:600;letter-spacing:.12em;color:var(--red);
-  border:1px solid var(--red);padding:.14rem .45rem;border-radius:2px;
-  transform:rotate(-2deg);text-transform:uppercase;white-space:nowrap;
-}
-.row:hover .stamp{animation:press .35s ease-out}
-@keyframes press{0%{transform:rotate(-2deg) scale(1)}45%{transform:rotate(-3.5deg) scale(1.14)}100%{transform:rotate(-2deg) scale(1)}}
+/* the house bracket — a small label flanked by a red square bracket. The red is
+   reserved for the brackets; the word stays quiet. Simple, one mark, reused everywhere. */
+.crop{font-family:var(--mono);font-size:.64rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);margin-left:.55rem;white-space:nowrap;vertical-align:middle}
+.crop::before{content:"[";color:var(--red);margin-right:.5em}
+.crop::after{content:"]";color:var(--red);margin-left:.5em}
 .row p{color:var(--soft);font-size:.98rem;margin-top:.4rem;max-width:30rem}
-.r-figs{display:flex;flex-direction:column;gap:.55rem;border-left:1px solid var(--rule);padding-left:1.6rem}
-.fig{display:flex;justify-content:space-between;align-items:baseline;font-size:.78rem;color:var(--faint);gap:1rem}
-.fig b{font-family:var(--mono);font-feature-settings:'tnum';font-size:.92rem;color:var(--ink);font-weight:500;white-space:nowrap}
+/* figures of record — each fact stacked: quiet label, prominent value below.
+   right-aligning a mix of numbers and phrases (85 vs "profitable → exit") left a
+   ragged, gappy column; stacking lets the number own its line and phrases read clean. */
+.r-figs{display:flex;flex-direction:column;gap:.95rem;border-left:1px solid var(--rule);padding-left:1.6rem}
+.fig{display:flex;flex-direction:column;gap:.02rem}
+.fig span{font-size:.72rem;color:var(--faint);letter-spacing:.02em}
+.fig b{font-family:var(--mono);font-feature-settings:'tnum';font-size:1.02rem;color:var(--ink);font-weight:500;letter-spacing:-.005em;line-height:1.2}
 .fig.key b{color:var(--red)}
 
 /* ============ the lab (evidence frames) ===================== */
-.lab{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;margin-top:1.6rem}
+/* four live projects → a balanced 2×2 set; each card keeps real presence
+   rather than shrinking into a cramped single row */
+.lab{display:grid;grid-template-columns:repeat(2,1fr);gap:1.6rem;margin-top:1.6rem}
 .exp{text-decoration:none;color:inherit;display:block}
 .frame{
   border:1px solid var(--rule-dark);background:var(--card);
-  box-shadow:0 1px 2px rgba(28,28,25,.05), 0 14px 28px -22px rgba(28,28,25,.35);
+  box-shadow:0 1px 2px rgba(28,28,25,.04), 0 12px 24px -22px rgba(28,28,25,.3);
   transition:transform .18s ease, box-shadow .18s ease;
 }
-.exp:hover .frame{transform:translateY(-3px);box-shadow:0 2px 3px rgba(28,28,25,.06), 0 20px 34px -22px rgba(28,28,25,.42)}
+.exp:hover .frame{transform:translateY(-3px);box-shadow:0 2px 3px rgba(28,28,25,.05), 0 18px 30px -22px rgba(28,28,25,.38)}
 .frame-bar{display:flex;justify-content:space-between;align-items:center;padding:.4rem .7rem;border-bottom:1px solid var(--rule);font-family:var(--mono);font-size:.64rem;color:var(--faint);letter-spacing:.04em}
 .frame-bar .dotrow{display:flex;gap:4px}
 .frame-bar .dotrow i{width:5px;height:5px;border-radius:50%;background:var(--rule-dark)}
 .exp:hover .frame{border-color:var(--ink)}
 .exp:hover .frame-bar .dotrow i:first-child{background:var(--red)}
-.shot{aspect-ratio:16/10.5;overflow:hidden}
-.shot img{width:100%;height:100%;object-fit:cover;object-position:top left;display:block}
+/* a short preview banner (top of each product), not a full-height hero — keeps
+   the shot supporting the card instead of dominating the 2×2 grid */
+.shot{aspect-ratio:16/7;overflow:hidden}
+.shot img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
+/* vouch has no product screenshot yet — a designed cover in its own brand
+   (dark + gold wordmark), faithful to the live site. Swap for a real shot at
+   assets/img/lab/vouch.jpg when there is one. */
+.shot.vcover{background:#1b1a17;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;color:#EFE9DD}
+.shot.vcover .vq{font-family:var(--sans);font-weight:700;font-size:1.5rem;letter-spacing:-.01em;display:inline-flex;align-items:center;gap:.34rem}
+.shot.vcover .vq::before{content:"\201D";color:#E3A94F;font-size:1.7rem;line-height:.6}
+.shot.vcover .vtag{font-family:var(--mono);font-size:.6rem;letter-spacing:.06em;color:#8f887a}
+.shot.vcover .vtag b{color:#E3A94F;font-weight:500}
 .exp-body{padding:.95rem .1rem 0}
 .exp-head{display:flex;justify-content:space-between;align-items:baseline;gap:.8rem}
 .exp-name{font-weight:700;font-size:1.05rem;letter-spacing:-.015em}
 .exp:hover .exp-name{color:var(--red)}
-.st{font-size:.6rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:.13rem .42rem;border-radius:2px;border:1px solid;color:var(--live);border-color:var(--live-bd);white-space:nowrap}
 .exp-body p{color:var(--soft);font-size:.9rem;margin:.25rem 0 .55rem}
 .exp-fig{font-family:var(--mono);font-size:.72rem;color:var(--faint)}
-.exp-fig b{font-feature-settings:'tnum';color:var(--ink);font-weight:500}
-.next-entry{
-  margin-top:1.4rem;border:1px dashed var(--rule-dark);padding:.95rem 1.3rem;
-  display:flex;align-items:baseline;gap:1.2rem;color:var(--soft);
-}
-.next-entry .n2{font-weight:600;color:var(--ink)}
-.next-entry .n3{font-size:.9rem;flex:1}
-.next-entry .n4{font-family:var(--mono);font-size:.7rem;color:var(--faint);letter-spacing:.1em;text-transform:uppercase}
+.exp-fig b{font-feature-settings:'tnum';color:var(--ink);font-weight:500;font-size:.82rem}
+/* vouch is new — no metrics yet; a quiet "just shipped" note holds the figure slot */
+.exp-new{font-family:var(--mono);font-size:.72rem;color:var(--red);letter-spacing:.04em}
 
-/* ============ writing (index rows on the ledger grid) ======= */
+/* ============ writing (index rows — title-led, no catalog numbers) === */
 .post{
-  display:grid;grid-template-columns:5.2rem 1fr;gap:2rem;
+  display:block;
   padding:1.55rem 0;border-bottom:1px solid var(--rule);
-  text-decoration:none;color:inherit;align-items:start;
+  text-decoration:none;color:inherit;
 }
-.p-no{font-family:var(--mono);font-size:.78rem;color:var(--faint);padding-top:.5rem}
-.post:hover .p-no{color:var(--red)}
 .p-title{font-weight:600;font-size:1.35rem;letter-spacing:-.02em;display:inline-flex;align-items:baseline;gap:.6rem}
 .p-title .go{color:var(--red);opacity:0;transform:translateX(-4px);transition:opacity .18s,transform .18s;font-weight:500}
 .post:hover .p-title{color:var(--red)}
@@ -224,11 +242,13 @@ section{padding:0 0 var(--s7)}
 /* ============ footer — editorial sign-off, bookends the header === */
 footer{margin-top:var(--s7);border-top:2px solid var(--ink);padding:1.2rem 0 3.4rem}
 .foot-in{display:flex;justify-content:space-between;align-items:flex-start;gap:2rem}
-.foot-name{font-weight:700;font-size:1rem;letter-spacing:-.01em;display:block;margin-bottom:.45rem}
-.foot-tag{font-family:var(--mono);font-size:.7rem;color:var(--faint);letter-spacing:.04em}
-.foot-nav{display:flex;flex-direction:column;align-items:flex-end;gap:.55rem;text-align:right}
-.foot-links a{color:var(--soft);text-decoration:none;font-size:.88rem;margin-left:1.3rem}
-.foot-links a:hover{color:var(--red)}
+.foot-name{font-weight:700;font-size:1rem;letter-spacing:-.01em;display:block}
+.foot-nav{display:flex;flex-direction:column;align-items:flex-end;gap:.7rem;text-align:right}
+/* social — solid ink glyphs, one recognisable mark each */
+.foot-social{display:inline-flex;align-items:center;gap:1.15rem}
+.foot-social a{color:var(--soft);line-height:0;display:inline-flex}
+.foot-social a:hover{color:var(--red)}
+.foot-social svg{width:16px;height:16px;fill:currentColor}
 .coffee-foot{display:inline-flex;align-items:center;gap:.45rem;text-decoration:none;color:var(--soft);font-size:.88rem}
 .coffee-foot:hover{color:var(--red)}
 .coffee-foot svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
@@ -247,11 +267,6 @@ footer{margin-top:var(--s7);border-top:2px solid var(--ink);padding:1.2rem 0 3.4
   .r-figs{border-left:none;padding-left:0;flex-direction:row;flex-wrap:wrap;gap:1.5rem;margin-top:1rem}
   .fig{flex-direction:column;gap:.15rem;align-items:flex-start}
   .lab{grid-template-columns:1fr;gap:1.8rem}
-  .next-entry{flex-wrap:wrap;gap:.5rem .9rem}
-  .next-entry .n3{flex-basis:100%;order:3}
-  .next-entry .n4{margin-left:auto}
-  .post{grid-template-columns:1fr;gap:.3rem}
-  .p-no{padding-top:0}
   .p-title{font-size:1.2rem}
   .p-title .go{opacity:1;transform:none} /* touch has no hover — the arrow is always there */
 }
@@ -264,36 +279,14 @@ footer{margin-top:var(--s7);border-top:2px solid var(--ink);padding:1.2rem 0 3.4
   .hero{padding-top:2.6rem;padding-bottom:2.8rem}
   h1{font-size:1.95rem}
   .hero p{font-size:1rem}
-  .cta .btn{padding:.7rem 1.3rem} /* touch target */
-  .f-row{flex-direction:column;gap:.8rem}
 }
-
-/* ============ exhibits — personality as document marks ====== */
-/* Patent-style line figures. Ink strokes, mono captions, numbered
-   FIG. Every mark cites a story; none is decoration. */
-.figmark{stroke:var(--ink);fill:none;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;vertical-align:middle;opacity:.75}
-/* plates — exhibits carry true, muted colour (tipped-in figures); they keep their own inks */
-.plate{vertical-align:middle;overflow:visible}
-.fig-sub{display:inline-flex;align-items:center;gap:.6rem;font-family:var(--mono);font-size:.68rem;color:var(--faint);letter-spacing:.06em}
-
-/* simba the inhabitant — walks across the screen when you go quiet */
-.walker{
-  position:fixed;bottom:0;left:-90px;z-index:40;width:64px;height:38px;
-  pointer-events:none;display:none;
-}
-.walker.go{display:block;animation:stroll 14s linear forwards}
-.walker svg{animation:pad .5s steps(2) infinite}
-.walker .body{fill:var(--ink)}
-.walker .tail{fill:none;stroke:var(--ink);stroke-width:3.2;stroke-linecap:round}
-@keyframes stroll{from{left:-90px}to{left:100vw}}
-@keyframes pad{from{transform:translateY(0)}to{transform:translateY(-1.5px)}}
 
 /* lego physics — page assembles on scroll */
 .snap{opacity:0;transform:translateY(10px)}
 .snap.in{opacity:1;transform:none;transition:transform .38s cubic-bezier(.2,1.42,.4,1),opacity .28s ease}
 
 /* the die — somewhere on the board */
-.roll{line-height:0}
+.roll{line-height:0;background:none;border:0;padding:0;cursor:pointer;color:inherit;font:inherit}
 .roll svg{width:19px;height:19px;vertical-align:-4px}
 .roll .face{fill:#C08A4E;stroke:#1C1C19;stroke-width:1.4;stroke-linejoin:round}
 .roll .pip{fill:#1C1C19}
@@ -308,29 +301,17 @@ footer{margin-top:var(--s7);border-top:2px solid var(--ink);padding:1.2rem 0 3.4
 
 
 
-/* the sunflower is heliotropic — its head turns toward your cursor */
-.sunflower .sf-head{transform-origin:22px 27px;will-change:transform}
-.sunflower.sway .sf-head{animation:sway 7s ease-in-out infinite alternate}
-@keyframes sway{from{transform:rotate(-4deg)}to{transform:rotate(4deg)}}
-
 .steam{transform-box:fill-box;animation:steam 3.6s ease-in-out infinite;opacity:0}
 .steam.s2{animation-delay:1.7s}
 @keyframes steam{0%{opacity:0;transform:translateY(3px)}35%{opacity:.6}75%{opacity:0;transform:translateY(-3.5px)}100%{opacity:0;transform:translateY(-3.5px)}}
 
 
 
-/* the meeple stands beside the shelf door; it hops when you knock */
-.h-row nav a svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;vertical-align:-1.5px;margin-left:.34rem}
-.h-row nav a:hover svg{animation:hop .4s ease}
-@keyframes hop{0%{transform:none}40%{transform:translateY(-3.5px) rotate(-9deg)}100%{transform:none}}
-
 @media(max-width:640px){
-    .signpost{right:1rem;font-size:.56rem}
   .h-clock{display:none}
   .die-pop{width:13rem}
   .foot-in{flex-direction:column;gap:1.6rem}
   .foot-nav{align-items:flex-start;text-align:left}
-  .foot-links a{margin:0 1.3rem 0 0}
 }
 
 /* ============ motion discipline ============================= */

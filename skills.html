@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>skills — Rinkesh Gorasia</title>
+<meta name="description" content="A public shelf of the AI skills I lean on — a few I wrote, most I reach for daily. Each is a /command that makes an agent good at one thing." />
+<link rel="canonical" href="https://rinkeshgorasia.com/skills.html" />
+<meta name="theme-color" content="#FCFCF9" />
+<link rel="manifest" href="manifest.json" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Rinkesh Gorasia" />
+<meta property="og:url" content="https://rinkeshgorasia.com/skills.html" />
+<meta property="og:title" content="skills — Rinkesh Gorasia" />
+<meta property="og:description" content="A public shelf of the AI skills I lean on — a few I wrote, most I reach for daily." />
+<meta property="og:image" content="https://rinkeshgorasia.com/assets/og.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="skills — Rinkesh Gorasia" />
+<meta name="twitter:description" content="A public shelf of the AI skills I lean on — a few I wrote, most I reach for daily." />
+<meta name="twitter:image" content="https://rinkeshgorasia.com/assets/og.png" />
+<link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg" />
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap"></noscript>
+<link rel="stylesheet" href="assets/ledger.css?v=18">
+<style>
+  .phead{padding:var(--s8) 0 var(--s5)}
+  .phead p{color:var(--soft);max-width:36rem;font-size:1.05rem;margin-top:1rem}
+
+  /* skills read as an index of /commands — mono invocation is the hero, not a bullet list */
+  .sk-sec{padding-bottom:var(--s6)}
+  .sk-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0 3rem;margin-top:.4rem}
+  .skill{border-top:1px solid var(--rule);padding:1.05rem 0}
+  .sk-top{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+  .sk-name{font-family:var(--mono);font-size:.94rem;font-weight:500;color:var(--ink);letter-spacing:-.01em}
+  .sk-name .sl{color:var(--red)}
+  .skill:hover .sk-name{color:var(--red)}
+  .sk-src{font-family:var(--mono);font-size:.64rem;color:var(--faint);letter-spacing:.05em;white-space:nowrap}
+  .sk-src.mine{color:var(--red)}
+  .sk-desc{font-size:.92rem;color:var(--soft);line-height:1.5;margin-top:.45rem;max-width:30rem}
+
+  @media(max-width:760px){ .sk-grid{grid-template-columns:1fr;gap:0} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header id="top">
+    <div class="h-row">
+      <a class="h-name" href="index.html">Rinkesh Gorasia</a>
+      <span class="h-right"><nav><a href="index.html">Home</a><a href="work.html">Work</a><a href="writing.html">Writing</a><a class="on" href="skills.html">Skills</a></nav><button type="button" class="roll" id="roll" aria-label="Roll the die"><svg viewBox="0 0 24 24" aria-hidden="true"><rect class="face" x="2.5" y="2.5" width="19" height="19" rx="4"/><g class="pips"><circle class="pip" cx="7" cy="7" r="1.7"/><circle class="pip" cx="17" cy="7" r="1.7"/><circle class="pip" cx="12" cy="12" r="1.7"/><circle class="pip" cx="7" cy="17" r="1.7"/><circle class="pip" cx="17" cy="17" r="1.7"/></g></svg></button><div class="die-pop" id="die-pop" role="status"><div class="dp-top"><span class="dp-num">roll me</span><span class="dp-die">⚄</span></div><p>Six sides. Roll to meet one.</p></div><span class="h-clock" id="h-clock"></span></span>
+    </div>
+  </header>
+
+  <section class="phead">
+    <h1>Skills<span class="dot">.</span></h1>
+    <p>A public shelf of the AI skills I actually reach for — a couple I wrote, the rest by people whose taste I trust. Each is a <span class="mono">/command</span> that makes an agent genuinely good at one thing.</p>
+  </section>
+
+  <section class="sk-sec">
+    <div class="sec-head"><span class="sec-title">Design &amp; craft</span><span class="sec-sub">3 skills</span></div>
+    <div class="sk-grid">
+      <div class="skill"><div class="sk-top"><span class="sk-name"><span class="sl">/</span>design-craft</span><span class="sk-src mine"><span class="crop">Mine</span></span></div><p class="sk-desc">My design process harness — understand the user's moment, design, render, judge. Not "assemble components and ship."</p></div>
+      <div class="skill"><div class="sk-top"><span class="sk-name"><span class="sl">/</span>cliche-blacklist</span><span class="sk-src mine"><span class="crop">Mine</span></span></div><p class="sk-desc">The running list of AI design &amp; copy clichés I refuse to ship — swept against before anything user-facing goes out.</p></div>
+      <div class="skill"><div class="sk-top"><span class="sk-name"><span class="sl">/</span>emil-design-eng</span><span class="sk-src">Emil Kowalski</span></div><p class="sk-desc">Emil's philosophy on UI polish, animation, and the invisible details that make software feel great.</p></div>
+    </div>
+  </section>
+
+  <section class="sk-sec">
+    <div class="sec-head"><span class="sec-title">Research &amp; web</span><span class="sec-sub">2 skills</span></div>
+    <div class="sk-grid">
+      <div class="skill"><div class="sk-top"><span class="sk-name"><span class="sl">/</span>firecrawl-search</span><span class="sk-src">Firecrawl</span></div><p class="sk-desc">Real web search with full-page content extracted, not just snippets.</p></div>
+      <div class="skill"><div class="sk-top"><span class="sk-name"><span class="sl">/</span>firecrawl-scrape</span><span class="sk-src">Firecrawl</span></div><p class="sk-desc">Clean markdown from any URL — including JavaScript-rendered SPAs that break a plain fetch.</p></div>
+    </div>
+  </section>
+
+  <section class="sk-sec" style="padding-bottom:var(--s5)">
+    <div class="sec-head"><span class="sec-title">Build &amp; ship</span><span class="sec-sub">2 skills</span></div>
+    <div class="sk-grid">
+      <div class="skill"><div class="sk-top"><span class="sk-name"><span class="sl">/</span>vercel-react-best-practices</span><span class="sk-src">Vercel</span></div><p class="sk-desc">React and Next.js performance patterns straight from Vercel Engineering.</p></div>
+      <div class="skill"><div class="sk-top"><span class="sk-name"><span class="sl">/</span>vercel-optimize</span><span class="sk-src">Vercel</span></div><p class="sk-desc">Cut Vercel cost and fix slow routes with metric-backed, version-aware recommendations.</p></div>
+    </div>
+  </section>
+  <footer>
+    <div class="foot-in">
+      <div class="foot-id">
+        <span class="foot-name">Rinkesh Gorasia</span>
+      </div>
+      <nav class="foot-nav">
+        <span class="foot-social"><a href="mailto:rinkeshgorasia@gmail.com" aria-label="Email" title="Email"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2Zm0 4-8 5-8-5V6l8 5 8-5v2Z"/></svg></a><a href="https://x.com/rinks__g" target="_blank" rel="noopener" aria-label="X" title="X (formerly Twitter)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.66l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.45-6.231Zm-1.161 17.52h1.833L7.084 4.126H5.117l11.966 15.644Z"/></svg></a><a href="https://www.linkedin.com/in/rinksg/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286ZM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065Zm1.782 13.019H3.555V9h3.564v11.452ZM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003Z"/></svg></a></span>
+        <a class="coffee-foot" href="coffee.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 14c.83 .642 2.077 1.017 3.5 1c1.423 .017 2.67 -.358 3.5 -1c.83 -.642 2.077 -1.017 3.5 -1c1.423 -.017 2.67 .358 3.5 1"/><path class="steam s1" d="M8 3a2.4 2.4 0 0 0 -1 2a2.4 2.4 0 0 0 1 2"/><path class="steam s2" d="M12 3a2.4 2.4 0 0 0 -1 2a2.4 2.4 0 0 0 1 2"/><path d="M3 10h14v5a6 6 0 0 1 -6 6h-2a6 6 0 0 1 -6 -6v-5"/><path d="M16.746 16.726a3 3 0 1 0 .252 -5.555"/></svg>the coffee log →</a>
+        <a class="foot-top" href="#top">↑ back to the top</a>
+      </nav>
+    </div>
+  </footer>
+
+</div>
+<script src="assets/ledger.js?v=18"></script>
+</body></html>

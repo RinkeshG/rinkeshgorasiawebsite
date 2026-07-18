@@ -31,8 +31,7 @@
 }
 *{margin:0;box-sizing:border-box}
 html,body{height:100%;overflow:hidden}
-body{background:radial-gradient(140% 125% at 50% 40%,transparent 58%,rgba(72,58,38,.075) 100%),#FAF6ED;font-family:var(--sans);color:var(--ink);-webkit-font-smoothing:antialiased}
-body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");opacity:.05;mix-blend-mode:multiply}
+body{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"),radial-gradient(140% 125% at 50% 40%,transparent 58%,rgba(72,58,38,.075) 100%);background-color:#FAF6ED;font-family:var(--sans);color:var(--ink);-webkit-font-smoothing:antialiased}
 
 .dbar{position:fixed;top:0;left:0;right:0;z-index:91;display:flex;justify-content:space-between;align-items:center;padding:16px 34px;font-family:var(--mono);font-size:.75rem;border-bottom:1px solid var(--rule);background:color-mix(in srgb,var(--paper) 85%,transparent);backdrop-filter:blur(6px)}
 .dnav a{color:var(--soft);text-decoration:none;margin-left:18px;transition:color .15s}
@@ -59,8 +58,8 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;ba
 .ambient{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0;transition:opacity .7s;background:radial-gradient(70% 55% at 50% 84%,var(--amb,transparent),transparent 72%)}
 .ambient.on{opacity:0}
 
-.table{position:absolute;inset:0;display:grid;place-items:center;transition:opacity .45s,transform .45s;z-index:2}
-.table.hide{opacity:0;transform:scale(.94);pointer-events:none}
+.table{position:absolute;inset:0;display:grid;place-items:center;transition:opacity .45s,transform .45s,visibility .45s;z-index:2}
+.table.hide{opacity:0;transform:scale(.94);pointer-events:none;visibility:hidden}
 .deckrow{display:flex;align-items:center;justify-content:center;gap:46px;transform-style:preserve-3d;transition:transform .25s ease-out}
 .deck{position:relative;width:188px;cursor:pointer;text-align:center}
 .deck-in{transition:transform .45s var(--spring)}
@@ -186,8 +185,8 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;ba
   <div class="ambient" id="ambient"></div>
   <div class="spot" id="spot"></div>
   <header class="dbar">
-    <nav class="dnav"><a href="index.html">Home</a><a href="work.html">Work</a><a href="writing.html">Writing</a><a class="on" href="shelf.html">Shelf</a></nav>
-    <span class="ctrls"><span class="clock" id="clock"></span><button class="cbtn close" id="close">← all decks</button><button class="cbtn" id="sound">sound on</button></span>
+    <nav class="dnav"><a href="index.html">Home</a><a href="work.html">Work</a><a href="writing.html">Writing</a><a href="skills.html">Skills</a><a class="on" href="shelf.html">Shelf</a></nav>
+    <span class="ctrls"><span class="clock" id="clock"></span><button class="cbtn close" id="close">← all decks</button><button class="cbtn" id="sound" aria-pressed="true" title="turn sound off">sound: on</button></span>
   </header>
   <div class="lede"><h1 id="title" title="deal me a random card">the shelf<span class="dot">.</span></h1><p class="sub" id="sub">pick a deck — it's the stuff that explains me.</p></div>
 
@@ -263,6 +262,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;ba
 
   /* sound, paper foley */
   var actx,soundOn=true;
+  try{ soundOn = localStorage.getItem('shelf-sound')!=='off'; }catch(e){}
   function au(){ if(!actx){try{actx=new (window.AudioContext||window.webkitAudioContext)();}catch(e){}} if(actx&&actx.state==='suspended')actx.resume(); return actx; }
   function noise(dur,f,q,vol){ var a=au(); if(!a)return; var n=Math.floor(a.sampleRate*dur),buf=a.createBuffer(1,n,a.sampleRate),d=buf.getChannelData(0); for(var i=0;i<n;i++)d[i]=(Math.random()*2-1); var s=a.createBufferSource(); s.buffer=buf; var bp=a.createBiquadFilter(); bp.type='bandpass'; bp.frequency.value=f; bp.Q.value=q; var g=a.createGain(); var t=a.currentTime; g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(vol,t+dur*.2); g.gain.exponentialRampToValueAtTime(.0001,t+dur); s.connect(bp); bp.connect(g); g.connect(a.destination); s.start(); s.stop(t+dur+.02); }
   function tone(dur,f,vol,type){ var a=au(); if(!a)return; var o=a.createOscillator(); o.type=type||'sine'; o.frequency.value=f; var g=a.createGain(); var t=a.currentTime; g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(vol,t+.012); g.gain.exponentialRampToValueAtTime(.0001,t+dur); o.connect(g); g.connect(a.destination); o.start(); o.stop(t+dur+.02); }
@@ -416,7 +416,10 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;ba
     var h=document.querySelector('#fwin .holo'); if(h){h.style.opacity='.7';h.style.backgroundPosition=(50+px*50)+'% '+(50+py*50)+'%';}
   });
 
-  document.getElementById('sound').addEventListener('click',function(){ soundOn=!soundOn; this.textContent=soundOn?'sound on':'sound off'; if(soundOn){au();riffle();} });
+  var sBtn=document.getElementById('sound');
+  function syncSound(){ sBtn.textContent=soundOn?'sound: on':'sound: off'; sBtn.setAttribute('aria-pressed',String(soundOn)); sBtn.title=soundOn?'turn sound off':'turn sound on'; }
+  syncSound();
+  sBtn.addEventListener('click',function(){ soundOn=!soundOn; try{ localStorage.setItem('shelf-sound',soundOn?'on':'off'); }catch(e){} syncSound(); if(soundOn){au();riffle();} });
 
   /* ---- click empty felt to close the open deck (desktop only; mobile uses the button, and tap-outside here mis-fires on touch) ---- */
   felt.addEventListener('click',function(e){ if(isMobile()||!felt.classList.contains('live')||e.target!==felt) return;
@@ -457,7 +460,6 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;ba
   /* ---- keyboard: Esc closes whatever's open; konami guarantees the joker ---- */
   var KON=[38,38,40,40,37,39,37,39,66,65], kpos=0;
   window.addEventListener('keydown',function(e){
-    var ck=document.getElementById('cmdk'); if(ck&&ck.classList.contains('open')) return; /* let the ⌘K palette own keys while open */
     var tg=e.target; if(tg&&(tg.tagName==='INPUT'||tg.tagName==='TEXTAREA'||tg.isContentEditable)) return; /* don't read the konami out of someone's typing */
     if(e.key==='Escape'){ if(scrim.classList.contains('on')) closeFocus(); else if(felt.classList.contains('live')) closeDeck(); return; }
     if(scrim.classList.contains('on') && e.key==='Tab'){ e.preventDefault(); try{ fcard.focus(); }catch(_){} return; }  /* trap focus inside the card dialog */

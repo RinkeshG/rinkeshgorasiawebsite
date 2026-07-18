@@ -9,8 +9,9 @@
 <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="assets/ledger.css?v=11">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap"></noscript>
+<link rel="stylesheet" href="assets/ledger.css?v=18">
 <style>
 :root{--eout:cubic-bezier(.2,.85,.25,1)}
 .lost{min-height:calc(100vh - 150px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:8px;padding-bottom:40px}
@@ -26,7 +27,7 @@
 .paws svg{width:18px;height:18px;color:var(--faint)}
 .mrrp404{position:absolute;right:-58px;top:8px;font-family:var(--mono);font-size:.68rem;color:var(--ink);background:var(--card);border:1px solid var(--ink);padding:6px 10px;opacity:0;transform:translateY(5px);transition:opacity .22s,transform .22s var(--eout);pointer-events:none;white-space:nowrap}
 .mrrp404.show{opacity:1;transform:none}
-.lost h1{font-size:1.9rem;font-weight:600;color:var(--ink);letter-spacing:-.03em;margin-top:46px;line-height:1.1}
+.lost h1{font-size:1.9rem;font-weight:600;color:var(--ink);letter-spacing:-.03em;margin-top:88px;line-height:1.1}
 .lost .hint{font-family:var(--mono);font-size:.68rem;color:var(--faint);opacity:0;transition:opacity .4s}
 .lost .hint.on{opacity:1}
 .lost .cta{margin-top:20px;display:inline-flex;gap:1.2rem}
@@ -40,6 +41,7 @@
   .c404 .d{font-size:2rem}
   .paws{right:-2px;bottom:-4px;gap:10px}.paws svg{width:15px;height:15px}
   .mrrp404{right:-6px;top:-4px}
+  .lost h1{margin-top:60px}
 }
 @media(prefers-reduced-motion:reduce){.paws{opacity:.5}}
 </style>
@@ -50,7 +52,7 @@
   <header id="top">
     <div class="h-row">
       <a class="h-name" href="index.html">Rinkesh Gorasia</a>
-      <span class="h-right"><nav><a href="index.html">Home</a><a href="work.html">Work</a><a href="writing.html">Writing</a><a href="shelf.html">Shelf<svg class="plate" viewBox="0 0 24 24" aria-hidden="true"><path fill="#C08A4E" stroke="#1C1C19" stroke-width="1.2" stroke-linejoin="round" d="M12 2.6c1.7 0 2.9 1.3 2.9 2.9 0 .9-.4 1.7-1 2.2 1 .5 2.3 1.4 3.7 2 1.6.7 3.3 1.2 3.3 2.5 0 .8-.6 1.3-1.5 1.3h-3.3c.3 1.9 1.3 3.4 2.3 4.7.6.8.1 1.9-.9 1.9h-4.2c-.5 0-.9-.3-1.1-.8l-1.2-3-1.2 3c-.2.5-.6.8-1.1.8H4.5c-1 0-1.5-1.1-.9-1.9 1-1.3 2-2.8 2.3-4.7H2.6c-.9 0-1.5-.5-1.5-1.3 0-1.3 1.7-1.8 3.3-2.5 1.4-.6 2.7-1.5 3.7-2-.6-.5-1-1.3-1-2.2 0-1.6 1.2-2.9 2.9-2.9z"/></svg></a></nav><a href="#" class="roll" id="roll" title="six sides of me — roll one" aria-label="Roll the die"><svg viewBox="0 0 24 24" aria-hidden="true"><rect class="face" x="2.5" y="2.5" width="19" height="19" rx="4"/><g class="pips"><circle class="pip" cx="7" cy="7" r="1.7"/><circle class="pip" cx="17" cy="7" r="1.7"/><circle class="pip" cx="12" cy="12" r="1.7"/><circle class="pip" cx="7" cy="17" r="1.7"/><circle class="pip" cx="17" cy="17" r="1.7"/></g></svg></a><div class="die-pop" id="die-pop"><div class="dp-top"><span class="dp-num">roll me</span><span class="dp-die">⚄</span></div><p>Six sides. Roll to meet one.</p></div><span class="h-clock" id="h-clock"></span></span>
+      <span class="h-right"><nav><a href="index.html">Home</a><a href="work.html">Work</a><a href="writing.html">Writing</a><a href="skills.html">Skills</a></nav><button type="button" class="roll" id="roll" aria-label="Roll the die"><svg viewBox="0 0 24 24" aria-hidden="true"><rect class="face" x="2.5" y="2.5" width="19" height="19" rx="4"/><g class="pips"><circle class="pip" cx="7" cy="7" r="1.7"/><circle class="pip" cx="17" cy="7" r="1.7"/><circle class="pip" cx="12" cy="12" r="1.7"/><circle class="pip" cx="7" cy="17" r="1.7"/><circle class="pip" cx="17" cy="17" r="1.7"/></g></svg></button><div class="die-pop" id="die-pop" role="status"><div class="dp-top"><span class="dp-num">roll me</span><span class="dp-die">⚄</span></div><p>Six sides. Roll to meet one.</p></div><span class="h-clock" id="h-clock"></span></span>
     </div>
   </header>
 
@@ -65,11 +67,11 @@
 
     <h1>This page fell off the shelf.</h1>
     <p class="hint" id="hint">tap to knock it over again</p>
-    <span class="cta"><a href="index.html">← back home</a><a href="shelf.html">browse the shelf →</a></span>
+    <span class="cta"><a href="index.html">← back home</a><a href="writing.html">read the writing →</a></span>
   </main>
 
 </div>
-<script src="assets/ledger.js?v=11"></script>
+<script src="assets/ledger.js?v=18"></script>
 <script>
 (function(){
   var deck=document.getElementById('deck'), mrrp=document.getElementById('mrrp404'),

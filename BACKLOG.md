@@ -5,7 +5,145 @@ what's intentionally deferred so it isn't lost.
 
 ---
 
-## ✅ Shipped this pass (branch `claude/affectionate-allen-b46ea5`)
+## ✅ Shipped — round 5 (branch `claude/light-version-ux-audit-dfd5d4`)
+
+- **House bracket → a literal `[ ]`.** The corner crop-marks still read fussy, so the tag is
+  now a plain red square bracket around a quiet word — `[ ACQUIRED ]`, `[ MINE ]`. One mark,
+  red reserved for the brackets. Design system updated to match.
+- **Skills page cut to quality, not quantity.** Removed every generic/bundled Anthropic skill
+  (docs, pdf, code-review, deep-research, skill-creator, dataviz, brand-system, writing-
+  guidelines, web-animation, artifact-design…) and `ankit-style-tweets`. Left a tight curated
+  set: **my two** (design-craft, cliche-blacklist) + Emil Kowalski's design-eng + Firecrawl
+  (search, scrape) + Vercel (react-best-practices, optimize) = 7 across 3 groups. Dropped the
+  "21 skills · 3 mine…" stat line.
+  - *Curation is still yours to finalize.* Firecrawl/Vercel are borderline "tools anyone can
+    add" — if you want it tighter (just yours + Emil), say so; equally, add back anything I cut
+    that you actually authored or want to showcase.
+
+## ✅ Shipped — round 4 (branch `claude/light-version-ux-audit-dfd5d4`)
+
+- **Lab screenshots were dominating the 2×2.** Going 3-across → 2×2 widened each card to
+  ~27rem, so the 16:10.5 shots ballooned to ~18rem tall and became a wall of images. Cut the
+  shot to a short **16:7 preview banner** (product hero top) + softened the frame shadow, so
+  the image supports the card instead of out-shouting the name/one-liner/stat. 2×2 kept.
+- **Coffee page footer no longer self-links.** Removed the "the coffee log →" link from
+  `coffee.html`'s own footer (it pointed at the page you're already on). Every other page keeps
+  it.
+
+## ✅ Shipped — round 3 (branch `claude/light-version-ux-audit-dfd5d4`)
+
+- **Track-record figures re-formatted.** The label-left / value-right column mixed numbers
+  (`85`) with phrases (`profitable → exit`), so right-aligning left a ragged, gappy column.
+  Fixed by *stacking* each fact — quiet label, prominent value below — so the number owns its
+  line and phrases read clean. Same treatment desktop + mobile now.
+- **Crop-bracket tag refined.** It read cramped because fixed corner-marks are proportionally
+  large around a tiny word. Gave the label real air (more padding, smaller/wider-tracked text)
+  so the brackets frame it like an intentional clipped stamp, like the portrait frame.
+- **Availability popover reworked.** "write to me" now **copies the email** (click → "copied ✓",
+  clipboard API + legacy fallback) instead of firing a mail client. The reply-time line is gone
+  (a reply-time promise is a liability); replaced with a quiet **"or DM me on X →"** as the
+  alternative channel.
+- **New `/skills` page + nav item.** A public shelf of AI skills, designed in the Ledger
+  language — each skill is its `/command` invocation (mono, red slash), grouped by craft with
+  counts, sources on the right, and *my* three marked with the house bracket ("MINE"). 2-col
+  desktop → 1-col mobile. Added to nav, sitemap, and llms.txt.
+
+### ⚑ Notes / needs you
+
+- **Skills content is my best-effort curation.** ~21 skills across 6 groups; authorship marked
+  "MINE" only for the three clearly yours (design-craft, cliche-blacklist, ankit-style-tweets)
+  and sourced to Anthropic / Vercel / Firecrawl / Emil Kowalski otherwise. Verify the list,
+  the attributions, and add/remove to taste. No repo links yet (none to link to) — say if
+  there's a GitHub and each `/command` can link out.
+- **"This isn't looking good" — I read it as the ACQUIRED crop-bracket** (the image you sent)
+  and refined its proportions. If you meant a different element (the Vouch cover, the popover),
+  point me at it.
+
+---
+
+## ✅ Shipped — the "calm record", round 2 (branch `claude/light-version-ux-audit-dfd5d4`)
+
+- **Header** — Bengaluru moved off the name and into the clock: one mono line, `Bengaluru ·
+  HH:MM IST`. Place lives with time, everywhere. (Clock still hides on phones.)
+- **House bracket** — the portrait's red corner crop-marks are now a reusable tag motif
+  (`.crop`). "Acquired" wears it instead of parentheses; the design system documents it as the
+  one way to tag a label (`Acquired / Shipped / Live` demos). No generic pills anywhere.
+- **Availability popover** — "Open to 0→1 roles" is no longer a bare mailto. It opens a small
+  note (die-popover styled) on what a 0→1 role means here + a mailto, and a **time-aware reply
+  line** read off Bengaluru's clock ("It's evening in Bengaluru right now — I'll reply when I'm
+  back at the desk"). On home hero and work close. Placeholder copy — refine in your voice.
+- **Lab is a 2×2 grid of four cards.** Vouch is a full card now (not a text row), with a
+  designed dark/gold cover + "Just shipped". See the Vouch-image note below.
+- **Work "Building now" thumbnails** got warm elevation + hover-lift (were flat/placeholder-
+  ish); Vouch there uses a matching dark/gold "vouch" tile.
+- **Intro personality line** — the hero closes on coffee, board games and Simba, linking the
+  coffee log and the shelf, so it reads as a person not a menu.
+- **`design-system.html` rebuilt** to the current system: house bracket, availability note,
+  social icons, 2×2 project card, updated principles (calm-over-clever, depth on real things
+  only), motion, and "never" list. Removed dead `--live` tokens from `ledger.css`.
+
+### ⚑ Flagged / needs you
+
+- **Vouch has no fetchable cover image.** `vouchforit.club` exposes no `og:image` and has no
+  `<img>` on the page (every OG route returns app HTML). I built an on-brand dark/gold CSS
+  cover from the live site's look. To use a real shot, drop it at `assets/img/lab/vouch.jpg`
+  and swap the `.shot.vcover` block for an `<img>`. Vouch also has no metrics yet → "Just
+  shipped" holds the figure slot; add real numbers when you have them.
+- **Timezone idea — my read:** the header clock (his local time) + the availability popover's
+  time-aware reply line already deliver the useful, thoughtful version (sets reply
+  expectations at the contact moment). A full "your time vs my time" visitor-timezone diff
+  would be a gimmick — more clutter than value — so I did **not** build it. Say if you disagree.
+- **Coffee "no-photo / detect context" note was unclear** — all three current coffee entries
+  have photos, and the card already falls back to a mono-initial tile when one is missing.
+  Left unchanged; tell me what you were seeing if there's a specific case.
+
+---
+
+## ✅ Shipped — the "calm record" edit (branch `claude/light-version-ux-audit-dfd5d4`)
+
+Direction: strip the landing-page scaffolding (badges, stamps, buttons, catalog numbers,
+reading-time), let the writing and work carry weight, one plain language throughout.
+
+- **Hero** — removed the pulsing status badge and the Write-to-me / DM-on-X buttons.
+  "Open to 0→1 roles" is now a quiet mono link (mailto) after the intro. No CTAs.
+- **Header** — "Bengaluru" sits beside the wordmark (small mono, faint) on every page.
+  The die is now a real `<button>`; its "roll me" invite shows on hover before the first roll.
+- **Track record** — the rotated red "Acquired" stamp → a subtle `(acquired)` mono aside in
+  the figure-caption's voice. Data figures bumped up a notch (they're the proof).
+- **Home "The lab" → "Built & shipped w/ AI"** (sub-line dropped). "Live" pills removed from
+  every project. Vouch is live now — the dashed "brewing" box became a real link row to
+  `vouchforit.club`.
+- **Work / Building now** — rebuilt as context-led rows: name + domain + a sharp "why /
+  what's hard" line + figures, with the screenshot demoted to a small side thumbnail (no
+  longer the hero). Vouch added with a "V" monogram tile. Close section lost its buttons and
+  ends on the same quiet availability link.
+- **Writing** — catalog numbers (01/02/…) removed from the list and article kickers;
+  "~2 min · written from…" reading-time lines removed; "Field note(s)" language purged (one
+  word: writing). "all writing →" moved to the foot of the home list. Article "talk to me
+  about it →" removed. Career-Leap meta description completed (was truncated mid-word).
+- **Footer** — dropped the "Product builder in Bengaluru · open to the next 0→1" tagline;
+  Email / X / LinkedIn are now solid ink glyph icons.
+
+## ⚑ Flagged this pass — not changed, your call
+
+- **`design-system.html` is now out of sync.** It documents the *old* components (status
+  badge, Live pill, filled buttons, boxed stamp, post numbers) as live examples — all of
+  which this pass changed or removed, so it renders stale. It's internal and unlinked (not in
+  nav or sitemap). Decision: refresh it to the new system, or retire it.
+- **Project stat numbers are still rough** (5K scans, 12K checks, 800+ PMs, ₹15L, etc.).
+  They're now visually louder (bigger figures + count-up). Worth confirming the real values
+  before they're the loudest thing on the page. The "why / what's hard" copy on the work page
+  is my honest draft from each product's premise — read it in your own voice and adjust.
+- **The die is now one of the last playful elements** after this calm-down. It's personality,
+  not noise — I'd keep it — but worth a deliberate keep/cut call rather than default.
+- **Header shows both "Bengaluru" and local IST time.** Mild place/timezone redundancy; reads
+  fine as bookends. Noting only if you'd rather drop one.
+- **Every header/footer/`<head>` edit had to be scripted across 9 files.** Reinforces the
+  standing Astro note below — the shared chrome is copy-pasted, and it's the real friction.
+
+---
+
+## ✅ Shipped earlier (branch `claude/affectionate-allen-b46ea5`)
 
 - [x] **Mobile home buries the pitch** — merged from `claude/busy-jackson-66ef0e`: name
   leads, square photo capped, one column with intentional spacing + touch hygiene.

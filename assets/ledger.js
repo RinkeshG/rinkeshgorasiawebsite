@@ -4,7 +4,7 @@
 
   /* figures tally up like ledger entries when they enter view */
   if (!reduced && 'IntersectionObserver' in window) {
-    var els = document.querySelectorAll('.fig b, .exp-fig b');
+    var els = document.querySelectorAll('.fig b, .exp-fig b, .b-fig b');
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
         if (!e.isIntersecting) return;
@@ -50,11 +50,51 @@
   if (clock) {
     var tick = function () {
       var ist = new Date(Date.now() + (330 + new Date().getTimezoneOffset()) * 60000);
-      clock.textContent = String(ist.getHours()).padStart(2, '0') + ':' +
+      clock.textContent = 'Bengaluru · ' + String(ist.getHours()).padStart(2, '0') + ':' +
                           String(ist.getMinutes()).padStart(2, '0') + ' IST';
     };
     tick();
     setInterval(tick, 30000);
+  }
+
+  /* the 0→1 availability note — click to see what I'm actually looking for.
+     "write to me" copies the address rather than firing a mail client. */
+  var availBtn = document.getElementById('avail-btn');
+  var availPop = document.getElementById('avail-pop');
+  if (availBtn && availPop) {
+    var copyBtn = document.getElementById('ap-copy');
+    if (copyBtn) {
+      var legacyCopy = function (text) {
+        try {
+          var ta = document.createElement('textarea');
+          ta.value = text; ta.setAttribute('readonly', '');
+          ta.style.position = 'absolute'; ta.style.left = '-9999px';
+          document.body.appendChild(ta); ta.select();
+          document.execCommand('copy'); document.body.removeChild(ta);
+        } catch (e) {}
+      };
+      copyBtn.addEventListener('click', function () {
+        var email = copyBtn.getAttribute('data-email') || '';
+        var prev = copyBtn.innerHTML;
+        var flash = function () {
+          copyBtn.innerHTML = '<span class="em">copied ✓</span>';
+          setTimeout(function () { copyBtn.innerHTML = prev; }, 1600);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(email).then(flash, function () { legacyCopy(email); flash(); });
+        } else { legacyCopy(email); flash(); }
+      });
+    }
+    var availToggle = function (open) {
+      var show = open == null ? !availPop.classList.contains('show') : open;
+      availPop.classList.toggle('show', show);
+      availBtn.setAttribute('aria-expanded', String(show));
+    };
+    availBtn.addEventListener('click', function (e) { e.stopPropagation(); availToggle(); });
+    document.addEventListener('click', function (e) {
+      if (!availPop.contains(e.target) && !availBtn.contains(e.target)) availToggle(false);
+    });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') availToggle(false); });
   }
 
   /* the site faces the light — paper follows Bengaluru's sun */
@@ -96,9 +136,17 @@
       });
     }
     var last = 5;
-    roll.addEventListener('click', function (e) {
-      e.preventDefault();
+    /* before the first roll, hovering the die shows its own invitation
+       ("roll me") — the affordance explains itself instead of a title tooltip.
+       touch skips this: the first tap rolls, which is its own explanation. */
+    var rolled = false;
+    if (matchMedia('(hover: hover)').matches) {
+      roll.addEventListener('mouseenter', function () { if (!rolled) pop.classList.add('show'); });
+      roll.addEventListener('mouseleave', function () { if (!rolled) pop.classList.remove('show'); });
+    }
+    roll.addEventListener('click', function () {
       if (roll.classList.contains('rolling')) return;
+      rolled = true;
       roll.classList.add('rolling');
       pop.classList.remove('show');
       var n; do { n = 1 + Math.floor(Math.random() * 6); } while (n === last);
