@@ -5,6 +5,26 @@ what's intentionally deferred so it isn't lost.
 
 ---
 
+## ✅ Shipped — round 8: mobile experience pass (branch `claude/light-version-ux-audit-dfd5d4`)
+
+Triggered by a real iPhone screenshot: the availability popover rendered badly on mobile.
+Walked every page on a phone-width viewport at the experience level (not just code).
+
+- **Availability popover on mobile** — was `position:absolute`, so it overflowed the viewport
+  bottom (its "write to me / DM" part cut off) and floated over the content below, with the
+  Simba photo's crop-mark bleeding through the overlap. → on phones it now expands **inline**
+  (pushes content down like a native disclosure); still floats on desktop where there's room.
+- **Touch targets** — nav links (~23px), the availability trigger (17px) and footer social
+  icons (16px) were well under a comfortable tap size. → hit areas expanded on phones (nav via
+  a transparent `::after`, so the visuals don't move; padding on the trigger/icons/footer
+  links). Nav ~40px, social icons 34px now.
+- **Work "Building now" rows on mobile** — side-by-side squeezed the copy into a narrow column
+  beside a floating 84px thumbnail. → stacks on phones: full-width text, a modest ~190px
+  preview below.
+
+Verified clean on mobile: coffee (map + toggle), writing article (measure), shelf deck, 404
+topple, skills. No horizontal overflow, no console errors, desktop unchanged.
+
 ## ✅ Shipped — round 7: motion audit + fixes (branch `claude/light-version-ux-audit-dfd5d4`)
 
 Ran the `improve-animations` and `find-animation-opportunities` skills (Emil Kowalski's bar).

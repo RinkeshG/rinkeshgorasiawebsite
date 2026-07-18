@@ -319,6 +319,17 @@ footer{margin-top:var(--s7);border-top:2px solid var(--ink);padding:1.2rem 0 3.4
 @media(max-width:640px){
   .h-clock{display:none}
   .die-pop{width:13rem}
+  /* on phones the availability note expands inline (pushes content down) instead of
+     floating — a fixed-width absolute card overflowed the screen and overlapped below */
+  .avail-pop{position:static;display:none;width:auto;max-width:100%;box-shadow:none;transform:none;opacity:1;pointer-events:auto;margin-top:.9rem}
+  .avail-pop.show{display:block}
+  /* touch: expand hit areas to a comfortable size without moving the visuals */
+  .h-row nav a{position:relative}
+  .h-row nav a::after{content:"";position:absolute;top:-.55rem;bottom:-.55rem;left:-.4rem;right:-.4rem}
+  .avail-trigger{padding:.45rem 0}
+  .foot-social{gap:.35rem}
+  .foot-social a{padding:.55rem}
+  .coffee-foot,.foot-top{padding:.3rem 0}
   .foot-in{flex-direction:column;gap:1.6rem}
   .foot-nav{align-items:flex-start;text-align:left}
 }
