@@ -5,6 +5,29 @@ what's intentionally deferred so it isn't lost.
 
 ---
 
+## ✅ Shipped — round 6: nav + SEO audit (branch `claude/light-version-ux-audit-dfd5d4`)
+
+- **Coffee removed from the header nav** (Home · Work · Writing · Skills). The page stays live
+  and reachable from the hero "filter coffee" link and the footer "the coffee log →". Shelf's
+  own bar updated to match (Coffee → Skills).
+- **Full SEO/meta audit across every page, desktop + mobile. Fixes:**
+  - `manifest.json` still had the **old dark theme colours** (`#0d0d0c`) → set to light `#FCFCF9`.
+  - `llms.txt` had **stale facts** the site was corrected away from (Career Leap "EdTech for
+    career transitions", Savior "$1M ARR / team of 8 / 30 clients", `knowyourpay.vercel.app`,
+    PSL "in beta") → rewritten to match the site (real domains, statuses, corrected copy).
+  - Added **Person + WebSite JSON-LD** to the home page (was none).
+  - `design-system.html` had **two `<h1>`** → the type sample is now a styled div.
+  - `writing.html` meta description was thin (70 chars) → richer (on-page intro unchanged).
+  - Refreshed all **sitemap `<lastmod>`** to today.
+- **Verified clean:** unique titles, canonical == og:url on every indexable page, OG + Twitter
+  cards, favicon/apple-touch-icon/theme-color/manifest present, viewport + lang, robots.txt
+  (AI crawlers explicitly allowed + sitemap), sitemap covers all 10 indexable pages, 404 +
+  design-system `noindex`, every `<img>` has alt, one h1 per page, no broken internal links,
+  no console errors. Committed + pushed.
+- **Still your call (unchanged):** the project stat numbers (5K scans, 12K checks, etc.) are
+  rough — they now also appear in `llms.txt`; verify them. Skills-list curation (Firecrawl/
+  Vercel borderline). Vouch cover image (`assets/img/lab/vouch.jpg`).
+
 ## ✅ Shipped — round 5 (branch `claude/light-version-ux-audit-dfd5d4`)
 
 - **House bracket → a literal `[ ]`.** The corner crop-marks still read fussy, so the tag is
