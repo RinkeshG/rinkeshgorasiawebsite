@@ -16,7 +16,7 @@ Rinkesh is a 0-to-1 product person who has built two companies from a rough prob
 - [The Shelf](https://rinkeshgorasia.com/shelf.html): The books, board games, lego and coffee that explain him, presented as a deck of collectible cards
 - [Board Games](https://rinkeshgorasia.com/games.html): A growing collection of favourite games, with player counts, table fit, personal verdicts, and an open invitation to play in Bengaluru
 - [Skills](https://rinkeshgorasia.com/skills.html): A public shelf of the AI skills he wrote and the ones he reaches for daily
-- [Coffee](https://rinkeshgorasia.com/coffee.html): His favourite coffee places in Bengaluru
+- [Go-to Places](https://rinkeshgorasia.com/coffee.html): The Bengaluru places he keeps returning to for coffee, food, work, and late nights
 
 ## Experience
 
