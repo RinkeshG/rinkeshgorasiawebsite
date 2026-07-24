@@ -255,8 +255,8 @@ footer{margin-top:var(--s7);border-top:2px solid var(--ink);padding:1.2rem 0 3.4
 .foot-name{font-weight:700;font-size:1rem;letter-spacing:-.01em;display:block}
 .foot-nav{display:flex;flex-direction:column;align-items:flex-end;gap:.7rem;text-align:right}
 /* social — solid ink glyphs, one recognisable mark each */
-.foot-social{display:inline-flex;align-items:center;gap:1.15rem}
-.foot-social a{color:var(--soft);line-height:0;display:inline-flex}
+.foot-social{display:inline-flex;align-items:center;gap:.25rem}
+.foot-social a{color:var(--soft);line-height:0;display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px}
 .foot-social a:hover{color:var(--red)}
 .foot-social svg{width:16px;height:16px;fill:currentColor}
 .coffee-foot{display:inline-flex;align-items:center;gap:.45rem;text-decoration:none;color:var(--soft);font-size:.88rem}
@@ -294,6 +294,10 @@ footer{margin-top:var(--s7);border-top:2px solid var(--ink);padding:1.2rem 0 3.4
 /* the record settles into view as you read — a calm fade-up, no bounce */
 .snap{opacity:0;transform:translateY(8px)}
 .snap.in{opacity:1;transform:none;transition:transform .34s var(--ease-out),opacity .3s var(--ease-out)}
+
+/* The die is paused for now. Keep its markup and behaviour intact so restoring
+   it is one reversible CSS change; display:none also removes its nav footprint. */
+.roll,.die-pop{display:none}
 
 /* the die — somewhere on the board */
 .roll{line-height:0;background:none;border:0;padding:0;cursor:pointer;color:inherit;font:inherit}
@@ -334,8 +338,7 @@ footer{margin-top:var(--s7);border-top:2px solid var(--ink);padding:1.2rem 0 3.4
   .h-row nav a{position:relative}
   .h-row nav a::after{content:"";position:absolute;top:-.55rem;bottom:-.55rem;left:-.4rem;right:-.4rem}
   .avail-trigger{padding:.45rem 0}
-  .foot-social{gap:.35rem}
-  .foot-social a{padding:.55rem}
+  .foot-social{gap:.1rem}
   .coffee-foot,.foot-top{padding:.3rem 0}
   .foot-in{flex-direction:column;gap:1.6rem}
   .foot-nav{align-items:flex-start;text-align:left}

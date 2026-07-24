@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Board games — collection scale preview</title>
+  <style>
+    :root{--ink:#1c1c19;--paper:#fcfcf9;--red:#be3e26;--rule:#d8d7cf;--mono:"SFMono-Regular",Consolas,"Liberation Mono",monospace}
+    *{box-sizing:border-box}
+    html,body{margin:0;background:#e8e7e1;color:var(--ink)}
+    .preview-bar{position:sticky;top:0;z-index:20;background:var(--ink);color:var(--paper);box-shadow:0 1px 0 rgba(255,255,255,.14)}
+    .preview-in{width:min(72rem,calc(100% - 2rem));min-height:3.5rem;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+    .preview-copy{display:flex;align-items:baseline;gap:.8rem;min-width:0}
+    .preview-title{font:600 .8rem/1.2 system-ui,sans-serif;white-space:nowrap}
+    .preview-note{font:400 .62rem/1.3 var(--mono);letter-spacing:.05em;color:#aaa9a2;white-space:nowrap}
+    .preview-switch{display:flex;align-items:center;gap:.35rem}
+    .preview-switch a{min-width:3rem;padding:.62rem .7rem;border:1px solid #55544f;color:#d8d7d0;text-align:center;text-decoration:none;font:500 .65rem/1 var(--mono);letter-spacing:.08em;text-transform:uppercase}
+    .preview-switch a[aria-current="page"]{border-color:var(--red);background:#2c211e;color:#fff}
+    iframe{display:block;width:100%;min-height:100vh;border:0;background:var(--paper)}
+    @media(max-width:640px){
+      .preview-in{width:calc(100% - 1rem);padding:.65rem 0;align-items:flex-start}
+      .preview-copy{display:block}.preview-note{display:block;margin-top:.28rem;white-space:normal}
+      .preview-switch a{min-width:2.6rem;padding:.58rem .5rem}
+    }
+  </style>
+</head>
+<body>
+  <header class="preview-bar">
+    <div class="preview-in">
+      <div class="preview-copy">
+        <span class="preview-title">Collection scale preview</span>
+        <span class="preview-note">Sample entries · local only · not part of the website</span>
+      </div>
+      <nav class="preview-switch" aria-label="Preview collection size">
+        <a href="?count=4" data-count="4">04</a>
+        <a href="?count=7" data-count="7">07</a>
+        <a href="?count=12" data-count="12">12</a>
+      </nav>
+    </div>
+  </header>
+  <iframe id="site-preview" title="Board games collection preview" src="games.html" scrolling="no"></iframe>
+  <script>
+    (function(){
+      var allowed=[4,7,12],params=new URL(location.href).searchParams,requested=Number(params.get('count')),total=allowed.indexOf(requested)>-1?requested:7;
+      var samples=[
+        {name:'Ticket to Ride',line:'A clean route builder that becomes territorial much faster than expected.',players:'group',quick:false,learning:'easy'},
+        {name:'Carcassonne',line:'Quiet tile placement, until somebody steals the field you were clearly building.',players:'two',quick:false,learning:'easy'},
+        {name:'Splendor',line:'Simple turns, sharp timing, and an unreasonable attachment to small poker chips.',players:'group',quick:true,learning:'easy'},
+        {name:'The Crew',line:'Cooperation where saying less somehow creates more accusations.',players:'group',quick:true,learning:'moderate'},
+        {name:'Jaipur',line:'Fast trading for two people who are comfortable pretending not to be competitive.',players:'two',quick:true,learning:'easy'},
+        {name:'7 Wonders',line:'A whole civilisation built while everyone insists they are not watching your board.',players:'group',quick:false,learning:'moderate'},
+        {name:'Cascadia',line:'A gentle puzzle with just enough tension to ruin the calm wildlife theme.',players:'two',quick:false,learning:'easy'},
+        {name:'Scout',line:'Tiny deck, impossible hand, immediate demands for another round.',players:'group',quick:true,learning:'easy'}
+      ];
+      document.querySelectorAll('[data-count]').forEach(function(link){if(Number(link.dataset.count)===total)link.setAttribute('aria-current','page');});
+      var frame=document.getElementById('site-preview');
+      frame.addEventListener('load',function(){
+        var doc=frame.contentDocument,win=frame.contentWindow,grid=doc.getElementById('game-grid');
+        var originals=Array.from(doc.querySelectorAll('.game-card'));
+        for(var index=4;index<total;index++){
+          var source=originals[index%originals.length],sample=samples[index-4],clone=source.cloneNode(true);
+          clone.dataset.id='preview-'+String(index+1);
+          clone.dataset.preview='true';
+          clone.dataset.players=sample.players;
+          clone.dataset.quick=String(sample.quick);
+          clone.dataset.learning=sample.learning;
+          clone.dataset.favorite='false';
+          clone.dataset.dealt='false';
+          clone.removeAttribute('data-game-bound');
+          var favourite=clone.querySelector('.favorite-mark');
+          if(favourite)favourite.remove();
+          clone.querySelector('.game-name').textContent=sample.name;
+          clone.querySelector('.game-line').textContent=sample.line;
+          var specs=clone.querySelectorAll('.game-spec b');
+          specs[0].textContent=sample.players==='two'?'2–4':'4+';
+          specs[1].textContent=sample.quick?'20–40m':'45–75m';
+          specs[2].textContent=sample.learning;
+          clone.setAttribute('aria-label','View layout-preview notes on '+sample.name);
+          grid.appendChild(clone);
+          win.boardGameCollection.registerGame(clone.dataset.id,{
+            name:sample.name,
+            type:'layout preview',
+            image:clone.querySelector('img').getAttribute('src'),
+            alt:sample.name+' sample game box',
+            call:sample.line,
+            verdict:'Sample content used only to test how the collection scales. This is not a published recommendation.',
+            stats:[['collection size',String(total)+' games'],['card treatment','consistent'],['status','local preview']]
+          });
+        }
+        win.boardGameCollection.refresh();
+        function syncHeight(){frame.style.height=doc.documentElement.scrollHeight+'px';}
+        if(win.ResizeObserver)new win.ResizeObserver(syncHeight).observe(doc.documentElement);
+        syncHeight();
+        win.setTimeout(syncHeight,400);
+        win.setTimeout(function(){
+          syncHeight();
+          if(params.get('focus')==='collection')window.scrollTo(0,frame.offsetTop+grid.offsetTop-110);
+        },1100);
+      });
+    })();
+  </script>
+</body>
+</html>

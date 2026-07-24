@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>board games — Rinkesh Gorasia</title>
+<meta name="description" content="Four board games I keep bringing back to the table — what they feel like, who they work with, and my deeply subjective verdict." />
+<link rel="canonical" href="https://rinkeshgorasia.com/games.html" />
+<meta name="theme-color" content="#FCFCF9" /><link rel="manifest" href="manifest.json" />
+<meta property="og:type" content="website" /><meta property="og:site_name" content="Rinkesh Gorasia" />
+<meta property="og:url" content="https://rinkeshgorasia.com/games.html" />
+<meta property="og:title" content="board games — Rinkesh Gorasia" />
+<meta property="og:description" content="Four board games I keep bringing back to the table, with a few deeply subjective notes." />
+<meta property="og:image" content="https://rinkeshgorasia.com/assets/og.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="board games — Rinkesh Gorasia" />
+<meta name="twitter:description" content="Four board games I keep bringing back to the table, with a few deeply subjective notes." />
+<meta name="twitter:image" content="https://rinkeshgorasia.com/assets/og.png" />
+<link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg" />
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap"></noscript>
+<link rel="stylesheet" href="assets/ledger.css?v=23">
+<style>
+  .skip-link{position:fixed;top:.75rem;left:.75rem;z-index:200;background:var(--ink);color:var(--paper);padding:.5rem .75rem;text-decoration:none;font:500 .7rem/1 var(--mono);transform:translateY(-200%);transition:transform 140ms var(--ease-out)}
+  .skip-link:focus{transform:none}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  .games-head{padding:var(--s8) 0 var(--s6);display:grid;grid-template-columns:minmax(0,1fr) 14rem;gap:4rem;align-items:end}
+  .games-head h1{margin-bottom:1rem;text-wrap:balance}
+  .games-head .dek{max-width:35rem;color:var(--soft);font-size:1.08rem;line-height:1.62}
+  .table-note{border-left:1px solid var(--rule-dark);padding-left:1.25rem}
+  .table-note .tn-label{display:block;font-family:var(--mono);font-size:.64rem;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);margin-bottom:.55rem}
+  .table-note p{font-size:.94rem;line-height:1.5;color:var(--ink)}
+  .table-note b{color:var(--red);font-weight:500}
+  .game-browser{border-top:2px solid var(--ink);padding-bottom:0}
+  .browser-controls{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"heading deal" "filters filters";align-items:center;column-gap:1rem;row-gap:.5rem;padding:.65rem 0 .75rem;border-bottom:1px solid var(--rule)}
+  .browser-heading{grid-area:heading;display:grid;gap:.24rem;align-content:center;white-space:nowrap}
+  .browser-title{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;font-weight:500}
+  .game-count{font-family:var(--mono);font-size:.56rem;line-height:1;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);font-variant-numeric:tabular-nums}
+  .game-filters{grid-area:filters;display:flex;align-items:center;gap:.65rem;min-width:0}
+  .filter-row{display:flex;align-items:center;gap:.4rem;min-width:0}
+  .filter-row + .filter-row{padding-left:.65rem;border-left:1px solid var(--rule-dark)}
+  .filter-label{font:500 .61rem/1 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--faint);white-space:nowrap}
+  .mobile-label{display:none}
+  .filter-options{display:flex;align-items:center;gap:.35rem;flex-wrap:nowrap}
+  .game-filter,.game-deal,.clear-filters,.empty-clear{appearance:none;min-height:38px;background:transparent;color:var(--soft);font:500 .63rem/1 var(--mono);letter-spacing:.045em;text-transform:uppercase;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:rgba(190,62,38,.12)}
+  .game-filter,.game-deal{border:1px solid var(--rule-dark);padding:.55rem .68rem;transition:transform 140ms var(--ease-out),border-color 140ms ease,color 140ms ease,background-color 140ms ease}
+  .game-filter:active,.game-deal:active,.clear-filters:active,.empty-clear:active{transform:scale(.97)}
+  .game-filter[aria-pressed="true"]{border-color:var(--red);background:var(--red-soft);color:var(--red)}
+  .favorite-filter{width:38px;padding:0;display:grid;place-items:center}
+  .favorite-filter svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;transition:fill 140ms ease,transform 140ms var(--ease-out)}
+  .favorite-filter[aria-pressed="true"] svg{fill:currentColor}
+  .clear-filters,.empty-clear{border:0;border-bottom:1px solid var(--red);padding:.25rem .05rem;min-height:32px;color:var(--ink);font-size:.6rem;transition:transform 140ms var(--ease-out),color 140ms ease}
+  .clear-filters[hidden]{display:none}
+  .game-deal{grid-area:deal;border-color:var(--ink);color:var(--ink);display:flex;align-items:center;justify-content:center;white-space:nowrap;min-width:8.6rem}
+  .deal-main{display:inline-flex;align-items:center}
+  .deal-short{display:none}
+  .deal-pool{display:none}
+  .game-deal[aria-disabled="true"],.game-deal:disabled{opacity:.45;cursor:not-allowed}
+  .game-deal .deal-mark{display:inline-flex;align-items:center;gap:2px;height:.72rem;margin-right:.42rem;vertical-align:-1px}
+  .game-deal .deal-mark i{display:block;width:2px;background:var(--red);transform-origin:center;border-radius:1px}
+  .game-deal .deal-mark i:nth-child(1){height:5px}.game-deal .deal-mark i:nth-child(2){height:10px}.game-deal .deal-mark i:nth-child(3){height:7px}
+  .game-grid{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--ink);border-left:1px solid var(--rule-dark)}
+  .game-card{position:relative;min-width:0;border:0;border-right:1px solid var(--rule-dark);border-bottom:1px solid var(--rule-dark);background:transparent;color:inherit;text-align:left;font:inherit;padding:0;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:rgba(190,62,38,.08);display:flex;flex-direction:column}
+  .game-card[hidden]{display:none}
+  .game-card[data-dealt="true"]{background:var(--red-soft)}
+  .game-card[data-dealt="true"]::after{content:"tonight";position:absolute;top:.85rem;right:.85rem;z-index:2;border:1px solid var(--red);color:var(--red);font:500 .58rem/1 var(--mono);letter-spacing:.11em;text-transform:uppercase;padding:.36rem .48rem;transform:rotate(2deg);background:var(--paper)}
+  .game-card:focus-visible{outline:2px solid var(--red);outline-offset:-2px}
+  .game-visual{height:17rem;display:grid;place-items:center;position:relative;overflow:hidden;border-bottom:1px solid var(--rule);background-color:rgba(255,255,255,.45);background-image:linear-gradient(var(--rule) 1px,transparent 1px),linear-gradient(90deg,var(--rule) 1px,transparent 1px);background-size:24px 24px}
+  .game-visual::before,.game-visual::after{content:"";position:absolute;width:1.1rem;height:1.1rem;border-color:var(--red);opacity:.72}
+  .game-visual::before{right:1.1rem;top:1.1rem;border-right:1px solid;border-top:1px solid}
+  .game-visual::after{left:1.1rem;bottom:1.1rem;border-left:1px solid;border-bottom:1px solid}
+  .game-visual img{width:66%;height:70%;object-fit:contain;filter:drop-shadow(0 14px 16px rgba(28,28,25,.16));transition:transform 220ms var(--ease-out)}
+  .game-card:nth-child(even) .game-visual img{transform:rotate(1deg)}
+  .game-copy{padding:1.25rem 1.3rem 1.35rem;display:flex;flex-direction:column;flex:1}
+  .game-name-row{display:flex;justify-content:space-between;align-items:center;gap:1rem}
+  .game-title{display:flex;align-items:center;flex-wrap:wrap;gap:.45rem}
+  .game-name{font-size:1.34rem;line-height:1.15;letter-spacing:-.025em;font-weight:600}
+  .favorite-mark{width:1.5rem;height:1.5rem;display:grid;place-items:center;color:var(--red)}
+  .favorite-mark svg{width:13px;height:13px;fill:currentColor;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+  .game-open{font:500 .65rem/1 var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--red);white-space:nowrap;transition:transform 160ms var(--ease-out)}
+  .game-line{color:var(--soft);font-size:.94rem;line-height:1.5;margin:.65rem 0 1.15rem;max-width:31rem}
+  .game-specs{margin-top:auto;display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--rule);padding-top:.8rem;gap:.75rem}
+  .game-spec span{display:block;font:400 .68rem/1 var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--soft);margin-bottom:.38rem}
+  .game-spec b{font:500 .74rem/1.2 var(--mono);color:var(--ink)}
+  .game-empty{grid-column:1/-1;border-right:1px solid var(--rule-dark);border-bottom:1px solid var(--rule-dark);padding:2.5rem 1.5rem;text-align:center;background:rgba(255,255,255,.3)}
+  .game-empty[hidden]{display:none}
+  .game-empty h3{font-size:1.2rem;line-height:1.2;margin-bottom:.45rem}
+  .game-empty p{color:var(--soft);font-size:.92rem}
+  .empty-clear{margin-top:.85rem}
+  .games-after{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(19rem,.8fr);margin-top:var(--s6);padding:2.1rem 0 2.25rem;border-top:1px solid var(--ink);border-bottom:1px solid var(--rule-dark)}
+  .invite-copy{padding-right:3.25rem}
+  .next-label{display:block;font-family:var(--mono);font-size:.62rem;letter-spacing:.13em;text-transform:uppercase;color:var(--faint)}
+  .games-after h2{margin:0 0 .55rem;font-size:1.55rem;line-height:1.12;letter-spacing:-.025em}
+  .games-after p{max-width:34rem;font-size:.94rem;line-height:1.55;color:var(--soft)}
+  .invite-link,.next-link{display:inline-flex;align-items:center;min-height:44px;margin-top:.9rem;color:var(--ink);font:500 .7rem/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid var(--red)}
+  .next-note{padding-left:2rem;border-left:1px solid var(--rule-dark)}
+  .next-layout{display:grid;grid-template-columns:6.25rem minmax(0,1fr);gap:1.35rem;align-items:center;margin-top:.7rem}
+  .next-stack{position:relative;width:6.25rem;height:6.2rem}
+  .next-card{position:absolute;display:flex;align-items:flex-start;justify-content:flex-end;width:3.7rem;height:4.85rem;padding:.42rem;border:1px solid var(--rule-dark);background-color:var(--paper);background-image:linear-gradient(var(--rule) 1px,transparent 1px),linear-gradient(90deg,var(--rule) 1px,transparent 1px);background-size:12px 12px;box-shadow:0 6px 14px rgba(28,28,25,.08);font:500 .55rem/1 var(--mono);color:var(--faint)}
+  .next-card:nth-child(1){left:.05rem;top:.65rem;transform:rotate(-8deg)}
+  .next-card:nth-child(2){left:1.35rem;top:.25rem;transform:rotate(1deg)}
+  .next-card:nth-child(3){left:2.5rem;top:.85rem;border-color:var(--red);color:var(--red);transform:rotate(8deg)}
+  .next-card:nth-child(3)::after{content:"?";position:absolute;inset:0;display:grid;place-items:center;font:500 1.3rem/1 var(--mono)}
+  .next-copy h3{margin:0 0 .4rem;font-size:1.1rem;line-height:1.2;letter-spacing:-.02em}
+  .next-copy p{font-size:.83rem;line-height:1.48}
+  .next-link{margin-top:.6rem;min-height:36px}
+  main + footer{margin-top:var(--s5)}
+  .game-scrim{position:fixed;inset:0;z-index:120;background:rgba(28,28,25,.4);backdrop-filter:blur(2px);display:grid;place-items:center;padding:1.5rem;overscroll-behavior:contain;opacity:0;visibility:hidden;pointer-events:none;transition:opacity 180ms ease}
+  .game-scrim[data-state="open"]{opacity:1;visibility:visible;pointer-events:auto}
+  .game-sheet{width:min(50rem,100%);max-height:min(42rem,calc(100vh - 3rem));overflow:auto;background:var(--paper);border:1px solid var(--ink);box-shadow:0 28px 70px rgba(28,28,25,.2);transform:translateY(8px);opacity:0;transition:transform 220ms var(--ease-out),opacity 180ms ease}
+  .game-scrim[data-state="open"] .game-sheet{transform:none;opacity:1}
+  .game-scrim[data-motion="none"],.game-scrim[data-motion="none"] .game-sheet{transition-duration:0ms}
+  .sheet-bar{position:sticky;top:0;z-index:3;display:flex;justify-content:space-between;align-items:center;padding:.75rem 1rem;border-bottom:1px solid var(--ink);background:var(--paper)}
+  .sheet-kicker{font:500 .7rem/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--soft)}
+  .sheet-close{min-width:44px;min-height:44px;border:0;background:none;color:var(--ink);font:400 .68rem/1 var(--mono);text-transform:uppercase;letter-spacing:.08em;cursor:pointer;padding:.35rem;transition:transform 140ms var(--ease-out)}
+  .sheet-close:active{transform:scale(.96)}
+  .sheet-body{display:grid;grid-template-columns:17rem 1fr}
+  .sheet-art{min-height:26rem;display:grid;place-items:center;border-right:1px solid var(--rule-dark);background-color:#fff;background-image:linear-gradient(var(--rule) 1px,transparent 1px),linear-gradient(90deg,var(--rule) 1px,transparent 1px);background-size:24px 24px}
+  .sheet-art img{width:72%;height:72%;object-fit:contain;filter:drop-shadow(0 16px 18px rgba(28,28,25,.18))}
+  .sheet-content{padding:2rem}
+  .sheet-num{font:400 .7rem/1 var(--mono);letter-spacing:.08em;color:var(--soft);font-variant-numeric:tabular-nums}
+  .sheet-title{font-size:2rem;line-height:1.05;letter-spacing:-.035em;margin:.75rem 0 .35rem}
+  .sheet-mood{font:500 .64rem/1 var(--mono);text-transform:uppercase;letter-spacing:.12em;color:var(--red)}
+  .sheet-call{font-size:1.15rem;line-height:1.48;margin:1.5rem 0;color:var(--ink)}
+  .sheet-verdict{border-left:2px solid var(--red);padding-left:1rem;color:var(--soft);font-size:.96rem;line-height:1.55}
+  .sheet-stats{margin-top:1.75rem;border-top:1px solid var(--ink)}
+  .sheet-stat{display:flex;justify-content:space-between;gap:1rem;padding:.65rem 0;border-bottom:1px solid var(--rule);font:400 .7rem/1.35 var(--mono)}
+  .sheet-stat span{color:var(--soft);text-transform:uppercase;letter-spacing:.07em}.sheet-stat b{font-weight:500;text-align:right}
+  .sheet-nav{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:.65rem;margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--ink)}
+  .sheet-nav button{appearance:none;min-height:44px;border:0;background:transparent;color:var(--ink);font:500 .68rem/1 var(--mono);letter-spacing:.05em;text-transform:uppercase;cursor:pointer;padding:.45rem 0;transition:transform 140ms var(--ease-out),color 140ms ease}
+  .sheet-nav button:first-child{text-align:left}.sheet-nav button:last-child{text-align:right}
+  .sheet-nav button:active{transform:scale(.97)}
+  .sheet-nav button[aria-disabled="true"]{opacity:.35;cursor:default}
+  .sheet-position{font:400 .66rem/1 var(--mono);letter-spacing:.06em;color:var(--soft);white-space:nowrap;font-variant-numeric:tabular-nums}
+  @media(hover:hover) and (pointer:fine){
+    .game-filter:hover,.game-deal:hover{border-color:var(--ink);color:var(--ink)}
+    .game-card:hover{background:rgba(255,255,255,.52)}
+    .game-card:hover .game-visual img{transform:translateY(-4px) rotate(-.5deg)}
+    .game-card:nth-child(even):hover .game-visual img{transform:translateY(-4px) rotate(.4deg)}
+    .game-card:hover .game-open{transform:translate(2px,-2px)}
+    .sheet-close:hover{color:var(--red)}
+  }
+  @media(max-width:720px){
+    .games-page header{padding-top:.85rem}
+    .games-page .h-row{gap:.3rem;padding:.55rem 0}
+    .games-page .h-row nav{gap:1rem}
+    .games-page .h-row nav a{font-size:.82rem}
+    .games-head{grid-template-columns:1fr;gap:.85rem;padding:1.9rem 0 1.65rem}
+    .games-head h1{font-size:2.05rem;margin-bottom:.65rem}
+    .games-head .dek{font-size:.96rem;line-height:1.48}
+    .table-note{max-width:none;border-left:0;padding-left:0;display:flex;align-items:baseline;gap:.55rem}
+    .table-note .tn-label{margin:0;font-size:.57rem;white-space:nowrap}
+    .table-note p{font-size:.82rem;line-height:1.4}
+    .browser-controls{column-gap:.65rem;row-gap:.55rem;padding:.6rem 0}
+    .browser-title{font-size:.66rem}
+    .game-count{font-size:.53rem}
+    .game-filters{display:grid;gap:.35rem;width:100%;padding-top:.15rem}
+    .filter-row{gap:.35rem}
+    .filter-row + .filter-row{padding-left:0;border-left:0}
+    .filter-label{width:3.15rem;flex:none;font-size:.56rem}
+    .filter-options{flex-wrap:nowrap;gap:.35rem}
+    .game-filter,.game-deal{min-height:40px;padding:.52rem .62rem}
+    .player-filter{min-width:2.7rem}
+    .favorite-filter{width:40px;min-width:40px;padding:0}
+    .clear-filters{min-height:30px;margin-left:.15rem}
+    .game-deal{min-width:4.8rem;padding-inline:.55rem}
+    .deal-wide{display:none}.deal-short{display:inline}
+    .desktop-label{display:none}.mobile-label{display:inline}
+    .game-grid{grid-template-columns:1fr}
+    .game-visual{height:16rem}
+    .games-after{grid-template-columns:1fr;padding:1.65rem 0 1.8rem}
+    .invite-copy{padding:0 0 1.5rem}
+    .games-after h2{font-size:1.35rem}
+    .games-after p{font-size:.88rem}
+    .next-note{padding:1.4rem 0 0;border-left:0;border-top:1px solid var(--rule-dark)}
+    .next-layout{grid-template-columns:6.25rem minmax(0,1fr)}
+    .game-scrim{padding:0;align-items:end}
+    .game-sheet{width:100%;max-height:88vh;border-left:0;border-right:0;border-bottom:0;transform:translateY(100%)}
+    .game-scrim[data-state="open"] .game-sheet{transform:none}
+    .sheet-body{grid-template-columns:1fr}
+    .sheet-art{min-height:15rem;border-right:0;border-bottom:1px solid var(--rule-dark)}
+    .sheet-art img{height:78%;width:55%}
+    .sheet-content{padding:1.5rem}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .game-card,.game-visual img,.game-open,.game-filter,.game-deal,.game-scrim,.game-sheet{transition-duration:0ms!important}
+  }
+</style>
+</head>
+<body class="games-page">
+<a class="skip-link" href="#games-main">Skip to content</a>
+<div class="wrap" id="page-shell">
+  <header id="top">
+    <div class="h-row">
+      <a class="h-name" href="index.html">Rinkesh Gorasia</a>
+      <span class="h-right"><nav aria-label="Main navigation"><a href="index.html">Home</a><a href="work.html">Work</a><a href="writing.html">Writing</a><a href="skills.html">Skills</a></nav><button type="button" class="roll" id="roll" aria-label="Roll the die"><svg viewBox="0 0 24 24" aria-hidden="true"><rect class="face" x="2.5" y="2.5" width="19" height="19" rx="4"/><g class="pips"><circle class="pip" cx="7" cy="7" r="1.7"/><circle class="pip" cx="17" cy="7" r="1.7"/><circle class="pip" cx="12" cy="12" r="1.7"/><circle class="pip" cx="7" cy="17" r="1.7"/><circle class="pip" cx="17" cy="17" r="1.7"/></g></svg></button><div class="die-pop" id="die-pop" role="status"><div class="dp-top"><span class="dp-num">roll me</span><span class="dp-die">⚄</span></div><p>Six sides. Roll to meet one.</p></div><span class="h-clock" id="h-clock"></span></span>
+    </div>
+  </header>
+  <main id="games-main">
+    <section class="games-head">
+      <div>
+        <h1>Board games<span class="dot">.</span></h1>
+        <p class="dek">Games that look calm on the box, then reveal exactly who everyone is at the table. These keep coming back.</p>
+      </div>
+      <aside class="table-note" aria-label="House rule">
+        <span class="tn-label">House rule no. 01</span>
+        <p>I do not let people win. <b>Allegedly.</b></p>
+      </aside>
+    </section>
+    <section class="game-browser" aria-labelledby="browser-title">
+      <div class="browser-controls">
+        <div class="browser-heading">
+          <h2 class="browser-title" id="browser-title">Pick the table</h2>
+          <span class="game-count" id="game-count" aria-live="polite" aria-atomic="true">4 games</span>
+        </div>
+        <div class="game-filters" aria-label="Filter games by game-night fit">
+          <div class="filter-row">
+            <span class="filter-label" id="players-filter-label">Players</span>
+            <div class="filter-options" role="group" aria-labelledby="players-filter-label">
+              <button class="game-filter player-filter" type="button" data-player="any" aria-pressed="true">Any</button>
+              <button class="game-filter player-filter" type="button" data-player="two" aria-pressed="false" aria-label="2 players"><span class="desktop-label">2 players</span><span class="mobile-label">2</span></button>
+              <button class="game-filter player-filter" type="button" data-player="group" aria-pressed="false" aria-label="4 or more players"><span class="desktop-label">4+ players</span><span class="mobile-label">4+</span></button>
+            </div>
+          </div>
+          <div class="filter-row">
+            <span class="sr-only" id="fit-filter-label">Game fit</span>
+            <div class="filter-options" data-kind="toggles" role="group" aria-labelledby="fit-filter-label">
+              <button class="game-filter toggle-filter" type="button" data-filter="quick" aria-pressed="false" aria-label="Under 45 minutes"><span class="desktop-label">≤45 min</span><span class="mobile-label">≤45 min</span></button>
+              <button class="game-filter toggle-filter" type="button" data-filter="easy" aria-pressed="false" aria-label="Easy to learn"><span class="desktop-label">Easy</span><span class="mobile-label">Easy</span></button>
+              <button class="game-filter toggle-filter favorite-filter" type="button" data-filter="favorite" aria-pressed="false" aria-label="Show favourites only" title="Favourites only"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78Z"/></svg></button>
+            </div>
+            <button class="clear-filters" id="clear-filters" type="button" hidden>Reset</button>
+          </div>
+        </div>
+        <button class="game-deal" id="game-deal" type="button" aria-describedby="game-count"><span class="deal-main" aria-hidden="true"><span class="deal-mark"><i></i><i></i><i></i></span><span class="deal-wide">Deal me one</span><span class="deal-short">Deal</span></span><span class="deal-pool" id="deal-pool">from 4 games</span></button>
+        <span class="sr-only" id="deal-status" aria-live="polite" aria-atomic="true"></span>
+      </div>
+      <div class="game-grid" id="game-grid">
+        <button class="game-card" type="button" data-id="catan" data-players="group" data-quick="false" data-learning="easy" data-favorite="true" aria-label="View notes on Catan, a favourite">
+          <span class="game-visual"><img src="assets/img/shelf/game-catan.jpg" alt="Catan board game box" width="285" height="351"></span>
+          <span class="game-copy"><span class="game-name-row"><span class="game-title"><span class="game-name">Catan</span><span class="favorite-mark" title="A favourite" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78Z"/></svg></span></span><span class="game-open" aria-hidden="true">View notes</span></span><span class="game-line">A friendly trading game, right up until somebody blocks the longest road.</span><span class="game-specs"><span class="game-spec"><span>Players</span><b>3–4</b></span><span class="game-spec"><span>Time</span><b>60–90m</b></span><span class="game-spec"><span>Learning</span><b>easy</b></span></span></span>
+        </button>
+        <button class="game-card" type="button" data-id="wingspan" data-players="two" data-quick="false" data-learning="moderate" data-favorite="false" aria-label="View notes on Wingspan">
+          <span class="game-visual"><img src="assets/img/shelf/game-wingspan.png" alt="Wingspan board game box" width="319" height="312"></span>
+          <span class="game-copy"><span class="game-name-row"><span class="game-name">Wingspan</span><span class="game-open" aria-hidden="true">View notes</span></span><span class="game-line">The prettiest engine builder I own, and the quietest way to become unbearable.</span><span class="game-specs"><span class="game-spec"><span>Players</span><b>1–5</b></span><span class="game-spec"><span>Time</span><b>45–75m</b></span><span class="game-spec"><span>Learning</span><b>moderate</b></span></span></span>
+        </button>
+        <button class="game-card" type="button" data-id="codenames" data-players="group" data-quick="true" data-learning="easy" data-favorite="true" aria-label="View notes on Codenames, a favourite">
+          <span class="game-visual"><img src="assets/img/shelf/game-codenames.jpg" alt="Codenames board game box and cards" width="760" height="570" loading="lazy"></span>
+          <span class="game-copy"><span class="game-name-row"><span class="game-title"><span class="game-name">Codenames</span><span class="favorite-mark" title="A favourite" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78Z"/></svg></span></span><span class="game-open" aria-hidden="true">View notes</span></span><span class="game-line">One clue, several bad interpretations, and a very efficient audit of how your friends think.</span><span class="game-specs"><span class="game-spec"><span>Players</span><b>4–8+</b></span><span class="game-spec"><span>Time</span><b>15–30m</b></span><span class="game-spec"><span>Learning</span><b>quick</b></span></span></span>
+        </button>
+        <button class="game-card" type="button" data-id="azul" data-players="two" data-quick="true" data-learning="easy" data-favorite="false" aria-label="View notes on Azul">
+          <span class="game-visual"><img src="assets/img/shelf/game-azul.jpg" alt="Azul board game box" width="315" height="315" loading="lazy"></span>
+          <span class="game-copy"><span class="game-name-row"><span class="game-name">Azul</span><span class="game-open" aria-hidden="true">View notes</span></span><span class="game-line">Tile-laying that looks like meditation and plays, politely, like a knife fight.</span><span class="game-specs"><span class="game-spec"><span>Players</span><b>2–4</b></span><span class="game-spec"><span>Time</span><b>30–45m</b></span><span class="game-spec"><span>Learning</span><b>easy</b></span></span></span>
+        </button>
+        <div class="game-empty" id="game-empty" hidden>
+          <h3>Nothing fits that table.</h3>
+          <p>Clear a filter and deal again.</p>
+          <button class="empty-clear" id="empty-clear" type="button">Clear filters</button>
+        </div>
+      </div>
+    </section>
+    <section class="games-after" aria-labelledby="game-night-title">
+      <div class="invite-copy">
+        <h2 id="game-night-title">Come play a round.</h2>
+        <p>If you’re in Bengaluru and want in on the next game night, send me a note. I’ll pick the game; you can blame me after.</p>
+        <a class="invite-link" href="https://x.com/rinks__g" target="_blank" rel="noopener">DM me for the next one →</a>
+      </div>
+      <aside class="next-note" aria-label="Games to try next">
+        <span class="next-label">Next on the table</span>
+        <div class="next-layout">
+          <div class="next-stack" aria-hidden="true">
+            <span class="next-card">01</span>
+            <span class="next-card">02</span>
+            <span class="next-card">03</span>
+          </div>
+          <div class="next-copy">
+            <h3>What should I try next?</h3>
+            <p>The shortlist is open. Send me the game your group cannot stop bringing back.</p>
+            <a class="next-link" href="mailto:rinkeshgorasia@gmail.com?subject=Board%20game%20recommendation&amp;body=You%20should%20try%3A%20">Send a recommendation →</a>
+          </div>
+        </div>
+      </aside>
+    </section>
+  </main>
+  <footer>
+    <div class="foot-in">
+      <div class="foot-id"><span class="foot-name">Rinkesh Gorasia</span></div>
+      <nav class="foot-nav">
+        <span class="foot-social"><a href="mailto:rinkeshgorasia@gmail.com" aria-label="Email" title="Email"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2Zm0 4-8 5-8-5V6l8 5 8-5v2Z"/></svg></a><a href="https://x.com/rinks__g" target="_blank" rel="noopener" aria-label="X" title="X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.66l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.45-6.231Zm-1.161 17.52h1.833L7.084 4.126H5.117l11.966 15.644Z"/></svg></a><a href="https://www.linkedin.com/in/rinksg/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286ZM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065Zm1.782 13.019H3.555V9h3.564v11.452ZM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C23.2.774 24 0 22.222 0h.003Z"/></svg></a></span>
+        <a class="coffee-foot" href="coffee.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 14c.83 .642 2.077 1.017 3.5 1c1.423 .017 2.67 -.358 3.5 -1c.83 -.642 2.077 -1.017 3.5 -1c1.423 -.017 2.67 .358 3.5 1"/><path class="steam s1" d="M8 3a2.4 2.4 0 0 0 -1 2a2.4 2.4 0 0 0 1 2"/><path class="steam s2" d="M12 3a2.4 2.4 0 0 0 -1 2a2.4 2.4 0 0 0 1 2"/><path d="M3 10h14v5a6 6 0 0 1 -6 6h-2a6 6 0 0 1 -6 -6v-5"/><path d="M16.746 16.726a3 3 0 1 0 .252 -5.555"/></svg>the coffee log →</a>
+        <a class="foot-top" href="#top">↑ back to the top</a>
+      </nav>
+    </div>
+  </footer>
+</div>
+<div class="game-scrim" id="game-scrim" data-state="closed" aria-hidden="true">
+  <section class="game-sheet" id="game-sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title" tabindex="-1">
+    <div class="sheet-bar"><span class="sheet-kicker" id="sheet-kicker">Rinkesh’s table notes</span><button class="sheet-close" id="sheet-close" type="button">Close ×</button></div>
+    <div class="sheet-body">
+      <div class="sheet-art"><img id="sheet-image" src="" alt="" width="400" height="400"></div>
+      <div class="sheet-content">
+        <span class="sheet-num" id="sheet-num"></span><h2 class="sheet-title" id="sheet-title"></h2><span class="sheet-mood" id="sheet-mood"></span>
+        <p class="sheet-call" id="sheet-call"></p><p class="sheet-verdict" id="sheet-verdict"></p><div class="sheet-stats" id="sheet-stats"></div>
+        <nav class="sheet-nav" aria-label="Browse game notes">
+          <button id="sheet-prev" type="button">← Previous</button>
+          <span class="sheet-position" id="sheet-position"></span>
+          <button id="sheet-next" type="button">Next →</button>
+        </nav>
+      </div>
+    </div>
+  </section>
+</div>
+<audio id="table-knock" preload="auto" aria-hidden="true"></audio>
+<script src="assets/ledger.js?v=22"></script>
+<script>
+(function(){
+  var data={
+    catan:{name:'Catan',type:'negotiation · high interaction',image:'assets/img/shelf/game-catan.jpg',alt:'Catan board game box',call:'Friendships have been tested over the longest road.',verdict:'The negotiation is the game. The sheep and brick are just props for finding out who bluffs, who holds grudges, and who absolutely should not control a port.',stats:[['best with','4 people'],['win rate','suspiciously high'],['trades honoured','negotiable']]},
+    wingspan:{name:'Wingspan',type:'engine builder · low conflict',image:'assets/img/shelf/game-wingspan.png',alt:'Wingspan board game box',call:'The only game that calms me down while I quietly crush you.',verdict:'Beautiful enough to make the table slow down, layered enough to stay interesting. The engine clicks into place so gently you almost miss the competition.',stats:[['best with','2–3 people'],['table volume','library'],['birds collected','all of them']]},
+    codenames:{name:'Codenames',type:'team wordplay · high interaction',image:'assets/img/shelf/game-codenames.jpg',alt:'Codenames board game box and cards',call:'One bad clue and the whole table turns on you. Perfect.',verdict:'The rules disappear in two minutes, then the people become the system. Best with friends who are confident they understand each other. They do not.',stats:[['best with','6 people'],['setup tax','almost none'],['clues regretted','many']]},
+    azul:{name:'Azul',type:'abstract strategy · low conflict',image:'assets/img/shelf/game-azul.jpg',alt:'Azul board game box',call:'I pick tiles like I pick fights: politely, then decisively.',verdict:'It earns its beauty. Every choice improves your wall or quietly damages somebody else’s. The tension is visible without the table ever getting loud.',stats:[['best with','2 people'],['table volume','dangerously calm'],['patterns ruined','yours']]}
+  };
+  var playerButtons=Array.prototype.slice.call(document.querySelectorAll('.player-filter'));
+  var toggleButtons=Array.prototype.slice.call(document.querySelectorAll('.toggle-filter'));
+  var cards=[];
+  var filterState={players:'any',quick:false,easy:false,favorite:false};
+  var count=document.getElementById('game-count'),deal=document.getElementById('game-deal'),dealPool=document.getElementById('deal-pool'),dealStatus=document.getElementById('deal-status'),clearFilters=document.getElementById('clear-filters'),emptyState=document.getElementById('game-empty'),emptyClear=document.getElementById('empty-clear'),scrim=document.getElementById('game-scrim'),sheet=document.getElementById('game-sheet'),closer=document.getElementById('sheet-close'),sheetKicker=document.getElementById('sheet-kicker'),sheetPrev=document.getElementById('sheet-prev'),sheetNext=document.getElementById('sheet-next'),sheetPosition=document.getElementById('sheet-position'),pageShell=document.getElementById('page-shell'),knockSample=document.getElementById('table-knock');
+  var lastFocus=null,lastDealId=null,activeGameId=null,tableAudio=null;
+  var reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  try{
+    var knockRate=22050,knockDuration=.12,knockCount=Math.floor(knockRate*knockDuration),knockBuffer=new ArrayBuffer(44+knockCount*2),knockView=new DataView(knockBuffer);
+    function writeKnockText(offset,text){for(var textIndex=0;textIndex<text.length;textIndex++)knockView.setUint8(offset+textIndex,text.charCodeAt(textIndex));}
+    writeKnockText(0,'RIFF');knockView.setUint32(4,36+knockCount*2,true);writeKnockText(8,'WAVE');writeKnockText(12,'fmt ');knockView.setUint32(16,16,true);knockView.setUint16(20,1,true);knockView.setUint16(22,1,true);knockView.setUint32(24,knockRate,true);knockView.setUint32(28,knockRate*2,true);knockView.setUint16(32,2,true);knockView.setUint16(34,16,true);writeKnockText(36,'data');knockView.setUint32(40,knockCount*2,true);
+    var knockSeed=173;
+    for(var knockIndex=0;knockIndex<knockCount;knockIndex++){
+      var knockTime=knockIndex/knockRate,knockBody=Math.sin(2*Math.PI*(118-260*knockTime)*knockTime)*Math.exp(-knockTime*29);
+      knockSeed=knockSeed*16807%2147483647;
+      var knockClick=knockIndex<420?((knockSeed/2147483647)*2-1)*Math.exp(-knockTime*82):0,knockTap=Math.sin(2*Math.PI*690*knockTime)*Math.exp(-knockTime*58);
+      knockView.setInt16(44+knockIndex*2,Math.round(Math.max(-1,Math.min(1,knockBody*.58+knockClick*.34+knockTap*.12))*32767),true);
+    }
+    knockSample.src=URL.createObjectURL(new Blob([knockBuffer],{type:'audio/wav'}));
+  }catch(error){}
+  function hasFilters(){return filterState.players!=='any'||filterState.quick||filterState.easy||filterState.favorite;}
+  function cardMatches(card){
+    if(filterState.players!=='any'&&card.dataset.players!==filterState.players)return false;
+    if(filterState.quick&&card.dataset.quick!=='true')return false;
+    if(filterState.easy&&card.dataset.learning!=='easy')return false;
+    if(filterState.favorite&&card.dataset.favorite!=='true')return false;
+    return true;
+  }
+  function visibleCards(){return cards.filter(function(card){return !card.hidden;});}
+  function updateUrlFromFilters(){
+    var url=new URL(location.href);
+    url.searchParams.delete('table');
+    if(filterState.players==='any')url.searchParams.delete('players');else url.searchParams.set('players',filterState.players);
+    ['quick','easy','favorite'].forEach(function(key){if(filterState[key])url.searchParams.set(key,'1');else url.searchParams.delete(key);});
+    history.replaceState(history.state,'',url);
+  }
+  function syncFilterControls(){
+    playerButtons.forEach(function(button){button.setAttribute('aria-pressed',String(button.dataset.player===filterState.players));});
+    toggleButtons.forEach(function(button){button.setAttribute('aria-pressed',String(filterState[button.dataset.filter]));});
+  }
+  function applyFilters(updateUrl,animateCards){
+    var shown=0;
+    cards.forEach(function(card){
+      card.dataset.dealt='false';
+      var visible=cardMatches(card);
+      card.hidden=!visible;
+      if(visible){
+        shown++;
+        if(animateCards!==false&&!reduced&&card.animate)card.animate([{opacity:.55,transform:'translateY(6px)'},{opacity:1,transform:'none'}],{duration:180,delay:Math.min((shown-1)*24,120),easing:'cubic-bezier(.23,1,.32,1)'});
+      }
+    });
+    var filtered=hasFilters();
+    var resultNoun=filtered?(shown===1?'match':'matches'):(shown===1?'game':'games');
+    count.textContent=shown===0?'No matches':shown+' '+resultNoun;
+    dealPool.textContent=shown===0?'no matches':'from '+shown+' '+(shown===1?'match':filtered?'matches':'games');
+    deal.disabled=shown===0;
+    deal.setAttribute('aria-disabled',String(shown===0));
+    deal.setAttribute('aria-label',shown===0?'Deal me one, no matching games':'Deal me one from '+shown+' '+(shown===1?'matching game':'matching games'));
+    clearFilters.hidden=!filtered;
+    emptyState.hidden=shown!==0;
+    syncFilterControls();
+    if(updateUrl!==false){dealStatus.textContent='';updateUrlFromFilters();}
+  }
+  function readFiltersFromUrl(){
+    var url=new URL(location.href),legacy=url.searchParams.get('table'),players=url.searchParams.get('players');
+    filterState.players=players==='two'||players==='group'?players:legacy==='two'?'two':legacy==='whole'?'group':'any';
+    filterState.quick=url.searchParams.get('quick')==='1'||legacy==='quick';
+    filterState.easy=url.searchParams.get('easy')==='1'||legacy==='easy';
+    filterState.favorite=url.searchParams.get('favorite')==='1'||legacy==='favorite';
+    syncFilterControls();
+  }
+  function resetFilters(animateCards){
+    filterState={players:'any',quick:false,easy:false,favorite:false};
+    applyFilters(true,animateCards);
+  }
+  playerButtons.forEach(function(button){button.addEventListener('click',function(event){filterState.players=button.dataset.player;applyFilters(true,event.detail!==0);});});
+  toggleButtons.forEach(function(button){button.addEventListener('click',function(event){var key=button.dataset.filter;filterState[key]=!filterState[key];applyFilters(true,event.detail!==0);});});
+  clearFilters.addEventListener('click',function(event){resetFilters(event.detail!==0);if(event.detail===0)playerButtons[0].focus();});
+  emptyClear.addEventListener('click',function(event){resetFilters(event.detail!==0);playerButtons[0].focus();});
+  function getModalCards(){
+    var matches=visibleCards();
+    return matches.some(function(card){return card.dataset.id===activeGameId;})?matches:cards;
+  }
+  function setModalUrl(id,mode){
+    if(mode==='none')return;
+    var url=new URL(location.href);url.searchParams.set('game',id);
+    var nextState=Object.assign({},history.state||{});
+    if(mode==='push'){nextState.boardGameModal=true;history.pushState(nextState,'',url);}
+    else history.replaceState(nextState,'',url);
+  }
+  function fillGame(id,dealt){
+    var game=data[id],modalCards=getModalCards(),index=modalCards.findIndex(function(card){return card.dataset.id===id;});
+    if(!game||index<0)return;
+    sheetKicker.textContent=dealt?'Tonight’s pick':'Rinkesh’s table notes';
+    document.getElementById('sheet-image').src=game.image;document.getElementById('sheet-image').alt=game.alt;document.getElementById('sheet-num').textContent=(index+1)+' of '+modalCards.length;document.getElementById('sheet-title').textContent=game.name;document.getElementById('sheet-mood').textContent=game.type;document.getElementById('sheet-call').textContent=game.call;document.getElementById('sheet-verdict').textContent=game.verdict;
+    document.getElementById('sheet-stats').innerHTML=game.stats.map(function(stat){return '<div class="sheet-stat"><span>'+stat[0]+'</span><b>'+stat[1]+'</b></div>';}).join('');
+    sheetPosition.textContent=(index+1)+' of '+modalCards.length;
+    var previous=modalCards[index-1],next=modalCards[index+1];
+    sheetPrev.disabled=!previous;sheetNext.disabled=!next;
+    sheetPrev.setAttribute('aria-disabled',String(!previous));sheetNext.setAttribute('aria-disabled',String(!next));
+    sheetPrev.setAttribute('aria-label',previous?'Previous game: '+data[previous.dataset.id].name:'No previous game');
+    sheetNext.setAttribute('aria-label',next?'Next game: '+data[next.dataset.id].name:'No next game');
+  }
+  function openGame(id,trigger,dealt,animate,historyMode){
+    var game=data[id];if(!game)return;
+    var wasClosed=scrim.dataset.state!=='open';
+    if(wasClosed)lastFocus=trigger||document.activeElement;
+    activeGameId=id;
+    scrim.dataset.motion=animate===false?'none':'standard';
+    fillGame(id,dealt);
+    setModalUrl(id,historyMode||'none');
+    if(wasClosed){
+      scrim.dataset.state='open';scrim.setAttribute('aria-hidden','false');pageShell.inert=true;pageShell.setAttribute('aria-hidden','true');document.body.style.overflow='hidden';
+      window.setTimeout(function(){closer.focus();},animate===false?0:80);
+    }
+  }
+  function closeVisual(restoreFocus){
+    if(scrim.dataset.state!=='open')return;
+    scrim.dataset.state='closed';scrim.setAttribute('aria-hidden','true');pageShell.inert=false;pageShell.removeAttribute('aria-hidden');document.body.style.overflow='';activeGameId=null;
+    if(restoreFocus!==false&&lastFocus&&lastFocus.isConnected)lastFocus.focus();
+  }
+  function requestClose(){
+    var url=new URL(location.href);
+    if(url.searchParams.has('game')&&history.state&&history.state.boardGameModal){history.back();return;}
+    url.searchParams.delete('game');history.replaceState(history.state,'',url);closeVisual(true);
+  }
+  function moveGame(direction,animate){
+    if(!activeGameId)return;
+    var modalCards=getModalCards(),index=modalCards.findIndex(function(card){return card.dataset.id===activeGameId;}),target=modalCards[index+direction];
+    if(!target)return;
+    openGame(target.dataset.id,null,false,animate,'replace');
+  }
+  function bindCard(card,index){
+    if(index>1)card.querySelector('img').loading='lazy';
+    if(card.dataset.gameBound==='true')return;
+    card.dataset.gameBound='true';
+    card.addEventListener('click',function(event){openGame(card.dataset.id,card,false,event.detail!==0,'push');});
+  }
+  function refreshCollection(){
+    cards=Array.prototype.slice.call(document.querySelectorAll('.game-card'));
+    cards.forEach(bindCard);
+    applyFilters(false,false);
+  }
+  window.boardGameCollection={
+    registerGame:function(id,details){data[id]=details;},
+    refresh:refreshCollection
+  };
+  closer.addEventListener('click',requestClose);
+  sheetPrev.addEventListener('click',function(event){if(sheetPrev.getAttribute('aria-disabled')!=='true')moveGame(-1,event.detail!==0);});
+  sheetNext.addEventListener('click',function(event){if(sheetNext.getAttribute('aria-disabled')!=='true')moveGame(1,event.detail!==0);});
+  scrim.addEventListener('click',function(event){if(event.target===scrim)requestClose();});
+  document.addEventListener('keydown',function(event){
+    if(scrim.dataset.state!=='open')return;
+    if(event.key==='Escape'){event.preventDefault();requestClose();return;}
+    if(event.key==='ArrowLeft'){event.preventDefault();moveGame(-1,false);return;}
+    if(event.key==='ArrowRight'){event.preventDefault();moveGame(1,false);return;}
+    if(event.key==='Tab'){
+      var focusable=Array.prototype.slice.call(sheet.querySelectorAll('button,[href],[tabindex]:not([tabindex="-1"])')).filter(function(element){return !element.disabled&&element.getAttribute('aria-hidden')!=='true';});
+      if(!focusable.length)return;
+      var first=focusable[0],last=focusable[focusable.length-1];
+      if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus();}
+      else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();}
+    }
+  });
+  window.addEventListener('popstate',function(){
+    readFiltersFromUrl();applyFilters(false,false);
+    var requestedGame=new URL(location.href).searchParams.get('game');
+    if(requestedGame&&data[requestedGame])openGame(requestedGame,null,false,false,'none');else closeVisual(true);
+  });
+  function markSound(){
+    deal.dataset.sound='playing';window.setTimeout(function(){delete deal.dataset.sound;},220);
+  }
+  function synthKnock(){
+    try{
+      var Audio=window.AudioContext||window.webkitAudioContext;if(!Audio)return;
+      if(!tableAudio||tableAudio.state==='closed')tableAudio=new Audio();
+      function play(){
+        var context=tableAudio,now=context.currentTime+.008,toneGain=context.createGain(),tone=context.createOscillator();
+        tone.type='sine';tone.frequency.setValueAtTime(138,now);tone.frequency.exponentialRampToValueAtTime(76,now+.11);
+        toneGain.gain.setValueAtTime(.0001,now);toneGain.gain.exponentialRampToValueAtTime(.075,now+.004);toneGain.gain.exponentialRampToValueAtTime(.0001,now+.13);
+        tone.connect(toneGain);toneGain.connect(context.destination);tone.start(now);tone.stop(now+.14);
+        var length=Math.floor(context.sampleRate*.055),buffer=context.createBuffer(1,length,context.sampleRate),values=buffer.getChannelData(0);
+        for(var index=0;index<length;index++)values[index]=(Math.random()*2-1)*(1-index/length);
+        var noise=context.createBufferSource(),filter=context.createBiquadFilter(),noiseGain=context.createGain();
+        noise.buffer=buffer;filter.type='bandpass';filter.frequency.value=620;filter.Q.value=.75;
+        noiseGain.gain.setValueAtTime(.052,now);noiseGain.gain.exponentialRampToValueAtTime(.0001,now+.055);
+        noise.connect(filter);filter.connect(noiseGain);noiseGain.connect(context.destination);noise.start(now);noise.stop(now+.06);
+        markSound();
+      }
+      if(tableAudio.state==='suspended')tableAudio.resume().then(play).catch(function(){});else play();
+    }catch(error){}
+  }
+  function tableKnock(){
+    try{
+      knockSample.currentTime=0;knockSample.volume=.78;
+      var playback=knockSample.play();
+      if(playback&&typeof playback.then==='function')playback.then(markSound).catch(synthKnock);else markSound();
+    }catch(error){synthKnock();}
+  }
+  function animateDealMark(){
+    if(reduced)return;
+    Array.prototype.forEach.call(deal.querySelectorAll('.deal-mark i'),function(bar,index){
+      if(bar.animate)bar.animate([{transform:'scaleY(.55)'},{transform:'scaleY(1.45)'},{transform:'scaleY(1)'}],{duration:220,delay:index*24,easing:'cubic-bezier(.23,1,.32,1)'});
+    });
+  }
+  deal.addEventListener('click',function(event){
+    var pool=visibleCards();
+    if(!pool.length)return;
+    var candidates=pool.length>1?pool.filter(function(card){return card.dataset.id!==lastDealId;}):pool;
+    var pick=candidates[Math.floor(Math.random()*candidates.length)];
+    lastDealId=pick.dataset.id;
+    cards.forEach(function(card){card.dataset.dealt=String(card===pick);});
+    dealStatus.textContent='Tonight’s pick: '+data[pick.dataset.id].name;
+    tableKnock();
+    if(event.detail!==0)animateDealMark();
+    openGame(pick.dataset.id,deal,true,event.detail!==0,'push');
+  });
+  readFiltersFromUrl();
+  refreshCollection();
+  var requestedGame=new URL(location.href).searchParams.get('game');
+  if(requestedGame&&data[requestedGame])openGame(requestedGame,null,false,false,'none');
+})();
+</script>
+</body></html>
