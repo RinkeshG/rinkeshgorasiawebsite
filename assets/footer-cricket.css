@@ -1,0 +1,200 @@
+/* THE LAST OVER — the footer becomes a scorebook and a pitch. */
+footer.cricket-open{position:relative;padding-top:.8rem}
+footer.cricket-open .foot-in{position:absolute;inset:.8rem 0 auto;opacity:0;visibility:hidden;pointer-events:none}
+.footer-cricket-game{
+  --field:#718365;
+  --field-deep:#4e6248;
+  --pitch:#cbb98e;
+  --pitch-dark:#a28d62;
+  --chalk:rgba(252,252,249,.82);
+  opacity:0;
+  transform:translate3d(0,6px,0) scale(.99);
+  transform-origin:50% 0;
+  transition:opacity .2s var(--ease-out),transform .22s var(--ease-out);
+  padding:.15rem 0 0;
+}
+.footer-cricket-game[hidden]{display:none}
+.footer-cricket-game[data-state="open"]{opacity:1;transform:none}
+.footer-cricket-game button,.footer-cricket-game input{font:inherit}
+.footer-cricket-game button{color:inherit}
+
+.fc-scoreboard{
+  min-height:4.25rem;
+  display:grid;
+  grid-template-columns:minmax(8rem,1fr) auto minmax(14rem,1fr) auto;
+  align-items:center;
+  gap:1.1rem;
+  border-bottom:1px solid var(--ink);
+  padding:0 0 .75rem;
+}
+.fc-identity{display:flex;align-items:baseline;gap:.75rem;min-width:0}
+.fc-kicker{font-family:var(--mono);font-size:.62rem;letter-spacing:.15em;color:var(--faint);white-space:nowrap}
+.fc-score{font-family:var(--mono);font-size:1.55rem;line-height:1;letter-spacing:-.08em;font-weight:500}
+.fc-score small{font-size:.68rem;letter-spacing:0;color:var(--faint);margin-left:.16rem}
+.fc-balls{display:flex;align-items:center;gap:.28rem;list-style:none}
+.fc-balls li{
+  width:1.55rem;height:1.55rem;display:grid;place-items:center;
+  font-family:var(--mono);font-size:.62rem;color:var(--faint);
+  border:1px solid var(--rule-dark);border-radius:50%;
+}
+.fc-balls li[data-state="played"]{color:var(--ink);border-color:var(--soft)}
+.fc-balls li[data-state="boundary"]{color:var(--red);border-color:var(--red);font-weight:700}
+.fc-balls li[data-state="wicket"]{background:var(--red);border-color:var(--red);color:var(--paper);font-weight:700}
+.fc-records{justify-self:center;display:flex;align-items:center;gap:.9rem;font-family:var(--mono);font-size:.58rem;letter-spacing:.08em;color:var(--faint);white-space:nowrap}
+.fc-records strong{color:var(--ink);font-weight:500;letter-spacing:0}
+.fc-actions{justify-self:end;display:flex;align-items:center;gap:.35rem}
+.fc-icon-button,.fc-close{
+  appearance:none;background:none;border:0;cursor:pointer;
+  min-width:44px;min-height:44px;display:inline-flex;align-items:center;justify-content:center;
+}
+.fc-icon-button{color:var(--soft);transition:color .14s ease,transform .14s var(--ease-out)}
+.fc-icon-button svg{width:17px;height:17px;fill:currentColor}
+.fc-icon-button[aria-pressed="false"]{color:var(--faint)}
+.fc-close{font-family:var(--mono);font-size:.63rem;letter-spacing:.08em;color:var(--soft);white-space:nowrap;transition:color .14s ease,transform .14s var(--ease-out)}
+.fc-icon-button:active,.fc-close:active,.fc-start:active,.fc-record-form button:active{transform:scale(.97)}
+
+.fc-field{
+  position:relative;
+  aspect-ratio:3/1;
+  min-height:15rem;
+  max-height:22rem;
+  overflow:hidden;
+  isolation:isolate;
+  touch-action:manipulation;
+  cursor:crosshair;
+  outline:none;
+  background:var(--paper);
+}
+.fc-field::after{
+  content:"";position:absolute;inset:0;z-index:8;pointer-events:none;
+  background:linear-gradient(90deg,rgba(252,251,247,.12),transparent 12% 88%,rgba(252,251,247,.12));
+}
+.fc-field:focus-visible .fc-shot-guide{opacity:.9;background:linear-gradient(90deg,rgba(190,62,38,.82),rgba(190,62,38,0))}
+.fc-pitch-scene{
+  position:absolute;inset:0;z-index:0;
+  background:url("img/cricket/pitch-v1.webp") center/100% 100% no-repeat;
+}
+.fc-wicket,.fc-bowler,.fc-batter{
+  position:absolute;display:block;z-index:3;pointer-events:none;user-select:none;
+  transform-origin:50% 50%;filter:drop-shadow(0 3px 3px rgba(23,21,17,.12));
+}
+.fc-wicket{width:4.2%;transition:transform .18s var(--ease-out),opacity .15s ease}
+.fc-wicket--striker{left:10.8%;top:50%;transform:translate(-50%,-50%) rotate(90deg)}
+.fc-wicket--bowler{left:89.2%;top:50%;transform:translate(-50%,-50%) rotate(-90deg)}
+.fc-wicket--striker[data-state="hit"]{transform:translate(-48%,-46%) rotate(102deg);opacity:.72}
+.fc-bowler{
+  left:78%;top:50%;width:8.5%;
+  transform:translate(-50%,-50%) rotate(-90deg);
+  transition:transform .42s cubic-bezier(.77,0,.175,1);
+}
+.fc-bowler.is-delivering{transform:translate(-72%,-50%) rotate(-96deg)}
+.fc-batter{
+  left:17%;top:50%;width:9.2%;
+  transform:translate(-50%,-50%) rotate(90deg);
+}
+.fc-shot-guide{
+  position:absolute;left:17%;top:50%;width:18%;height:1px;z-index:2;
+  transform-origin:0 50%;pointer-events:none;opacity:.52;
+  background:linear-gradient(90deg,rgba(190,62,38,.55),rgba(190,62,38,0));
+}
+.fc-game-ball,.fc-ball-shadow{position:absolute;left:0;top:0;width:12px;height:12px;border-radius:50%;pointer-events:none;opacity:0;will-change:transform}
+.fc-game-ball{z-index:7;background:#a62821;box-shadow:inset -2px -2px 0 rgba(61,12,10,.2)}
+.fc-game-ball i{position:absolute;left:5px;top:1px;width:1px;height:10px;background:rgba(251,231,214,.82);transform:rotate(-18deg)}
+.fc-ball-shadow{z-index:1;background:rgba(28,28,25,.38);filter:blur(2px)}
+.fc-game-ball.is-live,.fc-ball-shadow.is-live{opacity:1}
+.fc-result-flash{
+  position:absolute;left:50%;top:12%;transform:translate(-50%,-50%);z-index:9;
+  font-family:var(--mono);font-size:1.7rem;font-weight:700;color:var(--ink);opacity:0;
+}
+.fc-result-flash[data-state="played"],.fc-result-flash[data-state="boundary"],.fc-result-flash[data-state="wicket"]{opacity:1}
+.fc-result-flash[data-state="boundary"],.fc-result-flash[data-state="wicket"]{color:var(--red)}
+
+.fc-console{
+  min-height:5rem;display:grid;grid-template-columns:minmax(16rem,1fr) auto;
+  grid-template-areas:"commentary start" "help start";
+  align-items:center;column-gap:1.5rem;border-top:1px solid var(--ink);padding:.8rem 0 0;
+}
+.fc-commentary{grid-area:commentary;display:flex;align-items:baseline;gap:.85rem;min-width:0}
+.fc-delivery{font-family:var(--mono);font-size:.62rem;letter-spacing:.08em;color:var(--faint);white-space:nowrap}
+.fc-status{font-size:.92rem;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.fc-instructions{grid-area:help;font-family:var(--mono);font-size:.56rem;letter-spacing:.06em;color:var(--faint)}
+.fc-touch-help{display:none}
+.fc-start{
+  grid-area:start;appearance:none;background:var(--ink);color:var(--paper)!important;border:1px solid var(--ink);
+  min-height:44px;padding:.58rem 1rem;cursor:pointer;font-family:var(--mono)!important;font-size:.66rem!important;
+  letter-spacing:.08em;text-transform:uppercase;transition:background-color .14s ease,color .14s ease,transform .14s var(--ease-out);
+}
+.fc-start:hover{background:var(--red);border-color:var(--red)}
+.fc-record-form{
+  display:grid;grid-template-columns:1fr auto;gap:1rem;align-items:center;
+  border-top:1px solid var(--rule-dark);margin-top:.9rem;padding-top:.9rem;
+}
+.fc-record-form[hidden]{display:none}
+.fc-record-form label{font-size:.88rem;color:var(--soft)}
+.fc-record-form label strong{color:var(--red)}
+.fc-record-form>div{display:flex;align-items:center}
+.fc-record-form input{
+  width:5.2rem;height:44px;background:transparent;border:1px solid var(--ink);border-right:0;
+  padding:0 .65rem;text-transform:uppercase;font-family:var(--mono);letter-spacing:.16em;color:var(--ink);
+}
+.fc-record-form button{
+  min-height:44px;appearance:none;border:1px solid var(--ink);background:var(--ink);color:var(--paper);
+  padding:0 .8rem;cursor:pointer;font-family:var(--mono);font-size:.62rem;letter-spacing:.06em;
+  transition:background-color .14s ease,color .14s ease,transform .14s var(--ease-out);
+}
+.fc-record-form button:disabled{cursor:wait;opacity:.55}
+.fc-record-form>p{grid-column:1/-1;font-size:.78rem;color:var(--soft)}
+
+@media(hover:hover) and (pointer:fine){
+  .fc-icon-button:hover,.fc-close:hover{color:var(--red)}
+  .fc-field:hover .fc-shot-guide{opacity:.75}
+}
+
+@media(max-width:720px){
+  .footer-cricket-game{padding-top:0}
+  .fc-scoreboard{
+    grid-template-columns:1fr auto;
+    grid-template-areas:"identity actions" "balls balls" "records records";
+    gap:.45rem .75rem;padding-bottom:.65rem;
+  }
+  .fc-identity{grid-area:identity}.fc-actions{grid-area:actions}.fc-balls{grid-area:balls;justify-content:space-between}.fc-records{grid-area:records;justify-self:start}
+  .fc-balls li{width:1.75rem;height:1.75rem}
+  .fc-close{min-width:auto;padding-left:.5rem}
+  .fc-field{height:clamp(25rem,124vw,32rem);aspect-ratio:auto;min-height:0;max-height:none}
+  .fc-field::after{background:linear-gradient(180deg,rgba(252,251,247,.12),transparent 10% 90%,rgba(252,251,247,.12))}
+  .fc-pitch-scene{
+    inset:50% auto auto 50%;
+    width:clamp(25rem,124vw,32rem);height:clamp(8.25rem,41.3vw,10.65rem);
+    transform:translate(-50%,-50%) rotate(90deg);
+  }
+  .fc-wicket{width:clamp(1.8rem,9%,2.3rem)}
+  .fc-wicket--bowler{left:50%;top:9.5%;transform:translate(-50%,-50%) rotate(180deg)}
+  .fc-wicket--striker{left:50%;top:90.5%;transform:translate(-50%,-50%)}
+  .fc-wicket--striker[data-state="hit"]{transform:translate(-45%,-48%) rotate(12deg);opacity:.72}
+  .fc-bowler{left:50%;top:22%;width:clamp(3.5rem,16%,4.4rem);transform:translate(-50%,-50%) rotate(180deg)}
+  .fc-bowler.is-delivering{transform:translate(-50%,-30%) rotate(186deg)}
+  .fc-batter{left:50%;top:83%;width:clamp(4rem,17%,4.8rem);transform:translate(-50%,-50%)}
+  .fc-shot-guide{left:50%;top:80%;width:26%}
+  .fc-result-flash{top:8%}
+  .fc-console{grid-template-columns:1fr auto;grid-template-areas:"commentary start" "help help";row-gap:.45rem;padding-top:.7rem}
+  .fc-commentary{display:block}.fc-delivery{white-space:normal}.fc-status{font-size:.86rem;white-space:normal;margin-top:.15rem}
+  .fc-desktop-help{display:none}.fc-touch-help{display:inline}
+  .fc-record-form{grid-template-columns:1fr}.fc-record-form>div{width:100%}.fc-record-form input{flex:0 0 5.2rem}.fc-record-form button{flex:1}
+  .fc-all-time{display:none}
+}
+
+@media(max-width:390px){
+  .fc-score{font-size:1.35rem}.fc-kicker{font-size:.56rem}.fc-records{font-size:.54rem}
+  .fc-field{height:28rem;margin:0 -.35rem}
+  .fc-console{grid-template-columns:1fr;grid-template-areas:"commentary" "start" "help"}
+  .fc-start{width:100%;margin-top:.2rem}
+}
+
+.footer-cricket-game[data-motion="reduced"]{transform:none;transition:opacity .14s ease}
+.footer-cricket-game[data-motion="reduced"] .fc-bowler,
+.footer-cricket-game[data-motion="reduced"] .fc-wicket{transition:none}
+.footer-cricket-game[data-motion="reduced"] .fc-shot-guide{opacity:.4}
+
+@media(prefers-reduced-motion:reduce){
+  .footer-cricket-game,.fc-bowler,.fc-wicket,.fc-icon-button,.fc-close,.fc-start,.fc-record-form button{transition:none!important}
+}

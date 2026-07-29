@@ -10,14 +10,71 @@
   if (footIn && !footIn.querySelector('.footer-marks')) {
     var marks = document.createElement('div');
     marks.className = 'footer-marks';
-    marks.setAttribute('aria-hidden', 'true');
     marks.innerHTML = [
-      '<span class="footer-mark footer-mark--giraffe"><img src="assets/img/footer/giraffe.png" width="256" height="256" alt="" decoding="async"></span>',
-      '<span class="footer-mark footer-mark--flower"><img src="assets/img/footer/sunflower.png" width="256" height="256" alt="" decoding="async"></span>',
-      '<span class="footer-mark footer-mark--die"><img src="assets/img/footer/die.png" width="256" height="256" alt="" decoding="async"></span>',
-      '<span class="footer-mark footer-mark--cricket"><img src="assets/img/footer/cricket.png" width="256" height="256" alt="" decoding="async"></span>'
+      '<span class="footer-mark footer-mark--giraffe" aria-hidden="true"><img src="assets/img/footer/giraffe.png" width="256" height="256" alt="" decoding="async"></span>',
+      '<span class="footer-mark footer-mark--flower" aria-hidden="true"><img src="assets/img/footer/sunflower.png" width="256" height="256" alt="" decoding="async"></span>',
+      '<span class="footer-mark footer-mark--die" aria-hidden="true"><img src="assets/img/footer/die.png" width="256" height="256" alt="" decoding="async"></span>',
+      '<button class="footer-mark footer-mark--cricket footer-cricket-trigger" type="button" aria-expanded="false" aria-controls="footer-cricket-game" aria-label="Play The Last Over" title="Play The Last Over">' +
+        '<img src="assets/img/footer/cricket.png" width="256" height="256" alt="" decoding="async">' +
+        '<span class="footer-cricket-hint" aria-hidden="true">play the last over</span>' +
+      '</button>'
     ].join('');
     footIn.insertBefore(marks, footIn.querySelector('.foot-nav'));
+
+    /* The game is an earned surprise at the end of a page. Its engine, artwork
+       and styles are intentionally absent from the normal page payload and load
+       only after someone chooses the cricket mark. */
+    var cricketTrigger = marks.querySelector('.footer-cricket-trigger');
+    if (cricketTrigger) {
+      var cricketLoading = false;
+      var loadScript = function (src) {
+        return new Promise(function (resolve, reject) {
+          var existing = document.querySelector('script[data-cricket-src="' + src + '"]');
+          if (existing) {
+            if (existing.dataset.ready === 'true') resolve();
+            else existing.addEventListener('load', resolve, { once: true });
+            return;
+          }
+          var script = document.createElement('script');
+          script.src = src; script.defer = true; script.dataset.cricketSrc = src;
+          script.addEventListener('load', function () { script.dataset.ready = 'true'; resolve(); }, { once: true });
+          script.addEventListener('error', reject, { once: true });
+          document.head.appendChild(script);
+        });
+      };
+      var loadStyle = function (href) {
+        return new Promise(function (resolve, reject) {
+          var existing = document.querySelector('link[data-cricket-style]');
+          if (existing) { resolve(); return; }
+          var link = document.createElement('link');
+          link.rel = 'stylesheet'; link.href = href; link.dataset.cricketStyle = 'true';
+          link.addEventListener('load', resolve, { once: true });
+          link.addEventListener('error', reject, { once: true });
+          document.head.appendChild(link);
+        });
+      };
+      cricketTrigger.addEventListener('click', function (event) {
+        var keyboard = event.detail === 0;
+        if (window.FooterCricket) { window.FooterCricket.open({ keyboard: keyboard }); return; }
+        if (cricketLoading) return;
+        cricketLoading = true;
+        cricketTrigger.setAttribute('aria-busy', 'true');
+        Promise.all([
+          loadStyle('assets/footer-cricket.css?v=3'),
+          loadScript('assets/cricket-engine.js?v=3')
+        ]).then(function () {
+          return loadScript('assets/footer-cricket.js?v=3');
+        }).then(function () {
+          cricketLoading = false;
+          cricketTrigger.removeAttribute('aria-busy');
+          if (window.FooterCricket) window.FooterCricket.mount({ footer: footer, trigger: cricketTrigger, reduced: reduced, keyboard: keyboard });
+        }).catch(function () {
+          cricketLoading = false;
+          cricketTrigger.removeAttribute('aria-busy');
+          cricketTrigger.title = 'The Last Over could not load. Try again.';
+        });
+      });
+    }
 
     /* The sign-off is encountered once, near the end of a page. A one-time,
        lightweight entrance adds recognition without leaving the footer in

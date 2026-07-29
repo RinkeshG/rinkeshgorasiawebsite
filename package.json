@@ -2,7 +2,7 @@
   "name": "rinkeshgorasiawebsite",
   "private": true,
   "scripts": {
-    "check": "node --check api/content.js"
+    "check": "node --check api/content.js && node --check api/cricket-score.js && node --check assets/cricket-engine.js && node --check assets/footer-cricket.js && node --check assets/ledger.js"
   },
   "dependencies": {
     "@vercel/blob": "^2.3.0"
