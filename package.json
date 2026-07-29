@@ -1,0 +1,10 @@
+{
+  "name": "rinkeshgorasiawebsite",
+  "private": true,
+  "scripts": {
+    "check": "node --check api/content.js"
+  },
+  "dependencies": {
+    "@vercel/blob": "^2.3.0"
+  }
+}

@@ -251,7 +251,7 @@ reading-time), let the writing and work carry weight, one plain language through
   added (processed to crisp 120px assets); Career Leap also wired into the work page. One
   well silhouette holds two honest families — **bare glyphs** (Savior, Career Leap, KYP)
   float with padding; **app-icon tiles** (Sniff, PSL) fill edge-to-edge (`.lmark.tile`).
-  Reads as an intentional product grid, not a sticker sheet. Accel + Vouch stay monograms.
+  Reads as an intentional product grid, not a sticker sheet. Vouch stays a monogram.
 - [x] **Work-close button hierarchy (was P1).** Primary "copy my email" is now a filled
   lime button vs the ghost "DM on X" — emphasis, not width, carries the hierarchy; both
   content-width, neither stretches.
@@ -276,7 +276,7 @@ reading-time), let the writing and work carry weight, one plain language through
 - [x] **P0 — `.hl` underline removed** from the intro (weight emphasis kept, line dropped).
 - [x] **⌘K moved to the footer** (out of the top bar); hover-only, hidden on touch.
 - [x] **Experience cards deep-link** to the matching work section
-  (`work.html#savior` / `#career-leap` / `#accel`), landing under the sticky bar.
+  (`work.html#savior` / `#career-leap`), landing under the sticky bar.
 - [x] **Work-page "now" section redesigned** — the neglected one-liner became three
   compact logo cards linking to the live products; lighter than the home cards so it
   complements rather than repeats.
@@ -285,7 +285,7 @@ reading-time), let the writing and work carry weight, one plain language through
   vars pulled + pushed via CLI, GitHub auto-deploy connected, deployed, and the brand
   domains re-pointed — `knowyourpay.in` and `productsenselab.com` both serving (200).
   Site links updated to the real domains.
-- [x] **Real copy — home + work (Savior, Career Leap, Accel, products).** Written from
+- [x] **Real copy — home + work (Savior, Career Leap, products).** Written from
   real details in a plain founder voice (no em dashes, no rule-of-three, no AI tells):
   hero intro, the track-record cards (clear one-liner + substance highlights), and the
   deeper work-page case studies. Fixed old inaccuracies (Career Leap was soft-skills for
@@ -302,10 +302,10 @@ reading-time), let the writing and work carry weight, one plain language through
 
 ### Content & copy
 
-- [x] **Home page** — real intro + track-record cards (Savior, Career Leap, Accel) +
+- [x] **Home page** — real intro + track-record cards (Savior, Career Leap) +
   building-now product one-liners, in voice. *(stat-rail numbers for the building-now
   products — scans/users/etc — are still rough; verify when you have them.)*
-- [x] **Work page** — real case studies for Savior, Career Leap, Accel; "now" section live.
+- [x] **Work page** — real case studies for Savior and Career Leap; "now" section live.
 - [x] **Coffee page** — real cafés + personal notes done. **Photos still to add.**
 - [ ] **Writing page** — real essay titles and excerpts instead of placeholder text. Dates
   accurate. Index numbers match actual post count.

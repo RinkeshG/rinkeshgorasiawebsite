@@ -2,6 +2,38 @@
 (function () {
   var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* Four compact editorial object marks sit inside the sign-off itself. They are
+     one illustrated family, rather than four unrelated UI glyphs. Keeping the
+     markup here gives every page the same footer without duplicating it. */
+  var footer = document.querySelector('footer');
+  var footIn = footer && footer.querySelector('.foot-in');
+  if (footIn && !footIn.querySelector('.footer-marks')) {
+    var marks = document.createElement('div');
+    marks.className = 'footer-marks';
+    marks.setAttribute('aria-hidden', 'true');
+    marks.innerHTML = [
+      '<span class="footer-mark footer-mark--giraffe"><img src="assets/img/footer/giraffe.png" width="256" height="256" alt="" decoding="async"></span>',
+      '<span class="footer-mark footer-mark--flower"><img src="assets/img/footer/sunflower.png" width="256" height="256" alt="" decoding="async"></span>',
+      '<span class="footer-mark footer-mark--die"><img src="assets/img/footer/die.png" width="256" height="256" alt="" decoding="async"></span>',
+      '<span class="footer-mark footer-mark--cricket"><img src="assets/img/footer/cricket.png" width="256" height="256" alt="" decoding="async"></span>'
+    ].join('');
+    footIn.insertBefore(marks, footIn.querySelector('.foot-nav'));
+
+    /* The sign-off is encountered once, near the end of a page. A one-time,
+       lightweight entrance adds recognition without leaving the footer in
+       constant motion. Each object keeps its own small hover gesture below. */
+    if (!reduced && 'IntersectionObserver' in window) {
+      var marksIO = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          marks.classList.add('marks-in');
+          marksIO.disconnect();
+        });
+      }, { threshold: 0.65 });
+      marksIO.observe(marks);
+    }
+  }
+
   /* figures tally up like ledger entries when they enter view */
   if (!reduced && 'IntersectionObserver' in window) {
     var els = document.querySelectorAll('.fig b, .exp-fig b, .b-fig b');
