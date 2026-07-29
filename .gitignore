@@ -4,3 +4,11 @@ _*.png
 .DS_Store
 # local Claude tooling (preview launch config, etc.)
 .claude/
+
+# local environment secrets
+.env.local
+.env.*.local
+node_modules/
+.vercel/
+.vercel
+.env*.local

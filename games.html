@@ -317,6 +317,7 @@
   var count=document.getElementById('game-count'),deal=document.getElementById('game-deal'),dealPool=document.getElementById('deal-pool'),dealStatus=document.getElementById('deal-status'),clearFilters=document.getElementById('clear-filters'),emptyState=document.getElementById('game-empty'),emptyClear=document.getElementById('empty-clear'),scrim=document.getElementById('game-scrim'),sheet=document.getElementById('game-sheet'),closer=document.getElementById('sheet-close'),sheetKicker=document.getElementById('sheet-kicker'),sheetPrev=document.getElementById('sheet-prev'),sheetNext=document.getElementById('sheet-next'),sheetPosition=document.getElementById('sheet-position'),pageShell=document.getElementById('page-shell'),knockSample=document.getElementById('table-knock');
   var lastFocus=null,lastDealId=null,activeGameId=null,tableAudio=null;
   var reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var esc=function(value){return String(value==null?'':value).replace(/[&<>"]/g,function(character){return character==='&'?'&amp;':character==='<'?'&lt;':character==='>'?'&gt;':'&quot;';});};
   try{
     var knockRate=22050,knockDuration=.12,knockCount=Math.floor(knockRate*knockDuration),knockBuffer=new ArrayBuffer(44+knockCount*2),knockView=new DataView(knockBuffer);
     function writeKnockText(offset,text){for(var textIndex=0;textIndex<text.length;textIndex++)knockView.setUint8(offset+textIndex,text.charCodeAt(textIndex));}
@@ -332,9 +333,9 @@
   }catch(error){}
   function hasFilters(){return filterState.players!=='any'||filterState.quick||filterState.easy||filterState.favorite;}
   function cardMatches(card){
-    if(filterState.players!=='any'&&card.dataset.players!==filterState.players)return false;
+    if(filterState.players!=='any'&&card.dataset.players.split(',').indexOf(filterState.players)<0)return false;
     if(filterState.quick&&card.dataset.quick!=='true')return false;
-    if(filterState.easy&&card.dataset.learning!=='easy')return false;
+    if(filterState.easy&&card.dataset.easy!=='true'&&card.dataset.learning!=='easy')return false;
     if(filterState.favorite&&card.dataset.favorite!=='true')return false;
     return true;
   }
@@ -453,6 +454,27 @@
     cards.forEach(bindCard);
     applyFilters(false,false);
   }
+  function renderRemoteGames(items){
+    if(!Array.isArray(items)||!items.length)return;
+    var favouriteIcon='<span class="favorite-mark" title="A favourite" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78Z"/></svg></span>';
+    var nextData={};
+    var html=items.map(function(game,index){
+      if(!game.id||!game.name||!game.image)return '';
+      nextData[game.id]={name:game.name,type:game.type,image:game.image,alt:game.imageAlt,call:game.callout,verdict:game.verdict,stats:Array.isArray(game.stats)?game.stats:[]};
+      var favourite=game.favourite?favouriteIcon:'';
+      var fits=Array.isArray(game.playerFits)?game.playerFits.join(','):'';
+      return '<button class="game-card" type="button" data-id="'+esc(game.id)+'" data-players="'+esc(fits)+'" data-quick="'+String(Boolean(game.quick))+'" data-learning="'+esc(game.learning)+'" data-easy="'+String(Boolean(game.easy))+'" data-favorite="'+String(Boolean(game.favourite))+'" aria-label="View notes on '+esc(game.name)+(game.favourite?', a favourite':'')+'">'
+        +'<span class="game-visual"><img src="'+esc(game.image)+'" alt="'+esc(game.imageAlt||game.name+' board game')+'" width="640" height="640"'+(index>1?' loading="lazy"':'')+'></span>'
+        +'<span class="game-copy"><span class="game-name-row"><span class="game-title"><span class="game-name">'+esc(game.name)+'</span>'+favourite+'</span><span class="game-open" aria-hidden="true">View notes</span></span>'
+        +'<span class="game-line">'+esc(game.description)+'</span><span class="game-specs"><span class="game-spec"><span>Players</span><b>'+esc(game.players)+'</b></span><span class="game-spec"><span>Time</span><b>'+esc(game.duration)+'</b></span><span class="game-spec"><span>Learning</span><b>'+esc(game.learning)+'</b></span></span></span></button>';
+    }).join('');
+    if(!html)return;
+    Array.prototype.forEach.call(document.querySelectorAll('.game-card'),function(card){card.remove();});
+    emptyState.insertAdjacentHTML('beforebegin',html);
+    data=nextData;
+    refreshCollection();
+    if(activeGameId&&data[activeGameId])fillGame(activeGameId,false);
+  }
   window.boardGameCollection={
     registerGame:function(id,details){data[id]=details;},
     refresh:refreshCollection
@@ -531,6 +553,17 @@
   refreshCollection();
   var requestedGame=new URL(location.href).searchParams.get('game');
   if(requestedGame&&data[requestedGame])openGame(requestedGame,null,false,false,'none');
+  fetch('/api/content?type=games').then(function(response){
+    if(!response.ok)throw new Error('Content API unavailable');
+    return response.json();
+  }).then(function(payload){
+    if(!payload||!Array.isArray(payload.items))return;
+    renderRemoteGames(payload.items);
+    var requested=new URL(location.href).searchParams.get('game');
+    if(requested&&data[requested]&&scrim.dataset.state!=='open')openGame(requested,null,false,false,'none');
+  }).catch(function(){
+    /* The embedded collection remains a deliberate offline fallback. */
+  });
 })();
 </script>
 </body></html>
