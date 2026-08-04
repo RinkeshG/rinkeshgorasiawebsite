@@ -2,7 +2,7 @@
 <html lang="en"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>books — Rinkesh Gorasia</title>
-<meta name="description" content="The books page is still being catalogued." />
+<meta name="description" content="The books page is still being written." />
 <link rel="canonical" href="https://rinkeshgorasia.com/books.html" />
 <meta name="robots" content="noindex" />
 <meta name="theme-color" content="#FCFCF9" />
@@ -10,7 +10,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Rinkesh Gorasia" />
 <meta property="og:title" content="books — Rinkesh Gorasia" />
-<meta property="og:description" content="The books page is still being catalogued." />
+<meta property="og:description" content="The books page is still being written." />
 <meta property="og:image" content="https://rinkeshgorasia.com/assets/og.png" />
 <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg" />
 <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
@@ -20,56 +20,56 @@
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap"></noscript>
 <link rel="stylesheet" href="assets/ledger.css?v=36">
 <style>
-  /* The card glued inside the back cover of a library book: ruled
-     rows, a date stamped in each one, and a rubber stamp across it
-     saying what it is. Stamping is the whole joy of a library desk,
-     so the card lets you do it. */
-  .wip{padding:1.4rem 0 var(--s6);display:flex;flex-direction:column;align-items:center;text-align:center}
-  .pocket{
-    position:relative;width:min(23rem,100%);background:#FBF7EA;
-    border:1px solid var(--rule-dark);box-shadow:0 16px 32px -22px rgba(28,28,25,.6);
-    padding:1.15rem 1.3rem 1.4rem;text-align:left;
-    transform:rotate(-1.1deg);cursor:pointer;user-select:none;
-    transition:transform .2s var(--ease-out);
+  /* One visual, one line. A row of spines with a gap where this page
+     should be — the missing book is the whole joke. It leans in and
+     out of the gap on a slow loop, like it can't decide to arrive. */
+  .wip{padding:var(--s6) 0 var(--s7);display:flex;flex-direction:column;align-items:center;text-align:center}
+  .row{position:relative;display:flex;align-items:flex-end;gap:5px;height:12.5rem;margin-bottom:2.6rem;padding-bottom:2px}
+  .row::after{content:"";position:absolute;left:-1.5rem;right:-1.5rem;bottom:0;height:2px;background:var(--ink)}
+  .sp{
+    position:relative;width:2.7rem;border-radius:1px 1px 0 0;
+    box-shadow:inset -4px 0 7px -5px rgba(0,0,0,.5),0 6px 11px -7px rgba(28,28,25,.7);
+    display:flex;align-items:flex-start;justify-content:center;padding:.85rem .2rem;
+    font-weight:600;font-size:.68rem;line-height:1.1;letter-spacing:-.005em;
+    writing-mode:vertical-rl;transform:rotate(180deg);
   }
-  .pocket:hover{transform:rotate(-1.1deg) translateY(-2px)}
-  .pocket:active{transform:rotate(-1.1deg) translateY(0) scale(.995)}
-  .pocket:focus-visible{outline:2px solid var(--red);outline-offset:5px}
-  .pk-head{font-family:var(--mono);font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);display:flex;justify-content:space-between;gap:1rem}
-  .pk-title{font-weight:600;font-size:1.12rem;letter-spacing:-.02em;margin:.5rem 0 .1rem}
-  .pk-sub{font-family:var(--mono);font-size:.62rem;letter-spacing:.06em;color:var(--soft)}
-  .pk-rule{height:2px;background:var(--ink);margin:.85rem 0 0}
-  .pk-cols{display:grid;grid-template-columns:1fr auto;gap:1rem;font-family:var(--mono);font-size:.55rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);padding:.5rem 0 .3rem;border-bottom:1px solid var(--rule)}
-  .pk-rows{list-style:none}
-  .pk-rows li{
-    display:grid;grid-template-columns:1fr auto;gap:1rem;align-items:baseline;
-    padding:.5rem 0;border-bottom:1px solid var(--rule);
-    font-family:var(--mono);font-size:.76rem;color:var(--ink);
+  /* the head band a hardback wears */
+  .sp::after{content:"";position:absolute;top:.45rem;left:.34rem;right:.34rem;height:1px;background:currentColor;opacity:.32}
+  .sp:nth-child(1){background:#23231F;color:#F1EDE2;height:88%}
+  .sp:nth-child(2){background:#BE3E26;color:#FBF3EF;height:96%;width:2.95rem}
+  .sp:nth-child(3){background:#EDEAE0;color:#2A2A24;height:82%}
+  /* the gap, and the book that keeps not quite landing in it */
+  .gap{width:2.7rem;flex:none;position:relative;align-self:stretch}
+  .gap i{
+    position:absolute;left:0;bottom:0;width:100%;height:90%;
+    background:#C08A4E;color:#26221B;border-radius:1px 1px 0 0;
+    box-shadow:inset -4px 0 7px -5px rgba(0,0,0,.5),0 6px 11px -7px rgba(28,28,25,.7);
+    transform-origin:bottom right;
+    animation:tilt 6.5s var(--ease-out) infinite;
   }
-  .pk-rows li span:last-child{color:var(--faint);font-size:.66rem}
-  .pk-rows li.blank{color:var(--rule-dark)}
-  .pk-rows li.fresh{animation:stamped .28s var(--ease-out)}
-  @keyframes stamped{from{opacity:0;transform:scale(1.16) rotate(-2deg)}to{opacity:1;transform:none}}
-  /* the stamp itself */
-  .stamp{
-    position:absolute;right:.85rem;bottom:.85rem;z-index:2;
-    border:2px solid var(--red);color:var(--red);
-    font-family:var(--mono);font-size:.6rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;
-    padding:.4rem .55rem;line-height:1.25;text-align:center;
-    transform:rotate(-9deg);opacity:.82;background:rgba(251,247,234,.55);
+  .gap i::before{content:"";position:absolute;top:.45rem;left:.34rem;right:.34rem;height:1px;background:currentColor;opacity:.32}
+  @keyframes tilt{
+    0%,12%   {transform:rotate(0deg)}
+    38%,62%  {transform:rotate(22deg)}
+    88%,100% {transform:rotate(0deg)}
   }
-  .stamp b{display:block;font-size:.72rem;font-weight:500}
-  .wip-note{font-family:var(--mono);font-size:.66rem;letter-spacing:.06em;color:var(--faint);margin-top:1.1rem}
-  .wip h2{font-size:1.5rem;letter-spacing:-.025em;margin-top:2rem}
-  .wip p.say{color:var(--soft);max-width:26rem;margin-top:.55rem;font-size:1rem}
-  .wip .cta{display:flex;gap:1.4rem;margin-top:1.5rem;font-family:var(--mono);font-size:.74rem}
+  .sp:nth-child(5){background:#3E4A46;color:#EEF0EC;height:91%}
+  .sp:nth-child(6){background:#C9B79A;color:#2A2A24;height:85%}
+  .wip h1{font-size:2rem;letter-spacing:-.03em;margin-bottom:.6rem}
+  .wip p{color:var(--soft);max-width:27rem;font-size:1.02rem}
+  .wip .cta{display:flex;gap:1.4rem;margin-top:1.7rem;font-family:var(--mono);font-size:.74rem}
   .wip .cta a{color:var(--soft);text-decoration:none}
   .wip .cta a:hover{color:var(--red)}
   @media(max-width:640px){
-    .pocket{transform:none;padding:1rem 1.05rem 1.2rem}
-    .pocket:hover,.pocket:active{transform:none}
-    .stamp{right:.6rem;bottom:.7rem}
-    .wip .cta{flex-direction:column;gap:.7rem;align-items:center}
+    .row{height:10rem;gap:4px;margin-bottom:2.2rem}
+    .sp,.gap{width:2.25rem}
+    .sp:nth-child(2){width:2.45rem}
+    .sp{font-size:.62rem}
+    .wip h1{font-size:1.6rem}
+    .wip .cta{flex-direction:column;gap:.75rem;align-items:center}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .gap i{animation:none;transform:rotate(18deg)}
   }
 </style>
 </head>
@@ -84,24 +84,17 @@
   </header>
 
   <main class="wip">
-    <div class="pocket" id="card" role="button" tabindex="0" aria-label="Stamp the card">
-      <div class="pk-head"><span>Gorasia Lending Library</span><span>No. 0005</span></div>
-      <div class="pk-title">Books</div>
-      <div class="pk-sub">The five I keep re-reading</div>
-      <div class="pk-rule"></div>
-      <div class="pk-cols"><span>Date due</span><span>Borrower</span></div>
-      <ul class="pk-rows" id="rows">
-        <li><span>12 MAR 2019</span><span>Rinkesh</span></li>
-        <li><span>04 SEP 2021</span><span>Rinkesh</span></li>
-        <li><span>28 JAN 2024</span><span>Rinkesh (again)</span></li>
-        <li class="blank"><span>— — —</span><span>you?</span></li>
-      </ul>
-      <span class="stamp">Not yet<b>Catalogued</b></span>
+    <div class="row" role="img" aria-label="A shelf of books with one still finding its place">
+      <span class="sp">Shoe Dog</span>
+      <span class="sp">The Hard Thing About Hard Things</span>
+      <span class="sp">Thinking, Fast and Slow</span>
+      <span class="gap"><i></i></span>
+      <span class="sp">Zero to One</span>
+      <span class="sp">Show Your Work</span>
     </div>
-    <p class="wip-note" id="note">stamp it — the desk is unattended</p>
 
-    <h2>This page is still being catalogued.</h2>
-    <p class="say">The books exist, the shelf is real, and I have opinions about all five. Writing them down is the part I keep putting off.</p>
+    <h1>Still finding its place<span class="dot">.</span></h1>
+    <p>The books are real and I have opinions about every one of them. Writing those down is the part I keep putting off.</p>
     <span class="cta"><a href="shelf.html">← back to the shelf</a><a href="worth.html">things worth your time →</a></span>
   </main>
 
@@ -116,40 +109,4 @@
 
 </div>
 <script src="assets/ledger.js?v=28"></script>
-<script>
-(function () {
-  var card = document.getElementById('card'),
-      rows = document.getElementById('rows'),
-      note = document.getElementById('note');
-  var MONTHS = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
-  var WHO = ['Rinkesh', 'Rinkesh (again)', 'lent, never returned', 'you?', 'Simba', 'still me'];
-  var LINES = ['one more', 'the desk is still unattended', 'nobody is checking', 'go on then', 'this is not cataloguing'];
-  var count = 0;
-
-  function stamp() {
-    if (count >= 6) {
-      note.textContent = 'that is enough stamping for one evening';
-      return;
-    }
-    var d = new Date(2026, 0, 1);
-    d.setDate(d.getDate() + Math.floor(Math.random() * 900));
-    var li = document.createElement('li');
-    li.className = 'fresh';
-    var day = document.createElement('span');
-    day.textContent = ('0' + d.getDate()).slice(-2) + ' ' + MONTHS[d.getMonth()] + ' ' + d.getFullYear();
-    var who = document.createElement('span');
-    who.textContent = WHO[Math.floor(Math.random() * WHO.length)];
-    li.appendChild(day); li.appendChild(who);
-    var blank = rows.querySelector('.blank');
-    if (blank) rows.insertBefore(li, blank); else rows.appendChild(li);
-    count++;
-    note.textContent = LINES[Math.min(count - 1, LINES.length - 1)];
-  }
-
-  card.addEventListener('click', stamp);
-  card.addEventListener('keydown', function (e) {
-    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); stamp(); }
-  });
-})();
-</script>
 </body></html>

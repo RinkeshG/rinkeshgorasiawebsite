@@ -2,7 +2,7 @@
 <html lang="en"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>lego — Rinkesh Gorasia</title>
-<meta name="description" content="The lego page is still being assembled." />
+<meta name="description" content="The lego page is still being built." />
 <link rel="canonical" href="https://rinkeshgorasia.com/lego.html" />
 <meta name="robots" content="noindex" />
 <meta name="theme-color" content="#FCFCF9" />
@@ -10,7 +10,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Rinkesh Gorasia" />
 <meta property="og:title" content="lego — Rinkesh Gorasia" />
-<meta property="og:description" content="The lego page is still being assembled." />
+<meta property="og:description" content="The lego page is still being built." />
 <meta property="og:image" content="https://rinkeshgorasia.com/assets/og.png" />
 <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg" />
 <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
@@ -20,64 +20,43 @@
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap"></noscript>
 <link rel="stylesheet" href="assets/ledger.css?v=36">
 <style>
-  /* An instruction booklet page. Step number in the corner, the parts
-     for this step boxed off to one side, the build in the middle on
-     a baseplate — and a button that adds one piece at a time, because
-     that is the only way anything gets built. Real brick geometry:
-     8mm pitch, studs 4.8mm across and 1.8mm proud. */
-  .wip{padding:1.2rem 0 var(--s6)}
-  .manual{border:1px solid var(--rule-dark);background:var(--card);box-shadow:0 16px 34px -26px rgba(28,28,25,.55)}
-  .mn-top{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:.7rem .95rem;border-bottom:1px solid var(--rule);font-family:var(--mono);font-size:.6rem;letter-spacing:.13em;text-transform:uppercase;color:var(--faint)}
-  .mn-step{display:inline-flex;align-items:center;gap:.5rem;color:var(--ink)}
-  .mn-step b{display:grid;place-items:center;min-width:1.65rem;height:1.65rem;border:2px solid var(--ink);font-size:.78rem;font-weight:500;letter-spacing:0}
-  .mn-body{display:grid;grid-template-columns:1fr 11rem}
-  .mn-build{
-    position:relative;min-height:19rem;display:grid;place-items:center;overflow:hidden;
-    background-color:rgba(255,255,255,.45);
-    background-image:radial-gradient(circle at center,var(--rule) 1.6px,transparent 1.7px);
-    background-size:16px 16px;
+  /* One visual, one line. The page builds itself out of bricks and
+     never finishes, which is the only joke it needs.
+     Real brick geometry: 8mm stud pitch, studs 4.8mm across. */
+  .wip{padding:var(--s6) 0 var(--s7);display:flex;flex-direction:column;align-items:center;text-align:center}
+  .stage{--u:34px;position:relative;width:calc(var(--u) * 7);height:calc(var(--u) * 4.8);margin-bottom:2.4rem}
+  .brick{
+    position:absolute;height:calc(var(--u) * .92);border-radius:2px;
+    opacity:0;animation:lay 9s cubic-bezier(.3,1.5,.5,1) infinite;
+    animation-delay:calc(var(--i) * .15s);
   }
-  .plate{position:relative;--u:26px;width:calc(var(--u) * 7);height:calc(var(--u) * 5.2)}
-  .brick{position:absolute;height:calc(var(--u) * .92);border-radius:1.5px;opacity:0;transform:translateY(calc(var(--u) * -1.6))}
-  .brick.set{opacity:1;transform:none;transition:opacity .18s var(--ease-out),transform .4s cubic-bezier(.3,1.5,.5,1)}
-  .brick .body{position:absolute;inset:0;border-radius:1.5px;background:var(--c);
+  .brick .body{position:absolute;inset:0;border-radius:2px;background:var(--c);
     box-shadow:inset 0 calc(var(--u) * -.14) 0 rgba(0,0,0,.19),inset 0 calc(var(--u) * .1) 0 rgba(255,255,255,.24),
-               inset calc(var(--u) * -.09) 0 0 rgba(0,0,0,.11),0 2px 4px -2px rgba(28,28,25,.45)}
+               inset calc(var(--u) * -.09) 0 0 rgba(0,0,0,.11),0 3px 6px -3px rgba(28,28,25,.5)}
   .brick .studs{position:absolute;left:0;right:0;top:calc(var(--u) * -.2);height:calc(var(--u) * .2);display:flex}
   .brick .studs s{flex:1;display:block;position:relative}
   .brick .studs s::before{content:"";position:absolute;left:50%;transform:translateX(-50%);top:0;
-    width:calc(var(--u) * .58);height:100%;border-radius:1.5px 1.5px 0 0;background:var(--c);
+    width:calc(var(--u) * .58);height:100%;border-radius:2px 2px 0 0;background:var(--c);
     box-shadow:inset 0 1px 0 rgba(255,255,255,.3),inset calc(var(--u) * -.06) 0 0 rgba(0,0,0,.13)}
-  /* the ghost of the piece that goes on next, the way manuals show it */
-  .brick.next{opacity:1;transform:none}
-  .brick.next .body{background:none;border:1.5px dashed var(--rule-dark);box-shadow:none}
-  .brick.next .studs{display:none}
-  /* parts list */
-  .mn-parts{border-left:1px solid var(--rule);padding:.95rem 1rem;display:flex;flex-direction:column}
-  .mn-parts h2{font-family:var(--mono);font-size:.58rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:.75rem}
-  .part{display:flex;align-items:center;gap:.6rem;padding:.36rem 0;font-family:var(--mono);font-size:.7rem;color:var(--soft)}
-  .part i{display:block;height:9px;border-radius:1.5px;flex:none;box-shadow:inset 0 -2px 0 rgba(0,0,0,.18),inset 0 2px 0 rgba(255,255,255,.2)}
-  .part.done{color:var(--faint);text-decoration:line-through;text-decoration-color:var(--rule-dark)}
-  .mn-add{
-    margin-top:auto;appearance:none;width:100%;min-height:44px;cursor:pointer;
-    background:var(--paper);border:1px solid var(--ink);color:var(--ink);
-    font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;
-    padding:.6rem .5rem;transition:background-color .16s var(--ease-out),color .16s var(--ease-out);
+  @keyframes lay{
+    0%   {opacity:0;transform:translate(0,calc(var(--u) * -1.7))}
+    5%   {opacity:1;transform:translate(0,0)}
+    58%  {opacity:1;transform:translate(0,0) rotate(0)}
+    72%  {opacity:0;transform:translate(var(--x),calc(var(--u) * 2)) rotate(var(--r))}
+    100% {opacity:0;transform:translate(var(--x),calc(var(--u) * 2)) rotate(var(--r))}
   }
-  .mn-add:hover{background:var(--ink);color:var(--paper)}
-  .mn-add:disabled{cursor:default;border-color:var(--rule-dark);color:var(--faint);background:none}
-  .mn-foot{padding:.7rem .95rem;border-top:1px solid var(--rule);font-family:var(--mono);font-size:.64rem;letter-spacing:.05em;color:var(--faint)}
-  .wip h2.say-h{font-size:1.5rem;letter-spacing:-.025em;margin-top:2.2rem}
-  .wip p.say{color:var(--soft);max-width:27rem;margin-top:.55rem;font-size:1rem}
-  .wip .cta{display:flex;gap:1.4rem;margin-top:1.5rem;font-family:var(--mono);font-size:.74rem}
+  .wip h1{font-size:2rem;letter-spacing:-.03em;margin-bottom:.6rem}
+  .wip p{color:var(--soft);max-width:27rem;font-size:1.02rem}
+  .wip .cta{display:flex;gap:1.4rem;margin-top:1.7rem;font-family:var(--mono);font-size:.74rem}
   .wip .cta a{color:var(--soft);text-decoration:none}
   .wip .cta a:hover{color:var(--red)}
-  @media(max-width:700px){
-    .mn-body{grid-template-columns:1fr}
-    .mn-parts{border-left:0;border-top:1px solid var(--rule)}
-    .mn-build{min-height:15rem}
-    .plate{--u:21px}
-    .wip .cta{flex-direction:column;gap:.7rem}
+  @media(max-width:640px){
+    .stage{--u:25px;margin-bottom:2rem}
+    .wip h1{font-size:1.6rem}
+    .wip .cta{flex-direction:column;gap:.75rem;align-items:center}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .brick{animation:none;opacity:1;transform:none}
   }
 </style>
 </head>
@@ -92,26 +71,20 @@
   </header>
 
   <main class="wip">
-    <div class="manual">
-      <div class="mn-top">
-        <span class="mn-step"><b id="stepno">1</b> Step <span id="steptot">of 9</span></span>
-        <span>Set 0006 · Lego</span>
-      </div>
-      <div class="mn-body">
-        <div class="mn-build">
-          <div class="plate" id="plate"></div>
-        </div>
-        <div class="mn-parts">
-          <h2>Parts for this build</h2>
-          <div id="parts"></div>
-          <button type="button" class="mn-add" id="add">Add the next piece</button>
-        </div>
-      </div>
-      <div class="mn-foot" id="foot">nine pieces down, the rest of the instructions still being drawn</div>
+    <div class="stage" role="img" aria-label="A wall of lego bricks building itself and coming apart">
+      <span class="brick" style="--c:#BE3E26;--i:0;--x:-34px;--r:-18deg;left:calc(var(--u) * 1);bottom:0;width:calc(var(--u) * 4 - 1px)"><span class="body"></span><span class="studs"><s></s><s></s><s></s><s></s></span></span>
+      <span class="brick" style="--c:#26261F;--i:1;--x:28px;--r:15deg;left:calc(var(--u) * 5);bottom:0;width:calc(var(--u) * 2 - 1px)"><span class="body"></span><span class="studs"><s></s><s></s></span></span>
+      <span class="brick" style="--c:#C08A4E;--i:2;--x:-40px;--r:-22deg;left:0;bottom:calc(var(--u) * .92);width:calc(var(--u) * 3 - 1px)"><span class="body"></span><span class="studs"><s></s><s></s><s></s></span></span>
+      <span class="brick" style="--c:#6E7F6A;--i:3;--x:32px;--r:19deg;left:calc(var(--u) * 3);bottom:calc(var(--u) * .92);width:calc(var(--u) * 4 - 1px)"><span class="body"></span><span class="studs"><s></s><s></s><s></s><s></s></span></span>
+      <span class="brick" style="--c:#E2DCCC;--i:4;--x:-26px;--r:-13deg;left:calc(var(--u) * 1);bottom:calc(var(--u) * 1.84);width:calc(var(--u) * 2 - 1px)"><span class="body"></span><span class="studs"><s></s><s></s></span></span>
+      <span class="brick" style="--c:#BE3E26;--i:5;--x:36px;--r:25deg;left:calc(var(--u) * 3);bottom:calc(var(--u) * 1.84);width:calc(var(--u) * 3 - 1px)"><span class="body"></span><span class="studs"><s></s><s></s><s></s></span></span>
+      <span class="brick" style="--c:#26261F;--i:6;--x:-22px;--r:-16deg;left:calc(var(--u) * 2);bottom:calc(var(--u) * 2.76);width:calc(var(--u) * 4 - 1px)"><span class="body"></span><span class="studs"><s></s><s></s><s></s><s></s></span></span>
+      <span class="brick" style="--c:#6E7F6A;--i:7;--x:30px;--r:21deg;left:calc(var(--u) * 1);bottom:calc(var(--u) * 3.68);width:calc(var(--u) * 2 - 1px)"><span class="body"></span><span class="studs"><s></s><s></s></span></span>
+      <span class="brick" style="--c:#C08A4E;--i:8;--x:-30px;--r:-11deg;left:calc(var(--u) * 3.5);bottom:calc(var(--u) * 3.68);width:calc(var(--u) * 2 - 1px)"><span class="body"></span><span class="studs"><s></s><s></s></span></span>
     </div>
 
-    <h2 class="say-h">This page is still being assembled.</h2>
-    <p class="say">Three sets, five thousand pieces, and a lot of opinions about which one was worth the weekend. All of that is going here. Eventually.</p>
+    <h1>Still being built<span class="dot">.</span></h1>
+    <p>Three sets, five thousand pieces, and strong opinions about which one was worth the weekend. This page keeps coming apart before I finish it.</p>
     <span class="cta"><a href="shelf.html">← back to the shelf</a><a href="games.html">board games instead →</a></span>
   </main>
 
@@ -126,89 +99,4 @@
 
 </div>
 <script src="assets/ledger.js?v=28"></script>
-<script>
-(function () {
-  var RED = '#BE3E26', INK = '#26261F', TAN = '#C08A4E', SAGE = '#6E7F6A', CREAM = '#E2DCCC';
-  /* course, x in studs, width in studs, colour — offset joints, so no
-     vertical seam ever repeats between one course and the next */
-  var WALL = [
-    [0, 1, 4, RED], [0, 5, 2, INK],
-    [1, 0, 3, TAN], [1, 3, 4, SAGE],
-    [2, 1, 2, CREAM], [2, 3, 3, RED],
-    [3, 2, 4, INK],
-    [4, 3, 2, TAN], [4, 0, 2, SAGE]
-  ];
-  var NAMES = { }; NAMES[RED] = 'red'; NAMES[INK] = 'black'; NAMES[TAN] = 'tan';
-  NAMES[SAGE] = 'sage'; NAMES[CREAM] = 'cream';
-  var DONE = [
-    'that is the last piece I drew',
-    'the rest of the instructions are still being drawn',
-    'somewhere there is a bag of spares'
-  ];
-
-  var plate = document.getElementById('plate'),
-      parts = document.getElementById('parts'),
-      add = document.getElementById('add'),
-      stepno = document.getElementById('stepno'),
-      steptot = document.getElementById('steptot'),
-      foot = document.getElementById('foot');
-  var placed = 0;
-
-  steptot.textContent = 'of ' + WALL.length;
-
-  WALL.forEach(function (b, i) {
-    var el = document.createElement('span');
-    el.className = 'brick';
-    el.style.cssText = '--c:' + b[3] + ';left:calc(var(--u) * ' + b[1] +
-      ');bottom:calc(var(--u) * ' + (b[0] * 0.92).toFixed(2) +
-      ');width:calc(var(--u) * ' + b[2] + ' - 1px)';
-    var body = document.createElement('span'); body.className = 'body';
-    var studs = document.createElement('span'); studs.className = 'studs';
-    for (var s = 0; s < b[2]; s++) studs.appendChild(document.createElement('s'));
-    el.appendChild(body); el.appendChild(studs);
-    plate.appendChild(el);
-  });
-  var bricks = [].slice.call(plate.children);
-
-  function paintParts() {
-    parts.innerHTML = '';
-    WALL.forEach(function (b, i) {
-      var row = document.createElement('div');
-      row.className = 'part' + (i < placed ? ' done' : '');
-      var chip = document.createElement('i');
-      chip.style.background = b[3];
-      chip.style.width = (12 + b[2] * 7) + 'px';
-      var label = document.createElement('span');
-      label.textContent = '1× 2·' + b[2] + '  ' + NAMES[b[3]];
-      row.appendChild(chip); row.appendChild(label);
-      parts.appendChild(row);
-    });
-  }
-
-  function showNext() {
-    bricks.forEach(function (el) { el.classList.remove('next'); });
-    if (placed < bricks.length) bricks[placed].classList.add('next');
-  }
-
-  function place() {
-    if (placed >= bricks.length) return;
-    bricks[placed].classList.remove('next');
-    bricks[placed].classList.add('set');
-    placed++;
-    stepno.textContent = Math.min(placed + 1, WALL.length);
-    paintParts();
-    showNext();
-    if (placed >= bricks.length) {
-      stepno.textContent = WALL.length;
-      add.disabled = true;
-      add.textContent = 'Out of pieces';
-      foot.textContent = DONE[Math.floor(Math.random() * DONE.length)];
-    }
-  }
-
-  paintParts();
-  showNext();
-  add.addEventListener('click', place);
-})();
-</script>
 </body></html>
