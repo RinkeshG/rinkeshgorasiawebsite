@@ -51,7 +51,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap"></noscript>
-<link rel="stylesheet" href="assets/ledger.css?v=28">
+<link rel="stylesheet" href="assets/ledger.css?v=36">
 </head>
 <body>
 <div class="wrap">
@@ -59,22 +59,23 @@
   <header id="top">
     <div class="h-row">
       <a class="h-name" href="index.html">Rinkesh Gorasia</a>
-      <span class="h-right"><nav><a class="on" href="index.html">Home</a><a href="work.html">Work</a><a href="writing.html">Writing</a><a href="skills.html">Skills</a></nav><button type="button" class="roll" id="roll" aria-label="Roll the die"><svg viewBox="0 0 24 24" aria-hidden="true"><rect class="face" x="2.5" y="2.5" width="19" height="19" rx="4"/><g class="pips"><circle class="pip" cx="7" cy="7" r="1.7"/><circle class="pip" cx="17" cy="7" r="1.7"/><circle class="pip" cx="12" cy="12" r="1.7"/><circle class="pip" cx="7" cy="17" r="1.7"/><circle class="pip" cx="17" cy="17" r="1.7"/></g></svg></button><div class="die-pop" id="die-pop" role="status"><div class="dp-top"><span class="dp-num">roll me</span><span class="dp-die">⚄</span></div><p>Six sides. Roll to meet one.</p></div><span class="h-clock" id="h-clock"></span></span>
+      <span class="h-right"><nav><a class="on" href="index.html">Home</a><a href="work.html">Work</a><a href="writing.html">Writing</a><a href="curated.html">Shelf</a></nav><button type="button" class="roll" id="roll" aria-label="Roll the die"><svg viewBox="0 0 24 24" aria-hidden="true"><rect class="face" x="2.5" y="2.5" width="19" height="19" rx="4"/><g class="pips"><circle class="pip" cx="7" cy="7" r="1.7"/><circle class="pip" cx="17" cy="7" r="1.7"/><circle class="pip" cx="12" cy="12" r="1.7"/><circle class="pip" cx="7" cy="17" r="1.7"/><circle class="pip" cx="17" cy="17" r="1.7"/></g></svg></button><div class="die-pop" id="die-pop" role="status"><div class="dp-top"><span class="dp-num">roll me</span><span class="dp-die">⚄</span></div><p>Six sides. Roll to meet one.</p></div><span class="h-clock" id="h-clock"></span></span>
     </div>
   </header>
 
   <section class="hero">
     <div>
       <h1>Hey, I'm Rinkesh<span class="dot">.</span></h1>
-      <p>I'm a product builder and two-time founder. My first company, <a class="ln" href="work.html#savior">Savior</a>, ran daily operations for 85 hospitals before <strong>Zocdoc bought it in 2020</strong>. Then I built <a class="ln" href="work.html#career-leap">Career Leap</a> from a WhatsApp group into a learning platform used by 10,000 people. It grew, but the business didn&#8217;t work at scale, so I shut it down. Now I&#8217;m building again — in the open, mostly with AI.</p>
-      <p>The part I like most is the very beginning, when the problem is still messy and nobody knows yet if it'll work.</p>
-      <p>Away from the screen I'm chasing the city's best <a class="ln" href="coffee.html">filter coffee</a>, losing at <a class="ln" href="games.html">board games</a> I picked myself, and letting Simba supervise the rest.</p>
+      <p>Welcome to my corner of the internet. I'm a product builder from Bengaluru, and I've spent most of the last decade building products and companies.</p>
+      <p>My first startup, <a class="ln" href="work.html#savior">Savior</a>, helped 85 hospitals across India run their daily operations. We bootstrapped it from day one, got it profitable, and <strong>Zocdoc acquired it in 2020</strong>. My second, <a class="ln" href="work.html#career-leap">Career Leap</a>, was a live learning platform that grew to 10,000 learners. After three years we realised the product and business weren't going to scale, and I decided to shut it down.</p>
+      <p>Since then I've been exploring different domains, building products with AI and helping other founders with their product and growth along the way.</p>
+      <p>Beyond work, my weeks usually revolve around playing <a class="ln" href="games.html">board games</a>, exploring new <a class="ln" href="coffee.html">coffee places</a> in Bengaluru, or watching sports with my cat Simba.</p>
       <div class="avail">
-        <button type="button" class="avail-trigger" id="avail-btn" aria-expanded="false" aria-controls="avail-pop"><span class="lbl">Open to 0→1 roles</span><span class="chev" aria-hidden="true">▾</span></button>
+        <button type="button" class="avail-trigger" id="avail-btn" aria-expanded="false" aria-controls="avail-pop"><span class="lbl">Open to product &amp; growth roles</span><span class="chev" aria-hidden="true">▾</span></button>
         <div class="avail-scrim" id="avail-scrim" aria-hidden="true"></div>
         <div class="avail-pop" id="avail-pop" role="region" aria-label="What I'm looking for">
           <span class="ap-head">What I'm looking for</span>
-          <p>The earliest stage — a rough problem, no product yet, still figuring out if it's even real. I like being close to users, shipping fast, and being wrong quickly. Founder, founding PM, or a 0→1 lead.</p>
+          <p>The earliest stage: a rough problem, no product yet, still figuring out if it's even real. I like being close to users, shipping fast, and being wrong quickly. Founder, founding PM, or a 0→1 lead.</p>
           <div class="ap-contact">
             <button type="button" class="ap-cta" id="ap-copy" data-email="rinkeshgorasia@gmail.com"><span class="em">rinkeshgorasia@gmail.com</span> <span class="cp">copy</span></button>
             <a class="ap-x" href="https://x.com/rinks__g" target="_blank" rel="noopener">or DM me on X →</a>
@@ -178,25 +179,12 @@
 
   <section>
     <div class="sec-head"><span class="sec-title">Writing</span></div>
-    <a class="post" href="writing-career-leap.html">
-      <span>
-        <span class="p-title">Why I shut down Career Leap<span class="go">→</span></span>
-        <p class="p-ex">10k users, 40% completion — and I still turned it off. On telling alive from just warm.</p>
-      </span>
-    </a>
-    <a class="post" href="writing-hospitals.html">
-      <span>
-        <span class="p-title">What 85 hospitals taught me<span class="go">→</span></span>
-        <p class="p-ex">You can't understand a system from the outside. What changed once I researched from inside the building.</p>
-      </span>
-    </a>
-    <a class="post" href="writing-ai.html">
-      <span>
-        <span class="p-title">Building with AI, honestly<span class="go">→</span></span>
-        <p class="p-ex">Where AI actually moves the needle when you're shipping solo, and where it quietly eats your week.</p>
-      </span>
-    </a>
-    <a class="more" href="writing.html">all writing →</a>
+    <ul class="reglist">
+      <li><a href="writing-career-leap.html">Why I shut down Career Leap</a></li>
+      <li><a href="writing-hospitals.html">What 85 hospitals taught me</a></li>
+      <li><a href="writing-completion.html">Building for completion, not conversion</a></li>
+      <li><a href="writing-ai.html">Building with AI, honestly</a></li>
+    </ul>
   </section>
 
   <footer>
