@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>books — Rinkesh Gorasia</title>
+<meta name="description" content="The books page is still being catalogued." />
+<link rel="canonical" href="https://rinkeshgorasia.com/books.html" />
+<meta name="robots" content="noindex" />
+<meta name="theme-color" content="#FCFCF9" />
+<link rel="manifest" href="manifest.json" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Rinkesh Gorasia" />
+<meta property="og:title" content="books — Rinkesh Gorasia" />
+<meta property="og:description" content="The books page is still being catalogued." />
+<meta property="og:image" content="https://rinkeshgorasia.com/assets/og.png" />
+<link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg" />
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap"></noscript>
+<link rel="stylesheet" href="assets/ledger.css?v=36">
+<style>
+  /* The card glued inside the back cover of a library book: ruled
+     rows, a date stamped in each one, and a rubber stamp across it
+     saying what it is. Stamping is the whole joy of a library desk,
+     so the card lets you do it. */
+  .wip{padding:1.4rem 0 var(--s6);display:flex;flex-direction:column;align-items:center;text-align:center}
+  .pocket{
+    position:relative;width:min(23rem,100%);background:#FBF7EA;
+    border:1px solid var(--rule-dark);box-shadow:0 16px 32px -22px rgba(28,28,25,.6);
+    padding:1.15rem 1.3rem 1.4rem;text-align:left;
+    transform:rotate(-1.1deg);cursor:pointer;user-select:none;
+    transition:transform .2s var(--ease-out);
+  }
+  .pocket:hover{transform:rotate(-1.1deg) translateY(-2px)}
+  .pocket:active{transform:rotate(-1.1deg) translateY(0) scale(.995)}
+  .pocket:focus-visible{outline:2px solid var(--red);outline-offset:5px}
+  .pk-head{font-family:var(--mono);font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);display:flex;justify-content:space-between;gap:1rem}
+  .pk-title{font-weight:600;font-size:1.12rem;letter-spacing:-.02em;margin:.5rem 0 .1rem}
+  .pk-sub{font-family:var(--mono);font-size:.62rem;letter-spacing:.06em;color:var(--soft)}
+  .pk-rule{height:2px;background:var(--ink);margin:.85rem 0 0}
+  .pk-cols{display:grid;grid-template-columns:1fr auto;gap:1rem;font-family:var(--mono);font-size:.55rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);padding:.5rem 0 .3rem;border-bottom:1px solid var(--rule)}
+  .pk-rows{list-style:none}
+  .pk-rows li{
+    display:grid;grid-template-columns:1fr auto;gap:1rem;align-items:baseline;
+    padding:.5rem 0;border-bottom:1px solid var(--rule);
+    font-family:var(--mono);font-size:.76rem;color:var(--ink);
+  }
+  .pk-rows li span:last-child{color:var(--faint);font-size:.66rem}
+  .pk-rows li.blank{color:var(--rule-dark)}
+  .pk-rows li.fresh{animation:stamped .28s var(--ease-out)}
+  @keyframes stamped{from{opacity:0;transform:scale(1.16) rotate(-2deg)}to{opacity:1;transform:none}}
+  /* the stamp itself */
+  .stamp{
+    position:absolute;right:.85rem;bottom:.85rem;z-index:2;
+    border:2px solid var(--red);color:var(--red);
+    font-family:var(--mono);font-size:.6rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;
+    padding:.4rem .55rem;line-height:1.25;text-align:center;
+    transform:rotate(-9deg);opacity:.82;background:rgba(251,247,234,.55);
+  }
+  .stamp b{display:block;font-size:.72rem;font-weight:500}
+  .wip-note{font-family:var(--mono);font-size:.66rem;letter-spacing:.06em;color:var(--faint);margin-top:1.1rem}
+  .wip h2{font-size:1.5rem;letter-spacing:-.025em;margin-top:2rem}
+  .wip p.say{color:var(--soft);max-width:26rem;margin-top:.55rem;font-size:1rem}
+  .wip .cta{display:flex;gap:1.4rem;margin-top:1.5rem;font-family:var(--mono);font-size:.74rem}
+  .wip .cta a{color:var(--soft);text-decoration:none}
+  .wip .cta a:hover{color:var(--red)}
+  @media(max-width:640px){
+    .pocket{transform:none;padding:1rem 1.05rem 1.2rem}
+    .pocket:hover,.pocket:active{transform:none}
+    .stamp{right:.6rem;bottom:.7rem}
+    .wip .cta{flex-direction:column;gap:.7rem;align-items:center}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header id="top">
+    <div class="h-row">
+      <a class="h-name" href="index.html">Rinkesh Gorasia</a>
+      <span class="h-right"><nav><a href="index.html">Home</a><a href="work.html">Work</a><a href="writing.html">Writing</a><a class="on" href="shelf.html">Shelf</a></nav><span class="h-clock" id="h-clock"></span></span>
+    </div>
+  </header>
+
+  <main class="wip">
+    <div class="pocket" id="card" role="button" tabindex="0" aria-label="Stamp the card">
+      <div class="pk-head"><span>Gorasia Lending Library</span><span>No. 0005</span></div>
+      <div class="pk-title">Books</div>
+      <div class="pk-sub">The five I keep re-reading</div>
+      <div class="pk-rule"></div>
+      <div class="pk-cols"><span>Date due</span><span>Borrower</span></div>
+      <ul class="pk-rows" id="rows">
+        <li><span>12 MAR 2019</span><span>Rinkesh</span></li>
+        <li><span>04 SEP 2021</span><span>Rinkesh</span></li>
+        <li><span>28 JAN 2024</span><span>Rinkesh (again)</span></li>
+        <li class="blank"><span>— — —</span><span>you?</span></li>
+      </ul>
+      <span class="stamp">Not yet<b>Catalogued</b></span>
+    </div>
+    <p class="wip-note" id="note">stamp it — the desk is unattended</p>
+
+    <h2>This page is still being catalogued.</h2>
+    <p class="say">The books exist, the shelf is real, and I have opinions about all five. Writing them down is the part I keep putting off.</p>
+    <span class="cta"><a href="shelf.html">← back to the shelf</a><a href="worth.html">things worth your time →</a></span>
+  </main>
+
+  <footer>
+    <div class="foot-in">
+      <div class="foot-id"><span class="foot-name">Rinkesh Gorasia</span></div>
+      <nav class="foot-nav">
+        <span class="foot-social"><a href="mailto:rinkeshgorasia@gmail.com" aria-label="Email" title="Email"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2Zm0 4-8 5-8-5V6l8 5 8-5v2Z"/></svg></a><a href="https://x.com/rinks__g" target="_blank" rel="noopener" aria-label="X" title="X (formerly Twitter)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.66l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.45-6.231Zm-1.161 17.52h1.833L7.084 4.126H5.117l11.966 15.644Z"/></svg></a><a href="https://www.linkedin.com/in/rinksg/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286ZM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065Zm1.782 13.019H3.555V9h3.564v11.452ZM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003Z"/></svg></a></span>
+      </nav>
+    </div>
+  </footer>
+
+</div>
+<script src="assets/ledger.js?v=28"></script>
+<script>
+(function () {
+  var card = document.getElementById('card'),
+      rows = document.getElementById('rows'),
+      note = document.getElementById('note');
+  var MONTHS = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+  var WHO = ['Rinkesh', 'Rinkesh (again)', 'lent, never returned', 'you?', 'Simba', 'still me'];
+  var LINES = ['one more', 'the desk is still unattended', 'nobody is checking', 'go on then', 'this is not cataloguing'];
+  var count = 0;
+
+  function stamp() {
+    if (count >= 6) {
+      note.textContent = 'that is enough stamping for one evening';
+      return;
+    }
+    var d = new Date(2026, 0, 1);
+    d.setDate(d.getDate() + Math.floor(Math.random() * 900));
+    var li = document.createElement('li');
+    li.className = 'fresh';
+    var day = document.createElement('span');
+    day.textContent = ('0' + d.getDate()).slice(-2) + ' ' + MONTHS[d.getMonth()] + ' ' + d.getFullYear();
+    var who = document.createElement('span');
+    who.textContent = WHO[Math.floor(Math.random() * WHO.length)];
+    li.appendChild(day); li.appendChild(who);
+    var blank = rows.querySelector('.blank');
+    if (blank) rows.insertBefore(li, blank); else rows.appendChild(li);
+    count++;
+    note.textContent = LINES[Math.min(count - 1, LINES.length - 1)];
+  }
+
+  card.addEventListener('click', stamp);
+  card.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); stamp(); }
+  });
+})();
+</script>
+</body></html>
