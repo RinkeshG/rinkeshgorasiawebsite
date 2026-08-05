@@ -25,7 +25,7 @@
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap"></noscript>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" integrity="sha512-h9FcoyWjHcOcmEVkxOfTLnmZFWIH0iZhZT1H2TbOq55xssQGEJHEaIm+PgoUaZbRvQTNTluNOEfb1ZRy6D3BOw==" crossorigin="anonymous" referrerpolicy="no-referrer" media="print" onload="this.media='all'" />
 <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" integrity="sha512-h9FcoyWjHcOcmEVkxOfTLnmZFWIH0iZhZT1H2TbOq55xssQGEJHEaIm+PgoUaZbRvQTNTluNOEfb1ZRy6D3BOw==" crossorigin="anonymous" referrerpolicy="no-referrer" /></noscript>
-<link rel="stylesheet" href="assets/ledger.css?v=37">
+<link rel="stylesheet" href="assets/ledger.css?v=38">
 <style>
 :root{--places-ease:cubic-bezier(.23,1,.32,1)}
 .skip-link{position:fixed;top:.75rem;left:.75rem;z-index:200;background:var(--ink);color:var(--paper);padding:.5rem .75rem;text-decoration:none;font:500 .7rem/1 var(--mono);transform:translateY(-200%);transition:transform 140ms var(--places-ease)}
@@ -150,8 +150,10 @@ main + footer{margin-top:var(--s7)}
 
   <main id="places-main">
     <section class="phead">
-      <h1>My go-to places<span class="dot">.</span></h1>
-      <p>The places I keep returning to in Bengaluru, for coffee, food, getting work done, and plans that run late.</p>
+      <h1>My go-to places in Bengaluru<span class="dot">.</span></h1>
+      <p>The ones I keep going back to, for coffee, food, getting work done, and plans that run late.</p>
+      <!-- filled in from the live data once it loads; stays hidden if it doesn't -->
+      <p class="phead-meta" id="places-latest" hidden></p>
     </section>
 
     <section class="places-browser" aria-label="Browse my go-to places">
@@ -452,11 +454,26 @@ main + footer{margin-top:var(--s7)}
   applyIntent(currentIntent,{updateUrl:false,animate:false,keyboard:true});
   updateUrl();
 
+  /* The list grows, so the page says so rather than me remembering to edit a
+     line. Newest by the date the row was created; silent if the API is older
+     than this feature and sends no dates, or if a name is missing. */
+  function showLatest(items){
+    var el=document.getElementById('places-latest');
+    if(!el)return;
+    var dated=items.filter(function(p){return p&&p.name&&p.added&&!isNaN(Date.parse(p.added));});
+    if(!dated.length)return;
+    var newest=dated.reduce(function(a,b){return Date.parse(b.added)>Date.parse(a.added)?b:a;});
+    el.innerHTML='Latest addition: <b></b>';
+    el.querySelector('b').textContent=newest.area?newest.name+', '+newest.area:newest.name;
+    el.hidden=false;
+  }
+
   fetch('/api/content?type=places').then(function(response){
     if(!response.ok)throw new Error('Content API unavailable');
     return response.json();
   }).then(function(payload){
     if(!payload||!Array.isArray(payload.items)||!payload.items.length)return;
+    showLatest(payload.items);
     var remote=payload.items.map(function(place){
       return {
         id:place.id,nm:place.name,area:place.area,lat:Number(place.latitude),lng:Number(place.longitude),

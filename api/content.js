@@ -102,6 +102,9 @@ function placeRecord(record, image) {
     id: text(f.Slug),
     name: text(f.Name),
     area: text(f.Area),
+    /* when the row was created, so the page can say what was added most
+       recently instead of hardcoding a name that goes stale */
+    added: text(record.createdTime),
     latitude: number(f.Latitude),
     longitude: number(f.Longitude),
     categories,

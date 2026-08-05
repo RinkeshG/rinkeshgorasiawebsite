@@ -198,10 +198,17 @@ section:has(.avail){position:relative;z-index:5}
 .phead{padding:2.4rem 0 1.6rem}
 .phead h1{font-size:2rem;margin-bottom:.55rem}
 .phead p{color:var(--soft);max-width:36rem;font-size:1rem;line-height:1.55;text-wrap:pretty}
+/* a live line under the standfirst: what changed in this collection most
+   recently. Meta voice, so it reads as a note on the record rather than more
+   prose, and it is only ever shown when there is real data behind it. */
+.phead-meta{font-family:var(--mono);font-size:.68rem;letter-spacing:.06em;color:var(--faint);margin-top:.7rem}
+.phead-meta[hidden]{display:none}
+.phead-meta b{color:var(--soft);font-weight:500}
 @media(max-width:640px){
   .phead{padding:1.5rem 0 1.1rem}
   .phead h1{font-size:1.6rem}
   .phead p{font-size:.95rem}
+  .phead-meta{font-size:.64rem;margin-top:.6rem}
 }
 
 /* ============ sections ====================================== */
