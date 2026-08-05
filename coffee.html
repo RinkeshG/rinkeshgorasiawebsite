@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>my go-to places — Rinkesh Gorasia</title>
-<meta name="description" content="The places Rinkesh keeps returning to in Bengaluru — for coffee, food, getting work done, and plans that run late." />
+<title>my go-to places · Rinkesh Gorasia</title>
+<meta name="description" content="The places Rinkesh keeps returning to in Bengaluru, for coffee, food, getting work done, and plans that run late." />
 <link rel="canonical" href="https://rinkeshgorasia.com/coffee.html" />
 <meta name="theme-color" content="#FCFCF9" />
 <link rel="manifest" href="manifest.json" />
 <meta property="og:type" content="website" /><meta property="og:site_name" content="Rinkesh Gorasia" />
 <meta property="og:url" content="https://rinkeshgorasia.com/coffee.html" />
-<meta property="og:title" content="my go-to places — Rinkesh Gorasia" />
+<meta property="og:title" content="my go-to places · Rinkesh Gorasia" />
 <meta property="og:description" content="A deeply subjective list of places worth returning to in Bengaluru." />
 <meta property="og:image" content="https://rinkeshgorasia.com/assets/og.png" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="my go-to places — Rinkesh Gorasia" />
+<meta name="twitter:title" content="my go-to places · Rinkesh Gorasia" />
 <meta name="twitter:description" content="A deeply subjective list of places worth returning to in Bengaluru." />
 <meta name="twitter:image" content="https://rinkeshgorasia.com/assets/og.png" />
 <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg" />
@@ -25,16 +25,13 @@
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap"></noscript>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" integrity="sha512-h9FcoyWjHcOcmEVkxOfTLnmZFWIH0iZhZT1H2TbOq55xssQGEJHEaIm+PgoUaZbRvQTNTluNOEfb1ZRy6D3BOw==" crossorigin="anonymous" referrerpolicy="no-referrer" media="print" onload="this.media='all'" />
 <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" integrity="sha512-h9FcoyWjHcOcmEVkxOfTLnmZFWIH0iZhZT1H2TbOq55xssQGEJHEaIm+PgoUaZbRvQTNTluNOEfb1ZRy6D3BOw==" crossorigin="anonymous" referrerpolicy="no-referrer" /></noscript>
-<link rel="stylesheet" href="assets/ledger.css?v=36">
+<link rel="stylesheet" href="assets/ledger.css?v=37">
 <style>
 :root{--places-ease:cubic-bezier(.23,1,.32,1)}
 .skip-link{position:fixed;top:.75rem;left:.75rem;z-index:200;background:var(--ink);color:var(--paper);padding:.5rem .75rem;text-decoration:none;font:500 .7rem/1 var(--mono);transform:translateY(-200%);transition:transform 140ms var(--places-ease)}
 .skip-link:focus{transform:none}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-.places-head{padding:var(--s8) 0 var(--s6)}
-.places-title{font-size:2.55rem;font-weight:600;letter-spacing:-.04em;line-height:1.02;text-wrap:balance}
-.places-title .dot{color:var(--red)}
-.places-sub{margin-top:1rem;font-size:1.08rem;color:var(--soft);line-height:1.58;max-width:35rem;text-wrap:pretty}
+/* the page head is the shared .phead, see ledger.css */
 .places-browser{border-top:2px solid var(--ink);padding-bottom:0}
 .places-controls{min-height:4.6rem;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;padding:.55rem 0;border-bottom:1px solid var(--ink)}
 .intent-group{display:flex;align-items:center;gap:1.1rem;min-width:0}
@@ -114,9 +111,6 @@ main + footer{margin-top:var(--s7)}
   .cpin.sel:hover{transform:scale(1.12)}
 }
 @media(max-width:820px){
-  .places-head{padding:2.15rem 0 1.8rem}
-  .places-title{font-size:2.15rem}
-  .places-sub{font-size:.98rem;line-height:1.5}
   .places-controls{min-height:0;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.35rem 1rem;padding:.55rem 0 .65rem}
   .intent-group{grid-column:1/-1;display:grid;grid-template-columns:4.6rem minmax(0,1fr);gap:.55rem}
   .control-label{font-size:.55rem}
@@ -131,9 +125,6 @@ main + footer{margin-top:var(--s7)}
   .map-side{gap:1rem}
 }
 @media(max-width:420px){
-  .places-head{padding:1.8rem 0 1.5rem}
-  .places-title{font-size:2rem}
-  .places-sub{font-size:.94rem}
   .cc-thumb{width:78px;height:78px}
   .cc-name{font-size:1.3rem}
   .cc-body{padding:1.05rem 1.1rem 1.15rem}
@@ -153,16 +144,14 @@ main + footer{margin-top:var(--s7)}
   <header id="top">
     <div class="h-row">
       <a class="h-name" href="index.html">Rinkesh Gorasia</a>
-      <span class="h-right"><nav aria-label="Main navigation"><a href="index.html">Home</a><a href="work.html">Work</a><a href="writing.html">Writing</a><a href="shelf.html">Shelf</a></nav><button type="button" class="roll" id="roll" aria-label="Roll the die"><svg viewBox="0 0 24 24" aria-hidden="true"><rect class="face" x="2.5" y="2.5" width="19" height="19" rx="4"/><g class="pips"><circle class="pip" cx="7" cy="7" r="1.7"/><circle class="pip" cx="17" cy="7" r="1.7"/><circle class="pip" cx="12" cy="12" r="1.7"/><circle class="pip" cx="7" cy="17" r="1.7"/><circle class="pip" cx="17" cy="17" r="1.7"/></g></svg></button><div class="die-pop" id="die-pop" role="status"><div class="dp-top"><span class="dp-num">roll me</span><span class="dp-die">⚄</span></div><p>Six sides. Roll to meet one.</p></div><span class="h-clock" id="h-clock"></span></span>
+      <span class="h-right"><nav aria-label="Main navigation"><a href="index.html">Home</a><a href="work.html">Work</a><a href="writing.html">Writing</a><a class="on" href="shelf.html">Shelf</a></nav><button type="button" class="roll" id="roll" aria-label="Roll the die"><svg viewBox="0 0 24 24" aria-hidden="true"><rect class="face" x="2.5" y="2.5" width="19" height="19" rx="4"/><g class="pips"><circle class="pip" cx="7" cy="7" r="1.7"/><circle class="pip" cx="17" cy="7" r="1.7"/><circle class="pip" cx="12" cy="12" r="1.7"/><circle class="pip" cx="7" cy="17" r="1.7"/><circle class="pip" cx="17" cy="17" r="1.7"/></g></svg></button><div class="die-pop" id="die-pop" role="status"><div class="dp-top"><span class="dp-num">roll me</span><span class="dp-die">⚄</span></div><p>Six sides. Roll to meet one.</p></div><span class="h-clock" id="h-clock"></span></span>
     </div>
   </header>
 
   <main id="places-main">
-    <section class="places-head">
-      <div>
-        <h1 class="places-title">My go-to places<span class="dot">.</span></h1>
-        <p class="places-sub">The places I keep returning to in Bengaluru — for coffee, food, getting work done, and plans that run late.</p>
-      </div>
+    <section class="phead">
+      <h1>My go-to places<span class="dot">.</span></h1>
+      <p>The places I keep returning to in Bengaluru, for coffee, food, getting work done, and plans that run late.</p>
     </section>
 
     <section class="places-browser" aria-label="Browse my go-to places">
@@ -218,7 +207,7 @@ main + footer{margin-top:var(--s7)}
   </footer>
 
 </div>
-<script src="assets/ledger.js?v=28"></script>
+<script src="assets/ledger.js?v=29"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" integrity="sha512-puJW3E/qXDqYp9IfhAI54BJEaWIfloJ7JWs7OeD5i6ruC9JZL1gERT1wjtwXFlh7CjE7ZJ+/vcRZRkIYIb6p4g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
 (function(){

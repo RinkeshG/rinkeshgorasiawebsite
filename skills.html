@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>skills — Rinkesh Gorasia</title>
-<meta name="description" content="A public shelf of the AI skills I lean on — a few I wrote, most I reach for daily. Each is a /command that makes an agent good at one thing." />
+<title>skills · Rinkesh Gorasia</title>
+<meta name="description" content="A public shelf of the AI skills I lean on. A few I wrote, most I reach for daily. Each is a /command that makes an agent good at one thing." />
 <link rel="canonical" href="https://rinkeshgorasia.com/skills.html" />
 <meta name="theme-color" content="#FCFCF9" />
 <link rel="manifest" href="manifest.json" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Rinkesh Gorasia" />
 <meta property="og:url" content="https://rinkeshgorasia.com/skills.html" />
-<meta property="og:title" content="skills — Rinkesh Gorasia" />
-<meta property="og:description" content="A public shelf of the AI skills I lean on — a few I wrote, most I reach for daily." />
+<meta property="og:title" content="skills · Rinkesh Gorasia" />
+<meta property="og:description" content="A public shelf of the AI skills I lean on. A few I wrote, most I reach for daily." />
 <meta property="og:image" content="https://rinkeshgorasia.com/assets/og.png" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="skills — Rinkesh Gorasia" />
-<meta name="twitter:description" content="A public shelf of the AI skills I lean on — a few I wrote, most I reach for daily." />
+<meta name="twitter:title" content="skills · Rinkesh Gorasia" />
+<meta name="twitter:description" content="A public shelf of the AI skills I lean on. A few I wrote, most I reach for daily." />
 <meta name="twitter:image" content="https://rinkeshgorasia.com/assets/og.png" />
 <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg" />
 <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
@@ -22,13 +22,13 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap"></noscript>
-<link rel="stylesheet" href="assets/ledger.css?v=36">
+<link rel="stylesheet" href="assets/ledger.css?v=37">
 <style>
 
-  /* skills read as an index of /commands — mono invocation is the hero, not a bullet list */
+  /* skills read as an index of /commands: the mono invocation is the hero, not a bullet list */
   .sk-sec{padding-bottom:var(--s6)}
   .sk-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0 3rem;margin-top:.4rem}
-  /* each skill is a real link out to its source — focusable, keyboard-operable */
+  /* each skill is a real link out to its source: focusable, keyboard-operable */
   .skill{display:block;border-top:1px solid var(--rule);padding:1.05rem 0;text-decoration:none;color:inherit}
   .sk-top{display:flex;align-items:center;justify-content:space-between;gap:1rem}
   .sk-name{font-family:var(--mono);font-size:.94rem;font-weight:500;color:var(--ink);letter-spacing:-.01em}
@@ -40,7 +40,7 @@
   .sk-src.mine{color:var(--red)}
   .sk-desc{font-size:.92rem;color:var(--soft);line-height:1.5;margin-top:.45rem;max-width:30rem}
 
-  /* touch has no hover — the "opens externally" arrow is always shown so the linked
+  /* touch has no hover, so the "opens externally" arrow is always shown and the linked
      skills are visibly distinguishable from the two unlinked (mine, not-yet-public) ones */
   @media(max-width:760px){ .sk-grid{grid-template-columns:1fr;gap:0} a.skill .sk-go{opacity:1} }
 </style>
@@ -51,20 +51,20 @@
   <header id="top">
     <div class="h-row">
       <a class="h-name" href="index.html">Rinkesh Gorasia</a>
-      <span class="h-right"><nav><a href="index.html">Home</a><a href="work.html">Work</a><a href="writing.html">Writing</a><a href="shelf.html">Shelf</a></nav><button type="button" class="roll" id="roll" aria-label="Roll the die"><svg viewBox="0 0 24 24" aria-hidden="true"><rect class="face" x="2.5" y="2.5" width="19" height="19" rx="4"/><g class="pips"><circle class="pip" cx="7" cy="7" r="1.7"/><circle class="pip" cx="17" cy="7" r="1.7"/><circle class="pip" cx="12" cy="12" r="1.7"/><circle class="pip" cx="7" cy="17" r="1.7"/><circle class="pip" cx="17" cy="17" r="1.7"/></g></svg></button><div class="die-pop" id="die-pop" role="status"><div class="dp-top"><span class="dp-num">roll me</span><span class="dp-die">⚄</span></div><p>Six sides. Roll to meet one.</p></div><span class="h-clock" id="h-clock"></span></span>
+      <span class="h-right"><nav><a href="index.html">Home</a><a href="work.html">Work</a><a href="writing.html">Writing</a><a class="on" href="shelf.html">Shelf</a></nav><button type="button" class="roll" id="roll" aria-label="Roll the die"><svg viewBox="0 0 24 24" aria-hidden="true"><rect class="face" x="2.5" y="2.5" width="19" height="19" rx="4"/><g class="pips"><circle class="pip" cx="7" cy="7" r="1.7"/><circle class="pip" cx="17" cy="7" r="1.7"/><circle class="pip" cx="12" cy="12" r="1.7"/><circle class="pip" cx="7" cy="17" r="1.7"/><circle class="pip" cx="17" cy="17" r="1.7"/></g></svg></button><div class="die-pop" id="die-pop" role="status"><div class="dp-top"><span class="dp-num">roll me</span><span class="dp-die">⚄</span></div><p>Six sides. Roll to meet one.</p></div><span class="h-clock" id="h-clock"></span></span>
     </div>
   </header>
 
   <section class="phead">
     <h1>Skills<span class="dot">.</span></h1>
-    <p>A public shelf of the AI skills I actually reach for — a couple I wrote, the rest by people whose taste I trust. Each is a <span class="mono">/command</span> that makes an agent genuinely good at one thing.</p>
+    <p>A public shelf of the AI skills I actually reach for. A couple I wrote, the rest by people whose taste I trust. Each is a <span class="mono">/command</span> that makes an agent genuinely good at one thing.</p>
   </section>
 
   <section class="sk-sec">
     <div class="sec-head"><span class="sec-title">Design &amp; craft</span><span class="sec-sub">2 skills</span></div>
     <div class="sk-grid">
-      <div class="skill"><div class="sk-top"><span class="sk-name"><span class="sl">/</span>design-craft</span><span class="sk-src mine"><span class="crop">Mine</span></span></div><p class="sk-desc">My design process harness — understand the user's moment, design, render, judge. Not "assemble components and ship."</p></div>
-      <div class="skill"><div class="sk-top"><span class="sk-name"><span class="sl">/</span>cliche-blacklist</span><span class="sk-src mine"><span class="crop">Mine</span></span></div><p class="sk-desc">The running list of AI design &amp; copy clichés I refuse to ship — swept against before anything user-facing goes out.</p></div>
+      <div class="skill"><div class="sk-top"><span class="sk-name"><span class="sl">/</span>design-craft</span><span class="sk-src mine"><span class="crop">Mine</span></span></div><p class="sk-desc">My design process harness: understand the user's moment, design, render, judge. Not "assemble components and ship."</p></div>
+      <div class="skill"><div class="sk-top"><span class="sk-name"><span class="sl">/</span>cliche-blacklist</span><span class="sk-src mine"><span class="crop">Mine</span></span></div><p class="sk-desc">The running list of AI design &amp; copy clichés I refuse to ship, swept against before anything user-facing goes out.</p></div>
     </div>
   </section>
 
@@ -72,10 +72,10 @@
     <div class="sec-head"><span class="sec-title">Motion &amp; interface</span><span class="sec-sub">5 skills · Emil Kowalski</span></div>
     <div class="sk-grid">
       <a class="skill" href="https://animations.dev" target="_blank" rel="noopener"><div class="sk-top"><span class="sk-name"><span class="sl">/</span>emil-design-eng<span class="sk-go" aria-hidden="true">↗</span></span><span class="sk-src">Emil Kowalski</span></div><p class="sk-desc">Emil's philosophy on UI polish, animation, and the invisible details that make software feel great.</p></a>
-      <a class="skill" href="https://animations.dev" target="_blank" rel="noopener"><div class="sk-top"><span class="sk-name"><span class="sl">/</span>apple-design<span class="sk-go" aria-hidden="true">↗</span></span><span class="sk-src">Emil Kowalski</span></div><p class="sk-desc">Apple's approach to fluid, physical interface motion — springs, gestures, materials, depth — translated for the web.</p></a>
-      <a class="skill" href="https://animations.dev" target="_blank" rel="noopener"><div class="sk-top"><span class="sk-name"><span class="sl">/</span>improve-animations<span class="sk-go" aria-hidden="true">↗</span></span><span class="sk-src">Emil Kowalski</span></div><p class="sk-desc">Audit a codebase's motion like a senior advisor and produce prioritized, self-contained fix plans — read-only.</p></a>
-      <a class="skill" href="https://animations.dev" target="_blank" rel="noopener"><div class="sk-top"><span class="sk-name"><span class="sl">/</span>find-animation-opportunities<span class="sk-go" aria-hidden="true">↗</span></span><span class="sk-src">Emil Kowalski</span></div><p class="sk-desc">Find the moments that should animate but don't — and ruthlessly reject the ones that shouldn't.</p></a>
-      <a class="skill" href="https://animations.dev" target="_blank" rel="noopener"><div class="sk-top"><span class="sk-name"><span class="sl">/</span>animation-vocabulary<span class="sk-go" aria-hidden="true">↗</span></span><span class="sk-src">Emil Kowalski</span></div><p class="sk-desc">Turn a vague description of a motion effect into its exact name — the word to prompt a designer or AI with.</p></a>
+      <a class="skill" href="https://animations.dev" target="_blank" rel="noopener"><div class="sk-top"><span class="sk-name"><span class="sl">/</span>apple-design<span class="sk-go" aria-hidden="true">↗</span></span><span class="sk-src">Emil Kowalski</span></div><p class="sk-desc">Apple's approach to fluid, physical interface motion (springs, gestures, materials, depth) translated for the web.</p></a>
+      <a class="skill" href="https://animations.dev" target="_blank" rel="noopener"><div class="sk-top"><span class="sk-name"><span class="sl">/</span>improve-animations<span class="sk-go" aria-hidden="true">↗</span></span><span class="sk-src">Emil Kowalski</span></div><p class="sk-desc">Audit a codebase's motion like a senior advisor and produce prioritized, self-contained fix plans, read-only.</p></a>
+      <a class="skill" href="https://animations.dev" target="_blank" rel="noopener"><div class="sk-top"><span class="sk-name"><span class="sl">/</span>find-animation-opportunities<span class="sk-go" aria-hidden="true">↗</span></span><span class="sk-src">Emil Kowalski</span></div><p class="sk-desc">Find the moments that should animate but don't, and ruthlessly reject the ones that shouldn't.</p></a>
+      <a class="skill" href="https://animations.dev" target="_blank" rel="noopener"><div class="sk-top"><span class="sk-name"><span class="sl">/</span>animation-vocabulary<span class="sk-go" aria-hidden="true">↗</span></span><span class="sk-src">Emil Kowalski</span></div><p class="sk-desc">Turn a vague description of a motion effect into its exact name, the word to prompt a designer or AI with.</p></a>
     </div>
   </section>
   <footer>
@@ -90,5 +90,5 @@
   </footer>
 
 </div>
-<script src="assets/ledger.js?v=28"></script>
+<script src="assets/ledger.js?v=29"></script>
 </body></html>

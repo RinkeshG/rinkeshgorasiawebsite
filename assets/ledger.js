@@ -1,4 +1,4 @@
-/* THE LEDGER — behaviours. Everything here degrades to nothing. */
+/* THE LEDGER · behaviours. Everything here degrades to nothing. */
 (function () {
   var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -46,19 +46,29 @@
         if (!m || +m[2] === 0) return;
         var pre = m[1], target = +m[2], suf = m[3];
         var dec = (m[2].split('.')[1] || '').length;
+        var el = e.target, done = false;
+        /* the figure is a fact before it is an animation. Always land on the
+           original string: requestAnimationFrame is paused in a background tab,
+           so a tally caught mid-count used to sit there reading "24 hospitals"
+           instead of 85. The timer still fires when rAF does not. */
+        var settle = function () { if (!done) { done = true; el.textContent = raw; } };
+        if (document.hidden) { settle(); return; }
+        setTimeout(settle, 1200);
         var t0 = performance.now();
         (function tick(now) {
+          if (done) return;
           var k = Math.min(1, (now - t0) / 700);
           k = 1 - Math.pow(1 - k, 3);
-          e.target.textContent = pre + (target * k).toFixed(dec) + suf;
-          if (k < 1) requestAnimationFrame(tick);
+          if (k >= 1) { settle(); return; }
+          el.textContent = pre + (target * k).toFixed(dec) + suf;
+          requestAnimationFrame(tick);
         })(t0);
       });
     }, { threshold: 0.6 });
     els.forEach(function (el) { io.observe(el); });
   }
 
-  /* simba speaks — hover on desktop, tap on touch */
+  /* simba speaks: hover on desktop, tap on touch */
   var ph = document.querySelector('.ph-in');
   if (ph) {
     var lines = ['mrrp. hi.', 'prrb?', '*slow blink*', 'mrrp. (that means scroll on.)'];
@@ -89,7 +99,7 @@
     setInterval(tick, 30000);
   }
 
-  /* the 0→1 availability note — click to see what I'm actually looking for.
+  /* the 0→1 availability note: click to see what I'm actually looking for.
      "write to me" copies the address rather than firing a mail client. */
   var availBtn = document.getElementById('avail-btn');
   var availPop = document.getElementById('avail-pop');
@@ -125,7 +135,7 @@
       document.body.classList.toggle('avail-open', show); /* scroll-lock behind the sheet (mobile only, via CSS) */
       availBtn.setAttribute('aria-expanded', String(show));
       /* desktop: the note opens downward, and near the footer that can land below the
-         fold — nudge it fully into view so it's never something you have to scroll to find.
+         fold, so nudge it fully into view and it's never something you have to scroll to find.
          the popover is always in layout (absolute, opacity-toggled), so we can measure now.
          (on mobile it's a fixed bottom sheet, already in view, so this is a no-op.) */
       if (show && !matchMedia('(max-width:640px)').matches) {
@@ -141,7 +151,7 @@
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') availToggle(false); });
   }
 
-  /* the site faces the light — paper follows Bengaluru's sun */
+  /* the site faces the light: paper follows Bengaluru's sun */
   (function () {
     var ist = new Date(Date.now() + (330 + new Date().getTimezoneOffset()) * 60000);
     var hr = ist.getHours();
@@ -149,7 +159,7 @@
     if (part !== 'day') document.documentElement.dataset.light = part;
   })();
 
-  /* the die — six sides of me. roll to meet one; no teleporting. */
+  /* the die: six sides of me. roll to meet one; no teleporting. */
   var roll = document.getElementById('roll');
   var pop = document.getElementById('die-pop');
   if (roll && pop) {
@@ -181,7 +191,7 @@
     }
     var last = 5;
     /* before the first roll, hovering the die shows its own invitation
-       ("roll me") — the affordance explains itself instead of a title tooltip.
+       ("roll me"), so the affordance explains itself instead of a title tooltip.
        touch skips this: the first tap rolls, which is its own explanation. */
     var rolled = false;
     if (matchMedia('(hover: hover)').matches) {
@@ -209,7 +219,7 @@
     });
   }
 
-  /* lego physics — the page assembles as you read */
+  /* lego physics: the page assembles as you read */
   if (!reduced && 'IntersectionObserver' in window) {
     var parts = document.querySelectorAll('.row, .exp, .post');
     var snapIO = new IntersectionObserver(function (entries) {

@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>board games — Rinkesh Gorasia</title>
-<meta name="description" content="Four board games I keep bringing back to the table — what they feel like, who they work with, and my deeply subjective verdict." />
+<title>board games · Rinkesh Gorasia</title>
+<meta name="description" content="Four board games I keep bringing back to the table: what they feel like, who they work with, and my deeply subjective verdict." />
 <link rel="canonical" href="https://rinkeshgorasia.com/games.html" />
 <meta name="theme-color" content="#FCFCF9" /><link rel="manifest" href="manifest.json" />
 <meta property="og:type" content="website" /><meta property="og:site_name" content="Rinkesh Gorasia" />
 <meta property="og:url" content="https://rinkeshgorasia.com/games.html" />
-<meta property="og:title" content="board games — Rinkesh Gorasia" />
+<meta property="og:title" content="board games · Rinkesh Gorasia" />
 <meta property="og:description" content="Four board games I keep bringing back to the table, with a few deeply subjective notes." />
 <meta property="og:image" content="https://rinkeshgorasia.com/assets/og.png" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="board games — Rinkesh Gorasia" />
+<meta name="twitter:title" content="board games · Rinkesh Gorasia" />
 <meta name="twitter:description" content="Four board games I keep bringing back to the table, with a few deeply subjective notes." />
 <meta name="twitter:image" content="https://rinkeshgorasia.com/assets/og.png" />
 <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg" />
@@ -20,14 +20,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap"></noscript>
-<link rel="stylesheet" href="assets/ledger.css?v=36">
+<link rel="stylesheet" href="assets/ledger.css?v=37">
 <style>
   .skip-link{position:fixed;top:.75rem;left:.75rem;z-index:200;background:var(--ink);color:var(--paper);padding:.5rem .75rem;text-decoration:none;font:500 .7rem/1 var(--mono);transform:translateY(-200%);transition:transform 140ms var(--ease-out)}
   .skip-link:focus{transform:none}
   .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-  .games-head{padding:var(--s8) 0 var(--s6)}
-  .games-head h1{margin-bottom:1rem;text-wrap:balance}
-  .games-head .dek{max-width:35rem;color:var(--soft);font-size:1.08rem;line-height:1.62}
+  /* the page head is the shared .phead, see ledger.css */
   .game-browser{border-top:2px solid var(--ink);padding-bottom:0}
   .browser-controls{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"heading deal" "filters filters";align-items:center;column-gap:1rem;row-gap:.5rem;padding:.65rem 0 .75rem;border-bottom:1px solid var(--rule)}
   .browser-heading{grid-area:heading;display:grid;gap:.24rem;align-content:center;white-space:nowrap}
@@ -138,13 +136,9 @@
     .sheet-close:hover{color:var(--red)}
   }
   @media(max-width:720px){
-    .games-page header{padding-top:.85rem}
-    .games-page .h-row{gap:.3rem;padding:.55rem 0}
-    .games-page .h-row nav{gap:1rem}
-    .games-page .h-row nav a{font-size:.82rem}
-    .games-head{padding:1.9rem 0 1.65rem}
-    .games-head h1{font-size:2.05rem;margin-bottom:.65rem}
-    .games-head .dek{font-size:.96rem;line-height:1.48}
+    /* the header is the one element on every page; it keeps the shared size and
+       spacing from ledger.css. This page used to shrink its padding, nav gap and
+       link size on phones, which sat the rule 22px higher here than anywhere else. */
     .browser-controls{column-gap:.65rem;row-gap:.55rem;padding:.6rem 0}
     .browser-title{font-size:.66rem}
     .game-count{font-size:.53rem}
@@ -187,15 +181,13 @@
   <header id="top">
     <div class="h-row">
       <a class="h-name" href="index.html">Rinkesh Gorasia</a>
-      <span class="h-right"><nav aria-label="Main navigation"><a href="index.html">Home</a><a href="work.html">Work</a><a href="writing.html">Writing</a><a href="shelf.html">Shelf</a></nav><button type="button" class="roll" id="roll" aria-label="Roll the die"><svg viewBox="0 0 24 24" aria-hidden="true"><rect class="face" x="2.5" y="2.5" width="19" height="19" rx="4"/><g class="pips"><circle class="pip" cx="7" cy="7" r="1.7"/><circle class="pip" cx="17" cy="7" r="1.7"/><circle class="pip" cx="12" cy="12" r="1.7"/><circle class="pip" cx="7" cy="17" r="1.7"/><circle class="pip" cx="17" cy="17" r="1.7"/></g></svg></button><div class="die-pop" id="die-pop" role="status"><div class="dp-top"><span class="dp-num">roll me</span><span class="dp-die">⚄</span></div><p>Six sides. Roll to meet one.</p></div><span class="h-clock" id="h-clock"></span></span>
+      <span class="h-right"><nav aria-label="Main navigation"><a href="index.html">Home</a><a href="work.html">Work</a><a href="writing.html">Writing</a><a class="on" href="shelf.html">Shelf</a></nav><button type="button" class="roll" id="roll" aria-label="Roll the die"><svg viewBox="0 0 24 24" aria-hidden="true"><rect class="face" x="2.5" y="2.5" width="19" height="19" rx="4"/><g class="pips"><circle class="pip" cx="7" cy="7" r="1.7"/><circle class="pip" cx="17" cy="7" r="1.7"/><circle class="pip" cx="12" cy="12" r="1.7"/><circle class="pip" cx="7" cy="17" r="1.7"/><circle class="pip" cx="17" cy="17" r="1.7"/></g></svg></button><div class="die-pop" id="die-pop" role="status"><div class="dp-top"><span class="dp-num">roll me</span><span class="dp-die">⚄</span></div><p>Six sides. Roll to meet one.</p></div><span class="h-clock" id="h-clock"></span></span>
     </div>
   </header>
   <main id="games-main">
-    <section class="games-head">
-      <div>
-        <h1>Board games<span class="dot">.</span></h1>
-        <p class="dek">Games that look calm on the box, then reveal exactly who everyone is at the table. These keep coming back.</p>
-      </div>
+    <section class="phead">
+      <h1>Board games<span class="dot">.</span></h1>
+      <p>Games that look calm on the box, then reveal exactly who everyone is at the table. These keep coming back.</p>
     </section>
     <section class="game-browser" aria-labelledby="browser-title">
       <div class="browser-controls">
@@ -299,7 +291,7 @@
   </section>
 </div>
 <audio id="table-knock" preload="auto" aria-hidden="true"></audio>
-<script src="assets/ledger.js?v=28"></script>
+<script src="assets/ledger.js?v=29"></script>
 <script>
 (function(){
   var data={

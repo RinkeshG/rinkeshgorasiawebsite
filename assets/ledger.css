@@ -1,5 +1,5 @@
 /* ============================================================
-   THE LEDGER — design system for rinkeshgorasia.com
+   THE LEDGER · design system for rinkeshgorasia.com
    ------------------------------------------------------------
    Concept: an operator's record. The page is a document, not a
    screen. The record speaks in Hanken Grotesk; data speaks in
@@ -28,7 +28,7 @@
   --faint:#97958A;      /* meta, labels (decorative minimum)   */
   --rule:#E8E6DE;       /* hairline dividers                   */
   --rule-dark:#CFCDC2;  /* borders that must hold a shape      */
-  --red:#BE3E26;        /* bahi-khata red — status & verdicts  */
+  --red:#BE3E26;        /* bahi-khata red: status & verdicts  */
   --red-soft:#F4E4DD;   /* red at whisper volume (fills)       */
   --card:#FFFFFF;       /* surfaces that sit on the paper      */
 
@@ -45,16 +45,19 @@
   --prose:34rem;        /* comfortable line length */
 
   /* -- motion ----------------------------------------------- */
-  --ease-out:cubic-bezier(.23,1,.32,1); /* strong, calm ease-out — the default UI curve */
-  --pop:cubic-bezier(.34,1.4,.6,1);     /* a whisper of overshoot — the die & popovers only */
+  --ease-out:cubic-bezier(.23,1,.32,1); /* strong, calm ease-out: the default UI curve */
+  --pop:cubic-bezier(.34,1.4,.6,1);     /* a whisper of overshoot: the die & popovers only */
 }
 
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
+/* the gutter is always reserved, so a short page (writing, worth) and a long one
+   (home, work) put the sheet in exactly the same place. Without this the centred
+   sheet slides 7.5px sideways every time you navigate between the two. */
+html{scroll-behavior:smooth;scrollbar-gutter:stable}
 html,body{overflow-x:clip} /* marks may bleed off the sheet; the sheet never scrolls sideways */
 body{
-  /* grain lives in the background tile itself (opacity baked into the SVG) —
-     a fixed blend-mode overlay here defeats composited scrolling */
+  /* grain lives in the background tile itself (opacity baked into the SVG).
+     A fixed blend-mode overlay here defeats composited scrolling */
   background-color:var(--paper);
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
   color:var(--ink);
@@ -86,19 +89,39 @@ header{padding-top:2.2rem}
 .h-right{display:flex;align-items:baseline;gap:1.5rem;position:relative}
 .h-clock{font-family:var(--mono);font-size:.7rem;color:var(--faint);letter-spacing:.06em;white-space:nowrap}
 .h-row nav{display:flex;gap:1.6rem;align-items:baseline}
-.h-row nav a{color:var(--soft);text-decoration:none;font-size:.88rem}
+/* every link reserves the current-page underline, so the header rule sits at the
+   same height whether or not this page is in the nav. Colouring the border on
+   .on alone would grow the row 4px on Home and shrink it again on Board games. */
+.h-row nav a{color:var(--soft);text-decoration:none;font-size:.88rem;border-bottom:2px solid transparent;padding-bottom:2px}
 .h-row nav a:hover{color:var(--red)}
-.h-row nav a.on{color:var(--ink);border-bottom:2px solid var(--red);padding-bottom:2px}
+.h-row nav a.on{color:var(--ink);border-bottom-color:var(--red)}
 
 /* ============ hero ========================================== */
-.hero{display:grid;grid-template-columns:1fr 230px;gap:3.4rem;padding:var(--s8) 0 var(--s7);align-items:start}
-h1{font-weight:600;font-size:2.7rem;line-height:1.08;letter-spacing:-.035em;margin-bottom:1.4rem}
+/* Named areas rather than source order, because the portrait belongs in a
+   different place in each composition: beside the whole intro on the sheet,
+   directly under the opening line on a phone. Row gap is 0: the headline and
+   paragraphs keep their own margins, so the rhythm is the same in both. */
+.hero{
+  display:grid;
+  grid-template-columns:1fr 230px;
+  grid-template-areas:
+    "title photo"
+    "lede  photo"
+    "copy  photo";
+  column-gap:3.4rem; row-gap:0;
+  padding:var(--s8) 0 var(--s7);
+  align-items:start;
+}
+.hero-title{grid-area:title}
+.hero-lede{grid-area:lede}
+.hero-copy{grid-area:copy}
+h1{font-weight:600;font-size:2.7rem;line-height:1.08;letter-spacing:-.035em;margin-bottom:1.4rem;text-wrap:balance}
 h1 .dot{color:var(--red)}
-.hero p{color:var(--soft);margin-bottom:1rem;max-width:33rem;font-size:1.05rem}
+.hero p{color:var(--soft);margin-bottom:1rem;max-width:33rem;font-size:1.05rem;text-wrap:pretty}
 .hero p strong{color:var(--ink);font-weight:600}
 a.ln{color:var(--ink);font-weight:600;text-decoration:underline;text-decoration-color:var(--rule-dark);text-underline-offset:3px}
 a.ln:hover{text-decoration-color:var(--red);color:var(--red)}
-/* availability — a quiet line that opens a small note on what I'm looking for */
+/* availability: a quiet line that opens a small note on what I'm looking for */
 /* lift the whole section so the popover floats above the next one, not under it */
 section:has(.avail){position:relative;z-index:5}
 .avail{position:relative;margin-top:1.7rem}
@@ -111,7 +134,7 @@ section:has(.avail){position:relative;z-index:5}
 .avail-trigger:hover .lbl{border-color:var(--red)}
 .avail-trigger[aria-expanded="true"] .lbl{border-color:var(--red)}
 .avail-trigger[aria-expanded="true"] .chev{transform:rotate(180deg)}
-/* grows from its top-left corner — the corner nearest the trigger above it */
+/* grows from its top-left corner: the corner nearest the trigger above it */
 .avail-pop{position:absolute;top:calc(100% + .75rem);left:0;z-index:50;width:21rem;max-width:88vw;background:var(--card);border:1px solid var(--ink);box-shadow:0 18px 40px -18px rgba(28,28,25,.4);padding:1rem 1.1rem;opacity:0;transform-origin:top left;transform:scale(.96);pointer-events:none;transition:opacity .16s ease,transform .18s var(--pop)}
 .avail-pop.show{opacity:1;transform:none;pointer-events:auto}
 .avail-pop .ap-head{font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);display:block;margin-bottom:.5rem}
@@ -124,13 +147,18 @@ section:has(.avail){position:relative;z-index:5}
 .avail-pop .ap-cta:hover .cp{color:var(--red)}
 .avail-pop .ap-x{font-family:var(--mono);font-size:.7rem;color:var(--soft);text-decoration:none}
 .avail-pop .ap-x:hover{color:var(--red)}
-/* the "copied ✓" beat pops in — a small reward for a rare, satisfying action */
+/* the "copied ✓" beat pops in, a small reward for a rare, satisfying action */
 .avail-pop .ap-cta .ok{display:inline-flex;animation:copypop .15s var(--ease-out)}
 @keyframes copypop{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:none}}
 @keyframes sheetup{from{transform:translateY(100%)}to{transform:translateY(0)}}
 
-/* portrait — placed on the record with crop marks */
-.photo-cell{position:relative}
+/* portrait: placed on the record with crop marks */
+/* Optical alignment, not box alignment. align-items:start levels the boxes, but a
+   headline's ink starts lower than its box by half-leading + (ascender − cap-height);
+   for Hanken Grotesk at line-height 1.08 that is .19 of the font size. Dropping the
+   figure by the same amount lands the photo's top edge on the cap line of "Hey".
+   The crop marks stay outside it, which is where registration marks belong. */
+.photo-cell{position:relative;grid-area:photo;margin-top:calc(2.7rem * .19)}
 .ph-in{position:relative;display:block;cursor:pointer}
 .ph-in img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;display:block;filter:saturate(.94)}
 .ph-in::before,.ph-in::after,.ph-in .cm::before,.ph-in .cm::after{
@@ -140,7 +168,9 @@ section:has(.avail){position:relative;z-index:5}
 .ph-in::after{top:-7px;right:-7px;border-top:1.5px solid var(--red);border-right:1.5px solid var(--red)}
 .ph-in .cm::before{bottom:-7px;left:-7px;border-bottom:1.5px solid var(--red);border-left:1.5px solid var(--red)}
 .ph-in .cm::after{bottom:-7px;right:-7px;border-bottom:1.5px solid var(--red);border-right:1.5px solid var(--red)}
-.photo-cap{font-family:var(--mono);font-size:.68rem;color:var(--faint);margin-top:.8rem;display:flex;justify-content:space-between}
+/* measured from the crop marks, not the image edge, because the marks overhang the trim
+   by 7px, so .8rem left the caption almost touching the bottom-left mark */
+.photo-cap{font-family:var(--mono);font-size:.68rem;color:var(--faint);margin-top:1rem;display:flex;justify-content:space-between}
 /* simba speaks */
 .bubble{
   position:absolute;top:.7rem;right:.7rem;z-index:2;
@@ -158,13 +188,16 @@ section:has(.avail){position:relative;z-index:5}
 }
 .ph-in:hover .bubble,.ph-in.mrrp .bubble{opacity:1;transform:none}
 
-/* ============ interior page head — a label, not a hero ====== */
+/* ============ interior page head: a label, not a hero ====== */
 /* The visitor already chose this page in the nav. The h1 confirms the
    address, one line frames it, and the content starts inside the first
-   screen — on phones especially. Only index.html gets the full hero. */
+   screen, on phones especially. Only index.html gets the full hero.
+   Every interior page uses this, collections included: coffee and games
+   had grown their own near-copies at 2.55rem and 2.7rem, so arriving from
+   the shelf jumped the title a size and pushed the content down 30px. */
 .phead{padding:2.4rem 0 1.6rem}
 .phead h1{font-size:2rem;margin-bottom:.55rem}
-.phead p{color:var(--soft);max-width:36rem;font-size:1rem;line-height:1.55}
+.phead p{color:var(--soft);max-width:36rem;font-size:1rem;line-height:1.55;text-wrap:pretty}
 @media(max-width:640px){
   .phead{padding:1.5rem 0 1.1rem}
   .phead h1{font-size:1.6rem}
@@ -176,36 +209,63 @@ section{padding:0 0 var(--s7)}
 .sec-head{border-top:2px solid var(--ink);padding-top:.6rem;margin-bottom:.2rem;display:flex;justify-content:space-between;align-items:baseline;gap:1rem}
 .sec-title{font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
 .sec-sub{font-size:.85rem;color:var(--faint);text-align:right}
-/* "more" — a quiet link at the foot of a list, in the ledger's mono voice */
+/* "more": a quiet link at the foot of a list, in the ledger's mono voice */
 a.more{display:inline-block;margin-top:1.5rem;font-family:var(--mono);font-size:.74rem;letter-spacing:.04em;color:var(--soft);text-decoration:none}
 a.more:hover{color:var(--red)}
 
 /* ============ ledger rows (track record) ==================== */
+/* An entry reads downward, the way a ledger entry does: heading and date, the
+   account in plain words, then the figures that back it, then the way in. The
+   figures used to sit in a 14.5rem column on the right, where they were read
+   apart from the sentence they were supposed to prove. */
 .row{
-  display:grid;grid-template-columns:5.2rem 1fr 14.5rem;gap:2rem;
-  padding:1.6rem 0;border-bottom:1px solid var(--rule);
-  text-decoration:none;color:inherit;align-items:start;
+  display:block;
+  padding:1.9rem 0;border-bottom:1px solid var(--rule);
+  text-decoration:none;color:inherit;
 }
-.r-year{font-family:var(--mono);font-size:.78rem;color:var(--faint);padding-top:.45rem}
+/* name left, date right, on a shared baseline, the same header shape as
+   .sec-head and the case heads on work.html */
+.r-head{display:flex;justify-content:space-between;align-items:baseline;gap:1.5rem}
+.r-year{font-family:var(--mono);font-size:.78rem;color:var(--faint);white-space:nowrap}
 .r-name{font-weight:600;font-size:1.25rem;letter-spacing:-.02em;display:flex;align-items:center;gap:.75rem}
 .row:hover .r-name-t{color:var(--red)}
 .lmk{width:30px;height:30px;object-fit:contain;filter:grayscale(1) contrast(1.05);opacity:.85;flex:none}
 .row:hover .lmk{filter:none;opacity:1}
 .lmk-m{width:30px;height:30px;flex:none;border:1px solid var(--rule-dark);border-radius:2px;display:inline-flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;color:var(--soft)}
-/* the house bracket — a small label flanked by a red square bracket. The red is
+/* the house bracket: a small label flanked by a red square bracket. The red is
    reserved for the brackets; the word stays quiet. Simple, one mark, reused everywhere. */
 .crop{font-family:var(--mono);font-size:.64rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);margin-left:.55rem;white-space:nowrap;vertical-align:middle}
 .crop::before{content:"[";color:var(--red);margin-right:.5em}
 .crop::after{content:"]";color:var(--red);margin-left:.5em}
-.row p{color:var(--soft);font-size:.98rem;margin-top:.4rem;max-width:30rem}
-/* figures of record — each fact stacked: quiet label, prominent value below.
-   right-aligning a mix of numbers and phrases (85 vs "profitable → exit") left a
-   ragged, gappy column; stacking lets the number own its line and phrases read clean. */
-.r-figs{display:flex;flex-direction:column;gap:.95rem;border-left:1px solid var(--rule);padding-left:1.6rem}
+/* The account breaks once, on the turn in the story: setup, then what came of
+   it. The gaps ascend from there so the grouping is unambiguous. Two paragraphs
+   sit closest (one account), the tally steps back from them, and the way in
+   steps back furthest, because it is a separate act rather than more reading. */
+.row p{color:var(--soft);font-size:1.02rem;line-height:1.6;margin-top:.9rem;max-width:var(--prose);text-wrap:pretty}
+.row p + p{margin-top:.85rem}
+/* the tally: the figures of record, laid across under the account so each one
+   is read against the sentence it backs. Each fact stays stacked (quiet label,
+   prominent value) because a mix of numbers and phrases (85 vs "profitable →
+   exit") reads cleanly that way and right-aligning it never did. */
+/* closer to the account than to the link below it: the figures belong to the
+   sentence they back, the way in is a separate act */
+.r-figs{display:flex;flex-wrap:wrap;gap:1.1rem 2.6rem;margin-top:1.3rem}
 .fig{display:flex;flex-direction:column;gap:.02rem}
 .fig span{font-size:.72rem;color:var(--faint);letter-spacing:.02em}
-.fig b{font-family:var(--mono);font-feature-settings:'tnum';font-size:1.02rem;color:var(--ink);font-weight:500;letter-spacing:-.005em;line-height:1.2}
+.fig b{font-family:var(--mono);font-feature-settings:'tnum';font-size:1.02rem;color:var(--ink);font-weight:500;letter-spacing:-.005em;line-height:1.2;white-space:nowrap}
 .fig.key b{color:var(--red)}
+/* the way in. The whole row is the link; this is the affordance that says so,
+   in the same mono voice as a.more at the foot of a list. */
+.r-more{
+  display:inline-flex;align-items:baseline;gap:.5rem;margin-top:1.7rem;
+  font-family:var(--mono);font-size:.74rem;letter-spacing:.04em;color:var(--soft);
+  transition:color .16s var(--ease-out);
+}
+.r-more .go{color:var(--red);transition:transform .18s var(--ease-out)}
+.row:hover .r-more{color:var(--red)}
+.row:hover .r-more .go{transform:translateX(3px)}
+.row:focus-visible{outline:2px solid var(--red);outline-offset:5px}
+.row:focus-visible .r-name-t,.row:focus-visible .r-more{color:var(--red)}
 
 /* ============ the lab (evidence frames) ===================== */
 /* four live projects → a balanced 2×2 set; each card keeps real presence
@@ -223,11 +283,11 @@ a.more:hover{color:var(--red)}
 .frame-bar .dotrow i{width:5px;height:5px;border-radius:50%;background:var(--rule-dark)}
 .exp:hover .frame{border-color:var(--ink)}
 .exp:hover .frame-bar .dotrow i:first-child{background:var(--red)}
-/* a short preview banner (top of each product), not a full-height hero — keeps
+/* a short preview banner (top of each product), not a full-height hero, which keeps
    the shot supporting the card instead of dominating the 2×2 grid */
 .shot{aspect-ratio:16/7;overflow:hidden}
 .shot img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
-/* vouch has no product screenshot yet — a designed cover in its own brand
+/* vouch has no product screenshot yet, so a designed cover in its own brand
    (dark + gold wordmark), faithful to the live site. Swap for a real shot at
    assets/img/lab/vouch.jpg when there is one. */
 .shot.vcover{background:#1b1a17;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;color:#EFE9DD}
@@ -242,10 +302,10 @@ a.more:hover{color:var(--red)}
 .exp-body p{color:var(--soft);font-size:.9rem;margin:.25rem 0 .55rem}
 .exp-fig{font-family:var(--mono);font-size:.72rem;color:var(--faint)}
 .exp-fig b{font-feature-settings:'tnum';color:var(--ink);font-weight:500;font-size:.82rem}
-/* vouch is new — no metrics yet; a quiet "just shipped" note holds the figure slot */
+/* vouch is new, no metrics yet; a quiet "just shipped" note holds the figure slot */
 .exp-new{font-family:var(--mono);font-size:.72rem;color:var(--red);letter-spacing:.04em}
 
-/* ============ writing (index rows — an editorial register, not cards) === */
+/* ============ writing (index rows: an editorial register, not cards) === */
 .post{
   display:block;
   padding:1.55rem 0;border-bottom:1px solid var(--rule);
@@ -276,7 +336,7 @@ a.more:hover{color:var(--red)}
 .writing-index .post:focus-visible .p-title{color:var(--red)}
 .writing-index .post:focus-visible .go{opacity:1;transform:none}
 
-/* ============ essay list — plain red links, bullets, air ===== */
+/* ============ essay list: plain red links, bullets, air ===== */
 /* One line per essay, no rules between entries. Used on the home
    page (under a sec-head) and on writing.html (under a bare rule). */
 .reglist{list-style:none;padding-top:.35rem}
@@ -293,6 +353,41 @@ a.more:hover{color:var(--red)}
   .reglist a{font-size:1.02rem;padding:.4rem 0}
 }
 
+/* ============ essay interiors =============================== */
+/* Lifted out of the four writing-*.html files, which each carried a
+   byte-identical copy of this block.
+   The article used to be max-width:40rem;margin:0 auto, centred inside the
+   sheet. That put the title, the body and the essay's own 2px ink rules 104px
+   to the right of the margin the header rule draws, so a page had structural
+   rules at two widths and two left edges. It now hangs off the same margin as
+   every other page: rules span the sheet, text sits at the measure. */
+.artwrap{padding-top:var(--s7)}
+.art-back{font-family:var(--mono);font-size:.72rem;color:var(--faint);text-decoration:none;letter-spacing:.04em}
+.art-back:hover{color:var(--red)}
+.art-title{font-size:2.3rem;font-weight:600;letter-spacing:-.03em;line-height:1.1;margin:1.8rem 0 1rem;max-width:36rem;text-wrap:balance}
+.art-dek{font-size:1.2rem;color:var(--soft);line-height:1.5;max-width:36rem;text-wrap:pretty}
+/* the rule that opens the essay spans the sheet, like every other 2px ink rule
+   in the system; the text inside it stays at the measure */
+.art-head{padding-bottom:1.7rem;border-bottom:2px solid var(--ink)}
+.artwrap .prose{margin-top:2rem}
+.nextread{margin-top:3rem;border-top:1px solid var(--rule);padding-top:1.4rem}
+.nextread .lbl{font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:.9rem}
+.nextcard{display:grid;grid-template-columns:1fr auto;gap:1.2rem;align-items:baseline;text-decoration:none;color:inherit}
+.nextcard .no{font-family:var(--mono);font-size:.78rem;color:var(--faint)}
+.nextcard .ti{font-weight:600;font-size:1.15rem;letter-spacing:-.015em;display:block}
+.nextcard:hover .ti{color:var(--red)}
+.nextcard .ex{color:var(--soft);font-size:.92rem;margin-top:.2rem;display:block}
+.nextcard .ar{color:var(--red);opacity:0;transition:opacity .18s,transform .18s;transform:translateX(-4px)}
+.nextcard:hover .ar{opacity:1;transform:none}
+.art-end{display:flex;justify-content:space-between;gap:1.5rem;margin-top:3rem;padding-top:1.4rem;border-top:2px solid var(--ink);font-family:var(--mono);font-size:.78rem}
+.art-end a{color:var(--soft);text-decoration:none}
+.art-end a:hover{color:var(--red)}
+@media(max-width:640px){
+  .art-title{font-size:1.85rem}
+  .art-dek{font-size:1.08rem}
+  .nextcard .ar{opacity:1;transform:none}
+}
+
 /* ============ prose (essay interiors) ======================= */
 .prose{max-width:var(--prose);font-size:1.08rem;line-height:1.72;color:var(--ink)}
 .prose p{margin-bottom:1.25rem}
@@ -301,7 +396,7 @@ a.more:hover{color:var(--red)}
 .prose a:hover{color:var(--red);text-decoration-color:var(--red)}
 .prose blockquote{border-left:2px solid var(--red);padding-left:1.2rem;color:var(--soft);margin:1.6rem 0}
 
-/* ============ footer — one compact, personal sign-off ========== */
+/* ============ footer: one compact, personal sign-off ========== */
 /* margin-top:auto is the sticky-footer push: on short pages it grows to
    pin the footer to the viewport's bottom edge; on long pages it is 0 and
    the last section's own padding provides the gap above the rule */
@@ -324,7 +419,7 @@ footer{margin-top:auto;border-top:2px solid var(--ink);padding:1.35rem 0 3.4rem}
 .footer-marks.marks-in .footer-mark:nth-child(4){animation-delay:.135s}
 @keyframes footer-mark-in{from{opacity:0;transform:translateY(4px) scale(.96)}to{opacity:1;transform:none}}
 .foot-nav{display:flex;align-items:center;justify-self:end;text-align:right}
-/* social — solid ink glyphs, one recognisable mark each */
+/* social: solid ink glyphs, one recognisable mark each */
 .foot-social{display:inline-flex;align-items:center;gap:.25rem}
 .foot-social a{color:var(--soft);line-height:0;display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px}
 .foot-social a:hover{color:var(--red)}
@@ -340,21 +435,35 @@ footer{margin-top:auto;border-top:2px solid var(--ink);padding:1.35rem 0 3.4rem}
   .footer-mark--cricket:hover img{transform:translateY(-1px) rotate(-4deg)}
 }
 
-/* ============ mobile — recomposed, not shrunk =============== */
+/* ============ mobile: recomposed, not shrunk =============== */
 @media(max-width:860px){
-  .hero{grid-template-columns:1fr;gap:2.2rem;padding-top:var(--s7)}
-  h1{font-size:2.15rem}
-  /* portrait becomes a compact signature under the intro */
-  .photo-cell{max-width:216px}
-  .row{grid-template-columns:1fr;gap:.4rem;padding:1.5rem 0}
-  .r-year{padding-top:0;order:-1}
-  /* figures become a horizontal tally under the entry */
-  .r-figs{border-left:none;padding-left:0;flex-direction:row;flex-wrap:wrap;gap:1.5rem;margin-top:1rem}
-  .fig{flex-direction:column;gap:.15rem;align-items:flex-start}
   .lab{grid-template-columns:1fr;gap:1.8rem}
   .p-title{font-size:1.2rem}
-  .p-title .go{opacity:1;transform:none} /* touch has no hover — the arrow is always there */
+  .p-title .go{opacity:1;transform:none} /* touch has no hover, so the arrow is always there */
+  .r-more .go{transform:none}
   .writing-index .p-title{font-size:1.28rem}
+  .row{padding:1.6rem 0}
+  .r-figs{gap:1rem 2rem}
+}
+/* The hero keeps its two columns further down the range than the rest of the
+   page: at 760px the text column is still 27rem, a comfortable measure, so a
+   tablet keeps the composition instead of collapsing into a full-width block
+   with a stray photo beneath it. Rows and the lab collapse at 860 for their
+   own reasons, which is why the two breakpoints are no longer the same one. */
+@media(max-width:760px){
+  .hero{
+    grid-template-columns:1fr;
+    grid-template-areas:"title" "lede" "photo" "copy";
+    padding-top:var(--s7);
+  }
+  h1{font-size:2.15rem}
+  /* the portrait follows the opening line rather than trailing the whole hero.
+     Stacked last it landed ~890px down the page: past the fold on a phone, and
+     after the availability note that is meant to close the section.
+     It holds a constant share of the column rather than a fixed 216px, which
+     looked stranded once the column was 650px wide; the floor keeps it from
+     shrinking to a thumbnail on a phone. */
+  .photo-cell{width:clamp(216px,38%,280px);margin:.9rem 0 2rem}
 }
 @media(max-width:640px){
   body{font-size:16px}
@@ -365,9 +474,17 @@ footer{margin-top:auto;border-top:2px solid var(--ink);padding:1.35rem 0 3.4rem}
   .hero{padding-top:2.6rem;padding-bottom:2.8rem}
   h1{font-size:1.95rem}
   .hero p{font-size:1rem}
+  /* the date drops under the name when the two no longer fit on one line,
+     landing at the left margin rather than being squeezed against it */
+  .r-head{flex-wrap:wrap;gap:.3rem 1rem}
+  .row p{font-size:1rem}
+  /* the gaps keep ascending on phones too: equal ones here put the tally and
+     the link the same distance away and the grouping collapsed */
+  .r-figs{gap:.95rem 1.8rem;margin-top:1.2rem}
+  .r-more{margin-top:1.55rem}
 }
 
-/* the record settles into view as you read — a calm fade-up, no bounce */
+/* the record settles into view as you read: a calm fade-up, no bounce */
 .snap{opacity:0;transform:translateY(8px)}
 .snap.in{opacity:1;transform:none;transition:transform .34s var(--ease-out),opacity .3s var(--ease-out)}
 
@@ -375,13 +492,13 @@ footer{margin-top:auto;border-top:2px solid var(--ink);padding:1.35rem 0 3.4rem}
    it is one reversible CSS change; display:none also removes its nav footprint. */
 .roll,.die-pop{display:none}
 
-/* the die — somewhere on the board */
+/* the die: somewhere on the board */
 .roll{line-height:0;background:none;border:0;padding:0;cursor:pointer;color:inherit;font:inherit}
 .roll svg{width:19px;height:19px;vertical-align:-4px}
 .roll .face{fill:#C08A4E;stroke:#1C1C19;stroke-width:1.4;stroke-linejoin:round}
 .roll .pip{fill:#1C1C19}
 .roll:hover .face{fill:#D09A5B}
-/* grows from its top-right corner — the die sits just above it */
+/* grows from its top-right corner: the die sits just above it */
 .die-pop{position:absolute;top:130%;right:0;z-index:50;width:15.5rem;background:var(--card);border:1px solid var(--ink);padding:.75rem .9rem;opacity:0;transform-origin:top right;transform:scale(.96);pointer-events:none;transition:opacity .16s ease,transform .18s var(--pop)}
 .die-pop.show{opacity:1;transform:none;pointer-events:auto}
 .die-pop .dp-top{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-bottom:.4rem}
@@ -401,7 +518,7 @@ footer{margin-top:auto;border-top:2px solid var(--ink);padding:1.35rem 0 3.4rem}
 @media(max-width:640px){
   .h-clock{display:none}
   .die-pop{width:13rem}
-  /* on phones the availability note is a bottom sheet — it slides up INTO the viewport
+  /* on phones the availability note is a bottom sheet: it slides up INTO the viewport
      so it's seen immediately, instead of opening off-screen below the trigger (which
      forced the visitor to hunt for it by scrolling) */
   .avail-scrim{display:block;position:fixed;inset:0;z-index:190;background:rgba(28,28,25,.5);opacity:0;pointer-events:none;transition:opacity .25s ease}
@@ -432,7 +549,7 @@ footer{margin-top:auto;border-top:2px solid var(--ink);padding:1.35rem 0 3.4rem}
 }
 
 /* ============ motion discipline ============================= */
-/* reduced motion = fewer, gentler — not zero. Stop looping/decorative motion and
+/* reduced motion = fewer, gentler, not zero. Stop looping/decorative motion and
    positional travel, but keep the opacity & colour fades that aid reading. */
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
@@ -447,7 +564,7 @@ footer{margin-top:auto;border-top:2px solid var(--ink);padding:1.35rem 0 3.4rem}
 }
 
 /* phones: the one-row footer (name · marks · social) has no room at this
-   width — name and social share the top row, the marks get their own line */
+   width: name and social share the top row, the marks get their own line */
 @media(max-width:640px){
   .foot-in{grid-template-columns:1fr auto;grid-template-areas:"name social" "marks marks";row-gap:.55rem}
   .foot-id{grid-area:name;align-self:center}.foot-nav{grid-area:social}.footer-marks{grid-area:marks;justify-self:center}

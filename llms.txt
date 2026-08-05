@@ -20,12 +20,12 @@ Rinkesh is a 0-to-1 product person who has built two companies from a rough prob
 
 ## Experience
 
-- **Savior** (2017-2020): Healthcare-operations software for tier-1 hospitals in India (Fortis, Cloudnine). Bootstrapped to 85 hospitals and profitability with no sales team — all word of mouth. Built a team of 85. Acquired by Zocdoc in 2020.
+- **Savior** (2017-2020): Healthcare-operations software for tier-1 hospitals in India (Fortis, Cloudnine). Bootstrapped to 85 hospitals and profitability with no sales team, all word of mouth. Built a team of 85. Acquired by Zocdoc in 2020.
 - **Career Leap** (2020-2023): Live soft-skills learning for tech professionals. Grew from a WhatsApp group to 10K users in six months, 100K+ watch hours, 40% completion on live cohorts (industry average 5-10%), about Rs 15L in revenue. He shut it down when the unit economics didn't hold at scale.
 
 ## Currently Building (with AI)
 
-- **Sniff** (Live): Scan any cat food and see how good it actually is — no sponsored rankings. https://sniff.fyi
+- **Sniff** (Live): Scan any cat food and see how good it actually is, with no sponsored rankings. https://sniff.fyi
 - **KnowYourPay** (Live): Find out if you're underpaid for your exact role and city. https://knowyourpay.in
 - **Product Sense Lab** (Live): Practice PM interviews under pressure, with instant AI feedback. https://www.productsenselab.com
 - **Vouch** (Just shipped): Save and share the places you actually love, in one link. https://vouchforit.club
