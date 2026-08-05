@@ -228,7 +228,7 @@
         <span class="t-map"><span class="lmap" id="cmap" aria-hidden="true"></span></span>
         <span class="t-foot">
           <span class="t-tx"><span class="t-name">Go-to places<span class="go">&rarr;</span></span>
-          <span class="t-what">Coffee · food · work · late nights</span></span>
+          <span class="t-what" data-latest="places">Coffee · food · work · late nights</span></span>
           <span class="t-no">01</span>
         </span>
       </a>
@@ -242,7 +242,7 @@
         </span>
         <span class="t-foot">
           <span class="t-tx"><span class="t-name">Board games<span class="go">&rarr;</span></span>
-          <span class="t-what">The shortlist I deal out</span></span>
+          <span class="t-what" data-latest="games">The ones that keep coming back</span></span>
           <span class="t-no">02</span>
         </span>
       </a>
@@ -285,7 +285,7 @@
         </span>
         <span class="t-foot">
           <span class="t-tx"><span class="t-name">Books<span class="go">&rarr;</span></span>
-          <span class="t-what">Everything I've read, no reviews</span></span>
+          <span class="t-what">Currently reading · Anxious People by Fredrik Backman</span></span>
           <span class="t-no">05</span>
         </span>
       </a>
@@ -390,6 +390,31 @@
       t=setTimeout(function(){map.invalidateSize({animate:false});place();},180);
     });
   }catch(e){}
+})();
+
+/* Two of these collections are live, so their tiles name whatever went in
+   most recently rather than a line I have to remember to edit. Newest wins
+   however old it is: a shelf that has not moved in a year still says what
+   the last thing on it was, which is more honest than going quiet.
+   The label in the HTML is a real description on its own, so nothing here
+   is load-bearing: no JS, an older API without dates, or a failed request
+   all just leave it standing. */
+(function(){
+  var labels=document.querySelectorAll('.t-what[data-latest]');
+  if(!labels.length||!window.fetch)return;
+  Array.prototype.forEach.call(labels,function(el){
+    fetch('/api/content?type='+encodeURIComponent(el.dataset.latest))
+      .then(function(r){if(!r.ok)throw 0;return r.json();})
+      .then(function(payload){
+        var items=payload&&payload.items;
+        if(!Array.isArray(items))return;
+        var dated=items.filter(function(i){return i&&i.name&&i.added&&!isNaN(Date.parse(i.added));});
+        if(!dated.length)return;
+        var newest=dated.reduce(function(a,b){return Date.parse(b.added)>Date.parse(a.added)?b:a;});
+        el.textContent='Latest addition · '+newest.name;
+      })
+      .catch(function(){/* the written label stays */});
+  });
 })();
 </script>
 <script src="assets/ledger.js?v=29"></script>

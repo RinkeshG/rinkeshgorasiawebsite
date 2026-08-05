@@ -129,6 +129,10 @@ function gameRecord(record, image) {
   return {
     id: text(f.Slug),
     name: text(f.Name),
+    /* same as places: lets the shelf name the newest one without a hardcoded
+       title going stale. Note this is when the row was created, not when the
+       game was last played, which Airtable does not currently track. */
+    added: text(record.createdTime),
     image,
     imageAlt: text(f['Image alt']) || `${text(f.Name)} board game`,
     description: text(f['Card description']),
